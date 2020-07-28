@@ -1,0 +1,60 @@
+/** @format */
+
+@import '../../assets/config.scss';
+
+$type-list: (
+  '-danger': $red-6,
+  '-warning': $orange-6,
+  '-secondary': $text-color-light,
+  '-info': $gray,
+  '-success': $green-6,
+);
+
+.w-text {
+  color: $text-color;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: $family;
+  position: relative;
+
+  &-mark {
+    padding: 0;
+    color: inherit;
+  }
+
+  &-strong {
+    font-weight: 600;
+  }
+
+  &-delete {
+    text-decoration: line-through;
+  }
+
+  &-code {
+    margin: 0 4px;
+    padding: 0.2em 0.4em 0.1em;
+    font-size: 85%;
+    background: $code-bg;
+    border: 1px solid $normal-border;
+    border-radius: 3px;
+  }
+
+  &-u {
+    text-decoration: underline;
+  }
+
+  @each $size, $value in $type-list {
+    &#{$size} {
+      color: $value;
+    }
+  }
+
+  &-disabled {
+    color: $disabled-color;
+    cursor: not-allowed;
+
+    & .w-text-u::after {
+      border-bottom: 1px solid $disabled-color;
+    }
+  }
+}
