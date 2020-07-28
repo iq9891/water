@@ -1,5 +1,4 @@
-import { h } from 'vue';
-import { conf } from './constant';
+import renderTitle from '../../common/text';
 
 export default {
   name: 'WText',
@@ -36,33 +35,6 @@ export default {
     delete: Boolean,
   },
   setup(props, { slots }) {
-    let content = slots.default ? slots.default() : '';
-
-    Object.keys(props).forEach((propItem) => {
-      if (propItem && props[propItem] && conf[propItem]) {
-        const { tag } = conf[propItem];
-        content = h(
-          tag,
-          {
-            class: [`w-text-${tag}${props.type ? `w-text-${tag} w-text-${tag}-${props.type}` : ''}`],
-            style: props[`${propItem}Style`],
-          },
-          [content],
-        );
-      }
-    });
-
-    return () => h(
-      'span',
-      {
-        class: [
-          `w-text${props.type ? ` w-text-${props.type}` : ''}`,
-          {
-            'w-text-disabled': props.disabled,
-          },
-        ],
-      },
-      [content],
-    );
+    return renderTitle(props, slots, 'text');
   },
 }

@@ -9,6 +9,9 @@
   </router-link> |
   <router-link :to="{ name: 'Text'}">
     文字
+  </router-link> |
+  <router-link :to="{ name: 'Title'}">
+    标题
   </router-link>
   <br>
   <router-view />
