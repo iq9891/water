@@ -7631,6 +7631,11 @@ vue-eslint-parser@^7.0.0, vue-eslint-parser@^7.1.0:
     esquery "^1.0.1"
     lodash "^4.17.15"
 
+vue-router@^4.0.0-beta.4:
+  version "4.0.0-beta.4"
+  resolved "https://registry.npmjs.org/vue-router/-/vue-router-4.0.0-beta.4.tgz#0945886e8e35bed368ab57e50a6b004cff1459e0"
+  integrity sha512-Cp8CkTcQuWL3neBLZnd+zg7cH0aA/kX1AwNLmdrChz5z6JI9hNu2qImAXNvhobDddLtNbyjdYSedCB9RYt6aig==
+
 vue@^3.0.0-rc.1, vue@^3.0.0-rc.4:
   version "3.0.0-rc.4"
   resolved "https://registry.npmjs.org/vue/-/vue-3.0.0-rc.4.tgz#f17b32914c8add7f4792d618eb4f1358ff4222e8"
