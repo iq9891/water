@@ -1,0 +1,50 @@
+$space-list: (
+  '': 16px,
+  '-small': 8px,
+  '-large': 32px,
+);
+
+$space-type: (
+  'horizontal': 'right',
+  'vertical': 'bottom',
+);
+
+.w-space {
+  display: inline-flex;
+
+  &-vertical {
+    flex-direction: column;
+  }
+
+  &-align {
+    &-start {
+      align-items: flex-start;
+    }
+
+    &-center {
+      align-items: center;
+    }
+
+    &-end {
+      align-items: flex-end;
+    }
+
+    &-baseline {
+      align-items: baseline;
+    }
+  }
+
+  @each $type, $typeValue in $space-type {
+    &-item-#{$type} {
+      @each $size, $value in $space-list {
+        &#{$size} {
+          padding-#{$typeValue}: $value;
+  
+          &:last-child {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -12,6 +12,9 @@
   </router-link> |
   <router-link :to="{ name: 'Title'}">
     标题
+  </router-link> |
+  <router-link :to="{ name: 'Space'}">
+    间距
   </router-link>
   <br>
   <router-view />
