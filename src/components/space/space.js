@@ -6,9 +6,9 @@ export default {
   props: {
     size: {
       type: [String, Number],
-      default: 'small',
+      default: 'middle', // middle large
     },
-    direction: {
+    type: {
       type: String,
       default: 'horizontal', // vertical
     },
@@ -20,11 +20,11 @@ export default {
   setup(props, { slots }) {
     const children = slots.default ? slots.default() : '';
     const childrenLen = children.length;
-    const isHorizontal = props.direction === 'horizontal';
+    const isHorizontal = props.type === 'horizontal';
     const mergedAlign = props.align === undefined && isHorizontal ? 'center' : props.align;
 
     return () => h('div', {
-      class: [`w-space w-space-${props.direction}`, {
+      class: [`w-space w-space-${props.type}`, {
         [`w-space-align-${mergedAlign}`]: mergedAlign,
       }],
     }, children.map((childItem, childIdx) => {
@@ -36,8 +36,8 @@ export default {
       }
 
       return h('div', {
-        class: [`w-space-item-${props.direction}`, {
-          [`w-space-item-${props.direction}-${props.size}`]: isString(props.size),
+        class: [`w-space-item-${props.type}`, {
+          [`w-space-item-${props.type}-${props.size}`]: isString(props.size),
         }],
         style,
       }, childItem);

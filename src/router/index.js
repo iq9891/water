@@ -24,6 +24,12 @@ const routes = [
     name: "Space",
     component: () =>
       import(/* webpackChunkName: "space" */ "../views/Space.vue")
+  },
+  {
+    path: "/divider",
+    name: "Divider",
+    component: () =>
+      import(/* webpackChunkName: "divider" */ "../views/Divider.vue")
   }
 ];
 

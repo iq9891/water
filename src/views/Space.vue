@@ -12,7 +12,7 @@
       <span>Block</span>
     </WSpace>
     <hr>
-    <WSpace direction="vertical">
+    <WSpace type="vertical">
       center
       <button>Primary</button>
       <span>Block</span>
@@ -60,8 +60,8 @@
 </template>
 
 <script>
-import WSpace from '../components/space/space.vue';
-import WText from '../components/text/text.vue';
+import WSpace from '../components/space/Space.vue';
+import WText from '../components/text/Text.vue';
 
 export default {
   components: {

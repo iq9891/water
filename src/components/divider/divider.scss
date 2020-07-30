@@ -1,0 +1,106 @@
+@import '../../assets/config.scss';
+
+$divider-list: (
+  '-small': 8px,
+  '-middle': 16px,
+  '-large': 24px,
+);
+
+$divider-type: (
+  'horizontal': 'right',
+  'vertical': 'bottom',
+);
+
+.w-divider {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: $dividing;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  border-top: 1px solid $dividing;
+
+  &-dashed {
+    background: 0 0;
+    border-color: $dividing;
+    border-style: dashed;
+  }
+
+  &-horizontal {
+    display: flex;
+    clear: both;
+    width: 100%;
+    min-width: 100%;
+
+    &.w-divider-dashed {
+      border-width: 1px 0 0;
+    }
+  }
+
+  &-vertical {
+    position: relative;
+    top: -0.06em;
+    display: inline-block;
+    height: 0.9em;
+    vertical-align: middle;
+    border-top: 0;
+    border-left: 1px solid $dividing;
+
+    &.w-divider-dashed {
+      border-width: 0 1px 0 0;
+    }
+  }
+
+  @each $type, $typeValue in $divider-type {
+    &-#{$type} {
+      @each $size, $value in $divider-list {
+        &#{$size} {
+          @if $type == horizontal {
+            margin: $value 0;
+          } @else {
+            margin: 0 $value;
+          }
+        }
+      }
+    }
+  }
+}
+
+.w-divider-with-text {
+  margin: 16px 0;
+  white-space: nowrap;
+  position: relative;
+}
+
+.w-divider-inner-text {
+  color: $text-color;
+  display: inline-block;
+  padding: 0 1em;
+  font-weight: 500;
+  font-size: 16px;
+  position: absolute;
+  background: $white;
+
+  &-left {
+    left: 5%;
+    transform: translate(0, -12px);
+  }
+
+  &-center {
+    left: 50%;
+    transform: translate(-50%, -12px);
+  }
+
+  &-right {
+    right: 5%;
+    transform: translate(0, -12px);
+  }
+
+  &-plain {
+    font-weight: 400;
+    font-size: 14px;
+  }
+}
