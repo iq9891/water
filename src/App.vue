@@ -1,28 +1,27 @@
+<!-- @format -->
+
 <template>
-  <img
-    alt="Vue logo"
-    src="./assets/logo.png"
-  >
-  <br>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <br />
   <WSpace type="vertical">
     <div>
-      <router-link :to="{ name: 'Home'}">
+      <router-link :to="{ name: 'Home' }">
         首页
       </router-link>
       <WDivider type="vertical" />
-      <router-link :to="{ name: 'Text'}">
+      <router-link :to="{ name: 'Text' }">
         文字
       </router-link>
       <WDivider type="vertical" />
-      <router-link :to="{ name: 'Title'}">
+      <router-link :to="{ name: 'Title' }">
         标题
       </router-link>
       <WDivider type="vertical" />
-      <router-link :to="{ name: 'Space'}">
+      <router-link :to="{ name: 'Space' }">
         间距
       </router-link>
       <WDivider type="vertical" />
-      <router-link :to="{ name: 'Divider'}">
+      <router-link :to="{ name: 'Divider' }">
         分割线
       </router-link>
     </div>
@@ -31,16 +30,14 @@
 </template>
 
 <script>
-/** @format */
+  import WDivider from './components/divider/Divider.vue';
+  import WSpace from './components/space/Space.vue';
 
-import WDivider from './components/divider/Divider.vue';
-import WSpace from './components/space/Space.vue';
-
-export default {
-  name: 'App',
-  components: {
-    WDivider,
-    WSpace,
-  },
-};
+  export default {
+    name: 'App',
+    components: {
+      WDivider,
+      WSpace,
+    },
+  };
 </script>

@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <template>
   <w-text>Water</w-text>
   <w-text strong>
@@ -6,24 +8,13 @@
   <w-text underline>
     Water
   </w-text>
-  <w-text
-    underline
-    strong
-  >
+  <w-text underline strong>
     Water
   </w-text>
-  <w-text
-    underline
-    strong
-    code
-  >
+  <w-text underline strong code>
     Water
   </w-text>
-  <w-text
-    underline
-    strong
-    mark
-  >
+  <w-text underline strong mark>
     Water
   </w-text>
   <w-text
@@ -65,28 +56,24 @@
   >
     Water
   </w-text>
-  <w-text
-    underline
-    underline-style="color:#ff4949;"
-  >
+  <w-text underline :underline-style="[{ color: '#f0f' }, 'font-size: 40px']">
     Water
   </w-text>
-  <w-text
-    delete
-    delete-style="color:#ff4949;"
-  >
+  <w-text delete delete-style="color:#ff4949;">
     Water
   </w-text>
 </template>
 
 <script>
-/** @format */
+  import { defineAsyncComponent } from 'vue';
 
-import WText from '../components/text/Text.vue';
+  const WText = defineAsyncComponent(() =>
+    import('../components/text/Text.vue'),
+  );
 
-export default {
-  components: {
-    WText,
-  },
-};
+  export default {
+    components: {
+      WText,
+    },
+  };
 </script>

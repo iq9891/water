@@ -1,3 +1,5 @@
+/** @format */
+
 $space-list: (
   '-middle': 16px,
   '-small': 8px,
@@ -39,7 +41,7 @@ $space-type: (
       @each $size, $value in $space-list {
         &#{$size} {
           padding-#{$typeValue}: $value;
-  
+
           &:last-child {
             padding: 0;
           }

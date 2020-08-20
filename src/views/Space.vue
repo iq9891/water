@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <template>
   <div>
     <WSpace>
@@ -5,19 +7,19 @@
       <button>Primary</button>
       <span>Block</span>
     </WSpace>
-    <hr>
+    <hr />
     <WSpace :size="48">
       center
       <button>Primary</button>
       <span>Block</span>
     </WSpace>
-    <hr>
+    <hr />
     <WSpace type="vertical">
       center
       <button>Primary</button>
       <span>Block</span>
     </WSpace>
-    <hr>
+    <hr />
     <div class="space-align-container">
       <div class="space-align-block">
         <WSpace align="center">
@@ -60,32 +62,39 @@
 </template>
 
 <script>
-import WSpace from '../components/space/Space.vue';
-import WText from '../components/text/Text.vue';
+  import { defineAsyncComponent } from 'vue';
 
-export default {
-  components: {
-    WSpace,
-    WText,
-  }
-}
+  const WSpace = defineAsyncComponent(() =>
+    import('../components/space/Space.vue'),
+  );
+
+  const WText = defineAsyncComponent(() =>
+    import('../components/text/Text.vue'),
+  );
+
+  export default {
+    components: {
+      WSpace,
+      WText,
+    },
+  };
 </script>
 
 <style lang="scss">
-.space-align-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.space-align-block {
-  margin: 8px 4px;
-  border: 1px solid #40a9ff;
-  padding: 4px;
-  flex: none;
-}
-.space-align-block .mock-block {
-  display: inline-block;
-  padding: 32px 8px 16px;
-  background: rgba(150, 150, 150, 0.2);
-}
+  .space-align-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .space-align-block {
+    margin: 8px 4px;
+    border: 1px solid #40a9ff;
+    padding: 4px;
+    flex: none;
+  }
+  .space-align-block .mock-block {
+    display: inline-block;
+    padding: 32px 8px 16px;
+    background: rgba(150, 150, 150, 0.2);
+  }
 </style>

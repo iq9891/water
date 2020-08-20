@@ -4,20 +4,24 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext '.js,.vue' --fix"
+    "lint": "yarn jslint && yarn style",
+    "jslint": "eslint . --ext '.ts,.vue' --fix",
+    "style": "stylelint **/*.scss --fix"
   },
   "dependencies": {
-    "vue": "^3.0.0-rc.4",
-    "vue-router": "^4.0.0-beta.4"
+    "@vue/compiler-core": "^3.0.0-rc.6",
+    "vue": "^3.0.0-rc.6",
+    "vue-router": "^4.0.0-beta.7"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
     "@fe6/norm": "^2.1.0",
-    "@vue/compiler-sfc": "^3.0.0-rc.4",
-    "eslint-plugin-vue": "^7.0.0-beta.0",
+    "@vue/compiler-sfc": "^3.0.0-rc.6",
+    "eslint-plugin-vue": "^7.0.0-beta.2",
     "husky": "^4.2.5",
     "sass": "^1.26.10",
-    "vite": "^1.0.0-rc.3"
+    "typescript": "^3.9.7",
+    "vite": "^1.0.0-rc.4"
   }
 }

@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <template>
   <div>
     这是首页

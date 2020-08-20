@@ -1,41 +1,37 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: '/',
+    name: 'Home',
+    component: Home,
   },
   {
-    path: "/text",
-    name: "Text",
-    component: () =>
-      import(/* webpackChunkName: "text" */ "../views/Text.vue")
+    path: '/text',
+    name: 'Text',
+    component: () => import(/* webpackChunkName: "text" */ '../views/Text.vue'),
   },
   {
-    path: "/title",
-    name: "Title",
-    component: () =>
-      import(/* webpackChunkName: "title" */ "../views/Title.vue")
+    path: '/title',
+    name: 'Title',
+    component: () => import(/* webpackChunkName: "title" */ '../views/Title.vue'),
   },
   {
-    path: "/space",
-    name: "Space",
-    component: () =>
-      import(/* webpackChunkName: "space" */ "../views/Space.vue")
+    path: '/space',
+    name: 'Space',
+    component: () => import(/* webpackChunkName: "space" */ '../views/Space.vue'),
   },
   {
-    path: "/divider",
-    name: "Divider",
-    component: () =>
-      import(/* webpackChunkName: "divider" */ "../views/Divider.vue")
-  }
+    path: '/divider',
+    name: 'Divider',
+    component: () => import(/* webpackChunkName: "divider" */ '../views/Divider.vue'),
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 });
 
 export default router;
