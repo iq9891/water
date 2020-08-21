@@ -1,6 +1,6 @@
 /** @format */
 
-import { h, CSSProperties, SetupContext, VNode } from 'vue';
+import { h, CSSProperties, VNode } from 'vue';
 import { isNumber, isString } from '../../common/typeof';
 
 export interface SpaceProps {
@@ -25,47 +25,49 @@ export default {
       default: '',
     },
   },
-  setup(props: SpaceProps, { slots }: SetupContext) {
-    const children = slots.default ? slots.default() : [];
+  render(): VNode | null {
+    const { size, type, align, $slots } = this as any;
+
+    if (!$slots.default) {
+      return null;
+    }
+
+    const children = $slots.default();
     const childrenLen = children.length;
-    const isHorizontal = props.type === 'horizontal';
-    const mergedAlign =
-      props.align === undefined && isHorizontal ? 'center' : props.align;
+    const isHorizontal = type === 'horizontal';
+    const mergedAlign = align === undefined && isHorizontal ? 'center' : align;
 
-    return () =>
-      h(
-        'div',
-        {
-          class: [
-            `w-space w-space-${props.type}`,
-            {
-              [`w-space-align-${mergedAlign}`]: mergedAlign,
-            },
-          ],
-        },
-        children.map((childItem: VNode, childIdx: Number) => {
-          const style: CSSProperties = {};
+    return h(
+      'div',
+      {
+        class: [
+          `w-space w-space-${type}`,
+          {
+            [`w-space-align-${mergedAlign}`]: mergedAlign,
+          },
+        ],
+      },
+      children.map((childItem: VNode, childIdx: Number) => {
+        const style: CSSProperties = {};
 
-          if (isNumber(props.size) && childIdx < childrenLen) {
-            style.paddingRight = `${props.size}px`;
-          }
+        if (isNumber(size) && childIdx < childrenLen) {
+          style.paddingRight = `${size}px`;
+        }
 
-          return h(
-            'div',
-            {
-              class: [
-                `w-space-item-${props.type}`,
-                {
-                  [`w-space-item-${props.type}-${props.size}`]: isString(
-                    props.size,
-                  ),
-                },
-              ],
-              style,
-            },
-            childItem,
-          );
-        }),
-      );
+        return h(
+          'div',
+          {
+            class: [
+              `w-space-item-${type}`,
+              {
+                [`w-space-item-${type}-${size}`]: isString(size),
+              },
+            ],
+            style,
+          },
+          childItem,
+        );
+      }),
+    );
   },
 };
