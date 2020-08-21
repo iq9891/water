@@ -17,11 +17,6 @@ export interface LinkProps {
 }
 
 export default {
-  data() {
-    return {
-      newLoading: (this as any).loading,
-    };
-  },
   props: {
     tag: {
       type: String,

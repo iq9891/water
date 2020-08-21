@@ -28,6 +28,10 @@
       <router-link :to="{ name: 'Link' }">
         超链
       </router-link>
+      <WDivider type="vertical" />
+      <router-link :to="{ name: 'Empty' }">
+        空状态
+      </router-link>
     </div>
     <router-view />
   </WSpace>
