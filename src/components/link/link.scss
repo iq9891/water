@@ -1,0 +1,110 @@
+/** @format */
+
+@import '../../assets/config.scss';
+// @import '../../icon/src/icon.scss';
+
+$link-font: (
+  '-small': 12,
+  '': 14,
+  '-large': 16,
+);
+$move-time: 0.5s;
+
+.w-link {
+  line-height: 1;
+  cursor: pointer;
+  color: $blue-6;
+  font-family: $family;
+  text-decoration: none;
+  font-weight: normal;
+  transition: opacity $move-time, padding-left $move-time;
+  display: inline-block;
+  font-size: 0;
+
+  // 循环尺寸
+  @each $size, $value in $link-font {
+    &-only#{$size} {
+      @extend .w-link;
+
+      font-size: $value + px;
+    }
+
+    &#{$size} {
+      height: $value + px;
+
+      &:visited {
+        color: $blue-6;
+      }
+
+      &:hover {
+        color: $blue-5;
+        text-decoration: none !important;
+      }
+
+      &:active {
+        color: $blue-7;
+      }
+
+      & .w-link-text {
+        font-size: $value + px;
+        line-height: $value + px;
+      }
+
+      & .w-link-icon {
+        width: $value + px;
+        height: $value + px;
+        display: inline-block;
+        vertical-align: middle;
+
+        & svg,
+        & span {
+          color: $blue-6;
+          width: $value + px;
+          height: $value + px;
+        }
+      }
+    }
+  }
+
+  &-icon {
+    vertical-align: 0;
+    font-size: 0;
+  }
+
+  &-text {
+    padding-left: 4px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &-loading {
+    opacity: 0.5;
+    pointer-events: none;
+    position: relative;
+
+    &::before {
+      width: 10px;
+      height: 10px;
+      top: 1px;
+      left: 0;
+      border-color: $blue-6;
+    }
+  }
+
+  &-disabled {
+    color: $disabled-color;
+    cursor: not-allowed;
+
+    &:visited {
+      color: $disabled-color;
+    }
+
+    &:hover {
+      color: $disabled-color;
+    }
+
+    &:active {
+      color: $disabled-color;
+    }
+  }
+}

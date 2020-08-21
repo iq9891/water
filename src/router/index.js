@@ -27,6 +27,11 @@ const routes = [
     name: 'Divider',
     component: () => import(/* webpackChunkName: "divider" */ '../views/Divider.vue'),
   },
+  {
+    path: '/link',
+    name: 'Link',
+    component: () => import(/* webpackChunkName: "link" */ '../views/Link.vue'),
+  },
 ];
 
 const router = createRouter({

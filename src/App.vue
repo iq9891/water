@@ -24,6 +24,10 @@
       <router-link :to="{ name: 'Divider' }">
         分割线
       </router-link>
+      <WDivider type="vertical" />
+      <router-link :to="{ name: 'Link' }">
+        超链
+      </router-link>
     </div>
     <router-view />
   </WSpace>
