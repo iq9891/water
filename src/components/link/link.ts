@@ -104,6 +104,16 @@ export default {
       [iconNode(), textNode],
     );
 
-    return noHref ? toLink : hrefLink;
+    const normalNode = h(
+      'span',
+      {
+        class: linkClass,
+      },
+      [iconNode(), textNode],
+    );
+
+    const linkNode = noHref ? toLink : hrefLink;
+
+    return disabled ? normalNode : linkNode;
   },
 };

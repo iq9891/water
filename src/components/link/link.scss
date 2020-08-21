@@ -1,14 +1,12 @@
 /** @format */
 
 @import '../../assets/config.scss';
-// @import '../../icon/src/icon.scss';
 
 $link-font: (
-  '-small': 12,
-  '': 14,
-  '-large': 16,
+  '-small': $text-size-small,
+  '': $text-size,
+  '-large': $text-size-large,
 );
-$move-time: 0.5s;
 
 .w-link {
   line-height: 1;
@@ -17,7 +15,7 @@ $move-time: 0.5s;
   font-family: $family;
   text-decoration: none;
   font-weight: normal;
-  transition: opacity $move-time, padding-left $move-time;
+  transition: opacity $link-move-time, padding-left $link-move-time;
   display: inline-block;
   font-size: 0;
 
@@ -26,11 +24,11 @@ $move-time: 0.5s;
     &-only#{$size} {
       @extend .w-link;
 
-      font-size: $value + px;
+      font-size: $value;
     }
 
     &#{$size} {
-      height: $value + px;
+      height: $value;
 
       &:visited {
         color: $blue-6;
@@ -46,21 +44,21 @@ $move-time: 0.5s;
       }
 
       & .w-link-text {
-        font-size: $value + px;
-        line-height: $value + px;
+        font-size: $value;
+        line-height: $value;
       }
 
       & .w-link-icon {
-        width: $value + px;
-        height: $value + px;
+        width: $value;
+        height: $value;
         display: inline-block;
         vertical-align: middle;
 
         & svg,
         & span {
           color: $blue-6;
-          width: $value + px;
-          height: $value + px;
+          width: $value;
+          height: $value;
         }
       }
     }
@@ -94,6 +92,13 @@ $move-time: 0.5s;
   &-disabled {
     color: $disabled-color;
     cursor: not-allowed;
+
+    & .w-link-icon {
+      & svg,
+      & span {
+        color: $disabled-color;
+      }
+    }
 
     &:visited {
       color: $disabled-color;

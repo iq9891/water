@@ -3,9 +3,9 @@
 @import '../../assets/config.scss';
 
 $divider-list: (
-  '-small': 8px,
-  '-middle': 16px,
-  '-large': 24px,
+  '-small': $dividing-small,
+  '-middle': $dividing-middle,
+  '-large': $dividing-large,
 );
 
 $divider-type: (
@@ -17,17 +17,17 @@ $divider-type: (
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: $dividing;
+  color: $dividing-color;
   font-size: 14px;
   font-variant: tabular-nums;
   line-height: 1.5715;
   list-style: none;
   font-feature-settings: 'tnum';
-  border-top: 1px solid $dividing;
+  border-top: 1px solid $dividing-color;
 
   &-dashed {
     background: 0 0;
-    border-color: $dividing;
+    border-color: $dividing-color;
     border-style: dashed;
   }
 
@@ -49,7 +49,7 @@ $divider-type: (
     height: 0.9em;
     vertical-align: middle;
     border-top: 0;
-    border-left: 1px solid $dividing;
+    border-left: 1px solid $dividing-color;
 
     &.w-divider-dashed {
       border-width: 0 1px 0 0;

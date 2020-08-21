@@ -26,6 +26,15 @@
       </template>
       去 活动易 官网新标签页打开
     </w-link>
+    <w-link :to="{ name: 'Text' }" :loading="loading" :size="size" disabled>
+      <template #icon>
+        <fire-filled />
+      </template>
+      去 Text 图片 的 内跳转
+    </w-link>
+    <w-link :to="{ name: 'Text' }" :loading="loading" :size="size" disabled>
+      去 Text 图片 的 内跳转
+    </w-link>
     <w-link
       href="https://www.evente.cn"
       target="_blank"

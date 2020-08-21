@@ -1,9 +1,11 @@
 /** @format */
 
+@import '../../assets/config.scss';
+
 $space-list: (
-  '-middle': 16px,
-  '-small': 8px,
-  '-large': 32px,
+  '-small': $space-small,
+  '-middle': $space-middle,
+  '-large': $space-large,
 );
 
 $space-type: (
