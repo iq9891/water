@@ -1,1 +1,32 @@
 /** @format */
+
+@import '../../assets/config.scss';
+
+.w-empty {
+  text-align: center;
+  margin: 0 auto;
+
+  &-img {
+    height: 100px;
+    padding-bottom: $empty-img-space;
+
+    & svg,
+    & img {
+      height: 100%;
+      display: inline-block;
+    }
+
+    &-simple {
+      height: 40px;
+    }
+  }
+
+  &-body {
+    font-size: $empty-size;
+    color: $empty-color;
+
+    &-simple {
+      color: $empty-color-light;
+    }
+  }
+}

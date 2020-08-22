@@ -30,6 +30,7 @@ $link-font: (
     &#{$size} {
       height: $value;
 
+      &,
       &:visited {
         color: $blue-6;
       }
@@ -100,6 +101,7 @@ $link-font: (
       }
     }
 
+    &,
     &:visited {
       color: $disabled-color;
     }

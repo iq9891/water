@@ -83,6 +83,11 @@ $space-middle: 16px !default;
 $space-large: 32px !default;
 // 超链的时间
 $link-move-time: 0.5s !default;
+// 空状态
+$empty-size: 14px !default;
+$empty-color: #292b2d !default;
+$empty-color-light: #60636c !default;
+$empty-img-space: 8px !default;
 
 .ellipsis {
   overflow: hidden;

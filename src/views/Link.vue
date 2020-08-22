@@ -55,7 +55,7 @@
   import { FireFilled } from '@ant-design/icons-vue';
 
   const WLink = defineAsyncComponent(() =>
-    import('../components/link/Link.vue'),
+    import('../components/link/Link.ts'),
   );
 
   const WSpace = defineAsyncComponent(() =>
@@ -84,3 +84,7 @@
     },
   };
 </script>
+
+<style lang="scss">
+  @import '../components/link/link.scss';
+</style>
