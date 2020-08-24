@@ -1,0 +1,132 @@
+/** @format */
+
+@import '../../assets/config.scss';
+
+.w-switch {
+  height: 20px;
+  min-width: 42px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 100px;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 20px;
+  position: relative;
+  color: $normal-color;
+  cursor: pointer;
+  transition: color $switch-move-time, background-color $switch-move-time;
+
+  &-inner {
+    margin: 0 8px 0 29px;
+    display: inline-block;
+    transition: margin $switch-move-time;
+  }
+
+  &-handle {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    border-radius: 50%;
+    background: $normal-bg;
+    left: 0;
+    margin-left: 2px;
+    top: 2px;
+    transition: left $switch-move-time, margin $switch-move-time;
+
+    &-on {
+      left: 100%;
+      margin-left: -18px;
+    }
+
+    &-small {
+      width: 12px;
+      height: 12px;
+
+      &-on {
+        left: 100%;
+        margin-left: -14px;
+      }
+    }
+  }
+
+  &-loading {
+    width: 10px;
+    height: 10px;
+    display: block;
+    color: $loading-color;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 40%;
+
+    &-box {
+      cursor: not-allowed;
+    }
+
+    & svg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+    }
+
+    &-small {
+      @extend .w-switch-loading;
+
+      transform: scale(0.7) translate(-70%, -70%);
+    }
+
+    &-on {
+      color: $blue-6;
+    }
+  }
+
+  &-on {
+    background: $blue-6;
+    color: $normal-color;
+
+    &-inner {
+      margin: 0 29px 0 8px;
+    }
+
+    &::before {
+      left: 100%;
+      margin-left: -16px;
+    }
+  }
+
+  &-small {
+    line-height: 16px;
+    height: 16px;
+    min-width: 28px;
+
+    &-inner {
+      margin: 0 4px 0 19px;
+    }
+
+    &-on {
+      background: $blue-6;
+      color: $normal-color;
+
+      &-inner {
+        margin: 0 19px 0 4px;
+      }
+
+      &::before {
+        left: 100%;
+        margin-left: -12px;
+      }
+
+      &::after {
+        left: 100%;
+        margin-left: -14px;
+      }
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    background: $disabled-bg;
+  }
+}

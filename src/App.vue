@@ -32,6 +32,10 @@
       <router-link :to="{ name: 'Empty' }">
         空状态
       </router-link>
+      <WDivider type="vertical" />
+      <router-link :to="{ name: 'Switch' }">
+        开关
+      </router-link>
     </div>
     <router-view />
   </WSpace>

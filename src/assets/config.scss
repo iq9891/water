@@ -88,6 +88,10 @@ $empty-size: 14px !default;
 $empty-color: #292b2d !default;
 $empty-color-light: #60636c !default;
 $empty-img-space: 8px !default;
+// 加载的颜色
+$loading-color: rgba(0, 0, 0, 0.45);
+// 开关
+$switch-move-time: 0.3s;
 
 .ellipsis {
   overflow: hidden;

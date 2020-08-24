@@ -37,6 +37,11 @@ const routes = [
     name: 'Empty',
     component: () => import(/* webpackChunkName: "empty" */ '../views/Empty.vue'),
   },
+  {
+    path: '/switch',
+    name: 'Switch',
+    component: () => import(/* webpackChunkName: "switch" */ '../views/Switch.vue'),
+  },
 ];
 
 const router = createRouter({
