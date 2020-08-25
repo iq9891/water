@@ -42,6 +42,11 @@ const routes = [
     name: 'Switch',
     component: () => import(/* webpackChunkName: "switch" */ '../views/Switch.vue'),
   },
+  {
+    path: '/spin',
+    name: 'Spin',
+    component: () => import(/* webpackChunkName: "spin" */ '../views/Spin.vue'),
+  },
 ];
 
 const router = createRouter({

@@ -3,42 +3,46 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
   <br />
-  <WSpace type="vertical">
+  <w-space type="vertical">
     <div>
       <router-link :to="{ name: 'Home' }">
         首页
       </router-link>
-      <WDivider type="vertical" />
+      <w-divider type="vertical" />
       <router-link :to="{ name: 'Text' }">
         文字
       </router-link>
-      <WDivider type="vertical" />
+      <w-divider type="vertical" />
       <router-link :to="{ name: 'Title' }">
         标题
       </router-link>
-      <WDivider type="vertical" />
+      <w-divider type="vertical" />
       <router-link :to="{ name: 'Space' }">
         间距
       </router-link>
-      <WDivider type="vertical" />
+      <w-divider type="vertical" />
       <router-link :to="{ name: 'Divider' }">
         分割线
       </router-link>
-      <WDivider type="vertical" />
+      <w-divider type="vertical" />
       <router-link :to="{ name: 'Link' }">
         超链
       </router-link>
-      <WDivider type="vertical" />
+      <w-divider type="vertical" />
       <router-link :to="{ name: 'Empty' }">
         空状态
       </router-link>
-      <WDivider type="vertical" />
+      <w-divider type="vertical" />
       <router-link :to="{ name: 'Switch' }">
         开关
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Spin' }">
+        加载中
+      </router-link>
     </div>
     <router-view />
-  </WSpace>
+  </w-space>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-  <WSpace type="vertical">
+  <w-space type="vertical">
     <w-switch />
     <w-switch loading />
     <w-switch loading size="small" />
@@ -32,7 +32,7 @@
       :before="beforeFn"
       @change="changeFn"
     />
-  </WSpace>
+  </w-space>
 </template>
 
 <script>

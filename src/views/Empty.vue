@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-  <WSpace type="vertical">
+  <w-space type="vertical">
     <w-empty></w-empty>
     <w-empty type="simple"></w-empty>
     <w-empty type="simple">
@@ -15,7 +15,7 @@
       </template>
       <div>这是一个没有链接的超链</div>
     </w-empty>
-  </WSpace>
+  </w-space>
 </template>
 
 <script>

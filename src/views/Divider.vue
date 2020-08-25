@@ -7,86 +7,86 @@
       merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen,
       quo modo.
     </p>
-    <WDivider />
+    <w-divider />
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne
       merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen,
       quo modo.
     </p>
-    <WDivider dashed />
+    <w-divider dashed />
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne
       merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen,
       quo modo.
     </p>
-    <WDivider :style="{ borderWidth: 2, borderColor: '#7cb305' }" />
+    <w-divider :style="{ borderWidth: 2, borderColor: '#7cb305' }" />
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne
       merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen,
       quo modo.
     </p>
-    <WDivider style="borderColor: #f00" dashed />
+    <w-divider style="borderColor: #f00" dashed />
     <div>
       Text
-      <WDivider type="vertical" />
+      <w-divider type="vertical" />
       <a href="#">Link</a>
-      <WDivider type="vertical" />
+      <w-divider type="vertical" />
       <a href="#">Link</a>
     </div>
-    <WDivider :style="[dividerStyle]" dashed />
+    <w-divider :style="[dividerStyle]" dashed />
     <div>
       Text
-      <WDivider
+      <w-divider
         type="vertical"
         :style="{ borderWidth: 2, borderColor: '#7cb305' }"
       />
       <a href="#">Link</a>
-      <WDivider type="vertical" style="borderColor: #f00" dashed />
+      <w-divider type="vertical" style="borderColor: #f00" dashed />
       <a href="#">Link</a>
-      <WDivider type="vertical" :style="[dividerStyle]" dashed />
+      <w-divider type="vertical" :style="[dividerStyle]" dashed />
       <a href="#">Link</a>
     </div>
-    <WDivider>Text</WDivider>
+    <w-divider>Text</w-divider>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne
       merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen,
       quo modo.
     </p>
-    <WDivider placement="left">
+    <w-divider placement="left">
       Left Text
-    </WDivider>
+    </w-divider>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne
       merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen,
       quo modo.
     </p>
-    <WDivider placement="right">
+    <w-divider placement="right">
       Right Text
-    </WDivider>
+    </w-divider>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne
       merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen,
       quo modo.
     </p>
-    <WDivider plain>
+    <w-divider plain>
       Text
-    </WDivider>
+    </w-divider>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne
       merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen,
       quo modo.
     </p>
-    <WDivider placement="left" plain>
+    <w-divider placement="left" plain>
       Left Text
-    </WDivider>
+    </w-divider>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne
       merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen,
       quo modo.
     </p>
-    <WDivider placement="right" plain>
+    <w-divider placement="right" plain>
       Right Text
-    </WDivider>
+    </w-divider>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne
       merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen,

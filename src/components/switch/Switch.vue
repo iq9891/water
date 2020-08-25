@@ -7,7 +7,7 @@
       <slot v-else name="close"></slot>
     </span>
     <div :class="handleClass">
-      <LoadingOutlined v-if="loading" :class="loadingClass" />
+      <loading-outlined v-if="loading" :class="loadingClass" />
     </div>
   </div>
 </template>

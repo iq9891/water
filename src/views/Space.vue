@@ -2,43 +2,43 @@
 
 <template>
   <div>
-    <WSpace>
+    <w-space>
       center
       <button>Primary</button>
       <span>Block</span>
-    </WSpace>
+    </w-space>
     <hr />
-    <WSpace :size="48">
+    <w-space :size="48">
       center
       <button>Primary</button>
       <span>Block</span>
-    </WSpace>
+    </w-space>
     <hr />
-    <WSpace type="vertical">
+    <w-space type="vertical">
       center
       <button>Primary</button>
       <span>Block</span>
-    </WSpace>
+    </w-space>
     <hr />
     <div class="space-align-container">
       <div class="space-align-block">
-        <WSpace align="center">
+        <w-space align="center">
           center
           <WText>Primary</WText>
           <span class="mock-block">Block</span>
-        </WSpace>
+        </w-space>
       </div>
       <div class="space-align-block">
-        <WSpace align="start">
+        <w-space align="start">
           start
           <button type="primary">
             Primary
           </button>
           <span class="mock-block">Block</span>
-        </WSpace>
+        </w-space>
       </div>
       <div class="space-align-block">
-        <WSpace align="end">
+        <w-space align="end">
           <WText type="danger">
             end
           </WText>
@@ -46,16 +46,16 @@
             Primary
           </button>
           <span class="mock-block">Block</span>
-        </WSpace>
+        </w-space>
       </div>
       <div class="space-align-block">
-        <WSpace align="baseline">
+        <w-space align="baseline">
           baseline
           <button type="primary">
             Primary
           </button>
           <span class="mock-block">Block</span>
-        </WSpace>
+        </w-space>
       </div>
     </div>
   </div>

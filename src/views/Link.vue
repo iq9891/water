@@ -1,13 +1,13 @@
 <!-- @format -->
 
 <template>
-  <WSpace type="vertical">
+  <w-space type="vertical">
     <button @click="changeLoading">改变</button>
-    <WSpace>
+    <w-space>
       <button @click="changeSize('small')">小</button>
       <button @click="changeSize('')">正常</button>
       <button @click="changeSize('large')">大</button>
-    </WSpace>
+    </w-space>
     <w-link :loading="loading" :size="size">这是一个没有链接的超链</w-link>
     <w-link :to="{ name: 'Text' }" :loading="loading" :size="size"
       >去 Text 图片 的 内跳转</w-link
@@ -47,7 +47,7 @@
       </template>
       去 活动易 官网新标签页打开
     </w-link>
-  </WSpace>
+  </w-space>
 </template>
 
 <script>
