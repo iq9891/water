@@ -1,0 +1,76 @@
+/** @format */
+
+@use "sass:map" as map;
+
+// @import '../../components/style/color-palette.scss';
+@import '../../components/style/config.scss';
+
+@mixin renderColor($type, $map, $color) {
+  @for $index from 1 through 10 {
+    &-#{$type}-#{$index} {
+      background: map.get($map, $index);
+    }
+  }
+}
+
+.color {
+  &-item {
+    display: inline-block;
+    width: 400px;
+    margin: 45px 1%;
+
+    &:hover {
+      & .color-value {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-body {
+    text-align: left;
+  }
+
+  &-title {
+    color: #5c6b77;
+    font-weight: 500;
+    font-size: 22px;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  &-desc {
+    display: block;
+    color: #777;
+    font-weight: lighter;
+    font-size: 14px;
+    margin: 0 0 24px;
+  }
+
+  &-text {
+    float: left;
+    transition: all 0.3s;
+  }
+
+  &-value {
+    position: relative;
+    left: 3px;
+    float: right;
+    transform: scale(0.85);
+    transform-origin: 100% 50%;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  @include renderColor('blue', $blue-map, $blue-6);
+  @include renderColor('purple', $purple-map, $purple-6);
+  @include renderColor('cyan', $cyan-map, $cyan-6);
+  @include renderColor('green', $green-map, $green-6);
+  @include renderColor('magenta', $magenta-map, $magenta-6);
+  @include renderColor('red', $red-map, $red-6);
+  @include renderColor('orange', $orange-map, $orange-6);
+  @include renderColor('yellow', $yellow-map, $yellow-6);
+  @include renderColor('volcano', $volcano-map, $volcano-6);
+  @include renderColor('geekblue', $geekblue-map, $geekblue-6);
+  @include renderColor('lime', $lime-map, $lime-6);
+  @include renderColor('gold', $gold-map, $gold-6);
+}

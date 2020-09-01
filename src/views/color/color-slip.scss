@@ -1,0 +1,31 @@
+/** @format */
+
+@import '../../components/style/config.scss';
+
+.color-slip {
+  position: relative;
+  height: 44px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-family: $font-family;
+  line-height: 44px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:nth-child(n + 6) {
+    color: $white;
+  }
+
+  &:first-child {
+    border-radius: $border-radius-base $border-radius-base 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 $border-radius-base $border-radius-base;
+  }
+
+  &:hover {
+    margin-right: -8px;
+    border-radius: 0 $border-radius-base $border-radius-base 0;
+  }
+}

@@ -9,6 +9,10 @@
         首页
       </router-link>
       <w-divider type="vertical" />
+      <router-link :to="{ name: 'Color' }">
+        颜色
+      </router-link>
+      <w-divider type="vertical" />
       <router-link :to="{ name: 'Text' }">
         文字
       </router-link>
@@ -57,3 +61,9 @@
     },
   };
 </script>
+
+<style lang="scss">
+  body {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,179 @@
+/** @format */
+
+@use "sass:map" as map;
+
+@import 'color-palette.scss';
+
+@function renderColorMap($def-color) {
+  $colors: ();
+  @for $index from 1 through 10 {
+    $colors: map.merge(
+      $colors,
+      (
+        $index: colorpalette($def-color, $index),
+      )
+    );
+  }
+
+  @return $colors;
+}
+
+// color palettes
+$blue-base: #1890ff !default;
+$blue-6: $blue-base !default;
+$blue-map: rendercolormap($blue-base) !default;
+$blue-1: colorpalette($blue-6, 1) !default;
+$blue-2: colorpalette($blue-6, 2) !default;
+$blue-3: colorpalette($blue-6, 3) !default;
+$blue-4: colorpalette($blue-6, 4) !default;
+$blue-5: colorpalette($blue-6, 5) !default;
+$blue-7: colorpalette($blue-6, 7) !default;
+$blue-8: colorpalette($blue-6, 8) !default;
+$blue-9: colorpalette($blue-6, 9) !default;
+$blue-10: colorpalette($blue-6, 10) !default;
+
+$purple-base: #722ed1 !default;
+$purple-6: $purple-base !default;
+$purple-map: rendercolormap($purple-base) !default;
+$purple-1: colorpalette($purple-6, 1) !default;
+$purple-2: colorpalette($purple-6, 2) !default;
+$purple-3: colorpalette($purple-6, 3) !default;
+$purple-4: colorpalette($purple-6, 4) !default;
+$purple-5: colorpalette($purple-6, 5) !default;
+$purple-7: colorpalette($purple-6, 7) !default;
+$purple-8: colorpalette($purple-6, 8) !default;
+$purple-9: colorpalette($purple-6, 9) !default;
+$purple-10: colorpalette($purple-6, 10) !default;
+
+$cyan-base: #13c2c2 !default;
+$cyan-6: $cyan-base !default;
+$cyan-map: rendercolormap($cyan-base) !default;
+$cyan-1: colorpalette($cyan-6, 1) !default;
+$cyan-2: colorpalette($cyan-6, 2) !default;
+$cyan-3: colorpalette($cyan-6, 3) !default;
+$cyan-4: colorpalette($cyan-6, 4) !default;
+$cyan-5: colorpalette($cyan-6, 5) !default;
+$cyan-7: colorpalette($cyan-6, 7) !default;
+$cyan-8: colorpalette($cyan-6, 8) !default;
+$cyan-9: colorpalette($cyan-6, 9) !default;
+$cyan-10: colorpalette($cyan-6, 10) !default;
+
+$green-base: #52c41a !default;
+$green-6: $green-base !default;
+$green-map: rendercolormap($green-base) !default;
+$green-1: colorpalette($green-6, 1) !default;
+$green-2: colorpalette($green-6, 2) !default;
+$green-3: colorpalette($green-6, 3) !default;
+$green-4: colorpalette($green-6, 4) !default;
+$green-5: colorpalette($green-6, 5) !default;
+$green-7: colorpalette($green-6, 7) !default;
+$green-8: colorpalette($green-6, 8) !default;
+$green-9: colorpalette($green-6, 9) !default;
+$green-10: colorpalette($green-6, 10) !default;
+
+$magenta-base: #eb2f96 !default;
+$magenta-6: $magenta-base !default;
+$magenta-map: rendercolormap($magenta-base) !default;
+$magenta-1: colorpalette($magenta-6, 1) !default;
+$magenta-2: colorpalette($magenta-6, 2) !default;
+$magenta-3: colorpalette($magenta-6, 3) !default;
+$magenta-4: colorpalette($magenta-6, 4) !default;
+$magenta-5: colorpalette($magenta-6, 5) !default;
+$magenta-7: colorpalette($magenta-6, 7) !default;
+$magenta-8: colorpalette($magenta-6, 8) !default;
+$magenta-9: colorpalette($magenta-6, 9) !default;
+$magenta-10: colorpalette($magenta-6, 10) !default;
+
+$red-base: #f5222d !default;
+$red-6: $red-base !default;
+$red-map: rendercolormap($red-base) !default;
+$red-1: colorpalette($red-6, 1) !default;
+$red-2: colorpalette($red-6, 2) !default;
+$red-3: colorpalette($red-6, 3) !default;
+$red-4: colorpalette($red-6, 4) !default;
+$red-5: colorpalette($red-6, 5) !default;
+$red-7: colorpalette($red-6, 7) !default;
+$red-8: colorpalette($red-6, 8) !default;
+$red-9: colorpalette($red-6, 9) !default;
+$red-10: colorpalette($red-6, 10) !default;
+
+$orange-base: #fa8c16 !default;
+$orange-6: $orange-base !default;
+$orange-map: rendercolormap($orange-base) !default;
+$orange-1: colorpalette($orange-6, 1) !default;
+$orange-2: colorpalette($orange-6, 2) !default;
+$orange-3: colorpalette($orange-6, 3) !default;
+$orange-4: colorpalette($orange-6, 4) !default;
+$orange-5: colorpalette($orange-6, 5) !default;
+$orange-7: colorpalette($orange-6, 7) !default;
+$orange-8: colorpalette($orange-6, 8) !default;
+$orange-9: colorpalette($orange-6, 9) !default;
+$orange-10: colorpalette($orange-6, 10) !default;
+
+$yellow-base: #fadb14 !default;
+$yellow-6: $yellow-base !default;
+$yellow-map: rendercolormap($yellow-base) !default;
+$yellow-1: colorpalette($yellow-6, 1) !default;
+$yellow-2: colorpalette($yellow-6, 2) !default;
+$yellow-3: colorpalette($yellow-6, 3) !default;
+$yellow-4: colorpalette($yellow-6, 4) !default;
+$yellow-5: colorpalette($yellow-6, 5) !default;
+$yellow-7: colorpalette($yellow-6, 7) !default;
+$yellow-8: colorpalette($yellow-6, 8) !default;
+$yellow-9: colorpalette($yellow-6, 9) !default;
+$yellow-10: colorpalette($yellow-6, 10) !default;
+
+$volcano-base: #fa541c !default;
+$volcano-6: $volcano-base !default;
+$volcano-map: rendercolormap($volcano-base) !default;
+$volcano-1: colorpalette($volcano-6, 1) !default;
+$volcano-2: colorpalette($volcano-6, 2) !default;
+$volcano-3: colorpalette($volcano-6, 3) !default;
+$volcano-4: colorpalette($volcano-6, 4) !default;
+$volcano-5: colorpalette($volcano-6, 5) !default;
+$volcano-7: colorpalette($volcano-6, 7) !default;
+$volcano-8: colorpalette($volcano-6, 8) !default;
+$volcano-9: colorpalette($volcano-6, 9) !default;
+$volcano-10: colorpalette($volcano-6, 10) !default;
+
+$geekblue-base: #2f54eb !default;
+$geekblue-6: $geekblue-base !default;
+$geekblue-map: rendercolormap($geekblue-base) !default;
+$geekblue-1: colorpalette($geekblue-6, 1) !default;
+$geekblue-2: colorpalette($geekblue-6, 2) !default;
+$geekblue-3: colorpalette($geekblue-6, 3) !default;
+$geekblue-4: colorpalette($geekblue-6, 4) !default;
+$geekblue-5: colorpalette($geekblue-6, 5) !default;
+$geekblue-7: colorpalette($geekblue-6, 7) !default;
+$geekblue-8: colorpalette($geekblue-6, 8) !default;
+$geekblue-9: colorpalette($geekblue-6, 9) !default;
+$geekblue-10: colorpalette($geekblue-6, 10) !default;
+
+$lime-base: #a0d911 !default;
+$lime-6: $lime-base !default;
+$lime-map: rendercolormap($lime-base) !default;
+$lime-1: colorpalette($lime-6, 1) !default;
+$lime-2: colorpalette($lime-6, 2) !default;
+$lime-3: colorpalette($lime-6, 3) !default;
+$lime-4: colorpalette($lime-6, 4) !default;
+$lime-5: colorpalette($lime-6, 5) !default;
+$lime-7: colorpalette($lime-6, 7) !default;
+$lime-8: colorpalette($lime-6, 8) !default;
+$lime-9: colorpalette($lime-6, 9) !default;
+$lime-10: colorpalette($lime-6, 10) !default;
+
+$gold-base: #faad14 !default;
+$gold-6: $gold-base !default;
+$gold-map: rendercolormap($gold-base) !default;
+$gold-1: colorpalette($gold-6, 1) !default;
+$gold-2: colorpalette($gold-6, 2) !default;
+$gold-3: colorpalette($gold-6, 3) !default;
+$gold-4: colorpalette($gold-6, 4) !default;
+$gold-5: colorpalette($gold-6, 5) !default;
+$gold-7: colorpalette($gold-6, 7) !default;
+$gold-8: colorpalette($gold-6, 8) !default;
+$gold-9: colorpalette($gold-6, 9) !default;
+$gold-10: colorpalette($gold-6, 10) !default;
+
+$preset-colors: $magenta-6 $red-6 $volcano-6 $orange-6 $yellow-6 $gold-6 $cyan-6
+  $lime-6 $green-6 $blue-6 $geekblue-6 $purple-6 !default;

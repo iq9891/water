@@ -1,6 +1,6 @@
 /** @format */
 
-@import '../../assets/config.scss';
+@import '../style/config.scss';
 
 $type-list: (
   '-danger': $red-6,
@@ -14,7 +14,7 @@ $type-list: (
   color: $text-color;
   font-size: $text-size;
   line-height: $line-height;
-  font-family: $family;
+  font-family: $font-family;
   position: relative;
 
   &-mark {

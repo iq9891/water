@@ -1,0 +1,160 @@
+/** @format */
+
+@import './colors.scss';
+
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
+
+// -------- Colors -----------
+$primary-color: $blue-6 !default;
+$info-color: $blue-6 !default;
+$success-color: $green-6 !default;
+$processing-color: $blue-6 !default;
+$error-color: $red-5 !default;
+$highlight-color: $red-5 !default;
+$warning-color: $gold-6 !default;
+$normal-color: #d9d9d9 !default;
+$white: #fff !default;
+$black: #000 !default;
+
+// Color used by default to control hover and active backgrounds and for
+// alert info backgrounds.
+$primary-1: colorpalette($primary-color, 1) !default;
+$primary-2: colorpalette($primary-color, 2) !default;
+$primary-3: colorpalette($primary-color, 3) !default;
+$primary-4: colorpalette($primary-color, 4) !default;
+$primary-5: colorpalette($primary-color, 5) !default;
+$primary-6: colorpalette($primary-color, 6) !default;
+$primary-7: colorpalette($primary-color, 7) !default;
+$primary-9: colorpalette($primary-color, 9) !default;
+$primary-10: colorpalette($primary-color, 10) !default;
+
+// Background color for `<body>`
+$body-background: #fff !default;
+// Base background color for most components
+$component-background: #fff !default;
+
+$code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
+  monospace !default;
+
+$text-color: fade($black, 65%) !default;
+$text-color-secondary: fade($black, 45%) !default;
+$text-color-inverse: $white !default;
+
+$text-color-dark: fade($white, 85%) !default;
+$text-color-secondary-dark: fade($white, 65%) !default;
+$text-selection-bg: $primary-color !default;
+
+$icon-color: inherit !default;
+$icon-color-hover: fade($black, 75%) !default;
+
+$font-variant-base: tabular-nums !default;
+$font-feature-settings-base: 'tnum' !default;
+$font-size-base: 14px !default;
+$font-size-lg: $font-size-base + 2px !default;
+$font-size-sm: 12px !default;
+
+$border-radius-base: 2px !default;
+
+// 内边距
+$padding-lg: 24px !default;
+$padding-md: 16px !default;
+$padding-sm: 12px !default;
+$padding-xs: 8px !default;
+
+// 运动方式
+$ease-base-out: cubic-bezier(0.7, 0.3, 0.1, 1) !default;
+$ease-base-in: cubic-bezier(0.9, 0, 0.3, 0.7) !default;
+$ease-out: cubic-bezier(0.215, 0.61, 0.355, 1) !default;
+$ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19) !default;
+$ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1) !default;
+$ease-out-back: cubic-bezier(0.12, 0.4, 0.29, 1.46) !default;
+$ease-in-back: cubic-bezier(0.71, -0.46, 0.88, 0.6) !default;
+$ease-in-out-back: cubic-bezier(0.71, -0.46, 0.29, 1.46) !default;
+$ease-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1) !default;
+$ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.34) !default;
+$ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86) !default;
+$ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1) !default;
+$ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06) !default;
+$ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1) !default;
+
+// 阴影
+$shadow-color: rgba(0, 0, 0, 0.15) !default;
+$shadow-color-inverse: $component-background !default;
+$shadow-1-up: 0 -6px 16px -8px rgba(0, 0, 0, 0.08),
+  0 -9px 28px 0 rgba(0, 0, 0, 0.05), 0 -12px 48px 16px rgba(0, 0, 0, 0.03) !default;
+$shadow-1-down: 0 6px 16px -8px rgba(0, 0, 0, 0.08),
+  0 9px 28px 0 rgba(0, 0, 0, 0.05), 0 12px 48px 16px rgba(0, 0, 0, 0.03) !default;
+$shadow-1-left: -6px 0 16px -8px rgba(0, 0, 0, 0.08),
+  -9px 0 28px 0 rgba(0, 0, 0, 0.05), -12px 0 48px 16px rgba(0, 0, 0, 0.03) !default;
+$shadow-1-right: 6px 0 16px -8px rgba(0, 0, 0, 0.08),
+  9px 0 28px 0 rgba(0, 0, 0, 0.05), 12px 0 48px 16px rgba(0, 0, 0, 0.03) !default;
+$shadow-2: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+  0 9px 28px 8px rgba(0, 0, 0, 0.05) !default;
+$box-shadow-base: $shadow-2 !default;
+
+// 动画
+$animation-duration-slow: 0.3s !default; // Modal
+$animation-duration-base: 0.2s !default;
+$animation-duration-fast: 0.1s !default; // Tooltip
+
+// 正常
+$normal-border: #dbdee9 !default;
+$normal-bg: $white !default;
+$normal-color: $white !default;
+
+// 灰色
+$gray: #dcdcdc !default;
+// 字色
+$text-color: #292b2d !default;
+$text-color-light: #60636c !default;
+// 字号
+$text-size-large: 16px !default;
+$text-size: 14px !default;
+$text-size-small: 12px !default;
+// 行高
+$line-height-large: 22px !default;
+$line-height: 18px !default;
+$line-height-small: 16px !default;
+//不可用 颜色
+$disabled-bg: #eff1f6 !default;
+$disabled-color: #b4bac3 !default;
+$disabled-border: #dbdee9 !default;
+// code 的样式
+$code-bg: #f0f0f0 !default;
+// 阴影
+$shadow: rgba(0, 0, 0, 0.15) !default;
+// 遮罩颜色
+$mask: rgba(0, 0, 0, 0.65) !default;
+// 分割线
+$dividing-color: #eaeef5 !default;
+$dividing-small: 8px !default;
+$dividing-middle: 16px !default;
+$dividing-large: 24px !default;
+// 间距
+$space-small: 8px !default;
+$space-middle: 16px !default;
+$space-large: 32px !default;
+// 超链的时间
+$link-move-time: 0.5s !default;
+$link-color: $primary-color;
+$link-hover-color: colorpalette($link-color, 5);
+$link-active-color: colorpalette($link-color, 7);
+$link-decoration: none;
+$link-hover-decoration: none;
+// 空状态
+$empty-size: 14px !default;
+$empty-color: #292b2d !default;
+$empty-color-light: #60636c !default;
+$empty-img-space: 8px !default;
+// 加载的颜色
+$loading-color: rgba(0, 0, 0, 0.45);
+// 开关
+$switch-move-time: 0.3s;
+
+.w-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
