@@ -2,6 +2,9 @@
 
 <template>
   <div>
+    <pre style="color: red">
+      新增 UI
+    </pre>
     <div v-for="(color, index) in colorConf" :key="index" class="color-item">
       <div class="color-title">{{ color.en }} / {{ color.zh }}</div>
       <div class="color-desc">{{ color.desc }}</div>

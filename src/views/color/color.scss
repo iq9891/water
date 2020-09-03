@@ -5,7 +5,7 @@
 // @import '../../components/style/color-palette.scss';
 @import '../../components/style/config.scss';
 
-@mixin renderColor($type, $map, $color) {
+@mixin render-color($type, $map, $color) {
   @for $index from 1 through 10 {
     &-#{$type}-#{$index} {
       background: map.get($map, $index);
@@ -61,16 +61,16 @@
     transition: opacity 0.3s;
   }
 
-  @include renderColor('blue', $blue-map, $blue-6);
-  @include renderColor('purple', $purple-map, $purple-6);
-  @include renderColor('cyan', $cyan-map, $cyan-6);
-  @include renderColor('green', $green-map, $green-6);
-  @include renderColor('magenta', $magenta-map, $magenta-6);
-  @include renderColor('red', $red-map, $red-6);
-  @include renderColor('orange', $orange-map, $orange-6);
-  @include renderColor('yellow', $yellow-map, $yellow-6);
-  @include renderColor('volcano', $volcano-map, $volcano-6);
-  @include renderColor('geekblue', $geekblue-map, $geekblue-6);
-  @include renderColor('lime', $lime-map, $lime-6);
-  @include renderColor('gold', $gold-map, $gold-6);
+  @include render-color('blue', $blue-map, $blue-6);
+  @include render-color('purple', $purple-map, $purple-6);
+  @include render-color('cyan', $cyan-map, $cyan-6);
+  @include render-color('green', $green-map, $green-6);
+  @include render-color('magenta', $magenta-map, $magenta-6);
+  @include render-color('red', $red-map, $red-6);
+  @include render-color('orange', $orange-map, $orange-6);
+  @include render-color('yellow', $yellow-map, $yellow-6);
+  @include render-color('volcano', $volcano-map, $volcano-6);
+  @include render-color('geekblue', $geekblue-map, $geekblue-6);
+  @include render-color('lime', $lime-map, $lime-6);
+  @include render-color('gold', $gold-map, $gold-6);
 }

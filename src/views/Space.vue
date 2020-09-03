@@ -2,6 +2,9 @@
 
 <template>
   <div>
+    <pre style="color: red">
+      新增组件
+    </pre>
     <w-space>
       center
       <button>Primary</button>

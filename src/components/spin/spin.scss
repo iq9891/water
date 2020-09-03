@@ -84,6 +84,13 @@ $move-time: 0.3s;
         height: $value + px;
       }
     }
+
+    &-only {
+      position: static;
+      display: inline-block;
+      transform: translate(0, 0);
+      font-size: 0;
+    }
   }
 
   &-mask {

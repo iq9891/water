@@ -16,7 +16,7 @@ $brightnessStep2: 15;
 $lightColorCount: 5;
 $darkColorCount: 4;
 
-@function getHue($h, $i, $isLight) {
+@function get-hue($h, $i, $isLight) {
   $hue: 0;
   @if ($h >= 60 and $h <= 240) {
     $hue: $h + $hueStep * $i;
@@ -41,7 +41,7 @@ $darkColorCount: 4;
   @return $hue;
 }
 
-@function getSaturation($s, $i, $isLight) {
+@function get-saturation($s, $i, $isLight) {
   $saturation: 0;
   @if ($isLight) {
     $saturation: math.round($s * 100) - $saturationStep * $i;
@@ -62,14 +62,14 @@ $darkColorCount: 4;
   @return math.round($saturation);
 }
 
-@function getValue($v, $i, $isLight) {
+@function get-value($v, $i, $isLight) {
   @if ($isLight) {
     @return math.round($v * 100) + $brightnessStep1 * $i;
   }
   @return math.round($v * 100) - $brightnessStep2 * $i;
 }
 
-@function colorPalette($color, $index) {
+@function color-palette($color, $index) {
   $isLight: $index <= 6;
   $i: $index - $lightColorCount - 1;
 
@@ -77,15 +77,15 @@ $darkColorCount: 4;
     $i: $lightColorCount + 1 - $index;
   }
 
-  $hsv: tohsv(hextorgb($color));
+  $hsv: to-hsv(hex-to-rgb($color));
 
-  $h: gethue(map.get($hsv, 'h'), $i, $isLight);
-  $s: getsaturation(map.get($hsv, 's'), $i, $isLight);
-  $v: getvalue(map.get($hsv, 'v'), $i, $isLight);
+  $h: get-hue(map.get($hsv, 'h'), $i, $isLight);
+  $s: get-saturation(map.get($hsv, 's'), $i, $isLight);
+  $v: get-value(map.get($hsv, 'v'), $i, $isLight);
 
-  $rgb: hsvtorgb($h, $s, $v);
+  $rgb: hsv-to-rgb($h, $s, $v);
 
-  $hex: tohex($rgb);
+  $hex: to-hex($rgb);
 
   @return $hex;
 }

@@ -23,6 +23,9 @@ export default {
       return [
         `w-spin-icon${self.size ? `-${self.size}` : ''}`,
         `w-spin-tip-icon${self.size ? `-${self.size}` : ''}`,
+        {
+          'w-spin-icon-only': !self.$slots.default,
+        },
       ];
     },
     bodyClass() {

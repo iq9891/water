@@ -1,6 +1,10 @@
 <!-- @format -->
 
 <template>
+  <pre style="color: red">
+    重构组件
+    1. 默认 icon 替换 @ant-design/icons-vue 中的 LoadingOutlined
+  </pre>
   <w-space type="vertical">
     <w-switch />
     <w-switch loading />

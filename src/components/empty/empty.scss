@@ -5,6 +5,8 @@
 .w-empty {
   text-align: center;
   margin: 0 auto;
+  font-size: $empty-size;
+  color: $empty-color;
 
   &-img {
     height: 100px;
@@ -21,12 +23,7 @@
     }
   }
 
-  &-body {
-    font-size: $empty-size;
-    color: $empty-color;
-
-    &-simple {
-      color: $empty-color-light;
-    }
+  &-simple {
+    color: $empty-color-light;
   }
 }

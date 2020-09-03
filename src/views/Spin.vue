@@ -1,6 +1,11 @@
 <!-- @format -->
 
 <template>
+  <pre style="color: red">
+    重构组件
+    1. 修复了 没有  slot 的时候，loading大小问题
+    2. 默认 icon 替换 @ant-design/icons-vue 中的 LoadingOutlined
+  </pre>
   <w-space type="vertical">
     <button @click="changeLoading">改变</button>
     <w-space>
@@ -8,10 +13,28 @@
       <button @click="changeSize('')">正常</button>
       <button @click="changeSize('large')">大</button>
     </w-space>
-    <w-space type="vertical">
+    <w-space type="vertical"
+      ><w-spin v-model="loading" size="small">
+        <template #icon>
+          <img src="https://static2.evente.cn/static/img/icon.jpg" alt="水滴" />
+        </template>
+      </w-spin>
+      <w-spin v-model="loading">
+        <template #icon>
+          <img src="https://static2.evente.cn/static/img/icon.jpg" alt="水滴" />
+        </template>
+      </w-spin>
+      <w-spin v-model="loading" size="large">
+        <template #icon>
+          <img src="https://static2.evente.cn/static/img/icon.jpg" alt="水滴" />
+        </template>
+      </w-spin>
+      <w-spin v-model="loading" size="small"></w-spin>
+      <w-spin v-model="loading"></w-spin>
+      <w-spin v-model="loading" size="large"></w-spin>
       <w-spin v-model="loading" :size="size">
         <template #icon>
-          <fire-filled />
+          <img src="https://static2.evente.cn/static/img/icon.jpg" alt="水滴" />
         </template>
         这是一个没有链接的超链
       </w-spin>

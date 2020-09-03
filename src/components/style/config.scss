@@ -20,15 +20,15 @@ $black: #000 !default;
 
 // Color used by default to control hover and active backgrounds and for
 // alert info backgrounds.
-$primary-1: colorpalette($primary-color, 1) !default;
-$primary-2: colorpalette($primary-color, 2) !default;
-$primary-3: colorpalette($primary-color, 3) !default;
-$primary-4: colorpalette($primary-color, 4) !default;
-$primary-5: colorpalette($primary-color, 5) !default;
-$primary-6: colorpalette($primary-color, 6) !default;
-$primary-7: colorpalette($primary-color, 7) !default;
-$primary-9: colorpalette($primary-color, 9) !default;
-$primary-10: colorpalette($primary-color, 10) !default;
+$primary-1: color-palette($primary-color, 1) !default;
+$primary-2: color-palette($primary-color, 2) !default;
+$primary-3: color-palette($primary-color, 3) !default;
+$primary-4: color-palette($primary-color, 4) !default;
+$primary-5: color-palette($primary-color, 5) !default;
+$primary-6: color-palette($primary-color, 6) !default;
+$primary-7: color-palette($primary-color, 7) !default;
+$primary-9: color-palette($primary-color, 9) !default;
+$primary-10: color-palette($primary-color, 10) !default;
 
 // Background color for `<body>`
 $body-background: #fff !default;
@@ -139,8 +139,8 @@ $space-large: 32px !default;
 // 超链的时间
 $link-move-time: 0.5s !default;
 $link-color: $primary-color;
-$link-hover-color: colorpalette($link-color, 5);
-$link-active-color: colorpalette($link-color, 7);
+$link-hover-color: color-palette($link-color, 5);
+$link-active-color: color-palette($link-color, 7);
 $link-decoration: none;
 $link-hover-decoration: none;
 // 空状态

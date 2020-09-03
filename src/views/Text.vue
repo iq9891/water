@@ -1,6 +1,9 @@
 <!-- @format -->
 
 <template>
+  <pre style="color: red">
+    重构组件
+  </pre>
   <w-text>Water</w-text>
   <w-text strong>
     Water

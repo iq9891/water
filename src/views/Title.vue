@@ -1,6 +1,9 @@
 <!-- @format -->
 
 <template>
+  <pre style="color: red">
+    重构组件
+  </pre>
   <div>
     <w-title>h1. Water</w-title>
     <w-title :level="2">

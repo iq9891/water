@@ -56,6 +56,7 @@ $link-font: (
         vertical-align: middle;
 
         & svg,
+        & img,
         & span {
           color: $blue-6;
           width: $value;
@@ -96,6 +97,7 @@ $link-font: (
 
     & .w-link-icon {
       & svg,
+      & img,
       & span {
         color: $disabled-color;
       }

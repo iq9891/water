@@ -7,19 +7,19 @@
 @use "sass:math" as math;
 @use "sass:list" as list;
 
-@function isOnePointZero($n) {
+@function is-one-point-zero($n) {
   @return meta.type-of($n) == 'string' and string.index($n, '.') != -1;
 }
 
-@function isPercentage($n) {
+@function is-percentage($n) {
   @return meta.type-of($n) == 'string' and string.index($n, '%') != -1;
 }
 
-@function getNumberFromPercentage($n) {
+@function get-number-from-percentage($n) {
   @return string.slice($n, 1, -2);
 }
 
-@function convertToPercentage($n) {
+@function convert-to-percentage($n) {
   @if ($n <= 1) {
     $n: ($n * 100) + '%';
   }
@@ -28,15 +28,15 @@
 }
 
 @function bound01($n, $max) {
-  @if (isOnePointZero($n)) {
+  @if (is-one-point-zero($n)) {
     $n: 100;
   }
 
-  $processPercent: ispercentage($n);
+  $processPercent: is-percentage($n);
   $oneMax: $n;
 
   @if ($processPercent) {
-    $oneMax: getnumberfrompercentage($n);
+    $oneMax: get-number-from-percentage($n);
   }
   $n: math.min($max, math.max(0, $oneMax));
 
@@ -53,13 +53,13 @@
   @return ($n % $max) / $max;
 }
 
-@function hexToRGB($color) {
+@function hex-to-rgb($color) {
   @return (r: color.red($color), g: color.green($color), b: color.blue($color));
 }
 
-@function hsvToRgb($h, $s, $v) {
-  $h: bound01(converttopercentage($h), 360) * 6;
-  $s: bound01(converttopercentage($s), 100);
+@function hsv-to-rgb($h, $s, $v) {
+  $h: bound01(convert-to-percentage($h), 360) * 6;
+  $s: bound01(convert-to-percentage($s), 100);
   $v: bound01($v, 100);
 
   $i: math.floor($h);
@@ -116,7 +116,7 @@
   );
 }
 
-@function rgbToHsv($r, $g, $b) {
+@function rgb-to-hsv($r, $g, $b) {
   $r: bound01($r, 255);
   $g: bound01($g, 255);
   $b: bound01($b, 255);
@@ -159,12 +159,12 @@
   @return (h: $h, s: $s, v: $v);
 }
 
-@function rgbToHex($rgb) {
+@function rgb-to-hex($rgb) {
   @return rgb(map.get($rgb, 'r'), map.get($rgb, 'g'), map.get($rgb, 'b'));
 }
 
-@function toHsv($rgb) {
-  $hsv: rgbtohsv(map.get($rgb, 'r'), map.get($rgb, 'g'), map.get($rgb, 'b'));
+@function to-hsv($rgb) {
+  $hsv: rgb-to-hsv(map.get($rgb, 'r'), map.get($rgb, 'g'), map.get($rgb, 'b'));
   @return (
     h: map.get($hsv, 'h') * 360,
     s: map.get($hsv, 's'),
@@ -172,6 +172,6 @@
   );
 }
 
-@function toHex($rgb) {
-  @return rgbToHex($rgb);
+@function to-hex($rgb) {
+  @return rgb-to-hex($rgb);
 }

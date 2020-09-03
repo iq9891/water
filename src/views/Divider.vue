@@ -1,6 +1,9 @@
 <!-- @format -->
 
 <template>
+  <pre style="color: red">
+    新增组件
+  </pre>
   <div>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne

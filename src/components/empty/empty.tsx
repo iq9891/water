@@ -32,17 +32,17 @@ const Empty = defineComponent({
 
     const isSimple = type === 'simple';
 
-    const bodyClass = [
-      'w-empty-body',
+    const emptyClass = [
+      'w-empty',
       {
-        'w-empty-body-simple': isSimple,
+        'w-empty-simple': isSimple,
       },
     ];
 
     const children: VNode = $slots.default ? (
       $slots.default()
     ) : (
-      <div class={bodyClass}>暂无数据</div>
+      <div>暂无数据</div>
     );
 
     const defaultImgNode = isSimple
@@ -59,7 +59,7 @@ const Empty = defineComponent({
     ];
 
     return (
-      <div class="w-empty" style={style}>
+      <div class={emptyClass} style={style}>
         <div class={imgClass}>{imgNode}</div>
         {children}
       </div>
