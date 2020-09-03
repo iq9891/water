@@ -1,3 +1,4 @@
+/** @format */
 
 import { h, VNode, defineComponent } from 'vue';
 import { TypeStyle } from '../../common/types';
@@ -8,8 +9,8 @@ const defaultEmptyImg = DefaultEmptyImg;
 const simpleEmptyImg = SimpleEmptyImg;
 
 export interface EmptyProps {
-  style?: TypeStyle
-  type?: String
+  style?: TypeStyle;
+  type?: String;
 }
 
 export const PRESENTED_IMAGE_DEFAULT = h(defaultEmptyImg());
@@ -29,38 +30,38 @@ const Empty = defineComponent({
   render() {
     const { type, $slots, style } = this as any;
 
-    const isSimple = type === 'simple'
+    const isSimple = type === 'simple';
 
     const bodyClass = [
       'w-empty-body',
       {
-        ['w-empty-body-simple']: isSimple,
-      }
+        'w-empty-body-simple': isSimple,
+      },
     ];
-    
-    const children: VNode = $slots.default ? $slots.default() : (
+
+    const children: VNode = $slots.default ? (
+      $slots.default()
+    ) : (
       <div class={bodyClass}>暂无数据</div>
     );
 
-    const defaultImgNode = isSimple ? PRESENTED_IMAGE_SIMPLE : PRESENTED_IMAGE_DEFAULT;
-    
+    const defaultImgNode = isSimple
+      ? PRESENTED_IMAGE_SIMPLE
+      : PRESENTED_IMAGE_DEFAULT;
+
     const imgNode: VNode = $slots.img ? $slots.img() : defaultImgNode;
 
     const imgClass = [
       'w-empty-img',
       {
-        ['w-empty-img-simple']: isSimple,
-      }
+        'w-empty-img-simple': isSimple,
+      },
     ];
-    
+
     return (
       <div class="w-empty" style={style}>
-        <div
-          class={imgClass}
-        >
-          { imgNode }
-        </div>
-        { children }
+        <div class={imgClass}>{imgNode}</div>
+        {children}
       </div>
     );
   },

@@ -1,3 +1,5 @@
+/** @format */
+
 const Simple = () => (
   <svg width="64" height="41" viewBox="0 0 64 41">
     <g transform="translate(0 1)" fill="none" fill-rule="evenodd">

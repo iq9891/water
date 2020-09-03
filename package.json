@@ -6,7 +6,7 @@
     "test": "cross-env COVERAGE=false jest",
     "build": "vite build",
     "lint": "yarn jslint && yarn style",
-    "jslint": "eslint . --ext '.ts,.vue' --fix",
+    "jslint": "eslint . --ext '.ts,.tsx,.vue' --fix",
     "style": "stylelint **/*.scss --fix"
   },
   "dependencies": {

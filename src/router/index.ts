@@ -65,6 +65,12 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "spin" */ '../views/Spin.vue'),
     },
+    {
+      path: '/grid',
+      name: 'Grid',
+      component: () =>
+        import(/* webpackChunkName: "grid" */ '../views/grid/Grid.vue'),
+    },
   ],
 });
 

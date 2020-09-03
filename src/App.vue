@@ -44,6 +44,10 @@
       <router-link :to="{ name: 'Spin' }">
         加载中
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Grid' }">
+        栅格
+      </router-link>
     </div>
     <router-view />
   </w-space>
