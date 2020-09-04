@@ -71,6 +71,12 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "grid" */ '../views/grid/Grid.vue'),
     },
+    {
+      path: '/affix',
+      name: 'Affix',
+      component: () =>
+        import(/* webpackChunkName: "affix" */ '../views/Affix.vue'),
+    },
   ],
 });
 

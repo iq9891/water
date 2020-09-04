@@ -38,6 +38,7 @@ $type-list: (
     background: $code-bg;
     border: 1px solid $normal-border;
     border-radius: 3px;
+    display: inline-block;
   }
 
   &-u {

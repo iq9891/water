@@ -48,6 +48,10 @@
       <router-link :to="{ name: 'Grid' }">
         栅格
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Affix' }">
+        图钉
+      </router-link>
     </div>
     <router-view />
   </w-space>
