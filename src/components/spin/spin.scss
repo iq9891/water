@@ -4,29 +4,28 @@
 @import '../style/mixins/ellipsis.scss';
 
 $spin-size: (
-  '': 20,
-  '-large': 32,
-  '-small': 14,
+  '': $spin-size,
+  '-large': $spin-size-lg,
+  '-small': $spin-size-sm,
 );
 $spin-tip-fontsize: (
-  '': 12,
-  '-large': 12,
-  '-small': 12,
+  '': $spin-font-size,
+  '-large': $spin-font-size,
+  '-small': $spin-font-size-sm,
 );
 $spin-tip-space: (
-  '': 8,
-  '-large': 12,
-  '-small': 4,
+  '': $spin-tip-space,
+  '-large': $spin-tip-space-lg,
+  '-small': $spin-tip-space-sm,
 );
-$move-time: 0.3s;
 
 .w-spin {
   position: relative;
   transform-origin: center;
-  transition: opacity $move-time, color $move-time;
+  transition: opacity $spin-duration, color $spin-duration;
 
   &-body {
-    transition: opacity 0.3s;
+    transition: opacity $spin-duration;
 
     &::after {
       position: absolute;
@@ -38,9 +37,9 @@ $move-time: 0.3s;
       display: none \9;
       width: 100%;
       height: 100%;
-      background: #fff;
+      background: $component-background;
       opacity: 0;
-      transition: all 0.3s;
+      transition: all $spin-duration;
       content: ' ';
       pointer-events: none;
     }
@@ -49,21 +48,18 @@ $move-time: 0.3s;
       clear: both;
       overflow: hidden;
       opacity: 0.5;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
       user-select: none;
       pointer-events: none;
 
       &::after {
-        opacity: 0.4;
+        opacity: $spin-opacity;
         pointer-events: auto;
       }
     }
   }
 
   &-icon {
-    color: $blue-6;
+    color: $spin-color;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -72,7 +68,7 @@ $move-time: 0.3s;
     // 循环尺寸
     @each $size, $value in $spin-size {
       &#{$size} {
-        color: $blue-6;
+        color: $spin-color;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -81,8 +77,8 @@ $move-time: 0.3s;
 
       &#{$size} svg,
       &#{$size} img {
-        width: $value + px;
-        height: $value + px;
+        width: $value;
+        height: $value;
       }
     }
 
@@ -101,14 +97,13 @@ $move-time: 0.3s;
     width: 100%;
     height: 100%;
     user-select: none;
-    overflow: -hidden;
   }
 
   &-tip {
     @extend .w-ellipsis;
 
     margin: 0;
-    color: $blue-6;
+    color: $spin-color;
     width: 100%;
     line-height: 1;
     font-family: $font-family;
@@ -117,14 +112,14 @@ $move-time: 0.3s;
     // 循环尺寸
     @each $size, $value in $spin-size {
       &#{$size} {
-        font-size: map-get($spin-tip-fontsize, $size) + px;
-        padding-top: map-get($spin-tip-space, $size) + px;
+        font-size: map-get($spin-tip-fontsize, $size);
+        padding-top: map-get($spin-tip-space, $size);
       }
 
       &#{$size} svg,
       &#{$size} img {
-        width: $value + px;
-        height: $value + px;
+        width: $value;
+        height: $value;
       }
     }
   }

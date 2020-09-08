@@ -3,22 +3,22 @@
 @import '../style/config.scss';
 
 .w-switch {
-  height: 20px;
-  min-width: 42px;
+  height: $switch-height;
+  line-height: $switch-height;
+  min-width: $switch-min-width;
   background: rgba(0, 0, 0, 0.25);
   border-radius: 100px;
   display: inline-block;
-  font-size: 12px;
-  line-height: 20px;
+  font-size: $switch-font-size;
   position: relative;
-  color: $normal-color;
+  color: $switch-normal-color;
   cursor: pointer;
-  transition: color $switch-move-time, background-color $switch-move-time;
+  transition: color $switch-duration, background-color $switch-duration;
 
   &-inner {
     margin: 0 8px 0 29px;
     display: inline-block;
-    transition: margin $switch-move-time;
+    transition: margin $switch-duration;
   }
 
   &-handle {
@@ -26,11 +26,11 @@
     height: 16px;
     position: absolute;
     border-radius: 50%;
-    background: $normal-bg;
+    background: $switch-normal-bg;
     left: 0;
     margin-left: 2px;
     top: 2px;
-    transition: left $switch-move-time, margin $switch-move-time;
+    transition: left $switch-duration, margin $switch-duration;
 
     &-on {
       left: 100%;
@@ -52,7 +52,7 @@
     width: 10px;
     height: 10px;
     display: block;
-    color: $loading-color;
+    color: $switch-loading-color;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -78,13 +78,13 @@
     }
 
     &-on {
-      color: $blue-6;
+      color: $switch-color;
     }
   }
 
   &-on {
-    background: $blue-6;
-    color: $normal-color;
+    background: $switch-color;
+    color: $switch-normal-color;
 
     &-inner {
       margin: 0 29px 0 8px;
@@ -97,17 +97,17 @@
   }
 
   &-small {
-    line-height: 16px;
-    height: 16px;
-    min-width: 28px;
+    line-height: $switch-sm-height;
+    height: $switch-sm-height;
+    min-width: $switch-sm-min-width;
 
     &-inner {
       margin: 0 4px 0 19px;
     }
 
     &-on {
-      background: $blue-6;
-      color: $normal-color;
+      background: $switch-color;
+      color: $switch-normal-color;
 
       &-inner {
         margin: 0 19px 0 4px;
@@ -127,6 +127,6 @@
 
   &-disabled {
     cursor: not-allowed;
-    background: $disabled-bg;
+    background: $switch-disabled-bg;
   }
 }

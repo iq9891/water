@@ -18,7 +18,7 @@ $divider-type: (
   margin: 0;
   padding: 0;
   color: $text-color;
-  font-size: 14px;
+  font-size: $font-size-base;
   font-variant: tabular-nums;
   line-height: 1.5715;
   list-style: none;
@@ -82,7 +82,7 @@ $divider-type: (
   display: inline-block;
   padding: 0 1em;
   font-weight: 500;
-  font-size: 16px;
+  font-size: $font-size-lg;
   position: absolute;
   background: $white;
 
@@ -103,6 +103,6 @@ $divider-type: (
 
   &-plain {
     font-weight: 400;
-    font-size: 14px;
+    font-size: $font-size-base;
   }
 }

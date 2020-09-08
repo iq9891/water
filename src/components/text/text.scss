@@ -3,11 +3,11 @@
 @import '../style/config.scss';
 
 $type-list: (
-  '-danger': $red-6,
-  '-warning': $orange-6,
+  '-danger': $error-color,
+  '-warning': $warning-color,
   '-secondary': $text-color-secondary,
   '-info': $gray,
-  '-success': $green-6,
+  '-success': $success-color,
 );
 
 .w-text {

@@ -110,7 +110,7 @@ $line-height: 18px !default;
 $line-height-small: 16px !default;
 //不可用 颜色
 $disabled-bg: #eff1f6 !default;
-$disabled-color: #b4bac3 !default;
+$disabled-color: color.scale($black, $alpha: -75%) !default;
 $disabled-border: #dbdee9 !default;
 // code 的样式
 $code-bg: #f0f0f0 !default;
@@ -128,21 +128,47 @@ $space-small: 8px !default;
 $space-middle: 16px !default;
 $space-large: 32px !default;
 // 超链的时间
-$link-move-time: 0.5s !default;
+$link-duration: 0.5s !default;
 $link-color: $primary-color !default;
 $link-hover-color: color-palette($link-color, 5) !default;
 $link-active-color: color-palette($link-color, 7) !default;
 $link-decoration: none !default;
 $link-hover-decoration: none !default;
+$link-disabled-color: $disabled-color !default;
+$link-opacity: 0.5;
+$link-font-size-sm: $font-size-sm !default;
+$link-font-size: $font-size-base !default;
+$link-font-size-lg: $font-size-base !default;
 // 空状态
 $empty-size: 14px !default;
 $empty-color: #292b2d !default;
 $empty-color-light: #60636c !default;
 $empty-img-space: 8px !default;
-// 加载的颜色
-$loading-color: color.scale($black, $alpha: -55%) !default;
+// 加载中
+$spin-color: $primary-color !default;
+$spin-duration: 0.3s !default;
+$spin-font-size-sm: $font-size-sm !default;
+$spin-font-size: $font-size-base !default;
+$spin-font-size-lg: $font-size-base !default;
+$spin-size-sm: 14px !default;
+$spin-size: 20px !default;
+$spin-size-lg: 32px !default;
+$spin-tip-space-sm: 4px !default;
+$spin-tip-space: 8px !default;
+$spin-tip-space-lg: 12px !default;
+$spin-opacity: 0.4;
 // 开关
-$switch-move-time: 0.3s;
+$switch-color: $primary-color !default;
+$switch-height: 20px !default;
+$switch-sm-height: 16px !default;
+$switch-min-width: 44px !default;
+$switch-sm-min-width: 28px !default;
+$switch-duration: 0.3s !default;
+$switch-loading-color: color.scale($black, $alpha: -55%) !default;
+$switch-disabled-bg: $disabled-bg !default;
+$switch-normal-bg: $normal-bg !default;
+$switch-font-size: $font-size-sm !default;
+$switch-normal-color: $normal-color !default;
 // 按钮
 $btn-primary-color: $text-color-inverse !default;
 $btn-primary-bg: $primary-color !default;
