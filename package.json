@@ -13,6 +13,7 @@
     "@ant-design/icons-vue": "^5.0.0",
     "@vue/compiler-core": "^3.0.0-rc.6",
     "add-dom-event-listener": "^1.1.0",
+    "ant-design-vue": "^2.0.0-beta.6",
     "vue": "^3.0.0-rc.6",
     "vue-router": "^4.0.0-beta.7"
   },

@@ -1,4 +1,5 @@
 /** @format */
+@use 'sass:color';
 
 @import './colors.scss';
 
@@ -11,12 +12,12 @@ $primary-color: $blue-6 !default;
 $info-color: $blue-6 !default;
 $success-color: $green-6 !default;
 $processing-color: $blue-6 !default;
-$error-color: $red-5 !default;
-$highlight-color: $red-5 !default;
+$error-color: $red-6 !default;
 $warning-color: $gold-6 !default;
 $normal-color: #d9d9d9 !default;
 $white: #fff !default;
 $black: #000 !default;
+$gray: #dcdcdc !default;
 
 // Color used by default to control hover and active backgrounds and for
 // alert info backgrounds.
@@ -38,16 +39,12 @@ $component-background: #fff !default;
 $code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
   monospace !default;
 
-$text-color: fade($black, 65%) !default;
-$text-color-secondary: fade($black, 45%) !default;
+$text-color: color.scale($black, $alpha: -15%) !default;
+$text-color-secondary: color.scale($black, $alpha: -55%) !default;
 $text-color-inverse: $white !default;
 
-$text-color-dark: fade($white, 85%) !default;
-$text-color-secondary-dark: fade($white, 65%) !default;
-$text-selection-bg: $primary-color !default;
-
 $icon-color: inherit !default;
-$icon-color-hover: fade($black, 75%) !default;
+$icon-color-hover: color.scale($black, $alpha: -25%) !default;
 
 $font-variant-base: tabular-nums !default;
 $font-feature-settings-base: 'tnum' !default;
@@ -103,12 +100,6 @@ $animation-duration-fast: 0.1s !default; // Tooltip
 $normal-border: #dbdee9 !default;
 $normal-bg: $white !default;
 $normal-color: $white !default;
-
-// 灰色
-$gray: #dcdcdc !default;
-// 字色
-$text-color: #292b2d !default;
-$text-color-light: #60636c !default;
 // 字号
 $text-size-large: 16px !default;
 $text-size: 14px !default;
@@ -138,23 +129,39 @@ $space-middle: 16px !default;
 $space-large: 32px !default;
 // 超链的时间
 $link-move-time: 0.5s !default;
-$link-color: $primary-color;
-$link-hover-color: color-palette($link-color, 5);
-$link-active-color: color-palette($link-color, 7);
-$link-decoration: none;
-$link-hover-decoration: none;
+$link-color: $primary-color !default;
+$link-hover-color: color-palette($link-color, 5) !default;
+$link-active-color: color-palette($link-color, 7) !default;
+$link-decoration: none !default;
+$link-hover-decoration: none !default;
 // 空状态
 $empty-size: 14px !default;
 $empty-color: #292b2d !default;
 $empty-color-light: #60636c !default;
 $empty-img-space: 8px !default;
 // 加载的颜色
-$loading-color: rgba(0, 0, 0, 0.45);
+$loading-color: color.scale($black, $alpha: -55%) !default;
 // 开关
 $switch-move-time: 0.3s;
-
-.w-ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+// 按钮
+$btn-primary-color: $text-color-inverse !default;
+$btn-primary-bg: $primary-color !default;
+$btn-primary-border: $primary-color !default;
+$btn-info-color: $text-color !default;
+$btn-info-bg: $normal-bg !default;
+$btn-info-border: $info-color !default;
+$btn-border-bg: $normal-bg !default;
+$btn-border-color: $text-color !default;
+$btn-border-border: $normal-border !default;
+$btn-dashed-bg: $normal-bg !default;
+$btn-dashed-color: $text-color !default;
+$btn-dashed-border: $normal-border !default;
+$btn-danger-color: $text-color-inverse !default;
+$btn-danger-bg: color-palette($error-color, 5) !default;
+$btn-danger-border: color-palette($error-color, 5) !default;
+$btn-disabled-color: $disabled-color !default;
+$btn-disabled-bg: $disabled-bg !default;
+$btn-disabled-border: $disabled-border !default;
+$btn-loading-bg: $normal-bg !default;
+$btn-ghost-disabled-color: color.scale($black, $alpha: -75%) !default;
+$btn-ghost-color: $primary-color !default;

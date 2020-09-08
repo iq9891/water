@@ -77,6 +77,12 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "affix" */ '../views/Affix.vue'),
     },
+    {
+      path: '/button',
+      name: 'Button',
+      component: () =>
+        import(/* webpackChunkName: "button" */ '../views/Button.vue'),
+    },
   ],
 });
 

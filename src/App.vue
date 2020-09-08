@@ -52,6 +52,10 @@
       <router-link :to="{ name: 'Affix' }">
         图钉
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Button' }">
+        按钮
+      </router-link>
     </div>
     <router-view />
   </w-space>
@@ -73,5 +77,6 @@
 <style lang="scss">
   body {
     margin: 0;
+    padding-bottom: 20px;
   }
 </style>

@@ -1,0 +1,343 @@
+/** @format */
+
+@import '../style/config.scss';
+@import '../style/mixins/spread.scss';
+
+$prefix: 'w-';
+$button-list: (
+  '': 28,
+  '-large': 32,
+  '-small': 24,
+);
+$button-circle-min-width: (
+  '': 28px,
+  '-large': 30px,
+  '-small': 22px,
+);
+$button-padding: (
+  '': $padding-md,
+  '-large': $padding-md,
+  '-small': $padding-xs,
+);
+$button-icon: (
+  '': 12,
+  '-large': 16,
+  '-small': 12,
+);
+$button-icon-padding: (
+  '': 8,
+  '-large': 8,
+  '-small': 6,
+);
+$button-font: (
+  '': $font-size-base,
+  '-large': $font-size-lg,
+  '-small': $font-size-base,
+);
+$button-text-margin: (
+  '': 8,
+  '-large': 8,
+  '-small': 4,
+);
+
+$button-only-padding: (
+  '': 7,
+  '-large': 8,
+  '-small': 4,
+);
+
+.#{$prefix}btn {
+  box-sizing: border-box;
+  font-family: $font-family;
+  padding: 0 16px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: $border-radius-base;
+  border: 1px solid transparent;
+  background: $btn-primary-bg;
+  border-color: $btn-primary-border;
+  color: $btn-primary-color;
+  transition: all 0.3s ease;
+  outline: none;
+  // 用户是否可选择文本
+  user-select: none;
+  // 浏览器只允许进行滚动和持续缩放操作
+  touch-action: manipulation;
+  // 文本不换行
+  white-space: nowrap;
+  font-size: 0;
+
+  @each $size, $value in $button-padding {
+    &#{$size} {
+      padding: 0 $value;
+    }
+  }
+
+  &:focus {
+    border-color: color-palette($btn-primary-border, 7);
+    background: color-palette($btn-primary-bg, 7);
+    color: $btn-primary-color;
+  }
+
+  &:hover {
+    border-color: color-palette($btn-primary-border, 5);
+    background: color-palette($btn-primary-bg, 5);
+    color: $btn-primary-color;
+  }
+
+  &-circle {
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+  @each $size, $value in $button-circle-min-width {
+    &-circle.w-btn#{$size} {
+      min-width: $value;
+    }
+  }
+
+  &-body {
+    margin-left: 8px;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+
+  &-text {
+    display: inline-block;
+    vertical-align: middle;
+    // 循环尺寸
+    @each $size, $value in $button-text-margin {
+      &-icon#{$size} {
+        margin-left: $value + px;
+      }
+    }
+  }
+
+  &-info {
+    background: $btn-info-bg;
+    color: $btn-info-color;
+    border-color: $btn-info-border;
+
+    &:focus {
+      background: $btn-info-bg;
+      border-color: color-palette($btn-info-border, 7);
+      color: color-palette($btn-info-color, 7);
+    }
+
+    &:hover {
+      background: $btn-info-bg;
+      border-color: color-palette($btn-info-border, 5);
+      color: color-palette($btn-info-color, 5);
+    }
+  }
+
+  &-border {
+    @extend .#{$prefix}btn-info;
+
+    background: $btn-border-bg;
+    border-color: $btn-border-border;
+    color: $btn-border-color;
+  }
+
+  &-dashed {
+    @extend .#{$prefix}btn-border;
+
+    background: $btn-dashed-bg;
+    border-color: $btn-dashed-border;
+    color: $btn-dashed-color;
+    border-style: dashed;
+  }
+
+  &-danger {
+    background: $btn-danger-bg;
+    color: $btn-danger-color;
+    border-color: $btn-danger-border;
+
+    &:focus {
+      color: $btn-danger-color;
+      background: color-palette($btn-danger-bg, 7);
+      border-color: color-palette($btn-danger-border, 7);
+    }
+
+    &:hover {
+      background: color-palette($btn-danger-bg, 5);
+      color: $btn-danger-color;
+      border-color: color-palette($btn-danger-border, 5);
+    }
+  }
+  // 循环尺寸
+  @each $size, $value in $button-list {
+    &-icon#{$size},
+    &-body {
+      display: inline-block;
+      vertical-align: middle;
+
+      & span {
+        display: block;
+      }
+
+      & img,
+      & svg {
+        display: block;
+        width: map-get($button-icon, $size) + px;
+        height: map-get($button-icon, $size) + px;
+      }
+    }
+
+    &-only#{$size} {
+      padding: map-get($button-only-padding, $size) + px;
+
+      & .w-btn-icon {
+        display: block;
+      }
+    }
+
+    &-text#{$size} {
+      font-size: map-get($button-font, $size);
+      line-height: ($value - 2) + px;
+    }
+
+    &-round.w-btn#{$size} {
+      height: $value + px;
+      padding: 0 map-get($button-padding, $size);
+      font-size: map-get($button-font, $size);
+      border-radius: $value + px;
+    }
+  }
+
+  &-loading {
+    position: relative;
+
+    &::before {
+      content: ' ';
+      position: absolute;
+      cursor: not-allowed;
+      top: -1px;
+      left: -1px;
+      bottom: -1px;
+      right: -1px;
+      background: $btn-loading-bg;
+      border-radius: inherit;
+      opacity: 0.5;
+    }
+
+    &:focus,
+    &:hover {
+      background: $btn-primary-bg;
+      border-color: $btn-primary-border;
+      color: $btn-primary-color;
+    }
+
+    &.#{$prefix}btn-info:focus,
+    &.#{$prefix}btn-info:hover {
+      background: $btn-info-bg;
+      color: $btn-info-color;
+      border-color: $btn-info-border;
+    }
+
+    &.#{$prefix}btn-dashed:focus,
+    &.#{$prefix}btn-dashed:hover {
+      background: $btn-dashed-bg;
+      border-color: $btn-dashed-border;
+      color: $btn-dashed-color;
+    }
+
+    &.#{$prefix}btn-border:focus,
+    &.#{$prefix}btn-border:hover {
+      background: $btn-border-bg;
+      border-color: $btn-border-border;
+      color: $btn-border-color;
+    }
+
+    &.#{$prefix}btn-danger:focus,
+    &.#{$prefix}btn-danger:hover {
+      background: $btn-danger-bg;
+      color: $btn-danger-color;
+      border-color: $btn-danger-border;
+    }
+  }
+
+  &-click {
+    position: relative;
+
+    &::before {
+      content: ' ';
+      position: absolute;
+      top: -1px;
+      bottom: -1px;
+      right: -1px;
+      left: -1px;
+      border-radius: inherit;
+      border: 1px solid;
+      border-color: inherit;
+      opacity: 0.4;
+
+      @include speadMixin;
+    }
+  }
+
+  &-ghost {
+    background: none;
+    color: $btn-ghost-color;
+
+    &:hover,
+    &:focus {
+      background: none;
+    }
+
+    &.#{$prefix}btn-border {
+      color: $btn-border-color;
+    }
+
+    &.#{$prefix}btn-danger {
+      color: $btn-danger-color;
+
+      &:focus,
+      &:hover {
+        border-color: $btn-danger-border;
+        color: $btn-danger-color;
+      }
+    }
+
+    &,
+    &.#{$prefix}btn-border,
+    &.#{$prefix}btn-info,
+    &.#{$prefix}btn-dashed {
+      &:focus,
+      &:hover {
+        border-color: color-palette($btn-primary-border, 5);
+        color: color-palette($btn-primary-color, 5);
+      }
+    }
+
+    &.#{$prefix}btn-disabled {
+      background: none;
+      color: $btn-ghost-disabled-color;
+
+      &:hover,
+      &:focus {
+        background: none;
+        color: $btn-ghost-disabled-color;
+        border-color: $btn-disabled-border;
+      }
+    }
+  }
+
+  &-disabled {
+    background: $btn-disabled-bg;
+    color: $btn-disabled-color;
+    border-color: $btn-disabled-border;
+    cursor: not-allowed;
+
+    &:hover,
+    &:focus {
+      background: $btn-disabled-bg;
+      color: $btn-disabled-color;
+      border-color: $btn-disabled-border;
+    }
+  }
+}

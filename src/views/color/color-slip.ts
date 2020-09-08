@@ -9,13 +9,11 @@ const getColors = (typeValue: never[]): string[] => {
     const typeEl = typeValue[index];
     const { backgroundColor } = getComputedStyle(typeEl);
     colors.push(rgbToHex(backgroundColor));
-    console.log(backgroundColor, rgbToHex(backgroundColor), 'element');
   }
   return colors;
 };
 
 export default {
-  name: 'adsf',
   props: {
     count: {
       type: Number,
@@ -29,7 +27,6 @@ export default {
 
     onMounted(() => {
       typeColors.value = getColors(typeNodes.value) as any;
-      console.log(typeNodes.value, typeColors, 'typeNodes');
     });
 
     return {
