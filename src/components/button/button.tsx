@@ -2,6 +2,7 @@
 
 import { LoadingOutlined } from '@ant-design/icons-vue';
 import { TypeClass } from '../../common/types';
+import validator, { sizeValidator } from '../../common/validator';
 
 export interface ButtonProps {
   type?: String;
@@ -25,15 +26,23 @@ export default {
     type: {
       type: String,
       default: '',
+      validator(value: string) {
+        const typeList = ['', 'info', 'border', 'dashed', 'danger'];
+        return validator(typeList, value);
+      },
     },
     shape: {
-      // circle round
       type: String,
       default: '',
+      validator(value: string) {
+        const typeList = ['', 'circle', 'round'];
+        return validator(typeList, value);
+      },
     },
     size: {
       type: String,
       default: '',
+      validator: sizeValidator,
     },
     htmlType: {
       type: String,

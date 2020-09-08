@@ -5,6 +5,7 @@ import getScroll from '../../common/getscroll';
 import getOffset from '../../common/getoffset';
 import * as getRect from '../../common/getrect';
 import { isNumber } from '../../common/typeof';
+import validator from '../../common/validator';
 
 export interface ChangeEntity {
   affixStatus: boolean;
@@ -41,6 +42,10 @@ export default {
     position: {
       type: String,
       default: 'fixed',
+      validator(value: string) {
+        const typeList = ['static', 'relative', 'absolute', 'fixed'];
+        return validator(typeList, value);
+      },
     },
     change: {
       type: Function,

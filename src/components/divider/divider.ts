@@ -2,6 +2,10 @@
 
 import { h, SetupContext } from 'vue';
 import { TypeStyle } from '../../common/types';
+import validator, {
+  sizeValidator,
+  directionValidator,
+} from '../../common/validator';
 
 export interface DividerProps {
   size?: String;
@@ -16,15 +20,21 @@ export default {
   props: {
     size: {
       type: String,
-      default: 'middle', // small | large
+      default: '',
+      validator: sizeValidator,
     },
     type: {
       type: String,
       default: 'horizontal',
+      validator: directionValidator,
     },
     placement: {
       type: String,
-      default: 'center', // right | left
+      default: 'center',
+      validator(value: string) {
+        const typeList = ['left', 'center', 'right'];
+        return validator(typeList, value);
+      },
     },
     dashed: Boolean,
     plain: Boolean,

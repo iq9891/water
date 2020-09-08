@@ -2,6 +2,7 @@
 
 import { h, VNode, defineComponent } from 'vue';
 import { TypeStyle } from '../../common/types';
+import validator from '../../common/validator';
 import DefaultEmptyImg from './img-def';
 import SimpleEmptyImg from './img-simple';
 
@@ -20,7 +21,11 @@ const Empty = defineComponent({
   props: {
     type: {
       type: String,
-      default: 'default', // default | simple
+      default: 'default',
+      validator(value: string) {
+        const typeList = ['default', 'simple'];
+        return validator(typeList, value);
+      },
     },
     style: {
       type: [Object, Array, String],

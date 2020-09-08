@@ -2,6 +2,10 @@
 
 import { h, CSSProperties, VNode } from 'vue';
 import { isNumber, isString } from '../../common/typeof';
+import validator, {
+  sizeValidator,
+  directionValidator,
+} from '../../common/validator';
 
 export interface SpaceProps {
   size?: String | Number;
@@ -14,15 +18,25 @@ export default {
   props: {
     size: {
       type: [String, Number],
-      default: 'middle', // middle large
+      default: '',
+      validator(value: string | number) {
+        return isString(value)
+          ? sizeValidator(value as string)
+          : isNumber(value);
+      },
     },
     type: {
       type: String,
       default: 'horizontal', // vertical
+      validator: directionValidator,
     },
     align: {
       type: String,
       default: '',
+      validator(value: string) {
+        const typeList = ['', 'start', 'center', 'end', 'baseline'];
+        return validator(typeList, value);
+      },
     },
   },
   render(): VNode | null {

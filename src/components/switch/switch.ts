@@ -1,6 +1,7 @@
 /** @format */
 
 import { LoadingOutlined } from '@ant-design/icons-vue';
+import validator from '../../common/validator';
 
 export interface ReturnParamsEntity {
   ev: MouseEvent;
@@ -18,7 +19,14 @@ export default {
     disabled: Boolean,
     loading: Boolean,
     stop: Boolean,
-    size: String,
+    size: {
+      type: String,
+      defalut: '',
+      validator(value: string) {
+        const typeList = ['', 'small'];
+        return validator(typeList, value);
+      },
+    },
     before: Function,
     change: {
       type: Function,

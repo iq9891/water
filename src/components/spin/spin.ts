@@ -1,12 +1,17 @@
 /** @format */
 
 import { LoadingOutlined } from '@ant-design/icons-vue';
+import { sizeValidator } from '../../common/validator';
 
 export default {
   props: {
     modelValue: Boolean,
     tip: String,
-    size: String,
+    size: {
+      type: String,
+      default: '',
+      validator: sizeValidator,
+    },
   },
   computed: {
     spinClass() {

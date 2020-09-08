@@ -2,11 +2,23 @@
 
 import { SetupContext } from 'vue';
 import renderTitle, { TextProps } from '../../common/text';
+import validator from '../../common/validator';
 
 export const textDefProps = {
   type: {
     type: String,
     defualt: '',
+    validator(value: string) {
+      const typeList = [
+        '',
+        'secondary',
+        'warning',
+        'info',
+        'danger',
+        'success',
+      ];
+      return validator(typeList, value);
+    },
   },
   strongStyle: {
     type: [Object, Array, String],
