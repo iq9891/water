@@ -110,6 +110,7 @@ $line-height: 18px !default;
 $line-height-small: 16px !default;
 //不可用 颜色
 $disabled-bg: #eff1f6 !default;
+$disabled-bg-on: #e6e6e6 !default;
 $disabled-color: color.scale($black, $alpha: -75%) !default;
 $disabled-border: #dbdee9 !default;
 // code 的样式
@@ -128,7 +129,7 @@ $space-small: 8px !default;
 $space-middle: 16px !default;
 $space-large: 32px !default;
 // 超链的时间
-$link-duration: 0.5s !default;
+$link-duration: $animation-duration-slow !default;
 $link-color: $primary-color !default;
 $link-hover-color: color-palette($link-color, 5) !default;
 $link-active-color: color-palette($link-color, 7) !default;
@@ -146,7 +147,7 @@ $empty-color-light: #60636c !default;
 $empty-img-space: 8px !default;
 // 加载中
 $spin-color: $primary-color !default;
-$spin-duration: 0.3s !default;
+$spin-duration: $animation-duration-slow !default;
 $spin-font-size-sm: $font-size-sm !default;
 $spin-font-size: $font-size-base !default;
 $spin-font-size-lg: $font-size-base !default;
@@ -163,7 +164,7 @@ $switch-height: 20px !default;
 $switch-sm-height: 16px !default;
 $switch-min-width: 44px !default;
 $switch-sm-min-width: 28px !default;
-$switch-duration: 0.3s !default;
+$switch-duration: $animation-duration-slow !default;
 $switch-loading-color: color.scale($black, $alpha: -55%) !default;
 $switch-disabled-bg: $disabled-bg !default;
 $switch-normal-bg: $normal-bg !default;
@@ -191,3 +192,23 @@ $btn-disabled-border: $disabled-border !default;
 $btn-loading-bg: $normal-bg !default;
 $btn-ghost-disabled-color: color.scale($black, $alpha: -75%) !default;
 $btn-ghost-color: $primary-color !default;
+$btn-height-base: 28px !default;
+$btn-height-sm: 24px !default;
+$btn-height-lg: 32px !default;
+
+// 单选按钮
+$radio-color: $primary-color !default;
+$radio-solid-color: $text-color-inverse !default;
+$radio-hover-color: color-palette($radio-color, 5) !default;
+$radio-active-color: color-palette($radio-color, 7) !default;
+$radio-button-color: $text-color !default;
+$radio-button-bg: $component-background !default;
+$radio-button-border: $normal-border !default;
+$radio-duration: $animation-duration-slow !default;
+$radio-button-height-base: $btn-height-base !default;
+$radio-button-height-sm: $btn-height-sm !default;
+$radio-button-height-lg: $btn-height-lg !default;
+$radio-disabled-color: $disabled-color !default;
+$radio-disabled-bg: $disabled-bg !default;
+$radio-disabled-bg-on: $disabled-bg-on !default;
+$radio-disabled-border: $disabled-border !default;

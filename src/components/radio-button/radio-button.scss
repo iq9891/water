@@ -1,0 +1,146 @@
+/** @format */
+
+@import '../style/config.scss';
+
+.w-radio-button {
+  position: relative;
+  display: inline-block;
+  height: $radio-button-height-base;
+  margin: 0;
+  padding: 0 $padding-md - 1px;
+  color: $radio-button-color;
+  font-size: $font-size-base;
+  line-height: $radio-button-height-base - 2px;
+  background: $radio-button-bg;
+  border: 1px solid $radio-button-border;
+  border-left-width: 0;
+  cursor: pointer;
+  transition: line-height $radio-duration, height $radio-duration,
+    padding $radio-duration, color $radio-duration, background $radio-duration,
+    border-color $radio-duration, box-shadow $radio-duration;
+
+  &-small {
+    @extend .w-radio-button;
+
+    height: $radio-button-height-sm;
+    line-height: $radio-button-height-sm - 2px;
+    padding: 0 $padding-sm - 1px;
+  }
+
+  &-large {
+    @extend .w-radio-button;
+
+    height: $radio-button-height-lg;
+    line-height: $radio-button-height-lg - 2px;
+  }
+
+  &::before {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    display: block;
+    box-sizing: content-box;
+    width: 1px;
+    height: 100%;
+    padding: 1px 0;
+    background-color: $radio-button-border;
+    transition: background-color $radio-duration;
+    content: ' ';
+  }
+
+  &:first-child {
+    border-left-width: 1px;
+    border-radius: $border-radius-base 0 0 $border-radius-base;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  &:last-child {
+    border-radius: 0 $border-radius-base $border-radius-base 0;
+  }
+
+  &:hover {
+    color: $radio-hover-color;
+  }
+
+  &-outline-on {
+    color: $radio-color;
+    border-color: $radio-color;
+    z-index: 2;
+
+    &::before {
+      background-color: $radio-color;
+    }
+
+    &:active {
+      color: $radio-active-color;
+      border-color: $radio-active-color;
+    }
+
+    &:hover {
+      color: $radio-hover-color;
+      border-color: $radio-hover-color;
+
+      &::before {
+        background-color: $radio-hover-color;
+      }
+    }
+  }
+
+  &-solid-on {
+    @extend .w-radio-button-outline-on;
+
+    color: $radio-solid-color;
+    background: $radio-color;
+
+    &:active {
+      color: $radio-solid-color;
+      background: $radio-active-color;
+    }
+
+    &:hover {
+      color: $radio-solid-color;
+      background: $radio-hover-color;
+    }
+  }
+
+  &-status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &-disabled {
+    color: $radio-disabled-color;
+    background: $radio-disabled-bg;
+    border-color: $radio-disabled-border;
+
+    &:hover {
+      color: $radio-disabled-color;
+      background: $radio-disabled-bg;
+      border-color: $radio-disabled-border;
+    }
+
+    &.w-radio-button-solid-on,
+    &.w-radio-button-outline-on {
+      background: $radio-disabled-bg-on;
+
+      &:hover {
+        color: $radio-disabled-color;
+        background: $radio-disabled-bg-on;
+        border-color: $radio-disabled-border;
+      }
+    }
+  }
+}

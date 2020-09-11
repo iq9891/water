@@ -83,6 +83,12 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "button" */ '../views/Button.vue'),
     },
+    {
+      path: '/radio',
+      name: 'Radio',
+      component: () =>
+        import(/* webpackChunkName: "radio" */ '../views/Radio.vue'),
+    },
   ],
 });
 

@@ -56,6 +56,10 @@
       <router-link :to="{ name: 'Button' }">
         按钮
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Radio' }">
+        单选
+      </router-link>
     </div>
     <router-view />
   </w-space>
