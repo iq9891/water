@@ -16,9 +16,17 @@
   </pre>
   <w-space type="vertical">
     <w-space>
-      <w-button @click="size = 'large'">大</w-button>
+      <!-- <w-button @click="size = 'large'">大</w-button>
       <w-button type="info" @click="size = ''">中</w-button>
-      <w-button type="border" @click="size = 'small'">小</w-button>
+      <w-button type="border" @click="size = 'small'">小</w-button> -->
+      <w-radio-group
+        v-model="size"
+        :loading="loading"
+        :disabled="disabled"
+        :options="options"
+        type="button"
+        button-style="solid"
+      ></w-radio-group>
       <w-button type="dashed" @click="loading = !loading"
         >加载{{ loading ? '中' : '' }}</w-button
       >
@@ -411,24 +419,38 @@
     import('../components/divider/Divider.vue'),
   );
 
+  const WRadioGroup = defineAsyncComponent(() =>
+    import('../components/radio-group/radio-group'),
+  );
+
+  const options = [
+    { label: 'small', value: 'Small' },
+    { label: '', value: 'Default' },
+    { label: 'large', value: 'Large' },
+  ];
+
   export default {
     components: {
       WButton,
       FireFilled,
       WSpace,
       WDivider,
+      WRadioGroup,
     },
     data() {
       return {
         loading: false,
         disabled: false,
         size: '',
+        options,
       };
     },
   };
 </script>
 
 <style lang="scss">
+  @import '../components/radio-button/radio-button';
+  @import '../components/button/button';
   @import '../components/button/button.scss';
 
   .button-ghost {

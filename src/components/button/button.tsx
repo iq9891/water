@@ -75,6 +75,15 @@ export default {
         self.className,
       ];
     },
+    bodyClass() {
+      const self = this as any;
+      return [
+        `${self.preName}-body`,
+        {
+          [`${self.preName}-body-${self.size}`]: self.size,
+        },
+      ];
+    },
     iconClass() {
       const self = this as any;
       return [
@@ -126,6 +135,8 @@ export default {
       $attrs,
       htmlType,
       textClass,
+      bodyClass,
+      iconClass,
       $slots,
       disabled,
       btnClass,
@@ -143,27 +154,26 @@ export default {
       onanimationend: removeClickName,
     };
     let loadingNode = loading ? (
-      <LoadingOutlined class={`${preName}-icon`} />
+      <LoadingOutlined class={iconClass} />
     ) : (
       ''
     );
 
     if (!loading && $slots.icon) {
-      loadingNode = <span class={`${preName}-icon`}>{$slots.icon()}</span>;
+      loadingNode = <span class={iconClass}>{$slots.icon()}</span>;
     }
 
     const slotDef = $slots.default ? $slots.default() : [];
 
     const children =
       slotDef.length > 1
-        ? slotDef.map((childItem: any) => {
-            return <span class="w-btn-body">{childItem}</span>;
-          })
+        ? slotDef.map((childItem: any) => (<span class={bodyClass}>{childItem}</span>))
         : slotDef;
+    const moreChildren = slotDef.length > 1 ? children : <span class={textClass}>{children}</span>;
 
     const contentNode =
       children.length > 0 && (loadingNode || slotDef.length > 0) ? (
-        <span class={textClass}>{children}</span>
+        moreChildren
       ) : (
         children
       );

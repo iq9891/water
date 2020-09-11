@@ -5,14 +5,14 @@
 
 $prefix: 'w-';
 $button-list: (
-  '': 2 8,
-  '-large': 32,
-  '-small': 24,
+  '': $button-height-base,
+  '-large': $button-height-lg,
+  '-small': $button-height-sm,
 );
 $button-circle-min-width: (
-  '': 28px,
-  '-large': 30px,
-  '-small': 22px,
+  '': $button-circle-min-width-base,
+  '-large': $button-circle-min-width-lg,
+  '-small': $button-circle-min-width-sm,
 );
 $button-padding: (
   '': $padding-md,
@@ -20,14 +20,9 @@ $button-padding: (
   '-small': $padding-xs,
 );
 $button-icon: (
-  '': 12,
-  '-large': 16,
-  '-small': 12,
-);
-$button-icon-padding: (
-  '': 8,
-  '-large': 8,
-  '-small': 6,
+  '': $button-icon-base,
+  '-large': $button-icon-lg,
+  '-small': $button-icon-sm,
 );
 $button-font: (
   '': $font-size-base,
@@ -35,28 +30,27 @@ $button-font: (
   '-small': $font-size-base,
 );
 $button-text-margin: (
-  '': 8,
-  '-large': 8,
-  '-small': 4,
+  '': $button-text-margin-base,
+  '-large': $button-text-margin-lg,
+  '-small': $button-text-margin-sm,
 );
 
 $button-only-padding: (
-  '': 7,
-  '-large': 8,
-  '-small': 4,
+  '': $button-only-padding-base,
+  '-large': $button-only-padding-lg,
+  '-small': $button-only-padding-sm,
 );
 
 .#{$prefix}btn {
   box-sizing: border-box;
   font-family: $font-family;
-  padding: 0 16px;
   display: inline-block;
   cursor: pointer;
   border-radius: $border-radius-base;
   border: 1px solid transparent;
-  background: $btn-primary-bg;
-  border-color: $btn-primary-border;
-  color: $btn-primary-color;
+  background: $button-primary-bg;
+  border-color: $button-primary-border;
+  color: $button-primary-color;
   transition: all 0.3s ease;
   outline: none;
   // 用户是否可选择文本
@@ -74,15 +68,15 @@ $button-only-padding: (
   }
 
   &:focus {
-    border-color: color-palette($btn-primary-border, 7);
-    background: color-palette($btn-primary-bg, 7);
-    color: $btn-primary-color;
+    border-color: color-palette($button-primary-border, 7);
+    background: color-palette($button-primary-bg, 7);
+    color: $button-primary-color;
   }
 
   &:hover {
-    border-color: color-palette($btn-primary-border, 5);
-    background: color-palette($btn-primary-bg, 5);
-    color: $btn-primary-color;
+    border-color: color-palette($button-primary-border, 5);
+    background: color-palette($button-primary-bg, 5);
+    color: $button-primary-color;
   }
 
   &-circle {
@@ -104,6 +98,12 @@ $button-only-padding: (
     &:first-child {
       margin: 0;
     }
+    // 循环尺寸
+    @each $size, $value in $button-text-margin {
+      &#{$size} {
+        font-size: map-get($button-font, $size);
+      }
+    }
   }
 
   &-text {
@@ -111,62 +111,66 @@ $button-only-padding: (
     vertical-align: middle;
     // 循环尺寸
     @each $size, $value in $button-text-margin {
+      &#{$size} {
+        font-size: map-get($button-font, $size);
+      }
+
       &-icon#{$size} {
-        margin-left: $value + px;
+        margin-left: $value;
       }
     }
   }
 
   &-info {
-    background: $btn-info-bg;
-    color: $btn-info-color;
-    border-color: $btn-info-border;
+    background: $button-info-bg;
+    color: $button-info-color;
+    border-color: $button-info-border;
 
     &:focus {
-      background: $btn-info-bg;
-      border-color: color-palette($btn-info-border, 7);
-      color: color-palette($btn-info-color, 7);
+      background: $button-info-bg;
+      border-color: color-palette($button-info-border, 7);
+      color: color-palette($button-info-color, 7);
     }
 
     &:hover {
-      background: $btn-info-bg;
-      border-color: color-palette($btn-info-border, 5);
-      color: color-palette($btn-info-color, 5);
+      background: $button-info-bg;
+      border-color: color-palette($button-info-border, 5);
+      color: color-palette($button-info-color, 5);
     }
   }
 
   &-border {
     @extend .#{$prefix}btn-info;
 
-    background: $btn-border-bg;
-    border-color: $btn-border-border;
-    color: $btn-border-color;
+    background: $button-border-bg;
+    border-color: $button-border-border;
+    color: $button-border-color;
   }
 
   &-dashed {
     @extend .#{$prefix}btn-border;
 
-    background: $btn-dashed-bg;
-    border-color: $btn-dashed-border;
-    color: $btn-dashed-color;
+    background: $button-dashed-bg;
+    border-color: $button-dashed-border;
+    color: $button-dashed-color;
     border-style: dashed;
   }
 
   &-danger {
-    background: $btn-danger-bg;
-    color: $btn-danger-color;
-    border-color: $btn-danger-border;
+    background: $button-danger-bg;
+    color: $button-danger-color;
+    border-color: $button-danger-border;
 
     &:focus {
-      color: $btn-danger-color;
-      background: color-palette($btn-danger-bg, 7);
-      border-color: color-palette($btn-danger-border, 7);
+      color: $button-danger-color;
+      background: color-palette($button-danger-bg, 7);
+      border-color: color-palette($button-danger-border, 7);
     }
 
     &:hover {
-      background: color-palette($btn-danger-bg, 5);
-      color: $btn-danger-color;
-      border-color: color-palette($btn-danger-border, 5);
+      background: color-palette($button-danger-bg, 5);
+      color: $button-danger-color;
+      border-color: color-palette($button-danger-border, 5);
     }
   }
   // 循环尺寸
@@ -183,13 +187,13 @@ $button-only-padding: (
       & img,
       & svg {
         display: block;
-        width: map-get($button-icon, $size) + px;
-        height: map-get($button-icon, $size) + px;
+        width: map-get($button-icon, $size);
+        height: map-get($button-icon, $size);
       }
     }
 
     &-only#{$size} {
-      padding: map-get($button-only-padding, $size) + px;
+      padding: map-get($button-only-padding, $size);
 
       & .w-btn-icon {
         display: block;
@@ -197,15 +201,14 @@ $button-only-padding: (
     }
 
     &-text#{$size} {
-      font-size: map-get($button-font, $size);
-      line-height: ($value - 2) + px;
+      line-height: $value - 2px;
     }
 
     &-round.w-btn#{$size} {
-      height: $value + px;
+      height: $value;
       padding: 0 map-get($button-padding, $size);
       font-size: map-get($button-font, $size);
-      border-radius: $value + px;
+      border-radius: $value ;
     }
   }
 
@@ -220,44 +223,44 @@ $button-only-padding: (
       left: -1px;
       bottom: -1px;
       right: -1px;
-      background: $btn-loading-bg;
+      background: $button-loading-bg;
       border-radius: inherit;
       opacity: 0.5;
     }
 
     &:focus,
     &:hover {
-      background: $btn-primary-bg;
-      border-color: $btn-primary-border;
-      color: $btn-primary-color;
+      background: $button-primary-bg;
+      border-color: $button-primary-border;
+      color: $button-primary-color;
     }
 
     &.#{$prefix}btn-info:focus,
     &.#{$prefix}btn-info:hover {
-      background: $btn-info-bg;
-      color: $btn-info-color;
-      border-color: $btn-info-border;
+      background: $button-info-bg;
+      color: $button-info-color;
+      border-color: $button-info-border;
     }
 
     &.#{$prefix}btn-dashed:focus,
     &.#{$prefix}btn-dashed:hover {
-      background: $btn-dashed-bg;
-      border-color: $btn-dashed-border;
-      color: $btn-dashed-color;
+      background: $button-dashed-bg;
+      border-color: $button-dashed-border;
+      color: $button-dashed-color;
     }
 
     &.#{$prefix}btn-border:focus,
     &.#{$prefix}btn-border:hover {
-      background: $btn-border-bg;
-      border-color: $btn-border-border;
-      color: $btn-border-color;
+      background: $button-border-bg;
+      border-color: $button-border-border;
+      color: $button-border-color;
     }
 
     &.#{$prefix}btn-danger:focus,
     &.#{$prefix}btn-danger:hover {
-      background: $btn-danger-bg;
-      color: $btn-danger-color;
-      border-color: $btn-danger-border;
+      background: $button-danger-bg;
+      color: $button-danger-color;
+      border-color: $button-danger-border;
     }
   }
 
@@ -282,7 +285,7 @@ $button-only-padding: (
 
   &-ghost {
     background: none;
-    color: $btn-ghost-color;
+    color: $button-ghost-color;
 
     &:hover,
     &:focus {
@@ -290,16 +293,16 @@ $button-only-padding: (
     }
 
     &.#{$prefix}btn-border {
-      color: $btn-border-color;
+      color: $button-border-color;
     }
 
     &.#{$prefix}btn-danger {
-      color: $btn-danger-color;
+      color: $button-danger-color;
 
       &:focus,
       &:hover {
-        border-color: $btn-danger-border;
-        color: $btn-danger-color;
+        border-color: $button-danger-border;
+        color: $button-danger-color;
       }
     }
 
@@ -309,35 +312,35 @@ $button-only-padding: (
     &.#{$prefix}btn-dashed {
       &:focus,
       &:hover {
-        border-color: color-palette($btn-primary-border, 5);
-        color: color-palette($btn-primary-color, 5);
+        border-color: color-palette($button-primary-border, 5);
+        color: color-palette($button-primary-color, 5);
       }
     }
 
     &.#{$prefix}btn-disabled {
       background: none;
-      color: $btn-ghost-disabled-color;
+      color: $button-ghost-disabled-color;
 
       &:hover,
       &:focus {
         background: none;
-        color: $btn-ghost-disabled-color;
-        border-color: $btn-disabled-border;
+        color: $button-ghost-disabled-color;
+        border-color: $button-disabled-border;
       }
     }
   }
 
   &-disabled {
-    background: $btn-disabled-bg;
-    color: $btn-disabled-color;
-    border-color: $btn-disabled-border;
+    background: $button-disabled-bg;
+    color: $button-disabled-color;
+    border-color: $button-disabled-border;
     cursor: not-allowed;
 
     &:hover,
     &:focus {
-      background: $btn-disabled-bg;
-      color: $btn-disabled-color;
-      border-color: $btn-disabled-border;
+      background: $button-disabled-bg;
+      color: $button-disabled-color;
+      border-color: $button-disabled-border;
     }
   }
 }

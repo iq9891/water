@@ -89,6 +89,12 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "radio" */ '../views/Radio.vue'),
     },
+    {
+      path: '/checkbox',
+      name: 'Checkbox',
+      component: () =>
+        import(/* webpackChunkName: "checkbox" */ '../views/Checkbox.vue'),
+    },
   ],
 });
 
