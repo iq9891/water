@@ -1,0 +1,158 @@
+/** @format */
+
+@import '../style/config.scss';
+
+.w-checkbox-button {
+  position: relative;
+  display: inline-block;
+  height: $checkbox-button-height-base;
+  margin: 0;
+  padding: 0 $padding-md - 1px;
+  color: $checkbox-button-color;
+  font-size: $font-size-base;
+  line-height: $checkbox-button-height-base;
+  background: $checkbox-button-bg;
+  border: 1px solid $checkbox-button-border;
+  border-left-width: 0;
+  cursor: pointer;
+  transition: line-height $checkbox-duration, height $checkbox-duration,
+    padding $checkbox-duration, color $checkbox-duration,
+    background $checkbox-duration, border-color $checkbox-duration,
+    box-shadow $checkbox-duration;
+
+  &-small {
+    @extend .w-checkbox-button;
+
+    height: $checkbox-button-height-sm;
+    line-height: $checkbox-button-height-sm;
+    padding: 0 $padding-sm - 1px;
+  }
+
+  &-large {
+    @extend .w-checkbox-button;
+
+    height: $checkbox-button-height-lg;
+    line-height: $checkbox-button-height-lg;
+  }
+
+  &::before {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    display: block;
+    box-sizing: content-box;
+    width: 1px;
+    height: 100%;
+    padding: 1px 0;
+    background-color: $checkbox-button-border;
+    transition: background-color $checkbox-duration;
+    content: ' ';
+  }
+
+  &:first-child {
+    border-left-width: 1px;
+    border-radius: $border-radius-base 0 0 $border-radius-base;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  &:last-child {
+    border-radius: 0 $border-radius-base $border-radius-base 0;
+  }
+
+  &:hover {
+    color: $checkbox-hover-color;
+  }
+
+  &-outline-on {
+    color: $checkbox-color;
+    border-color: $checkbox-color;
+    z-index: 2;
+
+    &::before {
+      background-color: $checkbox-color;
+    }
+
+    &:active {
+      color: $checkbox-active-color;
+      border-color: $checkbox-active-color;
+    }
+
+    &:hover {
+      color: $checkbox-hover-color;
+      border-color: $checkbox-hover-color;
+
+      &::before {
+        background-color: $checkbox-hover-color;
+      }
+    }
+  }
+
+  &-solid-on {
+    @extend .w-checkbox-button-outline-on;
+
+    color: $checkbox-solid-color;
+    background: $checkbox-color;
+
+    &:active {
+      color: $checkbox-solid-color;
+      background: $checkbox-active-color;
+    }
+
+    &:hover {
+      color: $checkbox-solid-color;
+      background: $checkbox-hover-color;
+    }
+  }
+
+  &-only,
+  &-solid-only,
+  &-outline-only {
+    border-radius: $border-radius-base !important;
+  }
+
+  &-status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &-disabled {
+    color: $checkbox-disabled-color;
+    background: $checkbox-disabled-bg;
+    border-color: $checkbox-disabled-border;
+    cursor: not-allowed;
+
+    &:hover {
+      color: $checkbox-disabled-color;
+      background: $checkbox-disabled-bg;
+      border-color: $checkbox-disabled-border;
+    }
+
+    &.w-checkbox-button-solid-on,
+    &.w-checkbox-button-outline-on {
+      background: $checkbox-disabled-bg-on;
+
+      &::before {
+        background-color: $checkbox-disabled-bg-on;
+      }
+
+      &:hover {
+        color: $checkbox-disabled-color;
+        background: $checkbox-disabled-bg-on;
+        border-color: $checkbox-disabled-border;
+      }
+    }
+  }
+}

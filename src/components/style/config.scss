@@ -136,7 +136,7 @@ $link-active-color: color-palette($link-color, 7) !default;
 $link-decoration: none !default;
 $link-hover-decoration: none !default;
 $link-disabled-color: $disabled-color !default;
-$link-opacity: 0.5;
+$link-opacity: 0.5 !default;
 $link-font-size-sm: $font-size-sm !default;
 $link-font-size: $font-size-base !default;
 $link-font-size-lg: $font-size-base !default;
@@ -157,7 +157,7 @@ $spin-size-lg: 32px !default;
 $spin-tip-space-sm: 4px !default;
 $spin-tip-space: 8px !default;
 $spin-tip-space-lg: 12px !default;
-$spin-opacity: 0.4;
+$spin-opacity: 0.4 !default;
 // 开关
 $switch-color: $primary-color !default;
 $switch-height: 20px !default;
@@ -211,7 +211,7 @@ $button-only-padding-base: 7px !default;
 $button-only-padding-lg: 8px !default;
 $button-only-padding-sm: 4px !default;
 
-// 单选按钮
+// 单选
 $radio-color: $primary-color !default;
 $radio-solid-color: $text-color-inverse !default;
 $radio-hover-color: color-palette($radio-color, 5) !default;
@@ -227,3 +227,23 @@ $radio-disabled-color: $disabled-color !default;
 $radio-disabled-bg: $disabled-bg !default;
 $radio-disabled-bg-on: $disabled-bg-on !default;
 $radio-disabled-border: $disabled-border !default;
+$radio-disabled-on: #bfbfbf !default;
+$radio-disabled-inner-on: #8c8c8c !default;
+
+// 多选
+$checkbox-color: $primary-color !default;
+$checkbox-solid-color: $text-color-inverse !default;
+$checkbox-hover-color: color-palette($checkbox-color, 5) !default;
+$checkbox-active-color: color-palette($checkbox-color, 7) !default;
+$checkbox-button-color: $text-color !default;
+$checkbox-button-bg: $component-background !default;
+$checkbox-button-border: $normal-border !default;
+$checkbox-duration: $animation-duration-slow !default;
+$checkbox-button-height-base: $button-height-base !default;
+$checkbox-button-height-sm: $button-height-sm !default;
+$checkbox-button-height-lg: $button-height-lg !default;
+$checkbox-disabled-color: $disabled-color !default;
+$checkbox-disabled-bg: $disabled-bg !default;
+$checkbox-disabled-bg-on: $disabled-bg-on !default;
+$checkbox-disabled-border: $disabled-border !default;
+$checkbox-disabled-on: #bfbfbf !default;
