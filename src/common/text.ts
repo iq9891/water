@@ -1,6 +1,6 @@
 /** @format */
 
-import { h, Slots, VNode } from 'vue';
+import { h, Slots, VNode, RendererNode, RendererElement } from 'vue';
 import { TypeStyle } from './types';
 
 export interface ConfChildItem {
@@ -9,13 +9,6 @@ export interface ConfChildItem {
 
 export type TypeConfKey = 'underline' | 'strong' | 'code' | 'mark' | 'delete';
 
-// export interface ConfChild {
-//   underline: ConfChildItem
-//   strong: ConfChildItem
-//   code: ConfChildItem
-//   mark: ConfChildItem
-//   delete: ConfChildItem
-// }
 export interface ConfChild {
   [key: string]: ConfChildItem;
 }
@@ -61,13 +54,23 @@ export interface TitleIdxProps {
   [key: string]: String | TypeStyle | Boolean;
 }
 
+type ContentType =
+  | VNode
+  | VNode<
+      RendererNode,
+      RendererElement,
+      {
+        [key: string]: any;
+      }
+    >[];
+
 export default (props: TextProps, slots: Slots, type: String) => {
   if (!slots.default) {
     return null;
   }
 
   const children = slots.default();
-  let content: VNode | null = null;
+  let content: ContentType = children;
 
   Object.keys(props).forEach((propItem) => {
     const myTitleIdxProps = props as TitleIdxProps;
