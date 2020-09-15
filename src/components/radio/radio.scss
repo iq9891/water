@@ -93,9 +93,8 @@
   &-content {
     display: inline-block;
     vertical-align: middle;
-    font-size: 14px;
-    line-height: 16px;
-    padding: 0 8px;
+    font-size: $font-size-base;
+    padding: 0 $padding-xs;
   }
 
   &:hover {
@@ -112,6 +111,62 @@
       & .w-radio-status {
         border: 1px solid $disabled-border;
       }
+    }
+  }
+}
+
+.w-radio-border {
+  font-size: 0;
+
+  &-status {
+    @extend .w-radio-status;
+  }
+
+  &-on {
+    @extend .w-radio-on;
+
+    &.w-radio-button-small::after {
+      width: 4.8px;
+      height: 8.2px;
+      margin: -4.3px 0 0 -2px;
+    }
+  }
+
+  &.w-radio-button-small {
+    & .w-radio-border-status {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  &-inner {
+    @extend .w-radio-inner;
+
+    &-on {
+      @extend .w-radio-inner-on;
+
+      & span {
+        opacity: 0;
+      }
+
+      &.w-radio-button-inner-disabled {
+        background: $radio-disabled-inner-on;
+      }
+    }
+
+    &-loading span {
+      opacity: 0;
+    }
+  }
+
+  &-content {
+    @extend .w-radio-content;
+  }
+
+  &.w-radio-button-disabled {
+    & .w-radio-on {
+      border-color: $radio-disabled-border;
+      background: $radio-disabled-on;
     }
   }
 }

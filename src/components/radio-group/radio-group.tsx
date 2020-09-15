@@ -12,6 +12,7 @@ const RadioGroup = defineComponent({
   },
   props: {
     ...radioProps,
+    border: Boolean,
     type: {
       type: String,
       default: 'radio',
@@ -59,24 +60,39 @@ const RadioGroup = defineComponent({
     },
   },
   render() {
-    const { options, fieldNames, type } = getProps(this);
+    const {
+      options,
+      fieldNames,
+      type,
+      border,
+      radioClassName,
+      className,
+    } = getProps(this);
     let children = getSlots(this);
 
     if (isArray(options) && options.length > 0) {
       const { value, label, loading, key, disabled } = fieldNames;
-      children = options.map((optItem: any) => (
+      children = options.map((optItem: any, optIndex: number) => (
         <WRadio
-          label={optItem[label]}
-          loading={optItem[loading]}
-          key={optItem[key]}
-          disabled={optItem[disabled]}
-          type={type}>
-          {() => optItem[value]}
+          label={optItem[label] || ''}
+          loading={optItem[loading] || false}
+          key={optItem[key] || optIndex}
+          disabled={optItem[disabled] || false}
+          type={type}
+          className={radioClassName}
+          border={border}>
+          {() => optItem[value] || ''}
         </WRadio>
       ));
     }
 
-    return h('div', children);
+    return h(
+      'div',
+      {
+        class: className,
+      },
+      children,
+    );
   },
 });
 

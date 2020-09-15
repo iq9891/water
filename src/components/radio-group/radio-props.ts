@@ -11,6 +11,10 @@ export default {
     type: String,
     default: '',
   },
+  buttonStyle: {
+    type: String,
+    default: 'outline',
+  },
   before: {
     type: Function,
     default() {

@@ -16,10 +16,6 @@ export default {
       default: '',
     },
     checked: Boolean,
-    type: {
-      type: String,
-      default: 'radio',
-    },
     ...radioProps,
   },
   setup() {
@@ -32,12 +28,21 @@ export default {
   render() {
     const props = getProps(this as any);
     const children = () => getSlots(this as any);
+    const { radioGroup } = this as any;
     const rProps = {
       ...props,
     };
 
-    rProps.loading = (this as any).radioGroup.loading;
-    rProps.disabled = (this as any).radioGroup.disabled;
+    rProps.loading =
+      props.loading ||
+      (radioGroup &&
+        radioGroup.fieldNames &&
+        radioGroup[radioGroup.fieldNames.loading]);
+    rProps.disabled =
+      props.disabled ||
+      (radioGroup &&
+        radioGroup.fieldNames &&
+        radioGroup[radioGroup.fieldNames.disabled]);
 
     return (
       <WRadio {...rProps} type="button">

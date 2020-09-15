@@ -121,10 +121,19 @@
     pointer-events: none;
   }
 
+  &-inner {
+    opacity: 0;
+  }
+
   &-disabled {
     color: $radio-disabled-color;
     background: $radio-disabled-bg;
     border-color: $radio-disabled-border;
+    cursor: not-allowed;
+
+    &::before {
+      background: $radio-disabled-bg;
+    }
 
     &:hover {
       color: $radio-disabled-color;

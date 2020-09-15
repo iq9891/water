@@ -19,6 +19,7 @@ export interface RadioProps {
   modelValue: String | Number | Boolean;
   label: String | Number | Boolean;
   disabled: Boolean;
+  border: Boolean;
   loading: Boolean;
   className: TypeClass;
   before: Function;
@@ -36,6 +37,7 @@ export default {
       default: '',
     },
     checked: Boolean,
+    border: Boolean,
     type: {
       type: String,
       default: 'radio',
@@ -49,7 +51,8 @@ export default {
     },
     preClass() {
       const self = this as any;
-      return self.type === 'radio' ? `w-${self.type}` : `w-radio-${self.type}`;
+      const type = self.border ? 'radio-button' : self.type;
+      return self.isRadio || self.border ? `w-${type}` : `w-radio-${type}`;
     },
     preName() {
       const self = this as any;
@@ -65,17 +68,24 @@ export default {
     },
     radioClass(): any[] {
       const self = this as any;
-      const btnType = self.isRadio
-        ? ''
-        : `${self.radioGroup.$props.buttonStyle}`;
+      const buttonStyle = `${(self.radioGroup &&
+        self.radioGroup.$props.buttonStyle) ||
+        self.buttonStyle}`;
+      const btnType = self.isRadio && !self.border ? '' : buttonStyle;
       const size =
         self.radioGroup && self.radioGroup.$props.size
           ? self.radioGroup.$props.size
           : self.size;
+      const isNeedSize = !self.isRadio || (self.isRadio && self.border);
 
       return [
-        `${size ? self.preName : self.preClass}${size}`,
+        `${
+          isNeedSize
+            ? `${size ? self.preName : self.preClass}${size}`
+            : self.preClass
+        }`,
         {
+          'w-radio-border': self.border,
           [`${self.preName}${btnType}-on`]: self.status,
           [`${self.preName}disabled`]: self.disabledStatus,
         },
@@ -84,11 +94,12 @@ export default {
     },
     statusClass() {
       const self = this as any;
+      const preName = self.border ? 'w-radio-border-' : self.preName;
 
       return [
-        `${self.preName}status`,
+        `${preName}status`,
         {
-          [`${self.preName}status-on`]: self.status,
+          [`${preName}on`]: self.status,
           [`${self.preName}status-disabled`]: self.disabledStatus,
           [`${self.preName}status-loading`]: self.loadingStatus,
         },
@@ -96,11 +107,12 @@ export default {
     },
     innerClass() {
       const self = this as any;
+      const preName = self.border ? 'w-radio-border-' : self.preName;
       return [
-        `${self.preName}inner`,
+        `${preName}inner`,
         {
           [`${self.preName}inner-loading`]: self.loadingStatus,
-          [`${self.preName}inner-on`]: self.status,
+          [`${preName}inner-on`]: self.status,
           [`${self.preName}inner-disabled`]: self.disabledStatus,
         },
       ];
@@ -111,7 +123,13 @@ export default {
     },
     contentClass() {
       const self = this as any;
-      return `${self.preName}content`;
+      return [
+        `${self.preName}content`,
+        {
+          'w-radio-border-content': self.border,
+          [`${self.preName}content-disabled`]: self.disabledStatus,
+        },
+      ];
     },
     status(): boolean {
       const self = this as any;
@@ -130,7 +148,7 @@ export default {
   methods: {
     clickFn(ev: MouseEvent) {
       const self = this as any;
-      if (!self.disabled && !self.loading && !self.status) {
+      if (!self.disabledStatus && !self.loading && !self.status) {
         const reParams: ChangeParamsEntity = {
           ev,
           value: self.label,
