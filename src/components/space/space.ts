@@ -1,6 +1,6 @@
 /** @format */
 
-import { h, CSSProperties, VNode } from 'vue';
+import { h, CSSProperties, VNode, Comment } from 'vue';
 import { isNumber, isString } from '../../common/typeof';
 import validator, {
   sizeValidator,
@@ -61,27 +61,29 @@ export default {
           },
         ],
       },
-      children.map((childItem: VNode, childIdx: Number) => {
-        const style: CSSProperties = {};
+      children
+        .filter((childItem: VNode) => childItem.type !== Comment) // 过滤注释
+        .map((childItem: VNode, childIdx: Number) => {
+          const style: CSSProperties = {};
 
-        if (isNumber(size) && childIdx < childrenLen) {
-          style.paddingRight = `${size}px`;
-        }
+          if (isNumber(size) && childIdx < childrenLen) {
+            style.paddingRight = `${size}px`;
+          }
 
-        return h(
-          'div',
-          {
-            class: [
-              `w-space-item-${type}`,
-              {
-                [`w-space-item-${type}-${size}`]: isString(size),
-              },
-            ],
-            style,
-          },
-          childItem,
-        );
-      }),
+          return h(
+            'div',
+            {
+              class: [
+                `w-space-item-${type}`,
+                {
+                  [`w-space-item-${type}-${size}`]: isString(size) && !!size,
+                },
+              ],
+              style,
+            },
+            childItem,
+          );
+        }),
     );
   },
 };
