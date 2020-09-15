@@ -208,7 +208,7 @@ $button-only-padding: (
       height: $value;
       padding: 0 map-get($button-padding, $size);
       font-size: map-get($button-font, $size);
-      border-radius: $value ;
+      border-radius: $value;
     }
   }
 

@@ -153,11 +153,7 @@ export default {
       onClick: clickFn,
       onanimationend: removeClickName,
     };
-    let loadingNode = loading ? (
-      <LoadingOutlined class={iconClass} />
-    ) : (
-      ''
-    );
+    let loadingNode = loading ? <LoadingOutlined class={iconClass} /> : '';
 
     if (!loading && $slots.icon) {
       loadingNode = <span class={iconClass}>{$slots.icon()}</span>;
@@ -167,16 +163,17 @@ export default {
 
     const children =
       slotDef.length > 1
-        ? slotDef.map((childItem: any) => (<span class={bodyClass}>{childItem}</span>))
+        ? slotDef.map((childItem: any) => (
+            <span class={bodyClass}>{childItem}</span>
+          ))
         : slotDef;
-    const moreChildren = slotDef.length > 1 ? children : <span class={textClass}>{children}</span>;
+    const moreChildren =
+      slotDef.length > 1 ? children : <span class={textClass}>{children}</span>;
 
     const contentNode =
-      children.length > 0 && (loadingNode || slotDef.length > 0) ? (
-        moreChildren
-      ) : (
-        children
-      );
+      children.length > 0 && (loadingNode || slotDef.length > 0)
+        ? moreChildren
+        : children;
 
     return (
       <button {...buttonProps}>
