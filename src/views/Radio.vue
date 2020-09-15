@@ -1,13 +1,14 @@
 <!-- @format -->
 
 <template>
-  <!-- <pre style="color: red">
+  <pre style="color: red">
     重构组件
     1. 不在支持 icon 组件
     2. 统一使用 @ant-design/icons-vue 中的 icon
     3. 新增 checked 属性直接控制选中状态
-    4. 新增按钮类型
-  </pre> -->
+    4. 新增按钮类型，边框按钮
+    5. 可单独使用
+  </pre>
   <w-space type="vertical">
     <w-space>
       <w-button type="dashed" @click="loading = !loading"
@@ -17,8 +18,12 @@
         >禁用{{ disabled ? '中' : '' }}</w-button
       >
     </w-space>
-    <w-radio v-model:checked="val1">{{ val1 }}-Radio</w-radio>
-    <w-radio disabled>{{ val1 }}-Radio</w-radio>
+    <w-radio v-model:checked="val1">Radio</w-radio>
+    <w-radio v-model:checked="val1" disabled>Radio</w-radio>
+    <w-radio-button v-model:checked="val1" label="small">small</w-radio-button>
+    <w-radio-button v-model:checked="val1" label="small" button-style="solid"
+      >small</w-radio-button
+    >
     <w-radio-group
       v-model="size"
       :loading="loading"
@@ -45,6 +50,12 @@
       <w-radio label="large">large</w-radio>
       <w-radio label="">default</w-radio>
     </w-radio-group>
+    <w-radio-group v-model="size" :loading="loading" :disabled="disabled">
+      <w-radio label="small" border>small</w-radio>
+      <w-radio label="large" border>large</w-radio>
+      <w-radio label="" border>default</w-radio>
+    </w-radio-group>
+    <w-text>option 组合</w-text>
     <w-radio-group
       v-model="val3"
       :loading="loading"
@@ -65,6 +76,13 @@
       :options="options"
       type="button"
       button-style="solid"
+    ></w-radio-group>
+    <w-radio-group
+      v-model="val3"
+      :loading="loading"
+      :disabled="disabled"
+      :options="options"
+      border
     ></w-radio-group>
   </w-space>
 </template>
@@ -92,6 +110,10 @@
     import('../components/space/Space.vue'),
   );
 
+  const WText = defineAsyncComponent(() =>
+    import('../components/text/Text.vue'),
+  );
+
   const options = [
     { label: 'Apple', value: 'Apple' },
     { label: 'Pear', value: 'Pear' },
@@ -107,6 +129,7 @@
       WRadioGroup,
       WSpace,
       WButton,
+      WText,
     },
     data() {
       return {
