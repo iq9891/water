@@ -48,9 +48,10 @@ $icon-color-hover: color.scale($black, $alpha: -25%) !default;
 
 $font-variant-base: tabular-nums !default;
 $font-feature-settings-base: 'tnum' !default;
+// 字号
 $font-size-base: 14px !default;
 $font-size-lg: $font-size-base + 2px !default;
-$font-size-sm: 12px !default;
+$font-size-sm: $font-size-base - 2px !default;
 
 $border-radius-base: 2px !default;
 
@@ -100,10 +101,6 @@ $animation-duration-fast: 0.1s !default; // Tooltip
 $normal-border: #dbdee9 !default;
 $normal-bg: $white !default;
 $normal-color: $white !default;
-// 字号
-$text-size-large: 16px !default;
-$text-size: 14px !default;
-$text-size-small: 12px !default;
 // 行高
 $line-height-large: 22px !default;
 $line-height: 18px !default;
@@ -247,3 +244,9 @@ $checkbox-disabled-bg: $disabled-bg !default;
 $checkbox-disabled-bg-on: $disabled-bg-on !default;
 $checkbox-disabled-border: $disabled-border !default;
 $checkbox-disabled-on: #bfbfbf !default;
+
+// 数字输入框
+$input-number-height-base: $button-height-base !default;
+$input-number-height-sm: $button-height-sm !default;
+$input-number-height-lg: $button-height-lg !default;
+$input-number-duration: $animation-duration-slow !default;

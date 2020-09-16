@@ -64,6 +64,10 @@
       <router-link :to="{ name: 'Checkbox' }">
         多选
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'InputNumber' }">
+        数字输入框
+      </router-link>
     </div>
     <router-view />
   </w-space>

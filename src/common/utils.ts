@@ -20,3 +20,10 @@ export const camelize = cacheStringFunction((str: string) => {
 
 const { hasOwnProperty } = Object.prototype;
 export const hasOwn = (val: any, key: string) => hasOwnProperty.call(val, key);
+
+export const isClient = () =>
+  !!(
+    typeof window !== 'undefined' &&
+    window.document &&
+    window.document.createElement
+  );

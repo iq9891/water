@@ -95,6 +95,14 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "checkbox" */ '../views/Checkbox.vue'),
     },
+    {
+      path: '/inputnumber',
+      name: 'InputNumber',
+      component: () =>
+        import(
+          /* webpackChunkName: "inputnumber" */ '../views/InputNumber.vue'
+        ),
+    },
   ],
 });
 
