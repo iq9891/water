@@ -3,6 +3,7 @@
 import { inject } from 'vue';
 import { LoadingOutlined } from '@ant-design/icons-vue';
 import { TypeClass } from '../../common/types';
+import validator from '../../common/validator';
 import radioProps from '../radio-group/radio-props';
 
 export interface ChangeParamsEntity {
@@ -41,6 +42,10 @@ export default {
     type: {
       type: String,
       default: 'radio',
+      validator(value: string) {
+        const typeList = ['button', 'radio'];
+        return validator(typeList, value);
+      },
     },
     ...radioProps,
   },

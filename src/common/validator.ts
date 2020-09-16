@@ -25,3 +25,9 @@ export const directionValidator = (value: string) => {
 
   return validator(typeList, value);
 };
+
+export const buttonStyleValidator = (value: string) => {
+  const typeList = ['outline', 'solid'];
+
+  return validator(typeList, value);
+};

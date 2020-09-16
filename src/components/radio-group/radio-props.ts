@@ -1,4 +1,5 @@
 /** @format */
+import { sizeValidator, buttonStyleValidator } from '../../common/validator';
 
 export default {
   disabled: Boolean,
@@ -10,10 +11,12 @@ export default {
   size: {
     type: String,
     default: '',
+    validator: sizeValidator,
   },
   buttonStyle: {
     type: String,
     default: 'outline',
+    validator: buttonStyleValidator,
   },
   before: {
     type: Function,

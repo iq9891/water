@@ -1,5 +1,6 @@
 /** @format */
 import { inject } from 'vue';
+import validator from '../../common/validator';
 import checkboxProps from '../checkbox-group/checkbox-props';
 
 export interface ChangeParamsEntity {
@@ -25,6 +26,10 @@ export default {
     type: {
       type: String,
       default: 'checkbox',
+      validator(value: string) {
+        const typeList = ['button', 'checkbox'];
+        return validator(typeList, value);
+      },
     },
     checked: Boolean,
     border: Boolean,

@@ -3,6 +3,7 @@
 import { h, provide, defineComponent } from 'vue';
 import { getProps, getSlots } from '../../common/vue-utils';
 import { isArray } from '../../common/typeof';
+import validator from '../../common/validator';
 import WRadio from '../radio/Radio.vue';
 import radioProps from './radio-props';
 
@@ -16,6 +17,10 @@ const RadioGroup = defineComponent({
     type: {
       type: String,
       default: 'radio',
+      validator(value: string) {
+        const typeList = ['button', 'radio'];
+        return validator(typeList, value);
+      },
     },
     modelValue: {
       type: [String, Number],
@@ -26,10 +31,6 @@ const RadioGroup = defineComponent({
       default() {
         return [];
       },
-    },
-    buttonStyle: {
-      type: String,
-      default: 'outline',
     },
     fieldNames: {
       type: Object,
