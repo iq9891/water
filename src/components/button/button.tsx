@@ -111,9 +111,6 @@ export default {
       const self = this as any;
       self.clicked = !self.loading;
       self.clickEvent = ev;
-      // if (self.stop) {
-      //   ev.stopPropagation();
-      // }
     },
     removeClickName(ev: AnimationEvent) {
       const self = this as any;
@@ -123,7 +120,6 @@ export default {
         ev: self.clickEvent,
         animEvent: ev,
       };
-      // (self.click as Function)(reParams);
 
       self.clickEvent = null;
 
@@ -142,7 +138,6 @@ export default {
       btnClass,
       clickFn,
       removeClickName,
-      preName,
       loading,
     } = this as any;
     const buttonProps: any = {
