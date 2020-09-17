@@ -109,6 +109,12 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "badge" */ '../views/Badge.vue'),
     },
+    {
+      path: '/scroll',
+      name: 'Scroll',
+      component: () =>
+        import(/* webpackChunkName: "scroll" */ '../views/Scroll.vue'),
+    },
   ],
 });
 

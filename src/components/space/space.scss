@@ -14,7 +14,7 @@ $space-type: (
 );
 
 .w-space {
-  display: inline-flex;
+  display: flex; // inline-flex 在内嵌滚动组件的时候会有莫名的高度问题
 
   &-vertical {
     flex-direction: column;

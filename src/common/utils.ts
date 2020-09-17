@@ -27,3 +27,5 @@ export const isClient = () =>
     window.document &&
     window.document.createElement
   );
+
+export const { keys } = Object;

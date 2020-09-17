@@ -1,0 +1,114 @@
+/** @format */
+@import '../style/config.scss';
+
+.w-scroll {
+  overflow: hidden;
+  position: relative;
+
+  &:focus,
+  &:hover,
+  &-active {
+    & > .w-scroll-bar {
+      opacity: 1;
+    }
+  }
+
+  &-active {
+    & .w-scroll-thumb-horizontal {
+      height: 8px;
+      margin-top: -2px;
+    }
+
+    & .w-scroll-thumb-vertical {
+      width: 8px;
+      margin-left: -2px;
+    }
+  }
+
+  &-disabled {
+    .w-scroll-bar {
+      opacity: 0;
+    }
+
+    &:focus,
+    &:hover {
+      .w-scroll-bar {
+        opacity: 0;
+      }
+    }
+  }
+
+  &-wrap {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+
+  &-body {
+    display: inline-block;
+
+    &-vertical {
+      width: 100%;
+    }
+  }
+
+  &-bar {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    z-index: 1;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity $animation-duration-base ease-out;
+    cursor: pointer;
+
+    &:hover .w-scroll-thumb-horizontal {
+      height: 8px;
+      margin-top: -2px;
+    }
+
+    &:hover .w-scroll-thumb-vertical {
+      width: 8px;
+      margin-left: -2px;
+    }
+  }
+
+  &-thumb {
+    position: relative;
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: inherit;
+    background-color: $scroll-thumb-bg;
+    transition: background-color $scroll-duration, height $scroll-duration,
+      width $scroll-duration, margin $scroll-duration;
+
+    &-horizontal {
+      height: 4px;
+    }
+
+    &-vertical {
+      width: 4px;
+    }
+  }
+
+  &-horizontal {
+    height: 4px;
+    left: 2px;
+  }
+
+  &-vertical {
+    width: 4px;
+    top: 2px;
+  }
+
+  &-spin {
+    height: 100%;
+    width: 100%;
+
+    & .w-spin-body {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

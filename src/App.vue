@@ -77,6 +77,10 @@
       <router-link :to="{ name: 'Badge' }">
         徽章
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Scroll' }">
+        滚动
+      </router-link>
     </div>
     <router-view />
   </w-space>
