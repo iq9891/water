@@ -139,7 +139,7 @@ $link-font-size-sm: $font-size-sm !default;
 $link-font-size: $font-size-base !default;
 $link-font-size-lg: $font-size-base !default;
 // 空状态
-$empty-size: 14px !default;
+$empty-size: $font-size-base !default;
 $empty-color: #292b2d !default;
 $empty-color-light: #60636c !default;
 $empty-img-space: 8px !default;
@@ -149,7 +149,7 @@ $spin-duration: $animation-duration-slow !default;
 $spin-font-size-sm: $font-size-sm !default;
 $spin-font-size: $font-size-base !default;
 $spin-font-size-lg: $font-size-base !default;
-$spin-size-sm: 14px !default;
+$spin-size-sm: $font-size-base !default;
 $spin-size: 20px !default;
 $spin-size-lg: 32px !default;
 $spin-tip-space-sm: 4px !default;

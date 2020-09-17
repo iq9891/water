@@ -115,6 +115,12 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "scroll" */ '../views/Scroll.vue'),
     },
+    {
+      path: '/statistic',
+      name: 'Statistic',
+      component: () =>
+        import(/* webpackChunkName: "statistic" */ '../views/Statistic.vue'),
+    },
   ],
 });
 

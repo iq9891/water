@@ -81,6 +81,10 @@
       <router-link :to="{ name: 'Scroll' }">
         滚动
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Statistic' }">
+        统计数值
+      </router-link>
     </div>
     <router-view />
   </w-space>
