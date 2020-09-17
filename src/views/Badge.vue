@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-  <!-- <pre style="color: red">
+  <pre style="color: red">
     重构组件
     1. status 只支持 success processing default error warning
     2. 新增 color 设置 小圆点的颜色
@@ -10,7 +10,7 @@
     5. 新增 className 属性
     6. 新增 direction 属性
     7. 新增 缎带 组件
-  </pre> -->
+  </pre>
   <w-space type="vertical">
     <w-space>
       <w-badge v-model="val1" :direction="direction">

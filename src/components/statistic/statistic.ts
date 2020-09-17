@@ -1,6 +1,7 @@
 /** @format */
 
 import { isNumber, isFunction } from '../../common/typeof';
+import { directionValidator } from '../../common/validator';
 import WStatisticNumber from './number';
 
 enum NUMBER_TYPE {
@@ -11,11 +12,6 @@ enum NUMBER_TYPE {
 export default {
   components: {
     WStatisticNumber,
-  },
-  data() {
-    return {
-      isFunction,
-    };
   },
   props: {
     modelValue: {
@@ -33,6 +29,11 @@ export default {
     groupSeparator: {
       type: String,
       default: ',',
+    },
+    direction: {
+      type: String,
+      default: 'ltr',
+      validator: directionValidator,
     },
     valueStyle: {
       type: [Object, Array, String],
@@ -66,6 +67,16 @@ export default {
       return self.contentList.length > 1
         ? `.${self.contentList[NUMBER_TYPE.DECIMAL_ENUM]}`
         : '';
+    },
+    contentClass() {
+      const self = this as any;
+      return [
+        'w-statistic-content',
+        `w-statistic-content-${self.direction}`,
+        {
+          'w-statistic-content-render': isFunction(self.valueRender),
+        },
+      ];
     },
   },
 };

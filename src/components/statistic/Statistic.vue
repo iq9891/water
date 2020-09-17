@@ -6,18 +6,12 @@
       <slot v-if="$slots.title" name="title"></slot>
       <template v-else>{{ title }}</template>
     </div>
-    <div
-      class="w-statistic-content"
-      :class="{
-        ['w-statistic-content-render']: isFunction(valueRender),
-      }"
-      :style="valueStyle"
-    >
+    <div :class="contentClass" :style="valueStyle">
       <span v-if="$slots.prefix" class="w-statistic-prefix"
         ><slot name="prefix"
       /></span>
       <WStatisticNumber
-        v-if="isFunction(valueRender)"
+        v-if="valueRender"
         :value-render="valueRender"
         :model-value="modelValue"
       />

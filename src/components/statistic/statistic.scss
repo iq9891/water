@@ -29,6 +29,11 @@
     &-render {
       font-size: 24px;
     }
+
+    &-rtl {
+      text-align: right;
+      direction: ltr;
+    }
   }
 
   &-int {
