@@ -34,12 +34,12 @@ export default {
     },
     size: {
       type: String,
-      defalut: '',
+      default: '',
       validator: sizeNoLargeValidator,
     },
     direction: {
       type: String,
-      defalut: 'ltr',
+      default: 'ltr',
       validator: directionValidator,
     },
     color: {

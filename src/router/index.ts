@@ -121,6 +121,12 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "statistic" */ '../views/Statistic.vue'),
     },
+    {
+      path: '/rate',
+      name: 'Rate',
+      component: () =>
+        import(/* webpackChunkName: "rate" */ '../views/Rate.vue'),
+    },
   ],
 });
 
