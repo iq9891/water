@@ -14,13 +14,25 @@ const validator = (list: string[], value: string) => {
 
 export default validator;
 
+export const directionValidator = (value: string) => {
+  const typeList = ['rtl', 'ltr'];
+
+  return validator(typeList, value);
+};
+
 export const sizeValidator = (value: string) => {
   const typeList = ['', 'large', 'small'];
 
   return validator(typeList, value);
 };
 
-export const directionValidator = (value: string) => {
+export const sizeNoLargeValidator = (value: string) => {
+  const typeList = ['', 'small'];
+
+  return validator(typeList, value);
+};
+
+export const typeValidator = (value: string) => {
   const typeList = ['horizontal', 'vertical'];
 
   return validator(typeList, value);

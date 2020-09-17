@@ -1,4 +1,5 @@
 /** @format */
+import { JsonProps } from './vue-utils';
 
 export const rgbToHex = (rgbString: String) => {
   const rgb = rgbString.match(/\d+/g) as RegExpMatchArray;
@@ -9,4 +10,14 @@ export const rgbToHex = (rgbString: String) => {
   g = g.length === 1 ? `0${g}` : g;
   b = b.length === 1 ? `0${b}` : b;
   return `#${r}${g}${b}`;
+};
+
+export const getColorStyle = (color: string, attr: string) => {
+  const style: JsonProps = {};
+
+  if (color) {
+    style[attr] = color;
+  }
+
+  return style;
 };

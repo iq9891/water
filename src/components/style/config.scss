@@ -54,6 +54,7 @@ $font-size-lg: $font-size-base + 2px !default;
 $font-size-sm: $font-size-base - 2px !default;
 
 $border-radius-base: 2px !default;
+$border-radius-sm: $border-radius-base !default;
 
 // 内边距
 $padding-lg: 24px !default;
@@ -250,3 +251,16 @@ $input-number-height-base: $button-height-base !default;
 $input-number-height-sm: $button-height-sm !default;
 $input-number-height-lg: $button-height-lg !default;
 $input-number-duration: $animation-duration-slow !default;
+
+// 徽章
+$badge-color: $error-color !default;
+$badge-default: $normal-color !default;
+$badge-height: 20px !default;
+$badge-height-sm: 14px !default;
+$badge-dot-size: 6px !default;
+$badge-font-size: $font-size-sm !default;
+$badge-font-size-sm: $font-size-sm !default;
+$badge-font-weight: normal !default;
+$badge-status-size: 6px !default;
+$badge-text-color: $component-background !default;
+$badge-shadow: $component-background !default;

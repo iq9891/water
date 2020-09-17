@@ -4,7 +4,7 @@ import { h, CSSProperties, VNode, Comment } from 'vue';
 import { isNumber, isString } from '../../common/typeof';
 import validator, {
   sizeValidator,
-  directionValidator,
+  typeValidator,
 } from '../../common/validator';
 
 export interface SpaceProps {
@@ -28,7 +28,7 @@ export default {
     type: {
       type: String,
       default: 'horizontal', // vertical
-      validator: directionValidator,
+      validator: typeValidator,
     },
     align: {
       type: String,

@@ -4,7 +4,7 @@ import { h, SetupContext } from 'vue';
 import { TypeStyle } from '../../common/types';
 import validator, {
   sizeValidator,
-  directionValidator,
+  typeValidator,
 } from '../../common/validator';
 
 export interface DividerProps {
@@ -26,7 +26,7 @@ export default {
     type: {
       type: String,
       default: 'horizontal',
-      validator: directionValidator,
+      validator: typeValidator,
     },
     placement: {
       type: String,

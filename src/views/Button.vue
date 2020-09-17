@@ -450,7 +450,6 @@
 
 <style lang="scss">
   @import '../components/radio-button/radio-button';
-  @import '../components/button/button';
   @import '../components/button/button.scss';
 
   .button-ghost {

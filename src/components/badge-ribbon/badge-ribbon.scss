@@ -1,0 +1,70 @@
+/** @format */
+
+@import '../style/config.scss';
+
+.w-badge-ribbon {
+  position: absolute;
+  top: 8px;
+  height: 22px;
+  padding: 0 $padding-xs;
+  color: $badge-text-color;
+  line-height: 22px;
+  white-space: nowrap;
+  background-color: $primary-color;
+  border-radius: $border-radius-sm;
+
+  &-wrapper {
+    position: relative;
+  }
+
+  &-corner {
+    position: absolute;
+    top: 100%;
+    width: 8px;
+    height: 8px;
+    color: $primary-color;
+    border: 4px solid;
+    transform: scaleY(0.75);
+    transform-origin: top;
+    // If not support IE 11, use filter: brightness(75%) instead
+    &::after {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      width: inherit;
+      height: inherit;
+      color: rgba(0, 0, 0, 0.25);
+      border: inherit;
+      content: '';
+    }
+  }
+
+  &.w-badge-ribbon-ltr {
+    right: -8px;
+    border-bottom-right-radius: 0;
+
+    .w-badge-ribbon-corner {
+      right: 0;
+      border-color: currentColor transparent transparent currentColor;
+
+      &::after {
+        border-color: currentColor transparent transparent currentColor;
+      }
+    }
+  }
+
+  border-color: transparent currentcolor currentcolor transparent;
+  &.w-badge-ribbon-rtl {
+    left: -8px;
+    border-bottom-left-radius: 0;
+
+    .w-badge-ribbon-corner {
+      left: 0;
+      border-color: currentColor currentColor transparent transparent;
+
+      &::after {
+        border-color: currentColor currentColor transparent transparent;
+      }
+    }
+  }
+}

@@ -103,6 +103,12 @@ const router = createRouter({
           /* webpackChunkName: "inputnumber" */ '../views/InputNumber.vue'
         ),
     },
+    {
+      path: '/badge',
+      name: 'Badge',
+      component: () =>
+        import(/* webpackChunkName: "badge" */ '../views/Badge.vue'),
+    },
   ],
 });
 

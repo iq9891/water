@@ -3,6 +3,11 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
   <br />
+  <p>
+    <w-space>
+      <w-button size="small" @click="directionFn">{{ direction }}</w-button>
+    </w-space>
+  </p>
   <w-space type="vertical">
     <div>
       <router-link :to="{ name: 'Home' }">
@@ -68,27 +73,48 @@
       <router-link :to="{ name: 'InputNumber' }">
         数字输入框
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Badge' }">
+        徽章
+      </router-link>
     </div>
     <router-view />
   </w-space>
 </template>
 
 <script>
+  import { defineAsyncComponent } from 'vue';
+  import { mapState } from 'vuex';
   import WDivider from './components/divider/Divider.vue';
   import WSpace from './components/space/Space.vue';
+
+  const WButton = defineAsyncComponent(() =>
+    import('./components/button/Button.tsx'),
+  );
 
   export default {
     name: 'App',
     components: {
+      WButton,
       WDivider,
       WSpace,
+    },
+    computed: {
+      ...mapState(['direction']),
+    },
+    mounted() {
+      document.body.style.direction = this.direction;
+    },
+    methods: {
+      directionFn() {
+        const direction = this.direction === 'ltr' ? 'rtl' : 'ltr';
+        this.$store.dispatch('setDirection', direction);
+        document.body.style.direction = direction;
+      },
     },
   };
 </script>
 
 <style lang="scss">
-  body {
-    margin: 0;
-    padding-bottom: 20px;
-  }
+  @import './components/button/button.scss';
 </style>
