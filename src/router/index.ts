@@ -127,6 +127,12 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "rate" */ '../views/Rate.vue'),
     },
+    {
+      path: '/countdown',
+      name: 'Countdown',
+      component: () =>
+        import(/* webpackChunkName: "countdown" */ '../views/Countdown.vue'),
+    },
   ],
 });
 

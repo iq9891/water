@@ -15,8 +15,11 @@
         :value-render="valueRender"
         :model-value="modelValue"
       />
+      <template v-else-if="int && !decimal">
+        {{ int }}
+      </template>
       <template v-else>
-        <span class="w-statistic-int">{{ int }}</span>
+        <span :class="intClass">{{ int }}</span>
         <span class="w-statistic-decimal">{{ decimal }}</span>
       </template>
       <span v-if="$slots.suffix" class="w-statistic-suffix">

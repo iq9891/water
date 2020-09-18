@@ -89,6 +89,10 @@
       <router-link :to="{ name: 'Rate' }">
         评分
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Countdown' }">
+        倒计时
+      </router-link>
     </div>
     <router-view />
   </w-space>

@@ -75,8 +75,14 @@ export default {
         `w-statistic-content-${self.direction}`,
         {
           'w-statistic-content-render': isFunction(self.valueRender),
+          'w-statistic-int': self.int && !self.decimal,
+          [`w-statistic-int-${self.direction}`]: self.int && !self.decimal,
         },
       ];
+    },
+    intClass() {
+      const self = this as any;
+      return ['w-statistic-int', `w-statistic-int-${self.direction}`];
     },
   },
 };
