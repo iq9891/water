@@ -133,6 +133,12 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "countdown" */ '../views/Countdown.vue'),
     },
+    {
+      path: '/progress',
+      name: 'Progress',
+      component: () =>
+        import(/* webpackChunkName: "progress" */ '../views/Progress.vue'),
+    },
   ],
 });
 

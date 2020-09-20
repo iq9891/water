@@ -93,6 +93,10 @@
       <router-link :to="{ name: 'Countdown' }">
         倒计时
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Progress' }">
+        步骤条
+      </router-link>
     </div>
     <router-view />
   </w-space>

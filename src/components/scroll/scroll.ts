@@ -139,7 +139,7 @@ export default {
 
     nextTick(self.updateScroll);
 
-    if (!self.noResize && isClient) {
+    if (!self.noResize && isClient()) {
       on(window, 'resize', self.updateResize);
     }
   },
@@ -149,7 +149,7 @@ export default {
   },
   beforeDestroy() {
     const self = this as any;
-    if (!self.noResize && isClient) {
+    if (!self.noResize && isClient()) {
       off(window, 'resize', self.updateResize);
     }
   },

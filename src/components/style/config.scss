@@ -272,3 +272,9 @@ $scroll-duration: $animation-duration-slow !default;
 // 评分
 $rate-color-base: #e8e8e8 !default;
 $rate-color-on: #fadb14 !default;
+
+// 进度条
+$progress-step-bg: #f3f3f3 !default;
+$progress-trail-bg: $disabled-bg !default;
+$progress-font-size: $font-size-sm !default;
+$progress-font-size-circle: 18px !default;
