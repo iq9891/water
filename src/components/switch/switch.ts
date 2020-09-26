@@ -92,16 +92,10 @@ export default {
         const newSatus = !self.status;
         if (self.before) {
           self.before().then(() => {
-            self.$emit('update:modelValue', newSatus);
-            self.setStatus(newSatus);
-            reParams.status = self.status;
-            self.$emit('change', reParams);
+            self.afterChange(ev, newSatus);
           });
         } else {
-          self.setStatus(newSatus);
-          reParams.status = self.status;
-          self.$emit('update:modelValue', newSatus);
-          self.$emit('change', reParams);
+          self.afterChange(ev, newSatus);
         }
         self.change(reParams);
         if (self.stop) {
@@ -109,7 +103,16 @@ export default {
         }
       }
     },
-
+    afterChange(ev: MouseEvent, newSatus: ReturnParamsEntity) {
+      const self = this as any;
+      const reParams: ReturnParamsEntity = {
+        ev,
+      };
+      self.setStatus(newSatus);
+      reParams.status = self.status;
+      self.$emit('update:modelValue', newSatus);
+      self.$emit('change', reParams);
+    },
     setStatus(value: boolean): boolean {
       const self = this as any;
       self.status = value;

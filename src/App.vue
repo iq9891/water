@@ -97,6 +97,10 @@
       <router-link :to="{ name: 'Progress' }">
         步骤条
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Tag' }">
+        标签
+      </router-link>
     </div>
     <router-view />
   </w-space>

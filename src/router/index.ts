@@ -139,6 +139,11 @@ const router = createRouter({
       component: () =>
         import(/* webpackChunkName: "progress" */ '../views/Progress.vue'),
     },
+    {
+      path: '/tag',
+      name: 'Tag',
+      component: () => import(/* webpackChunkName: "tag" */ '../views/Tag.vue'),
+    },
   ],
 });
 

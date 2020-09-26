@@ -4,11 +4,7 @@ import { DirectiveBinding, VNode } from 'vue';
 import { once, on } from '../common/dom';
 
 export default {
-  beforeMount(
-    el: HTMLInputElement,
-    binding: DirectiveBinding<any>,
-    vnode: VNode,
-  ) {
+  beforeMount(el: HTMLInputElement, binding: DirectiveBinding<any>) {
     let interval: any = null;
     let startTime: number;
     const handler = () => binding.value.apply();
