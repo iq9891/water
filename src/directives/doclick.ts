@@ -3,8 +3,8 @@
 export default {
   beforeMount(el: any, binding: any) {
     const documentHandler = (e: any) => {
-      if (!el.contains(e.target) && binding.expression) {
-        binding.value(e);
+      if (!el.contains(e.target)) {
+        binding.value.apply(e);
       }
     };
     el.emfeDocumentClick = documentHandler;

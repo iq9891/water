@@ -43,3 +43,22 @@ export const buttonStyleValidator = (value: string) => {
 
   return validator(typeList, value);
 };
+
+export const placementValidator = (value: string) => {
+  const typeList = [
+    'top',
+    'left',
+    'right',
+    'bottom',
+    'topLeft',
+    'topRight',
+    'bottomLeft',
+    'bottomRight',
+    'leftTop',
+    'leftBottom',
+    'rightTop',
+    'rightBottom',
+  ];
+
+  return validator(typeList, value);
+};

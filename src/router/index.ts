@@ -144,6 +144,12 @@ const router = createRouter({
       name: 'Tag',
       component: () => import(/* webpackChunkName: "tag" */ '../views/Tag.vue'),
     },
+    {
+      path: '/select',
+      name: 'Select',
+      component: () =>
+        import(/* webpackChunkName: "select" */ '../views/Select.vue'),
+    },
   ],
 });
 

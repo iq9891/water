@@ -101,6 +101,10 @@
       <router-link :to="{ name: 'Tag' }">
         标签
       </router-link>
+      <w-divider type="vertical" />
+      <router-link :to="{ name: 'Select' }">
+        选择器
+      </router-link>
     </div>
     <router-view />
   </w-space>

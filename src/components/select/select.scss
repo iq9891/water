@@ -1,0 +1,322 @@
+/** @format */
+
+@import '../style/mixins/active.scss';
+@import '../style/mixins/ellipsis.scss';
+@import '../empty/empty.scss';
+
+.w-select {
+  font-family: $font-family;
+  font-size: 12px;
+  font-variant: tabular-nums;
+  box-sizing: border-box;
+  margin: 0;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  background: $select-bg;
+  border-radius: $border-radius-base;
+  border: 1px solid $select-border-color;
+  padding: 0 $padding-sm;
+  min-width: 120px;
+  transition: border-color $select-duration, line-height $select-duration,
+    padding $select-duration;
+
+  &:hover {
+    & .w-select-close {
+      opacity: 1;
+    }
+  }
+
+  &-focused {
+    @include active();
+  }
+
+  &-single {
+    @extend .w-select;
+
+    position: relative;
+
+    &-search {
+      border: none;
+      width: 100%;
+      line-height: $select-size-base;
+      height: $select-size-base;
+      padding: 0;
+
+      &-small {
+        line-height: $select-size-sm;
+        height: $select-size-sm;
+      }
+
+      &-large {
+        line-height: $select-size-lg;
+        height: $select-size-lg;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &::-webkit-input-placeholder {
+        color: $select-placeholder-color;
+      }
+
+      &::-moz-placeholder {
+        color: $select-placeholder-color;
+      }
+
+      &::-ms-input-placeholder {
+        color: $select-placeholder-color;
+      }
+
+      &-box {
+        position: absolute;
+        top: 0;
+
+        &-ltr {
+          left: $padding-sm;
+          right: $padding-sm + 12px + $padding-xxs;
+        }
+
+        &-rtl {
+          right: $padding-sm;
+          left: $padding-sm + 12px + $padding-xxs;
+        }
+      }
+    }
+  }
+
+  &-multiple {
+    @extend .w-select;
+
+    padding: 0 $padding-xxs;
+    cursor: text;
+  }
+
+  &-tags {
+    @extend .w-select-multiple;
+  }
+
+  &-more {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: $select-size-base;
+
+    &-small {
+      min-height: $select-size-sm;
+    }
+
+    &-large {
+      min-height: $select-size-lg;
+    }
+
+    &-ltr {
+      padding-right: 12px * 2;
+    }
+
+    &-rtl {
+      padding-left: 12px * 2;
+    }
+
+    &-content {
+      @extend .w-ellipsis;
+
+      display: inline-block;
+    }
+
+    &-remove {
+      font-style: normal;
+      text-align: center;
+      text-transform: none;
+      text-rendering: optimizeLegibility;
+      color: $text-color-secondary;
+      font-weight: 700;
+      line-height: inherit;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 10px;
+
+      &:hover {
+        color: $select-remove-color-hover;
+      }
+
+      &-ltr {
+        margin-left: 4px;
+      }
+
+      &-rtl {
+        margin-right: 4px;
+      }
+    }
+
+    &-item {
+      position: relative;
+      display: flex;
+      flex: none;
+      box-sizing: border-box;
+      max-width: 100%;
+      padding: 0 $padding-xxs;
+      height: $select-size-base - $padding-xxs * 2;
+      line-height: $select-size-base - $padding-xxs * 2 - 2;
+      background: #f5f5f5;
+      border: 1px solid #f0f0f0;
+      border-radius: $border-radius-base;
+      cursor: default;
+      transition: font-size $select-duration, line-height $select-duration,
+        height $select-duration;
+      user-select: none;
+
+      &-small {
+        height: $select-size-sm - $padding-xxs * 2;
+        line-height: $select-size-sm - $padding-xxs * 2 - 2;
+      }
+
+      &-large {
+        height: $select-size-lg - $padding-xxs * 2;
+        line-height: $select-size-lg - $padding-xxs * 2 - 2;
+      }
+
+      &-ltr {
+        margin: 4px 4px 4px 0;
+      }
+
+      &-rtl {
+        margin: 4px 0 4px 4px;
+      }
+
+      &-disabled {
+        background: $select-disabled-bg;
+        border-color: $select-disabled-border;
+        cursor: not-allowed;
+      }
+    }
+
+    &-inline {
+      @extend .w-select-more-item;
+
+      background: none;
+      padding: 0;
+      border: none;
+      width: 0.75em;
+      margin: 4px 4px 4px 0;
+    }
+
+    &-search {
+      border: none;
+      font-size: 100%;
+      height: auto;
+      width: 100%;
+      background: transparent;
+      outline: 0;
+      line-height: 1;
+      color: $text-color;
+    }
+
+    &-pre {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: inline;
+      white-space: pre;
+      pointer-events: none;
+      opacity: 0;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+  }
+
+  &-result {
+    @extend .w-ellipsis;
+
+    max-width: calc(100% - 20px);
+    line-height: $select-size-base;
+    height: $select-size-base;
+    color: $text-color;
+
+    &-small {
+      line-height: $select-size-sm;
+      height: $select-size-sm;
+    }
+
+    &-large {
+      line-height: $select-size-lg;
+      height: $select-size-lg;
+    }
+
+    &-disabled {
+      color: $disabled-color;
+    }
+
+    &-empty {
+      color: $select-placeholder-color;
+    }
+  }
+
+  &-arrow {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 53%;
+    margin-top: -6px;
+    color: $select-arrow-color;
+    user-select: none;
+
+    &-ltr {
+      right: 12px;
+    }
+
+    &-rtl {
+      left: 12px;
+    }
+
+    & > .anticon {
+      display: block;
+    }
+
+    // &-small {
+    //   width: 4px;
+    //   height: 4px;
+    //   transform: translateY(-4px) rotate(45deg);
+    // }
+
+    // &-large {
+    //   width: 8px;
+    //   height: 8px;
+    //   transform: translateY(-8px) rotate(45deg);
+    // }
+
+    // &-disabled {
+    //   border-right: 1px solid $disabled-border;
+    //   border-bottom: 1px solid $disabled-border;
+    // }
+  }
+
+  &-close {
+    position: absolute;
+    top: -1px;
+    right: 0;
+    background: $white;
+    opacity: 0;
+  }
+
+  &-search {
+    background: $white;
+  }
+
+  &-disabled {
+    color: $disabled-color;
+    cursor: not-allowed;
+    background: $select-disabled-bg;
+  }
+
+  &-box {
+    max-height: 180px;
+  }
+
+  &-empty {
+    color: $select-empty-color;
+    padding: $padding-md 0;
+  }
+}

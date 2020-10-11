@@ -1,0 +1,273 @@
+<!-- @format -->
+
+<template>
+  <!-- <pre style="color: red">
+    重构组件
+    1. 去掉 click 属性
+    3. 新增 ltr 支持
+    4. 自定义选择标签
+    7. 默认 icon 替换 @ant-design/icons-vue 中的 LoadingOutlined
+    新增 optionLabelProp 属性，控制 model 的值
+    新增 optionValueProp 属性，控制 显示 的值
+    新增 autoClearSearchValue 属性，自动清除搜索框内容
+    新增 clear 属性，单选时候，清除选中内容，新增 @clear 回调
+    新增 arrow 属性，控制右边 下拉小箭头显示
+    新增 contentRender 属性，自定义 option 每项内容
+    新增 selectPoperWidth, selectPoperHeight 属性 控制 poper 弹框的宽度高度
+    新增 maxTagCount 属性 最多显示几个
+    去掉 emptyText 属性，新增 empty slot 自定义空状态
+    新增 tag slot，自定义多选tags模式的标签
+    option 新增 new 属性，作为 tags 模式是否新增的标识
+  </pre> -->
+  <w-space type="vertical">
+    <w-space type="vertical">
+      <w-space>
+        <span>huiValue--{{ huiValue }}</span>
+        <span>hui2Value--{{ hui2Value }}</span>
+        <span>selectValue--{{ selectValue }}</span>
+        <span>moreValue--{{ moreValue }}</span>
+        <span>tagValue--{{ tagValue }}</span>
+      </w-space>
+      <w-space>
+        <w-radio-group v-model="size" :size="size">
+          <w-radio-button label="small">small</w-radio-button>
+          <w-radio-button label="">default</w-radio-button>
+          <w-radio-button label="large">large</w-radio-button>
+        </w-radio-group>
+      </w-space>
+      <w-space>
+        <w-select
+          v-model="selectValue"
+          style="width: 160px"
+          search
+          clear
+          :direction="direction"
+          :size="size"
+        >
+          <w-option
+            v-for="optItem in defaultDatas"
+            :key="optItem.label"
+            :label="optItem.label"
+            :value="optItem.value"
+            :loading="optItem.loading"
+            :disabled="optItem.disabled"
+          ></w-option>
+        </w-select>
+        <w-select
+          v-model="selectValue"
+          style="width: 160px"
+          :options="defaultDatas"
+          search
+          clear
+          :direction="direction"
+          :size="size"
+        >
+        </w-select>
+        <w-select
+          v-model="moreValue"
+          :transfer="false"
+          style="width: 160px"
+          mode="multiple"
+          search
+          :direction="direction"
+          :size="size"
+        >
+          <w-option
+            v-for="optItem in defaultDatas"
+            :key="optItem.label"
+            :label="optItem.label"
+            :value="optItem.value"
+            :loading="optItem.loading"
+            :disabled="optItem.disabled"
+          ></w-option>
+          <template #empty><span style="color: red">为空</span></template>
+          <template #diy><span style="color: green">diy</span></template>
+          <template #tag="{label}"
+            ><span style="color: orange">{{ label }}</span></template
+          >
+        </w-select>
+        <w-select
+          v-model="tagValue"
+          mode="tags"
+          search
+          :direction="direction"
+          :size="size"
+        >
+          <w-option
+            v-for="optItem in defaultDatas"
+            :key="optItem.label"
+            :label="optItem.label"
+            :value="optItem.value"
+            :loading="optItem.loading"
+            :disabled="optItem.disabled"
+          ></w-option>
+        </w-select>
+        <w-select
+          v-model="huiValue"
+          mode="multiple"
+          style="width: '100%'"
+          placeholder="select one country"
+          :select-poper-width="300"
+          :select-poper-height="210"
+          placement="bottomLeft"
+          arrow
+          clear
+          search
+          :max-tag-count="1"
+          :direction="direction"
+          :size="size"
+        >
+          <w-option
+            :content-render="() => contentRender('China 中1国')"
+          ></w-option>
+          <w-option
+            :content-render="() => contentRender('USA (美国)')"
+          ></w-option>
+          <w-option
+            :content-render="() => contentRender('Japan (日本)')"
+          ></w-option>
+        </w-select>
+        <w-select
+          v-model="hui2Value"
+          mode="multiple"
+          style="width: '100%'"
+          placeholder="select one country"
+          :select-poper-width="300"
+          :select-poper-height="210"
+          placement="bottomLeft"
+          arrow
+          clear
+          search
+          :direction="direction"
+          :size="size"
+          :max-tag-count="1"
+        >
+          <w-option>
+            China 中国
+          </w-option>
+          <w-option>
+            USA (美国)
+          </w-option>
+          <w-option>
+            Japan (日本)
+          </w-option>
+        </w-select>
+      </w-space>
+      <!-- <w-select v-model="selectValue">
+        <w-option
+          :key="defaultDatas[0].label"
+          :label="defaultDatas[0].label"
+          :value="defaultDatas[0].value"
+          :loading="defaultDatas[0].loading"
+          :disabled="defaultDatas[0].disabled"
+        ></w-option>
+        <w-option
+          :key="defaultDatas[1].label"
+          :label="defaultDatas[1].label"
+          :value="defaultDatas[1].value"
+          :loading="defaultDatas[1].loading"
+          :disabled="defaultDatas[1].disabled"
+        ></w-option>
+        <w-option
+          :key="defaultDatas[2].label"
+          :label="defaultDatas[2].label"
+          :value="defaultDatas[2].value"
+          :loading="defaultDatas[2].loading"
+          :disabled="defaultDatas[2].disabled"
+        ></w-option>
+      </w-select> -->
+      <!-- <w-select v-model="selectValue" :options="defaultDatas"></w-select> -->
+      <!-- <div>--{{moreValue}}--
+        <w-select mode="multiple" v-model="moreValue" :options="moreDatas"></w-select>
+      </div> -->
+    </w-space>
+  </w-space>
+</template>
+
+<script lang="ts">
+  import { defineAsyncComponent, h } from 'vue';
+  import { mapState } from 'vuex';
+
+  const WSelect = defineAsyncComponent(() =>
+    import('../components/select/Select.vue'),
+  );
+  const WOption = defineAsyncComponent(() =>
+    import('../components/select/Option.vue'),
+  );
+
+  const WRadioButton = defineAsyncComponent(() =>
+    import('../components/radio-button/radio-button'),
+  );
+
+  const WRadioGroup = defineAsyncComponent(() =>
+    import('../components/radio-group/radio-group'),
+  );
+
+  const WSpace = defineAsyncComponent(() =>
+    import('../components/space/Space.vue'),
+  );
+
+  export default {
+    components: {
+      WSelect,
+      WOption,
+      WSpace,
+      WRadioButton,
+      WRadioGroup,
+    },
+    data() {
+      return {
+        selectValue: '苹果',
+        defaultDatas: [
+          { value: 'Apple', label: '苹果', loading: false, disabled: true },
+          {
+            value: 'PearPearPearPearPearPearPearPearPear',
+            label: '鸭梨',
+            loading: false,
+          },
+          {
+            value: 'moremoremoremoremoremoremoremoremoremoremoremore',
+            label: '更多',
+            loading: false,
+          },
+        ],
+        moreValue: ['苹果', '鸭梨'],
+        moreDatas: [
+          { value: 'Apple', label: '苹果', loading: false, disabled: true },
+          { value: 'Pear', label: '鸭梨', loading: false },
+          { value: 'more', label: '更多', loading: false },
+        ],
+        tagValue: ['苹果', '鸭梨'],
+        tagDatas: [
+          { value: 'Apple', label: '苹果', loading: false, disabled: true },
+          { value: 'Pear', label: '鸭梨', loading: false },
+          { value: 'more', label: '更多', loading: false },
+        ],
+        huiValue: [],
+        hui2Value: [],
+        size: '',
+      };
+    },
+    computed: {
+      ...mapState(['direction']),
+    },
+    methods: {
+      contentRender(text: string) {
+        return h('div', [
+          h(
+            'span',
+            {
+              style: 'margin-right: 4px',
+            },
+            '🇨🇳',
+          ),
+          text,
+        ]);
+      },
+    },
+  };
+</script>
+
+<style lang="scss">
+  @import '../components/radio-button/radio-button';
+</style>

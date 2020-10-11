@@ -78,7 +78,6 @@ export const getColorInLinearGradient = (color: ColorType) => {
       index < gradientKeyListLastIndex ? ',' : ''
     }`;
   });
-  console.log(gradientString, 'gradientString');
   return `${gradientString})`;
 };
 
@@ -95,7 +94,6 @@ export const isLinearGradient = (colors: ColorType) => {
 
 export const getColor = (color: ColorType, modelValue: number) => {
   let newColor = '';
-  console.log(isLinearGradient(color), '12');
   if (isString(color)) {
     newColor = color as string;
   } else if (isArray(color)) {
@@ -105,6 +103,5 @@ export const getColor = (color: ColorType, modelValue: number) => {
   } else if (isFunction(color)) {
     newColor = (color as Function)(modelValue);
   }
-  console.log(newColor, 'newColor');
   return newColor;
 };

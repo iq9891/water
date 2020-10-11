@@ -1,7 +1,8 @@
 /** @format */
 
-import { isVNode, ComponentPublicInstance, Slots } from 'vue';
-import { isFunction } from './typeof';
+import merge from 'lodash-es/merge';
+import { isVNode, ComponentPublicInstance, Comment, Fragment, Text } from 'vue';
+import { isArray, isFunction } from './typeof';
 import { hasOwn, hyphenate, camelize } from './utils';
 
 // change from vue sourcecode
@@ -70,14 +71,34 @@ export const getProps = (instance: ComponentPublicInstance) => {
   return res;
 };
 
+export function isEmptyElement(c: any) {
+  return (
+    c.type === Comment ||
+    (c.type === Fragment && c.children.length === 0) ||
+    (c.type === Text && c.children.trim() === '')
+  );
+}
 export interface GetSlotsOptions {
-  name: string;
+  name?: string;
+  type?: string;
 }
 
-export const getSlots = (
-  instance: ComponentPublicInstance,
-  options: GetSlotsOptions = { name: 'default' },
-) => {
-  const { name } = options;
-  return instance.$slots[name] ? (instance.$slots[name] as any)() : null;
+const filterEmptyElement = (data: any[]) =>
+  data.filter((dataItem: any) => !isEmptyElement(dataItem));
+
+export const getSlots = (instance: any, options?: GetSlotsOptions) => {
+  const { name, type } = merge({ name: 'default', type: '$slots' }, options);
+  const defultSlots =
+    instance[type] && hasOwn(instance[type], name)
+      ? (instance[type][name] as any)()
+      : null;
+  // 处理一下，因为循环的时候 defult 是里面只有一个的数组，不循环是多元素的数组
+  if (
+    defultSlots &&
+    defultSlots.length > 0 &&
+    isArray(defultSlots[0].children)
+  ) {
+    return filterEmptyElement(defultSlots[0].children);
+  }
+  return defultSlots ? filterEmptyElement(defultSlots) : [];
 };

@@ -82,7 +82,6 @@ export default {
       const stroke = self.isLinearGradientColor
         ? `url(#${self.gradientId})`
         : getColor(self.color, self.modelValue);
-      console.log(stroke, 'self.stroke');
       return {
         strokeDasharray: `${self.perimeter *
           self.rate *

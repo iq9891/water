@@ -1,0 +1,62 @@
+/** @format */
+
+@import '../style/config.scss';
+@import '../style/mixins/ellipsis.scss';
+
+.w-option {
+  @extend .w-ellipsis;
+
+  position: relative;
+  padding: 5px 12px;
+  font-weight: 400;
+  font-size: $option-font-size;
+  line-height: 22px;
+  font-family: $font-family;
+  cursor: pointer;
+  transition: background $option-duration;
+
+  &-hover,
+  &:hover {
+    background: $option-bg-hover;
+  }
+
+  &-on {
+    background-color: $option-on-bg;
+    color: $text-color;
+    font-weight: bold;
+  }
+
+  &-more {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-disabled {
+    color: $disabled-color;
+    cursor: not-allowed;
+
+    &.w-option-hover,
+    &:hover {
+      background: none;
+    }
+
+    &.w-option-on {
+      background: none;
+      font-weight: normal;
+    }
+
+    & .w-option-icon {
+      color: $disabled-color;
+    }
+  }
+
+  &-content {
+    @extend .w-ellipsis;
+
+    width: calc(100% - 12px);
+  }
+
+  &-icon {
+    color: $option-check-icon-color;
+  }
+}
