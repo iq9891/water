@@ -151,12 +151,11 @@ export default {
       const self = this as any;
       self.tagSearchHandleNew();
 
-      const filteredOptionDatas = self.optionDatas.filter(
-        (optItem: any) =>
-          optItem[self.fieldNames[self.optionValueProp]].indexOf(
-            self.fieldValue,
-          ) > -1,
-      );
+      const filteredOptionDatas = self.optionDatas.filter((optItem: any) => {
+        const filterValue = optItem[self.fieldNames[self.optionValueProp]];
+        return filterValue ? filterValue.indexOf(self.fieldValue) > -1 : '';
+      });
+
       if (self.newOpt) {
         return filteredOptionDatas.concat(self.newOpt);
       }
@@ -281,10 +280,18 @@ export default {
           if (
             !hasOwn(myProps, label) &&
             !hasOwn(myProps, value) &&
-            hasOwn(myProps, 'contentRender')
+            (hasOwn(myProps, 'contentRender') ||
+              hasOwn(myProps, 'content-render'))
           ) {
-            const optNode = (myProps as any).contentRender();
-            if (optNode.children) {
+            if (hasOwn(myProps, 'content-render')) {
+              myProps.contentRender = myProps['content-render'];
+            }
+
+            const optNode = hasOwn(myProps, 'contentRender')
+              ? myProps.contentRender()
+              : null;
+
+            if (optNode && optNode.children) {
               const optNodeResult = optNode.children.filter((optChild: any) =>
                 isString(optChild),
               );
