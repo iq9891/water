@@ -10,7 +10,7 @@
   padding: 0 $padding-md - 1px;
   color: $checkbox-button-color;
   font-size: $font-size-base;
-  line-height: $checkbox-button-height-base;
+  line-height: $checkbox-button-height-base - 2px;
   background: $checkbox-button-bg;
   border: 1px solid $checkbox-button-border;
   border-left-width: 0;
@@ -24,7 +24,7 @@
     @extend .w-checkbox-button;
 
     height: $checkbox-button-height-sm;
-    line-height: $checkbox-button-height-sm;
+    line-height: $checkbox-button-height-sm - 2px;
     padding: 0 $padding-sm - 1px;
   }
 
@@ -32,7 +32,7 @@
     @extend .w-checkbox-button;
 
     height: $checkbox-button-height-lg;
-    line-height: $checkbox-button-height-lg;
+    line-height: $checkbox-button-height-lg - 2px;
   }
 
   &::before {
