@@ -8,102 +8,117 @@
     :class="selectClass"
     @click="selectClick($event)"
   >
-    <div
-      v-if="isSingleMode || moreTags.length < 1"
-      :class="resultClass"
-      :title="result || placeholder"
-    >
-      {{ result || placeholder }}
-    </div>
-    <div v-else :class="moreClass">
-      <template v-if="$slots.tag">
-        <template v-for="nameItem in moreTags">
-          <slot
-            name="tag"
-            :value="nameItem[fieldNames[optionValueProp]]"
-            :label="nameItem[fieldNames[optionLabelProp]]"
-            :disabled="nameItem[fieldNames.disabled]"
-            :loading="nameItem[fieldNames.loading]"
-          ></slot>
+    <template v-if="$slots.area">
+      <slot
+        name="area"
+        :moreTags="moreTags"
+        :result="result"
+        :fieldNames="fieldNames"
+        :optionValueProp="optionValueProp"
+        :optionLabelProp="optionLabelProp"
+        :tagCount="tagCount"
+        :maxTagCount="maxTagCount"
+        :poperStatus="poperStatus"
+      ></slot>
+    </template>
+    <template v-else>
+      <div
+        v-if="isSingleMode || moreTags.length < 1"
+        :class="resultClass"
+        :title="result || placeholder"
+      >
+        {{ result || placeholder }}
+      </div>
+      <div v-else :class="moreClass">
+        <template v-if="$slots.tag">
+          <template v-for="nameItem in moreTags">
+            <slot
+              name="tag"
+              :value="nameItem[fieldNames[optionValueProp]]"
+              :label="nameItem[fieldNames[optionLabelProp]]"
+              :disabled="nameItem[fieldNames.disabled]"
+              :loading="nameItem[fieldNames.loading]"
+            ></slot>
+          </template>
         </template>
-      </template>
-      <template v-else>
+        <template v-else>
+          <div
+            v-for="(nameItem, nameIndex) in moreTags"
+            :key="`select_more_${nameIndex}`"
+            :class="moreItemClass"
+          >
+            <span
+              class="w-select-more-content"
+              :title="nameItem[fieldNames[optionValueProp]]"
+              >{{ nameItem[fieldNames[optionValueProp]] }}</span
+            >
+            <span
+              v-if="!nameItem[fieldNames.disabled]"
+              :class="moreRemoveClass"
+              @click="removeTag(nameItem[fieldNames[optionValueProp]], $event)"
+            >
+              <close-outlined />
+            </span>
+          </div>
+        </template>
         <div
-          v-for="(nameItem, nameIndex) in moreTags"
-          :key="`select_more_${nameIndex}`"
+          v-if="moreTags.length > 0 && maxTagCount > 0 && tagCount > 0"
           :class="moreItemClass"
         >
-          <span
-            class="w-select-more-content"
-            :title="nameItem[fieldNames[optionValueProp]]"
-            >{{ nameItem[fieldNames[optionValueProp]] }}</span
-          >
-          <span
-            v-if="!nameItem[fieldNames.disabled]"
-            :class="moreRemoveClass"
-            @click="removeTag(nameItem[fieldNames[optionValueProp]], $event)"
-          >
-            <close-outlined />
-          </span>
+          <span class="w-select-more-content">+{{ tagCount }}...</span>
         </div>
-      </template>
-      <div
-        v-if="moreTags.length > 0 && maxTagCount > 0 && tagCount > 0"
-        :class="moreItemClass"
-      >
-        <span class="w-select-more-content">+{{ tagCount }}...</span>
+        <div
+          v-show="poperStatus"
+          class="w-select-more-inline"
+          :style="{ width: fieldWidth }"
+        >
+          <input
+            ref="moreSearch"
+            :value="fieldValue"
+            class="w-select-more-search"
+            type="text"
+            aria-label="search"
+            @input="fieldMoreInput($event)"
+            @keyup.enter="searchEnter($event)"
+            @keyup.down="searchKeyDown"
+            @keyup.up="searchKeyUp"
+            @keyup.delete="fieldDelete($event)"
+          />
+          <pre ref="pre" class="w-select-more-pre">{{ fieldValue }}</pre>
+        </div>
       </div>
       <div
-        v-show="poperStatus"
-        class="w-select-more-inline"
-        :style="{ width: fieldWidth }"
+        v-if="isSingleMode && search && poperStatus"
+        class="w-select-single-search-box"
       >
         <input
-          ref="moreSearch"
-          :value="fieldValue"
-          class="w-select-more-search"
+          ref="singleSearch"
+          v-model="fieldValue"
           type="text"
+          :class="searchClass"
+          :placeholder="result || placeholder"
           aria-label="search"
-          @input="fieldMoreInput($event)"
-          @keyup.enter="searchEnter($event)"
+          @keydown.enter="searchEnter($event)"
           @keyup.down="searchKeyDown"
           @keyup.up="searchKeyUp"
-          @keyup.delete="fieldDelete($event)"
         />
-        <pre ref="pre" class="w-select-more-pre">{{ fieldValue }}</pre>
       </div>
-    </div>
-    <div
-      v-if="isSingleMode && search && poperStatus"
-      class="w-select-single-search-box"
-    >
-      <input
-        ref="singleSearch"
-        v-model="fieldValue"
-        type="text"
-        :class="searchClass"
-        :placeholder="result || placeholder"
-        aria-label="search"
-        @keydown.enter="searchEnter($event)"
-        @keyup.down="searchKeyDown"
-        @keyup.up="searchKeyUp"
-      />
-    </div>
-    <span v-if="showArrow && !loading" :class="arrowClass">
-      <down-outlined />
-    </span>
-    <span v-if="showArrow && search && poperStatus" :class="arrowClass">
-      <search-outlined class="w-select-search" />
-    </span>
-    <span v-if="showArrow && loading" :class="arrowClass">
-      <loading-outlined />
-    </span>
-    <span v-if="clear && (result || nameTags.length)" :class="arrowClass">
-      <close-circle-filled
-        class="w-select-close"
-        @click="clearModelValue($event)"
-      />
-    </span>
+      <span v-if="showArrow && !loading" :class="arrowClass">
+        <down-outlined />
+      </span>
+      <span v-if="showArrow && search && poperStatus" :class="arrowClass">
+        <search-outlined class="w-select-search" />
+      </span>
+      <span v-if="showArrow && loading" :class="arrowClass">
+        <loading-outlined />
+      </span>
+      <span v-if="clear && (result || nameTags.length)" :class="arrowClass">
+        <close-circle-filled
+          class="w-select-close"
+          @click="clearModelValue($event)"
+        />
+      </span>
+    </template>
     <w-poper
       ref="poper"
       v-model="poperStatus"
@@ -131,7 +146,7 @@
           :change="optionChange"
           :before="before"
         ></w-option>
-        <slot v-if="$slots.diy" name="diy"></slot>
+        <slot v-if="$slots.dropdown" name="dropdown"></slot>
       </w-scroll>
       <template v-if="$slots.empty && !filterDatas.length">
         <slot name="empty"></slot>

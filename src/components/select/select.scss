@@ -99,6 +99,15 @@
     @extend .w-select-multiple;
   }
 
+  &-area {
+    background: none;
+    border-radius: 0;
+    border: none;
+    padding: 0;
+    min-width: auto;
+    cursor: pointer;
+  }
+
   &-more {
     display: flex;
     flex-wrap: wrap;

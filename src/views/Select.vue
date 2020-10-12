@@ -18,6 +18,8 @@
     去掉 emptyText 属性，新增 empty slot 自定义空状态
     新增 tag slot，自定义多选tags模式的标签
     option 新增 new 属性，作为 tags 模式是否新增的标识
+    diy slot 更名为 dropdown slot
+    新增 area slot 替换自定义 select 操作内容
   </pre> -->
   <w-space type="vertical">
     <w-space type="vertical">
@@ -81,7 +83,9 @@
             :disabled="optItem.disabled"
           ></w-option>
           <template #empty><span style="color: red">为空</span></template>
-          <template #diy><span style="color: green">diy</span></template>
+          <template #dropdown
+            ><span style="color: green">dropdown</span></template
+          >
           <template #tag="{label}"
             ><span style="color: orange">{{ label }}</span></template
           >
@@ -152,34 +156,86 @@
             Japan (日本)
           </w-option>
         </w-select>
+        <w-select v-model="selectValue">
+          <w-option
+            :key="defaultDatas[0].label"
+            :label="defaultDatas[0].label"
+            :value="defaultDatas[0].value"
+            :loading="defaultDatas[0].loading"
+            :disabled="defaultDatas[0].disabled"
+          ></w-option>
+          <w-option
+            :key="defaultDatas[1].label"
+            :label="defaultDatas[1].label"
+            :value="defaultDatas[1].value"
+            :loading="defaultDatas[1].loading"
+            :disabled="defaultDatas[1].disabled"
+          ></w-option>
+          <w-option
+            :key="defaultDatas[2].label"
+            :label="defaultDatas[2].label"
+            :value="defaultDatas[2].value"
+            :loading="defaultDatas[2].loading"
+            :disabled="defaultDatas[2].disabled"
+          ></w-option>
+        </w-select>
       </w-space>
-      <!-- <w-select v-model="selectValue">
-        <w-option
-          :key="defaultDatas[0].label"
-          :label="defaultDatas[0].label"
-          :value="defaultDatas[0].value"
-          :loading="defaultDatas[0].loading"
-          :disabled="defaultDatas[0].disabled"
-        ></w-option>
-        <w-option
-          :key="defaultDatas[1].label"
-          :label="defaultDatas[1].label"
-          :value="defaultDatas[1].value"
-          :loading="defaultDatas[1].loading"
-          :disabled="defaultDatas[1].disabled"
-        ></w-option>
-        <w-option
-          :key="defaultDatas[2].label"
-          :label="defaultDatas[2].label"
-          :value="defaultDatas[2].value"
-          :loading="defaultDatas[2].loading"
-          :disabled="defaultDatas[2].disabled"
-        ></w-option>
-      </w-select> -->
-      <!-- <w-select v-model="selectValue" :options="defaultDatas"></w-select> -->
-      <!-- <div>--{{moreValue}}--
-        <w-select mode="multiple" v-model="moreValue" :options="moreDatas"></w-select>
-      </div> -->
+      <w-space>
+        <w-select
+          v-model="areaMoreValue"
+          :transfer="false"
+          style="width: 160px"
+          mode="multiple"
+          :direction="direction"
+        >
+          <w-option
+            v-for="optItem in defaultDatas"
+            :key="optItem.label"
+            :label="optItem.label"
+            :value="optItem.value"
+            :loading="optItem.loading"
+            :disabled="optItem.disabled"
+          ></w-option>
+          <template #empty><span style="color: red">为空</span></template>
+          <template #dropdown
+            ><span style="color: green">dropdown</span></template
+          >
+          <template #tag="{label}"
+            ><span style="color: orange">{{ label }}</span></template
+          >
+          <template #area="myScope"
+            ><span style="color: chocolate">{{ areaMoreValue }}</span
+            ><span style="cursor: default;color: chocolate"
+              >请多选{{ myScope.poperStatus }}</span
+            ></template
+          >
+        </w-select>
+        <w-select
+          v-model="areaTagValue"
+          :transfer="false"
+          style="width: 160px"
+          mode="tags"
+          search
+          :direction="direction"
+          :options="defaultDatas"
+        >
+          <template #area>
+            <span style="color: chocolate">{{ areaTagValue }}</span>
+            <span style="cursor: default;color: chocolate">请 tags 选</span>
+          </template>
+        </w-select>
+        <w-select
+          v-model="areaOneValue"
+          style="width: 160px"
+          :direction="direction"
+          :options="defaultDatas"
+        >
+          <template #area>
+            <span style="color: chocolate">{{ areaOneValue }}</span>
+            <span style="cursor: default;color: chocolate">请 单 选</span>
+          </template>
+        </w-select>
+      </w-space>
     </w-space>
   </w-space>
 </template>
@@ -232,6 +288,9 @@
           },
         ],
         moreValue: ['苹果', '鸭梨'],
+        areaMoreValue: [],
+        areaTagValue: [],
+        areaOneValue: '鸭梨',
         moreDatas: [
           { value: 'Apple', label: '苹果', loading: false, disabled: true },
           { value: 'Pear', label: '鸭梨', loading: false },

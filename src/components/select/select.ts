@@ -145,7 +145,7 @@ export default {
     },
     tagCount() {
       const self = this as any;
-      return self.nameTags.length - self.maxTagCount;
+      return self.nameTags.length - (self.maxTagCount || 0);
     },
     filterDatas() {
       const self = this as any;
@@ -167,7 +167,8 @@ export default {
         `w-select-${self.mode}`,
         {
           'w-select-disabled': self.disabled,
-          'w-select-focused': self.poperStatus,
+          'w-select-focused': !self.$slots.area && self.poperStatus,
+          'w-select-area': self.$slots.area,
         },
       ];
     },
