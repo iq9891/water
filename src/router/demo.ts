@@ -194,4 +194,13 @@ export default [
     component: () =>
       import(/* webpackChunkName: "select" */ '../views/Select.vue'),
   },
+  {
+    path: '/poper',
+    name: 'Poper',
+    meta: {
+      name: '弹出空间',
+    },
+    component: () =>
+      import(/* webpackChunkName: "poper" */ '../views/Poper.vue'),
+  },
 ];
