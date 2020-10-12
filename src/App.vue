@@ -10,12 +10,12 @@
     </w-space>
   </p>
   <w-space type="vertical">
-    <div v-for="demoRouteItem in demoRouters" :key="demoRouteItem.name">
+    <span v-for="demoRouteItem in demoRouters" :key="demoRouteItem.name">
       <router-link :to="{ name: demoRouteItem.name }">
         {{ demoRouteItem.meta.name }}
       </router-link>
       <w-divider type="vertical" />
-    </div>
+    </span>
     <router-view />
   </w-space>
 </template>

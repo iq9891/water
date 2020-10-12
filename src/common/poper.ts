@@ -31,19 +31,8 @@ export const poperProps = {
     type: String,
     default: '',
   },
-  prefix: {
-    type: String,
-    default: '',
-  },
-  suffix: {
-    type: String,
-    default: '',
-  },
   ...poperBaseProps,
-  zIndex: {
-    type: Number,
-    default: 1,
-  },
+  zIndex: Number,
   before: {
     type: Function,
     default() {

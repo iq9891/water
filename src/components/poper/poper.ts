@@ -19,6 +19,7 @@ export default {
     },
     width: Number,
     height: Number,
+    zIndex: Number
   },
   computed: {
     ...poperComputed,
@@ -45,6 +46,10 @@ export default {
 
         if (self.height) {
           popElem.style.height = `${self.height}px`;
+        }
+
+        if (self.zIndex && self.zIndex > 0) {
+          popElem.style.zIndex = self.zIndex;
         }
       }
     },

@@ -20,6 +20,7 @@
     option 新增 new 属性，作为 tags 模式是否新增的标识
     diy slot 更名为 dropdown slot
     新增 area slot 替换自定义 select 操作内容
+    去掉 prefix 和 suffix 属性
   </pre> -->
   <w-space type="vertical">
     <w-space type="vertical">
@@ -45,6 +46,7 @@
           clear
           :direction="direction"
           :size="size"
+          :zIndex="1231312"
         >
           <w-option
             v-for="optItem in defaultDatas"
