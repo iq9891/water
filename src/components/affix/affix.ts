@@ -83,7 +83,7 @@ export default {
     self.getChildStyle();
     self.updatePostion();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const self = this as any;
     if (self.destroy) {
       removeObserved(self.target);

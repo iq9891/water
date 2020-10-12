@@ -147,7 +147,7 @@ export default {
     const self = this as any;
     self.updateScroll();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const self = this as any;
     if (!self.noResize && isClient()) {
       off(window, 'resize', self.updateResize);

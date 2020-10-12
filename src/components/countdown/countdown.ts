@@ -54,7 +54,7 @@ export default {
       self.syncTimer();
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const self = this as any;
     self.stopTimer();
   },
