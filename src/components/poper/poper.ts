@@ -19,7 +19,7 @@ export default {
     },
     width: Number,
     height: Number,
-    zIndex: Number
+    zIndex: Number,
   },
   computed: {
     ...poperComputed,

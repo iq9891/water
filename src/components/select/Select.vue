@@ -126,7 +126,7 @@
       :width="selectPoperWidth"
       :placement="placement"
       :disabled="!transfer"
-      :zIndex="zIndex"
+      :z-index="zIndex"
     >
       <w-scroll
         v-show="filterDatas.length"

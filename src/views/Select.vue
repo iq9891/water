@@ -46,7 +46,7 @@
           clear
           :direction="direction"
           :size="size"
-          :zIndex="1231312"
+          :z-index="1231312"
         >
           <w-option
             v-for="optItem in defaultDatas"
