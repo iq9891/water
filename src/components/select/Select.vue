@@ -7,6 +7,8 @@
     class="test"
     :class="selectClass"
     @click="selectClick($event)"
+    @focus="selectFocus"
+    @blur="selectBlur"
   >
     <template v-if="$slots.area">
       <slot

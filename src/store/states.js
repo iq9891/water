@@ -1,6 +1,6 @@
 /** @format */
 
 export default {
-  direction: 'ltr',
-  // direction: 'rtl',
+  // direction: 'ltr',
+  direction: 'rtl',
 };

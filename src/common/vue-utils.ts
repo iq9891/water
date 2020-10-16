@@ -1,7 +1,7 @@
 /** @format */
 
 import merge from 'lodash-es/merge';
-import { isVNode, ComponentPublicInstance, Comment, Fragment, Text } from 'vue';
+import { isVNode, ComponentOptions, Comment, Fragment, Text } from 'vue';
 import { isArray, isFunction } from './typeof';
 import { hasOwn, hyphenate, camelize } from './utils';
 
@@ -43,7 +43,7 @@ export interface JsonProps {
   [key: string]: any;
 }
 
-export const getProps = (instance: ComponentPublicInstance) => {
+export const getProps = (instance: ComponentOptions) => {
   const res: JsonProps = {};
   if (instance.$ && instance.$.vnode) {
     const props = instance.$.vnode.props || {};

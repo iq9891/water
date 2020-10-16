@@ -1,6 +1,7 @@
 /** @format */
 
 @import '../style/mixins/active.scss';
+@import '../style/mixins/input.scss';
 @import '../style/mixins/ellipsis.scss';
 @import '../empty/empty.scss';
 
@@ -55,21 +56,9 @@
         height: $select-size-lg;
       }
 
-      &:focus {
-        outline: none;
-      }
+      @include focus();
 
-      &::-webkit-input-placeholder {
-        color: $select-placeholder-color;
-      }
-
-      &::-moz-placeholder {
-        color: $select-placeholder-color;
-      }
-
-      &::-ms-input-placeholder {
-        color: $select-placeholder-color;
-      }
+      @include placeholder($select-placeholder-color);
 
       &-box {
         position: absolute;
@@ -111,14 +100,14 @@
   &-more {
     display: flex;
     flex-wrap: wrap;
-    min-height: $select-size-base;
+    min-height: $select-size-base - 2px;
 
     &-small {
-      min-height: $select-size-sm;
+      min-height: $select-size-sm - 2px;
     }
 
     &-large {
-      min-height: $select-size-lg;
+      min-height: $select-size-lg - 2px;
     }
 
     &-ltr {
@@ -209,7 +198,7 @@
       padding: 0;
       border: none;
       width: 0.75em;
-      margin: 4px 4px 4px 0;
+      margin: 2px 4px 2px 0;
     }
 
     &-search {
@@ -240,18 +229,18 @@
     @extend .w-ellipsis;
 
     max-width: calc(100% - 20px);
-    line-height: $select-size-base;
-    height: $select-size-base;
+    line-height: $select-size-base - 2px;
+    height: $select-size-base - 2px;
     color: $text-color;
 
     &-small {
-      line-height: $select-size-sm;
-      height: $select-size-sm;
+      line-height: $select-size-sm - 2px;
+      height: $select-size-sm - 2px;
     }
 
     &-large {
-      line-height: $select-size-lg;
-      height: $select-size-lg;
+      line-height: $select-size-lg - 2px;
+      height: $select-size-lg - 2px;
     }
 
     &-disabled {
@@ -283,23 +272,6 @@
     & > .anticon {
       display: block;
     }
-
-    // &-small {
-    //   width: 4px;
-    //   height: 4px;
-    //   transform: translateY(-4px) rotate(45deg);
-    // }
-
-    // &-large {
-    //   width: 8px;
-    //   height: 8px;
-    //   transform: translateY(-8px) rotate(45deg);
-    // }
-
-    // &-disabled {
-    //   border-right: 1px solid $disabled-border;
-    //   border-bottom: 1px solid $disabled-border;
-    // }
   }
 
   &-close {

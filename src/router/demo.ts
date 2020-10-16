@@ -203,4 +203,13 @@ export default [
     component: () =>
       import(/* webpackChunkName: "poper" */ '../views/Poper.vue'),
   },
+  {
+    path: '/input',
+    name: 'Input',
+    meta: {
+      name: '输入框',
+    },
+    component: () =>
+      import(/* webpackChunkName: "input" */ '../views/Input.vue'),
+  },
 ];

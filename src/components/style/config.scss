@@ -14,7 +14,6 @@ $success-color: $green-6 !default;
 $processing-color: $blue-6 !default;
 $error-color: $red-6 !default;
 $warning-color: $gold-6 !default;
-$normal-color: #d9d9d9 !default;
 $white: #fff !default;
 $black: #000 !default;
 $gray: #dcdcdc !default;
@@ -42,6 +41,8 @@ $code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
 $text-color: color.scale($black, $alpha: -15%) !default;
 $text-color-secondary: color.scale($black, $alpha: -55%) !default;
 $text-color-inverse: $white !default;
+
+$placeholder-color: #bfbfbf !default;
 
 $icon-color: inherit !default;
 $icon-color-hover: color.scale($black, $alpha: -25%) !default;
@@ -305,7 +306,7 @@ $select-disabled-bg: $disabled-bg !default;
 $select-disabled-border: $disabled-border !default;
 $select-arrow-color: rgba(0, 0, 0, 0.25) !default;
 $select-remove-color-hover: $icon-color-hover !default;
-$select-placeholder-color: #b4bac3 !default;
+$select-placeholder-color: $placeholder-color !default;
 $select-size-lg: 32px !default;
 $select-size-base: 28px !default;
 $select-size-sm: 24px !default;
@@ -317,3 +318,21 @@ $option-font-size: $font-size-base !default;
 $option-bg-hover: #f5f5f5 !default;
 $option-on-bg: $primary-1 !default;
 $option-check-icon-color: $primary-6 !default;
+
+// input
+$input-duration: $animation-duration-slow !default;
+$input-bg: $component-background !default;
+$input-color: $text-color !default;
+$input-placeholder-color: $placeholder-color !default;
+$input-border: $normal-border !default;
+$input-font-size: $font-size-base !default;
+$input-size-lg: 32px !default;
+$input-size-base: 28px !default;
+$input-size-sm: 24px !default;
+$input-addon-bg: #fafafa !default;
+$input-clear-color: $disabled-color !default;
+$input-disabled-color: $disabled-color !default;
+$input-disabled-bg: $disabled-bg !default;
+$input-disabled-border: $disabled-border !default;
+$input-limit-color: #c0c4cc !default;
+$input-limit-font-size: $font-size-sm !default;

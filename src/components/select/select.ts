@@ -27,7 +27,6 @@ import {
   TYPE_ENUM,
 } from './option-utils';
 import {
-  OptionsEntity,
   FieldNamesEntity,
   ReturnParamsEntity,
   fieldNamesDefault,
@@ -65,6 +64,7 @@ export default {
       optionDatas: [],
       nameTags: [],
       newOpt: null,
+      focused: false,
     };
   },
   props: {
@@ -96,7 +96,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'placeholderplaceholder',
+      default: '',
     },
     optionLabelProp: {
       type: String,
@@ -167,7 +167,7 @@ export default {
         `w-select-${self.mode}`,
         {
           'w-select-disabled': self.disabled,
-          'w-select-focused': !self.$slots.area && self.poperStatus,
+          'w-select-focused': !self.$slots.area && self.focused,
           'w-select-area': self.$slots.area,
         },
       ];
@@ -344,6 +344,7 @@ export default {
     selectClick() {
       const self = this as any;
       self.changePoperStatus(true);
+      self.focused = true;
       self.$nextTick(() => {
         if (self.search && self.$refs.singleSearch) {
           self.$refs.singleSearch.focus();
@@ -592,6 +593,7 @@ export default {
     bodyClick() {
       const self = this as any;
       self.changePoperStatus();
+      self.focused = false;
     },
   },
 };

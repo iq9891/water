@@ -5,10 +5,6 @@ export interface ReturnParamsEntity {
   [propName: string]: any;
 }
 
-export interface OptionsEntity {
-  [propName: string]: any;
-}
-
 export interface FieldNamesEntity {
   [propName: string]: any;
 }

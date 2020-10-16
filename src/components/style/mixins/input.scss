@@ -1,0 +1,23 @@
+/** @format */
+
+@import '../config.scss';
+
+@mixin placeholder($color: $placeholder-color) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+
+  &::-moz-placeholder {
+    color: $color;
+  }
+
+  &::-ms-input-placeholder {
+    color: $color;
+  }
+}
+
+@mixin focus() {
+  &:focus {
+    outline: none;
+  }
+}
