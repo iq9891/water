@@ -30,7 +30,7 @@
         @blur="niceInputBlur"
       />
       <both-sides-render
-        v-if="clear"
+        v-if="clear && !disabled"
         type="clear"
         :class-name="{
           'w-input-clear-hidden': !modelValue || disabled,
@@ -104,7 +104,7 @@
           @blur="niceInputBlur"
         />
         <both-sides-render
-          v-if="clear"
+          v-if="clear && !disabled"
           type="clear"
           :clear="clear"
           :class-name="{
@@ -137,7 +137,7 @@
           @blur="niceInputBlur"
         />
         <both-sides-render
-          v-if="clear"
+          v-if="clear && !disabled"
           type="clear"
           :class-name="{
             'w-input-clear-more': isSuffix,
@@ -186,7 +186,7 @@
       @blur="niceInputBlur"
     />
     <both-sides-render
-      v-if="clear"
+      v-if="clear && !disabled"
       type="clear"
       :clear="clear"
       :class-name="{

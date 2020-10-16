@@ -39,8 +39,7 @@ const InputOptions: ComponentOptions = {
           'w-input-nice-after': this.isAddonAfter,
           [`w-input-nice-after-${this.direction}`]: this.isAddonAfter,
           'w-input-nice-disabled': this.disabled,
-          'w-input-nice-borderless':
-            !this.isAddon && !this.isMoreMode && !this.border,
+          'w-input-nice-borderless': !this.isAddon && !this.border,
           [`w-input-nice-${this.size}`]: this.size,
         },
       ];

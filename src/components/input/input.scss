@@ -124,11 +124,11 @@
     @include both-sides();
 
     &-ltr {
-      padding-left: $padding-xxs;
+      padding-left: $padding-xs;
     }
 
     &-rtl {
-      padding-right: $padding-xxs;
+      padding-right: $padding-xs;
     }
   }
 

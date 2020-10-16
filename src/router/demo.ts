@@ -212,4 +212,13 @@ export default [
     component: () =>
       import(/* webpackChunkName: "input" */ '../views/Input.vue'),
   },
+  {
+    path: '/password',
+    name: 'Password',
+    meta: {
+      name: '密码',
+    },
+    component: () =>
+      import(/* webpackChunkName: "password" */ '../views/Password.vue'),
+  },
 ];

@@ -336,3 +336,8 @@ $input-disabled-bg: $disabled-bg !default;
 $input-disabled-border: $disabled-border !default;
 $input-limit-color: #c0c4cc !default;
 $input-limit-font-size: $font-size-sm !default;
+
+// password
+$password-duration: $animation-duration-slow !default;
+$password-icon-color: rgba(0, 0, 0, 0.45) !default;
+$password-icon-color-hover: rgba(0, 0, 0, 0.85) !default;
