@@ -27,7 +27,7 @@ const bothSidesRender = defineComponent({
     },
     onlySlots: Boolean,
     clear: Boolean,
-    showWordLimit: Boolean,
+    showCount: Boolean,
     instance: {
       type: Object,
       default() {},
@@ -72,7 +72,7 @@ const bothSidesRender = defineComponent({
       });
     }
 
-    if (this.showWordLimit) {
+    if (this.showCount) {
       limitNode = h(
         'span',
         {

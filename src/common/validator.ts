@@ -44,6 +44,11 @@ export const buttonStyleValidator = (value: string) => {
   return validator(typeList, value);
 };
 
+export const textAreaResizeValidator = (value: string) => {
+  const typeList = ['', 'none', 'both', 'horizontal', 'vertical'];
+  return validator(typeList, value);
+};
+
 export const placementValidator = (value: string) => {
   const typeList = [
     'top',

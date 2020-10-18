@@ -8,6 +8,8 @@
     输入框改变内容的时候添加防抖, 新增 valueWait 最大延迟描述，单位毫秒
     新增 border 属性 只支持独立模式不带前缀后缀
     新增 direction 属性支持 ltr
+    change emit 修改成 onChange 因为 input修改v-model失去焦点意外触发 change emit 所以修改成 onChange
+    change 属性修改为 onChange
   </pre> -->
   <w-space type="vertical">
     <w-space>
@@ -20,6 +22,9 @@
       >
       <w-checkbox v-model:checked="border"
         >边框{{ border ? '中' : '' }}</w-checkbox
+      >
+      <w-checkbox v-model:checked="showCount"
+        >显示数字{{ showCount ? '中' : '' }}</w-checkbox
       >
       <w-radio-group v-model="size">
         <w-radio-button label="small">small</w-radio-button>
@@ -35,7 +40,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     />
     <w-input
       v-model="val1"
@@ -45,7 +50,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     >
       <template #prefix>
         <user-outlined />
@@ -59,7 +64,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     >
       <template #addonBefore>
         <w-select
@@ -94,7 +99,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     >
       <template #addonAfter>
         <SettingOutlined />
@@ -108,7 +113,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     >
       <template #addonBefore>
         <SettingOutlined />
@@ -122,7 +127,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     >
       <template #suffix><span style="color:red">.c90om</span></template>
       <template #addonBefore>
@@ -137,7 +142,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     >
       <template #prefix><span style="color:red">htt2p://</span></template>
       <template #addonAfter>
@@ -152,7 +157,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     >
       <template #prefix><span style="color:red">htt1p://</span></template>
       <template #suffix><span style="color:green">.c11om</span></template>
@@ -166,7 +171,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     >
       <template #prefix>hsttp://</template>
     </w-input>
@@ -178,7 +183,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     >
       <template #prefix>htxtp://</template>
     </w-input>
@@ -191,7 +196,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     >
       <template #prefix>hzttp://</template>
     </w-input>
@@ -204,7 +209,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     />
     <w-input
       v-model="val1"
@@ -214,7 +219,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     />
     <w-input
       v-model="val1"
@@ -224,7 +229,7 @@
       :size="size"
       :direction="direction"
       :max-length="7"
-      show-word-limit
+      :show-count="showCount"
     />
   </w-space>
 </template>
@@ -280,6 +285,7 @@
         disabled: false,
         clear: true,
         border: true,
+        showCount: false,
         size: '',
       };
     },

@@ -1,0 +1,45 @@
+/** @format */
+
+@import '../input/input';
+
+.w-textarea {
+  &-nice {
+    padding: 0;
+    border: none;
+    height: auto;
+
+    & > textarea.w-textarea {
+      min-height: $textarea-min-height-base;
+      border: 1px solid $input-border;
+      padding: $padding-xxs $padding-sm;
+    }
+
+    & .w-input-clear {
+      padding: 0;
+      position: absolute;
+      right: $padding-sm;
+      top: ($textarea-min-height-base - $font-size-sm) / 2;
+    }
+
+    & .w-input-limit {
+      position: absolute;
+      right: $padding-xs;
+      bottom: $padding-xxs;
+    }
+
+    &-borderless {
+      & > textarea.w-textarea {
+        border: none;
+      }
+    }
+
+    &-focused {
+      border: none;
+      box-shadow: none;
+
+      & > textarea.w-textarea {
+        @include active();
+      }
+    }
+  }
+}

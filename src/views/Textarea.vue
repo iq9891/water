@@ -16,8 +16,8 @@
       <w-checkbox v-model:checked="border"
         >边框{{ border ? '中' : '' }}</w-checkbox
       >
-      <w-checkbox v-model:checked="visibilityToggle"
-        >切换{{ visibilityToggle ? '中' : '' }}</w-checkbox
+      <w-checkbox v-model:checked="showCount"
+        >显示数字{{ showCount ? '中' : '' }}</w-checkbox
       >
       <w-radio-group v-model="size">
         <w-radio-button label="small">small</w-radio-button>
@@ -25,18 +25,46 @@
         <w-radio-button label="large">large</w-radio-button>
       </w-radio-group>
     </w-space>
-    <w-password
+    <w-textarea
       v-model="val1"
       :clear="clear"
       :disabled="disabled"
       :size="size"
       :border="border"
-      :visibility-toggle="visibilityToggle"
       :direction="direction"
+      :show-count="showCount"
+      placeholder="请输入密码"
+      autocomplete="on"
+      @on-change="onChange"
+      @onClear="onClear"
+    />
+    <w-textarea
+      v-model="val1"
+      :clear="clear"
+      :disabled="disabled"
+      :size="size"
+      :border="border"
+      :direction="direction"
+      :show-count="showCount"
+      placeholder="请输入密码"
+      autocomplete="on"
+      style="width: 100px"
+      :auto-size="{ minRows: 2, maxRows: 4 }"
+      @on-change="onChange"
+    />
+    <w-textarea
+      v-model="val1"
+      :clear="clear"
+      :disabled="disabled"
+      :size="size"
+      :border="border"
+      :direction="direction"
+      :show-count="showCount"
       placeholder="请输入密码"
       autocomplete="on"
       :max-length="7"
-      @on-change="change"
+      resize="both"
+      @on-change="onChange"
     />
   </w-space>
 </template>
@@ -45,8 +73,8 @@
   import { defineAsyncComponent } from 'vue';
   import { mapState } from 'vuex';
 
-  const WPassword = defineAsyncComponent(() =>
-    import('../components/password/Password.vue'),
+  const WTextarea = defineAsyncComponent(() =>
+    import('../components/textarea/Textarea.vue'),
   );
 
   const WCheckbox = defineAsyncComponent(() =>
@@ -68,7 +96,7 @@
   export default {
     components: {
       WCheckbox,
-      WPassword,
+      WTextarea,
       WSpace,
       WRadioButton,
       WRadioGroup,
@@ -80,16 +108,19 @@
         disabled: false,
         clear: true,
         border: true,
+        showCount: false,
         size: '',
-        visibilityToggle: true,
       };
     },
     computed: {
       ...mapState(['direction']),
     },
     methods: {
-      change(params: any) {
-        console.log(params, 'change');
+      onChange(params: any) {
+        console.log(params, '-----onChange');
+      },
+      onClear(params: any) {
+        console.log(params, '-----onClear');
       },
     },
   };

@@ -1,9 +1,10 @@
 /** @format */
 
-import { defineComponent, DefineComponent } from 'vue';
-import { isKorean, isUndefined } from '../../common/typeof';
+import { CSSProperties, defineComponent, DefineComponent, h } from 'vue';
+import validator from '../../common/validator';
+import { isKorean } from '../../common/typeof';
 import { getProps } from '../../common/vue-utils';
-import { getMaxLengthValue } from './utils';
+import { getMaxLengthValue, getTeatAreaStyle, getTargetStyles } from './utils';
 import inputProps from './input-props';
 
 export interface ReturnParamsEntity {
@@ -13,15 +14,25 @@ export interface ReturnParamsEntity {
   eventType: string;
 }
 
-const InpOptions = defineComponent({
+const inpOptions = defineComponent({
   props: {
     ...inputProps,
+    tag: {
+      type: String,
+      default: 'input',
+      validator: (value: string) => {
+        const typeList = ['input', 'textarea'];
+        return validator(typeList, value);
+      },
+    },
   },
-  emits: ['update:modelValue', 'change'],
+  emits: ['update:modelValue', 'on-change'],
   data() {
     return {
       isPinYinWriting: false,
       throttleTimer: null,
+      inputStyle: {},
+      inputOriginStyle: {},
     };
   },
   computed: {
@@ -31,6 +42,7 @@ const InpOptions = defineComponent({
         {
           'w-input-disabled': this.disabled,
           'w-input-readonly': this.readonly,
+          'w-textarea': this.tag === 'textarea',
         },
         this.className,
       ];
@@ -41,8 +53,13 @@ const InpOptions = defineComponent({
   },
   mounted() {
     this.getValue();
+    this.getInputOriginStyles();
   },
   methods: {
+    getInputOriginStyles() {
+      const inpNode = this.$refs.inpEle as any;
+      this.inputOriginStyle = getTargetStyles(inpNode);
+    },
     handleCompositionStart() {
       this.isPinYinWriting = true;
     },
@@ -83,18 +100,26 @@ const InpOptions = defineComponent({
       target.value = getMaxLengthValue(value, this.maxLength);
 
       this.$emit('update:modelValue', getMaxLengthValue(value, this.maxLength));
-      this.$emit('change', reParams);
-      this.change(reParams);
+      this.$emit('on-change', reParams);
+      this.onChange(reParams);
     },
     getValue() {
       if (this.$refs.inpEle) {
-        (this.$refs.inpEle as any).value = getMaxLengthValue(
-          this.modelValue,
-          this.maxLength,
-        );
+        const inpNode = this.$refs.inpEle as any;
+
+        inpNode.value = getMaxLengthValue(this.modelValue, this.maxLength);
+
+        this.$nextTick(this.resizeStyle);
       }
     },
-    handleBlur() {},
+    resizeStyle() {
+      const inpNode = this.$refs.inpEle as any;
+      this.inputStyle = getTeatAreaStyle(
+        inpNode,
+        this.autoSize,
+        this.inputOriginStyle,
+      );
+    },
   },
   render() {
     const {
@@ -104,12 +129,13 @@ const InpOptions = defineComponent({
       placeholder,
       maxLength,
       autocomplete,
-      className,
+      tag,
+      rows,
+      resize,
     } = getProps(this);
 
-    const InpProps: any = {
+    const inpProps: any = {
       ...this.$attrs,
-      type,
       disabled,
       readonly,
       placeholder,
@@ -118,15 +144,28 @@ const InpOptions = defineComponent({
       onCompositionupdate: this.handleCompositionUpdate,
       onCompositionend: this.handleCompositionEnd,
       onInput: this.inputHandle.bind(this as any),
-      onBlur: this.handleBlur,
     };
 
     if (maxLength > 0) {
-      InpProps.maxLength = maxLength;
+      inpProps.maxLength = maxLength;
     }
 
-    return <input ref="inpEle" class={this.inputClass} {...InpProps} />;
+    if (tag === 'input') {
+      inpProps.type = type;
+    }
+
+    if (tag === 'textarea') {
+      inpProps.rows = rows;
+      (this.inputStyle as CSSProperties).resize = resize;
+    }
+
+    return h(tag, {
+      ...inpProps,
+      class: this.inputClass,
+      style: this.inputStyle,
+      ref: 'inpEle',
+    });
   },
 });
 
-export default InpOptions;
+export default inpOptions;

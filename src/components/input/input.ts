@@ -27,6 +27,11 @@ const InputOptions: ComponentOptions = {
       type: String,
       default: '',
     },
+    tag: {
+      // input | textarea
+      type: String,
+      default: 'input',
+    },
   },
   computed: {
     niceClass() {
@@ -41,8 +46,15 @@ const InputOptions: ComponentOptions = {
           'w-input-nice-disabled': this.disabled,
           'w-input-nice-borderless': !this.isAddon && !this.border,
           [`w-input-nice-${this.size}`]: this.size,
+          'w-textarea-nice': this.isTextArea,
+          'w-textarea-nice-focused': this.isTextArea && this.niceInputFocused,
+          'w-textarea-nice-borderless':
+            this.isTextArea && !this.isAddon && !this.border,
         },
       ];
+    },
+    isTextArea() {
+      return this.tag === 'textarea';
     },
     inputBoxClass() {
       if (!this.isAddon) {
@@ -83,14 +95,15 @@ const InputOptions: ComponentOptions = {
   methods: {
     changeValue(params: ReturnParamsEntity) {
       this.$emit('update:modelValue', params.value);
-      this.$emit('change', params);
-      this.change(params);
+      this.$emit('on-change', params);
+      this.onChange(params);
     },
     niceInputFocus() {
       this.niceInputFocused = true;
     },
-    niceInputBlur() {
+    niceInputBlur(ev: FocusEvent) {
       this.niceInputFocused = false;
+      ev.stopPropagation();
     },
     clearContent(ev: MouseEvent) {
       const reParams: ReturnParamsEntity = {

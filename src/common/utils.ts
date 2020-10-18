@@ -29,3 +29,5 @@ export const isClient = () =>
   );
 
 export const { keys } = Object;
+
+export const getStyle = (el: any) => window.getComputedStyle(el);

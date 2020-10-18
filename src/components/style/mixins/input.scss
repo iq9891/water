@@ -5,14 +5,22 @@
 @mixin placeholder($color: $placeholder-color) {
   &::-webkit-input-placeholder {
     color: $color;
+    font-size: $input-font-size;
   }
 
   &::-moz-placeholder {
     color: $color;
+    font-size: $input-font-size;
+    opacity: 1;
   }
 
-  &::-ms-input-placeholder {
+  &::placeholder {
     color: $color;
+    font-size: $input-font-size;
+  }
+
+  &:placeholder-shown {
+    text-overflow: ellipsis;
   }
 }
 

@@ -341,3 +341,8 @@ $input-limit-font-size: $font-size-sm !default;
 $password-duration: $animation-duration-slow !default;
 $password-icon-color: rgba(0, 0, 0, 0.45) !default;
 $password-icon-color-hover: rgba(0, 0, 0, 0.85) !default;
+
+// textarea
+$textarea-min-height-lg: $input-size-lg !default;
+$textarea-min-height-base: $input-size-base !default;
+$textarea-min-height-sm: $input-size-sm !default;

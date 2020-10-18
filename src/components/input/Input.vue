@@ -25,12 +25,17 @@
         :model-value="modelValue"
         :max-length="maxLength"
         :autocomplete="autocomplete"
-        @change="changeValue"
+        :value-wait="valueWait"
+        :tag="tag"
+        :auto-size="autoSize"
+        :rows="rows"
+        :resize="resize"
+        @on-change="changeValue"
         @focus="niceInputFocus"
         @blur="niceInputBlur"
       />
       <both-sides-render
-        v-if="clear && !disabled"
+        v-if="modelValue && clear && !disabled"
         type="clear"
         :class-name="{
           'w-input-clear-hidden': !modelValue || disabled,
@@ -41,9 +46,9 @@
         @clear="clearContent"
       />
       <both-sides-render
-        v-if="showWordLimit"
+        v-if="showCount && maxLength"
         type="limit"
-        :show-word-limit="showWordLimit"
+        :show-count="showCount"
         :instance="instance"
         :direction="direction"
       />
@@ -58,12 +63,17 @@
         :model-value="modelValue"
         :max-length="maxLength"
         :autocomplete="autocomplete"
-        @change="changeValue"
+        :value-wait="valueWait"
+        :tag="tag"
+        :auto-size="autoSize"
+        :rows="rows"
+        :resize="resize"
+        @on-change="changeValue"
         @focus="niceInputFocus"
         @blur="niceInputBlur"
       />
       <both-sides-render
-        v-if="isSuffix || clear"
+        v-if="isSuffix || (modelValue && clear)"
         type="clear"
         :class-name="{
           'w-input-clear-more': isSuffix,
@@ -75,9 +85,9 @@
         @clear="clearContent"
       />
       <both-sides-render
-        v-if="showWordLimit"
+        v-if="showCount && maxLength"
         type="limit"
-        :show-word-limit="showWordLimit"
+        :show-count="showCount"
         :instance="instance"
         :direction="direction"
       />
@@ -99,12 +109,17 @@
           :model-value="modelValue"
           :max-length="maxLength"
           :autocomplete="autocomplete"
-          @change="changeValue"
+          :value-wait="valueWait"
+          :tag="tag"
+          :auto-size="autoSize"
+          :rows="rows"
+          :resize="resize"
+          @on-change="changeValue"
           @focus="niceInputFocus"
           @blur="niceInputBlur"
         />
         <both-sides-render
-          v-if="clear && !disabled"
+          v-if="modelValue && clear && !disabled"
           type="clear"
           :clear="clear"
           :class-name="{
@@ -115,9 +130,9 @@
           @clear="clearContent"
         />
         <both-sides-render
-          v-if="showWordLimit"
+          v-if="showCount && maxLength"
           type="limit"
-          :show-word-limit="showWordLimit"
+          :show-count="showCount"
           :instance="instance"
           :direction="direction"
         />
@@ -132,12 +147,17 @@
           :model-value="modelValue"
           :max-length="maxLength"
           :autocomplete="autocomplete"
-          @change="changeValue"
+          :value-wait="valueWait"
+          :tag="tag"
+          :auto-size="autoSize"
+          :rows="rows"
+          :resize="resize"
+          @on-change="changeValue"
           @focus="niceInputFocus"
           @blur="niceInputBlur"
         />
         <both-sides-render
-          v-if="clear && !disabled"
+          v-if="modelValue && clear && !disabled"
           type="clear"
           :class-name="{
             'w-input-clear-more': isSuffix,
@@ -149,9 +169,9 @@
           @clear="clearContent"
         />
         <both-sides-render
-          v-if="showWordLimit && !isAddonBefore"
+          v-if="showCount && maxLength && !isAddonBefore"
           type="limit"
-          :show-word-limit="showWordLimit"
+          :show-count="showCount"
           :instance="instance"
           :direction="direction"
         />
@@ -171,7 +191,10 @@
       :direction="direction"
     />
   </div>
-  <div v-else-if="!isMoreMode && (clear || showWordLimit)" :class="niceClass">
+  <div
+    v-else-if="!isMoreMode && (clear || (showCount && maxLength))"
+    :class="niceClass"
+  >
     <Inp
       :type="type"
       :disabled="disabled"
@@ -181,12 +204,17 @@
       :model-value="modelValue"
       :max-length="maxLength"
       :autocomplete="autocomplete"
-      @change="changeValue"
+      :value-wait="valueWait"
+      :tag="tag"
+      :auto-size="autoSize"
+      :rows="rows"
+      :resize="resize"
+      @on-change="changeValue"
       @focus="niceInputFocus"
       @blur="niceInputBlur"
     />
     <both-sides-render
-      v-if="clear && !disabled"
+      v-if="modelValue && clear && !disabled"
       type="clear"
       :clear="clear"
       :class-name="{
@@ -197,9 +225,9 @@
       @clear="clearContent"
     />
     <both-sides-render
-      v-if="showWordLimit"
+      v-if="showCount && maxLength"
       type="limit"
-      :show-word-limit="showWordLimit"
+      :show-count="showCount"
       :instance="instance"
       :direction="direction"
     />
@@ -214,10 +242,15 @@
     :model-value="modelValue"
     :max-length="maxLength"
     :autocomplete="autocomplete"
+    :value-wait="valueWait"
+    :tag="tag"
+    :auto-size="autoSize"
+    :rows="rows"
+    :resize="resize"
     :class-name="{
       'w-input-borderless': !border,
     }"
-    @change="changeValue"
+    @on-change="changeValue"
     @focus="niceInputFocus"
     @blur="niceInputBlur"
   />

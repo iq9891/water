@@ -221,4 +221,13 @@ export default [
     component: () =>
       import(/* webpackChunkName: "password" */ '../views/Password.vue'),
   },
+  {
+    path: '/textarea',
+    name: 'Textarea',
+    meta: {
+      name: '多行文本',
+    },
+    component: () =>
+      import(/* webpackChunkName: "textarea" */ '../views/Textarea.vue'),
+  },
 ];

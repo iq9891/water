@@ -13,8 +13,7 @@
     :autocomplete="autocomplete"
     :readonly="readonly"
     :max-length="maxLength"
-    @change="passWordChange"
-    @clear="passWordClear"
+    @on-change="passWordChange"
   >
     <template #suffix>
       <eye-two-tone

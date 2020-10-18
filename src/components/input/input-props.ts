@@ -1,6 +1,10 @@
 /** @format */
 
-import { sizeValidator, directionValidator } from '../../common/validator';
+import validator, {
+  sizeValidator,
+  directionValidator,
+  textAreaResizeValidator,
+} from '../../common/validator';
 
 export default {
   modelValue: {
@@ -12,9 +16,22 @@ export default {
     type: Number,
     default: 0,
   },
+  rows: {
+    type: Number,
+    default: 2,
+  },
+  autoSize: {
+    type: [Boolean, Object], // { minRows: 2, maxRows: 6 }
+    default: false,
+  },
   placeholder: {
     type: String,
     default: '',
+  },
+  resize: {
+    type: String,
+    default: '',
+    validator: textAreaResizeValidator,
   },
   autocomplete: {
     type: String,
@@ -36,7 +53,7 @@ export default {
   },
   disabled: Boolean,
   readonly: Boolean,
-  showWordLimit: Boolean,
+  showCount: Boolean,
   border: {
     type: Boolean,
     default: true,
@@ -46,7 +63,7 @@ export default {
     type: [Object, Array, String],
     default: '',
   },
-  change: {
+  onChange: {
     type: Function,
     default: () => {},
   },

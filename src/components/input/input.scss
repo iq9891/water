@@ -45,7 +45,8 @@
 
     display: inline-flex;
 
-    & > input.w-input {
+    & > input.w-input,
+    & > textarea.w-input {
       border: none;
       padding: 0;
       height: auto;
@@ -148,7 +149,8 @@
     border-collapse: separate;
     border-spacing: 0;
 
-    & > input.w-input {
+    & > input.w-input,
+    & > textarea.w-input {
       border-radius: 0;
       width: 100%;
       margin-bottom: 0;
