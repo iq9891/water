@@ -5,9 +5,9 @@
 @import '../config.scss';
 
 @mixin active($color: $outline-color) {
-  border-color: $color !important;
+  border-color: $color;
   border-right-width: $border-width-base !important;
   outline: 0;
   box-shadow: $outline-offset $outline-blur-size $outline-width
-    color-palette($color, 1) !important;
+    color-palette($color, 1);
 }

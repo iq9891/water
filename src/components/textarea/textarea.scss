@@ -5,20 +5,26 @@
 .w-textarea {
   &-nice {
     padding: 0;
-    border: none;
+    // border: none;
     height: auto;
 
     & > textarea.w-textarea {
       min-height: $textarea-min-height-base;
-      border: 1px solid $input-border;
       padding: $padding-xxs $padding-sm;
     }
 
     & .w-input-clear {
       padding: 0;
       position: absolute;
-      right: $padding-sm;
       top: ($textarea-min-height-base - $font-size-sm) / 2;
+
+      &-ltr {
+        right: $padding-xxs;
+      }
+
+      &-rtl {
+        left: $padding-xxs;
+      }
     }
 
     & .w-input-limit {
@@ -30,15 +36,6 @@
     &-borderless {
       & > textarea.w-textarea {
         border: none;
-      }
-    }
-
-    &-focused {
-      border: none;
-      box-shadow: none;
-
-      & > textarea.w-textarea {
-        @include active();
       }
     }
   }
