@@ -8,8 +8,8 @@
     输入框改变内容的时候添加防抖, 新增 valueWait 最大延迟描述，单位毫秒
     新增 border 属性 只支持独立模式不带前缀后缀
     新增 direction 属性支持 ltr
-    change emit 修改成 onChange 因为 input修改v-model失去焦点意外触发 change emit 所以修改成 onChange
-    change 属性修改为 onChange
+    change emit 修改成 on-change 因为 input修改v-model失去焦点意外触发 change emit 所以修改成 onChange
+    change 属性修改为 on-change
   </pre> -->
   <w-space type="vertical">
     <w-space>

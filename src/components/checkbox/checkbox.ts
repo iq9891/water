@@ -147,8 +147,8 @@ export default {
       } else {
         self.$emit('update:checked', !self.checked);
         self.$emit('update:modelValue', self.label);
-        (self.change as Function)(reParams);
-        self.$emit('change', reParams);
+        (self.onChange as Function)(reParams);
+        self.$emit('on-change', reParams);
       }
     },
   },

@@ -118,7 +118,7 @@ export default {
       };
 
       self.change(params);
-      self.$emit('change', params);
+      self.$emit('on-change', params);
     },
   },
   directives: {

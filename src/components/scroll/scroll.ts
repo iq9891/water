@@ -82,11 +82,11 @@ export default {
         };
       },
     },
-    scroll: {
+    onScroll: {
       type: Function,
       default: () => {},
     },
-    pulling: {
+    onPulling: {
       type: Function,
       default: () => {},
     },
@@ -260,8 +260,8 @@ export default {
         ) {
           self.isPulling = true;
           pullParams.eventType = 'pulling';
-          self.pulling(pullParams);
-          self.$emit('pulling', pullParams);
+          self.onPulling(pullParams);
+          self.$emit('on-pulling', pullParams);
         }
 
         // 上拉加载更多
@@ -273,13 +273,13 @@ export default {
         ) {
           self.isPulling = true;
           pullParams.eventType = 'pulling';
-          self.pulling(pullParams);
-          self.$emit('pulling', pullParams);
+          self.onPulling(pullParams);
+          self.$emit('on-pulling', pullParams);
         }
 
         if (self.scrollDir) {
-          self.scroll(pullParams);
-          self.$emit('scroll', pullParams);
+          self.onScroll(pullParams);
+          self.$emit('on-scroll', pullParams);
         }
       }
     },

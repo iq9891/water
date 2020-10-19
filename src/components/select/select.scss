@@ -42,18 +42,18 @@
     &-search {
       border: none;
       width: 100%;
-      line-height: $select-size-base;
-      height: $select-size-base;
+      line-height: $select-size-base - 2;
+      height: $select-size-base - 2;
       padding: 0;
 
       &-small {
-        line-height: $select-size-sm;
-        height: $select-size-sm;
+        line-height: $select-size-sm - 2;
+        height: $select-size-sm - 2;
       }
 
       &-large {
-        line-height: $select-size-lg;
-        height: $select-size-lg;
+        line-height: $select-size-lg - 2;
+        height: $select-size-lg - 2;
       }
 
       @include focus();

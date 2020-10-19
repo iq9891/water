@@ -18,7 +18,7 @@ export default {
     default: 'outline',
     validator: buttonStyleValidator,
   },
-  before: {
+  onBefore: {
     type: Function,
     default() {
       return new Promise((resolve) => {
@@ -26,7 +26,7 @@ export default {
       });
     },
   },
-  change: {
+  onChange: {
     type: Function,
     default: () => {},
   },

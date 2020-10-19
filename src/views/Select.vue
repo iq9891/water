@@ -12,7 +12,7 @@
     新增 autoClearSearchValue 属性，自动清除搜索框内容
     新增 clear 属性，单选时候，清除选中内容，新增 @clear 回调
     新增 arrow 属性，控制右边 下拉小箭头显示
-    新增 contentRender 属性，自定义 option 每项内容
+    新增 onContentRender 属性，自定义 option 每项内容
     新增 selectPoperWidth, selectPoperHeight 属性 控制 poper 弹框的宽度高度
     新增 maxTagCount 属性 最多显示几个
     去掉 emptyText 属性，新增 empty slot 自定义空状态
@@ -21,6 +21,13 @@
     diy slot 更名为 dropdown slot
     新增 area slot 替换自定义 select 操作内容
     去掉 prefix 和 suffix 属性
+    before 属性替换为 on-before
+    blur 属性替换为 on-blur
+    blur emit 替换为 on-blur
+    focus 属性替换为 on-focus
+    focus emit 替换为 on-focus
+    新增 on-clear 属性
+    新增 on-clear emit
   </pre> -->
   <w-space type="vertical">
     <w-space type="vertical">

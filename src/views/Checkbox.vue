@@ -9,9 +9,11 @@
     4. 新增按钮类型 type ， 支持 填充按钮，边框按钮，边框多选
     5. 支持大小，按钮及边框多选
     6. 可自定义文字
-    7. change 方法返回的参数调整
+    7. onChange 方法返回的参数调整
     8. 组合支持属性配置直接使用 options
     9. 可单独使用
+    change 属性替换为 on-change
+    change emit 方法 替换为 on-change
   </pre>
   <w-space type="vertical">
     <w-space>

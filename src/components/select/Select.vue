@@ -7,8 +7,6 @@
     class="test"
     :class="selectClass"
     @click="selectClick($event)"
-    @focus="selectFocus"
-    @blur="selectBlur"
   >
     <template v-if="$slots.area">
       <slot
@@ -85,6 +83,8 @@
             @keyup.down="searchKeyDown"
             @keyup.up="searchKeyUp"
             @keyup.delete="fieldDelete($event)"
+            @blur="inputBlur($event)"
+            @focus="inputFocus($event)"
           />
           <pre ref="pre" class="w-select-more-pre">{{ fieldValue }}</pre>
         </div>
@@ -103,6 +103,8 @@
           @keydown.enter="searchEnter($event)"
           @keyup.down="searchKeyDown"
           @keyup.up="searchKeyUp"
+          @blur="inputBlur($event)"
+          @focus="inputFocus($event)"
         />
       </div>
       <span v-if="showArrow && !loading" :class="arrowClass">
@@ -144,10 +146,10 @@
           :loading="optItem[fieldNames.loading]"
           :disabled="optItem[fieldNames.disabled]"
           :new="!!optItem.new"
-          :content-render="optItem.contentRender"
           :hover="optIdx === optHoverIndex"
-          :change="optionChange"
-          :before="before"
+          :on-content-render="optItem.contentRender"
+          :on-change="optionChange"
+          :on-before="onBefore"
         ></w-option>
         <slot v-if="$slots.dropdown" name="dropdown"></slot>
       </w-scroll>

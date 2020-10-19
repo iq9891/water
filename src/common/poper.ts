@@ -33,7 +33,7 @@ export const poperProps = {
   },
   ...poperBaseProps,
   zIndex: Number,
-  before: {
+  onBefore: {
     type: Function,
     default() {
       return new Promise((resolve) => {
@@ -44,15 +44,15 @@ export const poperProps = {
     },
   },
   getContainer: Function,
-  change: {
+  onChange: {
     type: Function,
     default: () => {},
   },
-  focus: {
+  onFocus: {
     type: Function,
     default: () => {},
   },
-  blur: {
+  onBlur: {
     type: Function,
     default: () => {},
   },

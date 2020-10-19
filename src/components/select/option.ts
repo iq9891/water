@@ -47,12 +47,12 @@ export default {
       type: Object,
       default: (): FieldNamesEntity => fieldNamesDefault,
     },
-    change: {
+    onChange: {
       type: Function,
       default: () => {},
     },
-    contentRender: Function,
-    before: {
+    onContentRender: Function,
+    onBefore: {
       type: Function,
       default() {
         return new Promise((resolve) => {
@@ -105,7 +105,7 @@ export default {
     checkOption(ev: MouseEvent) {
       const self = this as any;
       if (!self.disabled) {
-        self.before().then(() => {
+        self.onBefore().then(() => {
           const { label, value, loading, disabled } = self.fieldNames;
           const reParams: ReturnParamsEntity = {
             ev,
@@ -116,7 +116,7 @@ export default {
             active: self.isActive,
             new: self.new,
           };
-          self.change(reParams);
+          self.onChange(reParams);
           ev.stopPropagation();
         });
       }

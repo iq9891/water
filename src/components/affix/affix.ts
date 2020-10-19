@@ -47,7 +47,7 @@ export default {
         return validator(typeList, value);
       },
     },
-    change: {
+    onChange: {
       type: Function,
       default: () => {},
     },
@@ -125,8 +125,8 @@ export default {
         scrollStatus: isStatic,
       };
 
-      self.change(changeEmit);
-      self.$emit('change', changeEmit);
+      self.onChange(changeEmit);
+      self.$emit('on-change', changeEmit);
 
       return changeEmit;
     },

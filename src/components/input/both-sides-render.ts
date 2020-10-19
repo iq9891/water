@@ -41,7 +41,7 @@ const bothSidesRender = defineComponent({
       default: 'ltr',
     },
   },
-  emits: ['clear'],
+  emits: ['on-clear'],
   render() {
     let content: string = '';
     let clearNode: string | VNode = '';
@@ -67,7 +67,7 @@ const bothSidesRender = defineComponent({
           this.className,
         ],
         onClick: (ev: MouseEvent) => {
-          this.$emit('clear', ev);
+          this.$emit('on-clear', ev);
         },
       });
     }

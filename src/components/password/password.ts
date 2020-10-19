@@ -54,7 +54,7 @@ const PasswordOptions: ComponentOptions = {
       type: [Object, Array, String],
       default: '',
     },
-    change: {
+    onChange: {
       type: Function,
       default: () => {},
     },
@@ -76,7 +76,7 @@ const PasswordOptions: ComponentOptions = {
     },
     passWordChange(params: ReturnParamsEntity) {
       this.$emit('update:modelValue', params.value);
-      this.change(params);
+      this.onChange(params);
     },
     changeType() {
       if (!this.disabled) {

@@ -6,7 +6,9 @@
     1. 取消 animate 动画参数，去掉动画改变内容的效果
     2. 修改样式，统一样式变量
     3. 持续按住，不断改变
-    4. change 方法返回的参数修改，返回 新旧两值
+    4. on-change 方法返回的参数修改，返回 新旧两值
+    change 属性替换为 on-change
+    change emit 方法 替换为 on-change
   </pre> -->
   <w-space type="vertical">
     <w-space>

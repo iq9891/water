@@ -6,6 +6,10 @@
     1. 新增 pulled 属性
     2. 加载更多不在获取 ref 调用组件内置发方法，而是用 pulled 控制是否拉取完成，当拉取完成 设置 pulled 为 true 组件自动处理
     3. 修复向下修改更多，再触发向上加载更多，向上加载更多完成没处理，导致的向下加载更多无效的问题， 修改 openPull 属性和使用，从之前的 Boolean 变成 String
+    pulling 属性替换为 onPulling
+    pulling emit 方法 替换为 on-pulling
+    scroll 属性替换为 onScroll
+    scroll emit 方法 替换为 on-scroll
   </pre>
   <w-space type="vertical">
     <WScroll
@@ -13,7 +17,7 @@
       class="demo-scroll-h"
       type="horizontal"
       open-pull="next"
-      :pulling="pulling2"
+      :on-pulling="pulling2"
       :edge-is-prevent-default="false"
       :pulled="pulled2"
     >
@@ -29,7 +33,7 @@
       class="demo-scroll"
       open-pull="next"
       :loading="loading1"
-      :pulling="pulling1"
+      :on-pulling="pulling1"
       :edge-is-prevent-default="false"
       :pulled="pulled1"
     >

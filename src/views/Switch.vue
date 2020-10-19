@@ -4,6 +4,10 @@
   <pre style="color: red">
     重构组件
     1. 默认 icon 替换 @ant-design/icons-vue 中的 LoadingOutlined
+    change 属性替换为 onChange
+    change emit 方法 替换为 on-change
+    before 属性替换为 onBefore
+    before emit 方法 替换为 on-before
   </pre>
   <w-space type="vertical">
     <w-switch />
@@ -33,8 +37,8 @@
     <w-switch
       v-model="swtichStatus"
       :loading="swtichLoading"
-      :before="beforeFn"
-      @change="changeFn"
+      :on-before="beforeFn"
+      @on-change="changeFn"
     />
   </w-space>
 </template>

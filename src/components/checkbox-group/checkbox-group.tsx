@@ -78,8 +78,8 @@ const CheckboxGroup = defineComponent({
         item.status = !checkStatus;
 
         self.$emit('update:modelValue', modelValue);
-        (self.change as Function)(item);
-        self.$emit('change', item);
+        (self.onChange as Function)(item);
+        self.$emit('on-change', item);
       }
     },
   },

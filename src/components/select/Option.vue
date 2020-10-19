@@ -7,13 +7,16 @@
     @click="checkOption($event)"
   >
     <template v-if="isSingleMode">
-      <option-content-render v-if="contentRender" :render="contentRender" />
+      <option-content-render v-if="onContentRender" :render="onContentRender" />
       <slot v-else-if="$slots.default"></slot>
       <template v-else>{{ value }}</template>
     </template>
     <template v-else>
       <div class="w-option-content" :title="value">
-        <option-content-render v-if="contentRender" :render="contentRender" />
+        <option-content-render
+          v-if="onContentRender"
+          :render="onContentRender"
+        />
         <slot v-else-if="$slots.default"></slot>
         <template v-else>{{ value }}</template>
       </div>

@@ -31,8 +31,8 @@
         :rows="rows"
         :resize="resize"
         @on-change="changeValue"
-        @focus="niceInputFocus"
-        @blur="niceInputBlur"
+        @on-focus="niceInputFocus"
+        @on-blur="niceInputBlur"
       />
       <both-sides-render
         v-if="modelValue && clear && !disabled"
@@ -43,7 +43,7 @@
         :clear="clear"
         :instance="instance"
         :direction="direction"
-        @clear="clearContent"
+        @on-clear="clearContent"
       />
       <both-sides-render
         v-if="showCount && maxLength"
@@ -69,8 +69,8 @@
         :rows="rows"
         :resize="resize"
         @on-change="changeValue"
-        @focus="niceInputFocus"
-        @blur="niceInputBlur"
+        @on-focus="niceInputFocus"
+        @on-blur="niceInputBlur"
       />
       <both-sides-render
         v-if="isSuffix || (modelValue && clear)"
@@ -82,7 +82,7 @@
         :clear="clear"
         :instance="instance"
         :direction="direction"
-        @clear="clearContent"
+        @on-clear="clearContent"
       />
       <both-sides-render
         v-if="showCount && maxLength"
@@ -115,8 +115,8 @@
           :rows="rows"
           :resize="resize"
           @on-change="changeValue"
-          @focus="niceInputFocus"
-          @blur="niceInputBlur"
+          @on-focus="niceInputFocus"
+          @on-blur="niceInputBlur"
         />
         <both-sides-render
           v-if="modelValue && clear && !disabled"
@@ -127,7 +127,7 @@
           }"
           :instance="instance"
           :direction="direction"
-          @clear="clearContent"
+          @on-clear="clearContent"
         />
         <both-sides-render
           v-if="showCount && maxLength"
@@ -153,8 +153,8 @@
           :rows="rows"
           :resize="resize"
           @on-change="changeValue"
-          @focus="niceInputFocus"
-          @blur="niceInputBlur"
+          @on-focus="niceInputFocus"
+          @on-blur="niceInputBlur"
         />
         <both-sides-render
           v-if="modelValue && clear && !disabled"
@@ -166,7 +166,7 @@
           :clear="clear"
           :instance="instance"
           :direction="direction"
-          @clear="clearContent"
+          @on-clear="clearContent"
         />
         <both-sides-render
           v-if="showCount && maxLength && !isAddonBefore"
@@ -210,8 +210,8 @@
       :rows="rows"
       :resize="resize"
       @on-change="changeValue"
-      @focus="niceInputFocus"
-      @blur="niceInputBlur"
+      @on-focus="niceInputFocus"
+      @on-blur="niceInputBlur"
     />
     <both-sides-render
       v-if="modelValue && clear && !disabled"
@@ -222,7 +222,7 @@
       }"
       :instance="instance"
       :direction="direction"
-      @clear="clearContent"
+      @on-clear="clearContent"
     />
     <both-sides-render
       v-if="showCount && maxLength"
@@ -251,8 +251,8 @@
       'w-input-borderless': !border,
     }"
     @on-change="changeValue"
-    @focus="niceInputFocus"
-    @blur="niceInputBlur"
+    @on-focus="niceInputFocus"
+    @on-blur="niceInputBlur"
   />
 </template>
 

@@ -115,6 +115,10 @@ export default {
     selectPoperWidth: Number,
     selectPoperHeight: Number,
     maxTagCount: Number,
+    onClear: {
+      type: Function,
+      default: () => {},
+    },
   },
   computed: {
     ...poperComputed,
@@ -343,14 +347,18 @@ export default {
     },
     selectClick() {
       const self = this as any;
-      self.changePoperStatus(true);
-      self.focused = true;
-      self.$nextTick(() => {
-        if (self.search && self.$refs.singleSearch) {
-          self.$refs.singleSearch.focus();
-        }
-        self.getFocus();
-      });
+      if (!self.disabled) {
+        self.onBefore().then(() => {
+          self.changePoperStatus(true);
+          self.focused = true;
+          self.$nextTick(() => {
+            if (self.search && self.$refs.singleSearch) {
+              self.$refs.singleSearch.focus();
+            }
+            self.getFocus();
+          });
+        });
+      }
     },
     resetHoverIndex() {
       const self = this as any;
@@ -559,8 +567,8 @@ export default {
           );
 
       self.$emit('update:modelValue', newParams.modelValue);
-      self.change(newParams);
-      self.$emit('change', newParams);
+      self.onChange(newParams);
+      self.$emit('on-change', newParams);
 
       if (self.isSingleMode) {
         self.changePoperStatus();
@@ -576,7 +584,8 @@ export default {
       const self = this as any;
       const modelValue = self.isSingleMode ? '' : [];
       self.$emit('update:modelValue', modelValue);
-      self.$emit('clear');
+      self.$emit('on-clear');
+      self.onClear();
       self.handleNameTags();
       self.setPoperPosition();
       ev.stopPropagation();
@@ -594,6 +603,16 @@ export default {
       const self = this as any;
       self.changePoperStatus();
       self.focused = false;
+    },
+    inputBlur(ev: MouseEvent) {
+      const self = this as any;
+      self.onBlur(ev);
+      self.$emit('on-blur', ev);
+    },
+    inputFocus(ev: MouseEvent) {
+      const self = this as any;
+      self.onFocus(ev);
+      self.$emit('on-focus', ev);
     },
   },
 };

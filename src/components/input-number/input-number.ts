@@ -71,7 +71,7 @@ export default {
       type: Function,
       default: (input: string) => input,
     },
-    change: {
+    onChange: {
       type: Function,
       default: () => {},
     },
@@ -189,8 +189,8 @@ export default {
         oldValue,
       };
 
-      (self.change as Function)(reParams);
-      self.$emit('change', reParams);
+      (self.onChange as Function)(reParams);
+      self.$emit('on-change', reParams);
       self.$emit('update:modelValue', self.number);
 
       return reParams;

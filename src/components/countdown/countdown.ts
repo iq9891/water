@@ -41,7 +41,7 @@ export default {
       type: [Object, Array, String],
       default: '',
     },
-    finish: {
+    onFinish: {
       type: Function,
       default: () => {},
     },
@@ -88,8 +88,8 @@ export default {
 
         const timestamp = getTime(self.modelValue, self.format);
         if (timestamp < Date.now()) {
-          self.$emit('finish');
-          self.finish();
+          self.$emit('on-finish');
+          self.onFinish();
         }
       }
     },

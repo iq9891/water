@@ -86,7 +86,7 @@ export default {
       const thumbHalf = self.thumb[self.bar.offset] / 2;
       const thumbPositionPercentage =
         ((offset - thumbHalf) * 100) / self.elem[self.bar.offset];
-      self.$emit('click-track', {
+      self.$emit('on-click-track', {
         ev,
         thumbPositionPercentage,
         scrollScale: 0,
@@ -102,7 +102,7 @@ export default {
 
       on(document, 'mouseup', self.mouseUpDocumentHandler);
       document.onselectstart = () => false;
-      self.$emit('start-drag', self.isCursorDown);
+      self.$emit('on-start-drag', self.isCursorDown);
     },
     mouseMoveDocumentHandler(ev: any): void {
       const self = this as any;
@@ -120,7 +120,7 @@ export default {
       const thumbPositionPercentage =
         ((scrollScale - thumbClickPosition) * 100) / self.elem[self.bar.offset];
 
-      self.$emit('move', {
+      self.$emit('on-move', {
         ev,
         thumbPositionPercentage,
         scrollScale,
@@ -137,7 +137,7 @@ export default {
       off(document, 'mouseup', self.mouseUpDocumentHandler);
 
       document.onselectstart = null;
-      self.$emit('end-drag', self.isCursorDown);
+      self.$emit('on-end-drag', self.isCursorDown);
     },
   },
 };

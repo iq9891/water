@@ -23,8 +23,8 @@ export interface RadioProps {
   border: Boolean;
   loading: Boolean;
   className: TypeClass;
-  before: Function;
-  change: Function;
+  onBefore: Function;
+  onChange: Function;
 }
 
 export default {
@@ -159,7 +159,7 @@ export default {
           value: self.label,
           label: self.label,
         };
-        (self.before as Function)(reParams).then(() => {
+        (self.onBefore as Function)(reParams).then(() => {
           self.emitChange(ev);
         });
       }
@@ -179,8 +179,8 @@ export default {
       } else {
         self.$emit('update:checked', !self.checked);
         self.$emit('update:modelValue', self.label);
-        (self.change as Function)(reParams);
-        self.$emit('change', reParams);
+        (self.onChange as Function)(reParams);
+        self.$emit('on-change', reParams);
       }
     },
   },

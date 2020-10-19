@@ -18,7 +18,7 @@ export default {
     default: 'outline',
     validator: buttonStyleValidator,
   },
-  change: {
+  onChange: {
     type: Function,
     default: () => {},
   },

@@ -29,11 +29,11 @@ export default {
       validator: directionValidator,
     },
     className: [String, Object],
-    change: {
+    onChange: {
       type: Function,
       default: () => {},
     },
-    hover: {
+    onHover: {
       type: Function,
       default: () => {},
     },
@@ -143,14 +143,14 @@ export default {
     },
     emitHover(value: number) {
       const self = this as any;
-      self.hover(value);
-      self.$emit('hover', value);
+      self.onHover(value);
+      self.$emit('on-hover', value);
     },
     emitClick(value: number) {
       const self = this as any;
-      self.change(value);
+      self.onChange(value);
       self.$emit('update:modelValue', value);
-      self.$emit('change', value);
+      self.$emit('on-change', value);
     },
   },
   components: {

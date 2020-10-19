@@ -10,6 +10,8 @@
     5. 去掉 prefix 属性
     6. 去掉 color 属性
     7. 新增 ltr 支持
+    change 属性替换为 onChange
+    change emit 方法 替换为 on-change
   </pre> -->
   <w-space type="vertical">
     <button @click="allowClear = !allowClear">

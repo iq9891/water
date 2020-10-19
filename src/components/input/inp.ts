@@ -26,7 +26,7 @@ const inpOptions = defineComponent({
       },
     },
   },
-  emits: ['update:modelValue', 'on-change'],
+  emits: ['update:modelValue', 'on-change', 'on-focus', 'on-blur'],
   data() {
     return {
       isPinYinWriting: false,
@@ -120,6 +120,12 @@ const inpOptions = defineComponent({
         this.inputOriginStyle,
       );
     },
+    inputFocus(ev: FocusEvent) {
+      this.$emit('on-focus', ev);
+    },
+    inputBlur(ev: FocusEvent) {
+      this.$emit('on-blur', ev);
+    },
   },
   render() {
     const {
@@ -144,6 +150,8 @@ const inpOptions = defineComponent({
       onCompositionupdate: this.handleCompositionUpdate,
       onCompositionend: this.handleCompositionEnd,
       onInput: this.inputHandle.bind(this as any),
+      onFocus: this.inputFocus,
+      onBlur: this.inputBlur,
     };
 
     if (maxLength > 0) {

@@ -35,8 +35,10 @@ export default {
   methods: {
     poperInit() {
       const self = this as any;
-      self.setWidth();
-      setPostion(this, self.targetNode, self.disabled);
+      self.$nextTick(() => {
+        self.setWidth();
+        setPostion(this, self.targetNode, self.disabled);
+      });
     },
     setWidth() {
       const self = this as any;

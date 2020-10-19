@@ -4,9 +4,11 @@
   <!-- <pre style="color: red">
     重构组件
     1. 新增 ltr 支持
+    finish emit 方法 替换为 on-finish
+    finish 属性替换为 on-finish
   </pre> -->
   <w-space type="vertical">
-    <w-countdown v-model="value1" :direction="direction" :finish="finish" />
+    <w-countdown v-model="value1" :direction="direction" :on-finish="finish" />
     <w-countdown
       v-model="value1"
       :direction="direction"

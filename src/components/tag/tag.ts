@@ -122,7 +122,7 @@ export default {
         ev,
       };
       self.close(params);
-      self.$emit('close', params);
+      self.$emit('on-close', params);
     },
   },
 };

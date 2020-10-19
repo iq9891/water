@@ -1,7 +1,7 @@
 /** @format */
 
 import { LoadingOutlined } from '@ant-design/icons-vue';
-import validator, { sizeNoLargeValidator } from '../../common/validator';
+import { sizeNoLargeValidator } from '../../common/validator';
 
 export interface ReturnParamsEntity {
   ev: MouseEvent;
@@ -24,8 +24,15 @@ export default {
       defalut: '',
       validator: sizeNoLargeValidator,
     },
-    before: Function,
-    change: {
+    onBefore: {
+      type: Function,
+      default() {
+        return new Promise((resolve) => {
+          resolve();
+        });
+      },
+    },
+    onChange: {
       type: Function,
       default: () => {},
     },
@@ -86,18 +93,12 @@ export default {
       const self = this as any;
 
       if (!self.disabled && !self.loading) {
-        const reParams: ReturnParamsEntity = {
-          ev,
-        };
         const newSatus = !self.status;
-        if (self.before) {
-          self.before().then(() => {
-            self.afterChange(ev, newSatus);
-          });
-        } else {
+
+        self.onBefore().then(() => {
           self.afterChange(ev, newSatus);
-        }
-        self.change(reParams);
+        });
+
         if (self.stop) {
           ev.stopPropagation();
         }
@@ -111,12 +112,12 @@ export default {
       self.setStatus(newSatus);
       reParams.status = self.status;
       self.$emit('update:modelValue', newSatus);
-      self.$emit('change', reParams);
+      self.$emit('on-change', reParams);
+      self.onChange(reParams);
     },
-    setStatus(value: boolean): boolean {
+    setStatus(value: boolean) {
       const self = this as any;
       self.status = value;
-      return self.status;
     },
   },
 

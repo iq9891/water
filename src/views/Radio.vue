@@ -8,6 +8,9 @@
     3. 新增 checked 属性直接控制选中状态
     4. 新增按钮类型，边框按钮
     5. 可单独使用
+    before 属性替换为 on-before
+    change 属性替换为 on-change
+    change emit 方法 替换为 on-change
   </pre>
   <w-space type="vertical">
     <w-space>

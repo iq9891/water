@@ -5,6 +5,8 @@
     重构组件
     1. 修复组件获取宽度不包含内边距问题
     2. 修复左右晃动问题
+    change 属性替换为 on-change
+    change emit 方法 替换为 on-change
   </pre>
   <w-affix>
     <div style="padding: 0 10px;background: rgba(255,0,0,0.4)">

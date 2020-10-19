@@ -13,10 +13,10 @@
       :is-vertical="isVertical"
       :move="move"
       :size="size"
-      @move="barMove"
-      @click-track="barClickTrack"
-      @start-drag="dragChange"
-      @end-drag="dragChange"
+      @on-move="barMove"
+      @on-click-track="barClickTrack"
+      @on-start-drag="dragChange"
+      @on-end-drag="dragChange"
     ></WBar>
   </div>
 </template>
