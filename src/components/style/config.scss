@@ -346,3 +346,12 @@ $password-icon-color-hover: rgba(0, 0, 0, 0.85) !default;
 $textarea-min-height-lg: $input-size-lg !default;
 $textarea-min-height-base: $input-size-base !default;
 $textarea-min-height-sm: $input-size-sm !default;
+
+// password
+$search-duration: $animation-duration-slow !default;
+$search-icon-color: rgba(0, 0, 0, 0.45) !default;
+$search-disabled-color: $input-disabled-color !default;
+$search-icon-color-inverse: $white !default;
+$search-button-only-padding-base: $button-only-padding-base !default;
+$search-button-only-padding-sm: ($button-only-padding-sm + 1px) !default;
+$search-button-only-padding-lg: ($button-only-padding-lg + 1px) !default;

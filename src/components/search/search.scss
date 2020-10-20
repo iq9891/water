@@ -1,0 +1,70 @@
+/** @format */
+
+@import '../style/config.scss';
+@import '../button/button.scss';
+
+.w-search {
+  &-only .w-input-addon-after {
+    padding: 0;
+    border: none;
+  }
+
+  & .w-input-nice-after-ltr {
+    border-right: none;
+  }
+
+  & .w-input-nice-after-rtl {
+    border-left: none;
+  }
+
+  &-icon {
+    color: $search-icon-color;
+    cursor: pointer;
+    transition: all $search-duration;
+
+    &-disabled {
+      color: $search-disabled-color;
+      cursor: not-allowed;
+    }
+  }
+
+  &-btn {
+    &-ltr {
+      border-radius: 0 $border-radius-base $border-radius-base 0;
+      padding: $search-button-only-padding-base $padding-md;
+
+      &.w-btn-disabled {
+        color: $search-disabled-color;
+        cursor: not-allowed;
+      }
+    }
+
+    &-rtl {
+      border-radius: $border-radius-base 0 0 $border-radius-base;
+      padding: $search-button-only-padding-base $padding-md;
+
+      &.w-btn-disabled {
+        color: $search-disabled-color;
+      }
+    }
+
+    &-small {
+      padding: $search-button-only-padding-sm $padding-md;
+    }
+
+    &-large {
+      padding: $search-button-only-padding-lg $padding-md;
+    }
+
+    &-icon {
+      @extend .w-search-icon;
+
+      color: $search-icon-color-inverse;
+
+      &-disabled {
+        color: $search-disabled-color;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

@@ -230,4 +230,13 @@ export default [
     component: () =>
       import(/* webpackChunkName: "textarea" */ '../views/Textarea.vue'),
   },
+  {
+    path: '/search',
+    name: 'Search',
+    meta: {
+      name: '搜索框',
+    },
+    component: () =>
+      import(/* webpackChunkName: "search" */ '../views/Search.vue'),
+  },
 ];

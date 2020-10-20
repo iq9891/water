@@ -17,10 +17,12 @@ export default {
     default: 0,
   },
   rows: {
+    // textarea
     type: Number,
     default: 2,
   },
   autoSize: {
+    // textarea
     type: [Boolean, Object], // { minRows: 2, maxRows: 6 }
     default: false,
   },
@@ -29,6 +31,7 @@ export default {
     default: '',
   },
   resize: {
+    // textarea
     type: String,
     default: '',
     validator: textAreaResizeValidator,
@@ -64,6 +67,10 @@ export default {
     default: '',
   },
   onChange: {
+    type: Function,
+    default: () => {},
+  },
+  onEnter: {
     type: Function,
     default: () => {},
   },

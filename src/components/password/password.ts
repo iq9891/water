@@ -6,7 +6,7 @@ import { sizeValidator, directionValidator } from '../../common/validator';
 import WInput from '../input/Input.vue';
 import { ReturnParamsEntity } from '../input/inp';
 
-const PasswordOptions: ComponentOptions = {
+const passwordOptions: ComponentOptions = {
   components: {
     WInput,
     EyeInvisibleOutlined,
@@ -44,7 +44,7 @@ const PasswordOptions: ComponentOptions = {
     },
     disabled: Boolean,
     readonly: Boolean,
-    showWordLimit: Boolean,
+    showCount: Boolean,
     border: {
       type: Boolean,
       default: true,
@@ -86,4 +86,4 @@ const PasswordOptions: ComponentOptions = {
   },
 };
 
-export default PasswordOptions;
+export default passwordOptions;

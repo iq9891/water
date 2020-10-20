@@ -33,6 +33,7 @@
         @on-change="changeValue"
         @on-focus="niceInputFocus"
         @on-blur="niceInputBlur"
+        @on-enter="enterChange"
       />
       <both-sides-render
         v-if="modelValue && clear && !disabled"
@@ -71,6 +72,7 @@
         @on-change="changeValue"
         @on-focus="niceInputFocus"
         @on-blur="niceInputBlur"
+        @on-enter="enterChange"
       />
       <both-sides-render
         v-if="isSuffix || (modelValue && clear)"
@@ -117,6 +119,7 @@
           @on-change="changeValue"
           @on-focus="niceInputFocus"
           @on-blur="niceInputBlur"
+          @on-enter="enterChange"
         />
         <both-sides-render
           v-if="modelValue && clear && !disabled"
@@ -155,6 +158,7 @@
           @on-change="changeValue"
           @on-focus="niceInputFocus"
           @on-blur="niceInputBlur"
+          @on-enter="enterChange"
         />
         <both-sides-render
           v-if="modelValue && clear && !disabled"
@@ -212,6 +216,7 @@
       @on-change="changeValue"
       @on-focus="niceInputFocus"
       @on-blur="niceInputBlur"
+      @on-enter="enterChange"
     />
     <both-sides-render
       v-if="modelValue && clear && !disabled"
@@ -253,6 +258,7 @@
     @on-change="changeValue"
     @on-focus="niceInputFocus"
     @on-blur="niceInputBlur"
+    @on-enter="enterChange"
   />
 </template>
 

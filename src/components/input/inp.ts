@@ -26,7 +26,7 @@ const inpOptions = defineComponent({
       },
     },
   },
-  emits: ['update:modelValue', 'on-change', 'on-focus', 'on-blur'],
+  emits: ['update:modelValue', 'on-change', 'on-focus', 'on-blur', 'on-enter'],
   data() {
     return {
       isPinYinWriting: false,
@@ -126,6 +126,20 @@ const inpOptions = defineComponent({
     inputBlur(ev: FocusEvent) {
       this.$emit('on-blur', ev);
     },
+    inputEnter(ev: KeyboardEvent) {
+      if (ev.target !== ev.currentTarget) return;
+      if (ev.keyCode !== 13) return;
+      if (ev.key !== 'Enter' || ev.code !== 'Enter') return;
+      const target = ev.target as any;
+      const { value } = target;
+      const reParams: ReturnParamsEntity = {
+        ev,
+        value,
+        maxLength: this.maxLength,
+        eventType: 'enter',
+      };
+      this.$emit('on-enter', reParams);
+    },
   },
   render() {
     const {
@@ -152,6 +166,7 @@ const inpOptions = defineComponent({
       onInput: this.inputHandle.bind(this as any),
       onFocus: this.inputFocus,
       onBlur: this.inputBlur,
+      onKeyUp: this.inputEnter,
     };
 
     if (maxLength > 0) {
