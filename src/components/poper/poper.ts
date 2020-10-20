@@ -1,10 +1,10 @@
 /** @format */
 
-import { placementValidator } from '../../common/validator';
+import { ComponentOptions } from 'vue';
 import { poperComputed, poperBaseProps } from '../../common/poper';
 import { setPostion, getRefByTarget } from './utils';
 
-export default {
+const poperOptions: ComponentOptions = {
   props: {
     ...poperBaseProps,
     modelValue: Boolean,
@@ -24,34 +24,30 @@ export default {
   computed: {
     ...poperComputed,
     targetNode() {
-      const self = this as any;
-      return getRefByTarget(self, '$parent', self.target);
+      return getRefByTarget(this, '$parent', this.target);
     },
   },
   mounted() {
-    const self = this as any;
-    self.poperInit();
+    this.poperInit();
   },
   methods: {
     poperInit() {
-      const self = this as any;
-      self.$nextTick(() => {
-        self.setWidth();
-        setPostion(this, self.targetNode, self.disabled);
+      this.$nextTick(() => {
+        this.setWidth();
+        setPostion(this, this.targetNode, this.disabled);
       });
     },
     setWidth() {
-      const self = this as any;
-      const { popElem } = self.$refs;
+      const { popElem } = this.$refs;
       if (popElem) {
-        popElem.style.width = `${self.width || self.targetNode.offsetWidth}px`;
+        popElem.style.width = `${this.width || this.targetNode.offsetWidth}px`;
 
-        if (self.height) {
-          popElem.style.height = `${self.height}px`;
+        if (this.height) {
+          popElem.style.height = `${this.height}px`;
         }
 
-        if (self.zIndex && self.zIndex > 0) {
-          popElem.style.zIndex = self.zIndex;
+        if (this.zIndex && this.zIndex > 0) {
+          popElem.style.zIndex = this.zIndex;
         }
       }
     },
@@ -60,3 +56,5 @@ export default {
     modelValue: 'poperInit',
   },
 };
+
+export default poperOptions;

@@ -1,13 +1,13 @@
 /** @format */
 
-import { h, provide, defineComponent } from 'vue';
+import { provide, ComponentOptions } from 'vue';
 import { getProps, getSlots } from '../../common/vue-utils';
 import { isArray } from '../../common/typeof';
 import validator from '../../common/validator';
 import WRadio from '../radio/Radio.vue';
 import radioProps from './radio-props';
 
-const RadioGroup = defineComponent({
+const radioGroupOptions: ComponentOptions = {
   components: {
     WRadio,
   },
@@ -54,10 +54,9 @@ const RadioGroup = defineComponent({
   },
   methods: {
     emitChange(reParams: any) {
-      const self = this as any;
-      self.$emit('update:modelValue', reParams.label);
-      (self.onChange as Function)(reParams);
-      self.$emit('on-change', reParams);
+      this.$emit('update:modelValue', reParams.label);
+      this.onChange(reParams);
+      this.$emit('on-change', reParams);
     },
   },
   render() {
@@ -87,14 +86,8 @@ const RadioGroup = defineComponent({
       ));
     }
 
-    return h(
-      'div',
-      {
-        class: className,
-      },
-      children,
-    );
+    return <div class={className}>{children}</div>;
   },
-});
+};
 
-export default RadioGroup;
+export default radioGroupOptions;

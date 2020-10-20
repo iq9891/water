@@ -8,6 +8,7 @@
     3. slot 外面必须 template 的具名，不然不起作用
     4. size 属性不再支持自定义字号
     5. loading 的 icon 替换 @ant-design/icons-vue 中的 LoadingOutlined
+    去掉 tag 属性
   </pre>
   <w-space type="vertical">
     <button @click="changeLoading">改变</button>

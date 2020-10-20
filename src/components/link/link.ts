@@ -1,12 +1,12 @@
 /** @format */
 
-import { h, VNode } from 'vue';
+import { h, VNode, ComponentOptions } from 'vue';
 import { RouterLink } from 'vue-router';
 import { LoadingOutlined } from '@ant-design/icons-vue';
 import { isUndefined } from '../../common/typeof';
+import { getSlots, getProps } from '../../common/vue-utils';
 
 export interface LinkProps {
-  tag?: String;
   href?: String;
   target?: String;
   size?: String;
@@ -16,12 +16,8 @@ export interface LinkProps {
   disabled?: Boolean;
 }
 
-export default {
+const linkOptions: ComponentOptions = {
   props: {
-    tag: {
-      type: String,
-      default: 'a',
-    },
     href: String,
     target: String,
     size: String,
@@ -30,13 +26,13 @@ export default {
     disabled: Boolean,
   },
   render(): VNode | null {
-    const { to, href, target, loading, $slots, disabled, size } = this as any;
+    const { to, href, target, loading, disabled, size } = getProps(this);
 
-    if (!$slots.default) {
+    const children = getSlots(this);
+
+    if (!children.length) {
       return null;
     }
-
-    const children = $slots.default();
 
     const noHref = isUndefined(href);
 
@@ -51,7 +47,7 @@ export default {
     }
 
     const iconNode = (): VNode | null => {
-      const iconChild = $slots.icon ? $slots.icon() : null;
+      const iconChild = getSlots(this, { name: 'icon' });
       const newIconChild = loading ? h(LoadingOutlined) : iconChild;
 
       return newIconChild
@@ -112,3 +108,5 @@ export default {
     return disabled ? normalNode : linkNode;
   },
 };
+
+export default linkOptions;

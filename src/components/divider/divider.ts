@@ -1,6 +1,6 @@
 /** @format */
 
-import { h, SetupContext } from 'vue';
+import { h, SetupContext, ComponentOptions } from 'vue';
 import { TypeStyle } from '../../common/types';
 import validator, {
   sizeValidator,
@@ -16,7 +16,7 @@ export interface DividerProps {
   style?: TypeStyle;
 }
 
-export default {
+const dividerOptions: ComponentOptions = {
   props: {
     size: {
       type: String,
@@ -76,3 +76,5 @@ export default {
       );
   },
 };
+
+export default dividerOptions;

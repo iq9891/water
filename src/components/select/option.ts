@@ -1,8 +1,8 @@
 /** @format */
 
-import { inject } from 'vue';
+import { nextTick, inject, ComponentOptions } from 'vue';
 import { CheckOutlined } from '@ant-design/icons-vue';
-import { isFunction } from '../../common/typeof';
+import { getSlots } from '../../common/vue-utils';
 import {
   ReturnParamsEntity,
   FieldNamesEntity,
@@ -11,7 +11,7 @@ import {
 import { selectMode, TYPE_ENUM } from './option-utils';
 import optionContentRender from './option-content-render';
 
-export default {
+const optionOptions: ComponentOptions = {
   components: {
     CheckOutlined,
     optionContentRender,
@@ -56,7 +56,7 @@ export default {
       type: Function,
       default() {
         return new Promise((resolve) => {
-          (this as any).$nextTick(() => {
+          nextTick(() => {
             resolve();
           });
         });
@@ -65,61 +65,57 @@ export default {
   },
   computed: {
     isSingleMode() {
-      const self = this as any;
-      const mode = self.selectMode || self.mode;
+      const mode = this.selectMode || this.mode;
       return mode === TYPE_ENUM.single;
     },
     isActive() {
-      const self = this as any;
-      const hasDefaultSlot = isFunction(self.$slots.default);
-      const slotValue = hasDefaultSlot ? self.$slots.default() : [];
+      const slotValue = getSlots(this);
       return (
-        self.active ||
-        self.checkActive(self.selectModelValue, self.label) ||
+        this.active ||
+        this.checkActive(this.selectModelValue, this.label) ||
         (slotValue.length > 0 &&
-          self.checkActive(self.selectModelValue, slotValue[0].children))
+          this.checkActive(this.selectModelValue, slotValue[0].children))
       );
     },
     optionClass() {
-      const self = this as any;
       return [
         'w-option',
         {
-          'w-option-more': !self.isSingleMode,
-          'w-option-on': self.isActive,
-          'w-option-loading': self.loading,
-          'w-option-disabled': self.disabled,
-          'w-option-hover': self.hover,
+          'w-option-more': !this.isSingleMode,
+          'w-option-on': this.isActive,
+          'w-option-loading': this.loading,
+          'w-option-disabled': this.disabled,
+          'w-option-hover': this.hover,
         },
       ];
     },
   },
   methods: {
     checkActive(modelValue: string | any[], labelValue: string) {
-      const self = this as any;
-      if (self.isSingleMode) {
+      if (this.isSingleMode) {
         return modelValue === labelValue;
       }
       return modelValue.indexOf(labelValue) > -1;
     },
     checkOption(ev: MouseEvent) {
-      const self = this as any;
-      if (!self.disabled) {
-        self.onBefore().then(() => {
-          const { label, value, loading, disabled } = self.fieldNames;
+      if (!this.disabled) {
+        this.onBefore().then(() => {
+          const { label, value, loading, disabled } = this.fieldNames;
           const reParams: ReturnParamsEntity = {
             ev,
-            [label]: self.label,
-            [value]: self.value,
-            [loading]: self.loading,
-            [disabled]: !!self.disabled,
-            active: self.isActive,
-            new: self.new,
+            [label]: this.label,
+            [value]: this.value,
+            [loading]: this.loading,
+            [disabled]: !!this.disabled,
+            active: this.isActive,
+            new: this.new,
           };
-          self.onChange(reParams);
+          this.onChange(reParams);
           ev.stopPropagation();
         });
       }
     },
   },
 };
+
+export default optionOptions;

@@ -1,6 +1,6 @@
 /** @format */
 
-import { defineComponent, h } from 'vue';
+import { ComponentOptions } from 'vue';
 import {
   CheckCircleFilled,
   ExclamationCircleFilled,
@@ -8,7 +8,6 @@ import {
 } from '@ant-design/icons-vue';
 import validator from '../../common/validator';
 import { JsonProps, getProps } from '../../common/vue-utils';
-
 import { statusList, STATUS_ENUM } from './helper';
 
 const iconTypeList = () => {
@@ -25,7 +24,7 @@ const iconTypeList = () => {
   return list;
 };
 
-export default defineComponent({
+const progressIconOptions: ComponentOptions = {
   props: {
     type: {
       type: String,
@@ -37,9 +36,11 @@ export default defineComponent({
     },
   },
   render() {
-    const { type } = getProps(this as any);
+    const { type } = getProps(this);
     const iconList = iconTypeList();
 
     return type !== '' ? iconList[type] : null;
   },
-});
+};
+
+export default progressIconOptions;

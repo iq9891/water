@@ -1,6 +1,6 @@
 /** @format */
 
-import { h, nextTick } from 'vue';
+import { h, nextTick, ComponentOptions } from 'vue';
 import dayjs, { Dayjs } from 'dayjs';
 import { directionValidator } from '../../common/validator';
 import { TIME_VALUE_FORMAT_DEFAULT } from '../../common/time';
@@ -8,7 +8,7 @@ import { isString, isNumber } from '../../common/typeof';
 import WStatistic from '../statistic/Statistic.vue';
 import { getTime, REFRESH_INTERVAL, formatCountdown, MS_FORMAT } from './utils';
 
-export default {
+const countDownOptions: ComponentOptions = {
   components: {
     WStatistic,
   },
@@ -47,58 +47,52 @@ export default {
     },
   },
   mounted() {
-    const self = this as any;
-    self.initContent();
+    this.initContent();
 
     nextTick(() => {
-      self.syncTimer();
+      this.syncTimer();
     });
   },
   beforeUnmount() {
-    const self = this as any;
-    self.stopTimer();
+    this.stopTimer();
   },
   methods: {
     syncTimer() {
-      const self = this as any;
-      const timestamp = getTime(self.modelValue, self.format);
+      const timestamp = getTime(this.modelValue, this.format);
 
       if (timestamp >= Date.now()) {
-        self.startTimer();
+        this.startTimer();
       } else {
-        self.stopTimer();
+        this.stopTimer();
       }
     },
     startTimer() {
-      const self = this as any;
-      if (self.countdownId) return;
-      self.countdownId = window.setInterval(() => {
-        const { value, isGo } = formatCountdown(self.modelValue, self.format);
+      if (this.countdownId) return;
+      this.countdownId = window.setInterval(() => {
+        const { value, isGo } = formatCountdown(this.modelValue, this.format);
         if (!isGo) {
-          self.stopTimer();
+          this.stopTimer();
         }
-        self.content = value;
+        this.content = value;
       }, REFRESH_INTERVAL);
     },
     stopTimer() {
-      const self = this as any;
-      if (self.countdownId) {
-        clearInterval(self.countdownId);
-        self.countdownId = undefined;
+      if (this.countdownId) {
+        clearInterval(this.countdownId);
+        this.countdownId = undefined;
 
-        const timestamp = getTime(self.modelValue, self.format);
+        const timestamp = getTime(this.modelValue, this.format);
         if (timestamp < Date.now()) {
-          self.$emit('on-finish');
-          self.onFinish();
+          this.$emit('on-finish');
+          this.onFinish();
         }
       }
     },
     formatCountdown() {
-      const self = this as any;
-      const { value, isGo } = formatCountdown(self.modelValue, self.format);
+      const { value, isGo } = formatCountdown(this.modelValue, this.format);
 
       if (!isGo) {
-        self.stopTimer();
+        this.stopTimer();
       }
 
       return h(
@@ -110,14 +104,15 @@ export default {
       );
     },
     initContent() {
-      const self = this as any;
       const valueMoment =
-        isString(self.modelValue) || isNumber(self.modelValue)
-          ? dayjs(self.modelValue, MS_FORMAT)
-          : (self.modelValue as Dayjs);
-      self.content = valueMoment.isValid()
+        isString(this.modelValue) || isNumber(this.modelValue)
+          ? dayjs(this.modelValue, MS_FORMAT)
+          : (this.modelValue as Dayjs);
+      this.content = valueMoment.isValid()
         ? valueMoment.format(MS_FORMAT)
-        : dayjs(self.modelValue).format(MS_FORMAT);
+        : dayjs(this.modelValue).format(MS_FORMAT);
     },
   },
 };
+
+export default countDownOptions;

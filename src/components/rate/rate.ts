@@ -1,16 +1,15 @@
 /** @format */
 
+import { ComponentOptions } from 'vue';
 import { StarFilled } from '@ant-design/icons-vue';
 import { directionValidator } from '../../common/validator';
 
-export default {
-  name: 'WRate',
+const rateOptions: ComponentOptions = {
   data() {
-    const self = this as any;
     return {
       now: -1,
       index: -1,
-      clickedIndex: self.modelValue, // 点击的索引
+      clickedIndex: -1, // 点击的索引
     };
   },
   props: {
@@ -39,8 +38,8 @@ export default {
     },
   },
   mounted() {
-    const self = this as any;
-    self.init(self.modelValue);
+    this.init(this.modelValue);
+    this.setClickedIndex(this.modelValue);
   },
   methods: {
     isHalf(cNow: number, now: number) {
@@ -50,8 +49,7 @@ export default {
       return cNow < index;
     },
     isBig(cNow: number) {
-      const self = this as any;
-      return cNow === Math.ceil(self.now) - 1;
+      return cNow === Math.ceil(this.now) - 1;
     },
     init(value = -1) {
       this.setIndex(value);
@@ -68,89 +66,76 @@ export default {
       this.rightClick(index);
     },
     leftOver(index: number) {
-      const self = this as any;
-      if (!self.disabled) {
+      if (!this.disabled) {
         const value = index + 0.5;
-        self.setIndex(value);
-        self.updateIndexList();
-        self.emitHover(value);
+        this.setIndex(value);
+        this.updateIndexList();
+        this.emitHover(value);
       }
     },
     changeIndex(index: number, step: number) {
-      const self = this as any;
-      const isClear = self.clickedIndex - step === index && self.allowClear;
-      self.now = isClear ? -1 : index + step;
+      const isClear = this.clickedIndex - step === index && this.allowClear;
+      this.now = isClear ? -1 : index + step;
 
       return isClear ? 0 : index + step;
     },
     leftOut(index: number) {
-      const self = this as any;
-      if (!self.disabled) {
-        self.setIndex(index);
-        self.updateIndexList();
+      if (!this.disabled) {
+        this.setIndex(index);
+        this.updateIndexList();
       }
     },
     leftClick(index: number) {
-      const self = this as any;
-      if (!self.disabled) {
-        const value = self.changeIndex(index, 0.5);
-        self.setClickedIndex(value);
-        self.emitClick(value);
+      if (!this.disabled) {
+        const value = this.changeIndex(index, 0.5);
+        this.setClickedIndex(value);
+        this.emitClick(value);
       }
     },
     rightOver(index: number) {
-      const self = this as any;
-      if (!self.disabled) {
+      if (!this.disabled) {
         const value = index + 1;
-        self.setIndex(value);
-        self.updateIndexList();
-        self.emitHover(value);
+        this.setIndex(value);
+        this.updateIndexList();
+        this.emitHover(value);
       }
     },
     rightClick(index: number) {
-      const self = this as any;
-      if (!self.disabled) {
-        const value = self.changeIndex(index, 1);
+      if (!this.disabled) {
+        const value = this.changeIndex(index, 1);
 
-        self.setClickedIndex(value);
-        self.emitClick(value);
+        this.setClickedIndex(value);
+        this.emitClick(value);
       }
     },
     out() {
-      const self = this as any;
-      if (!self.disabled) {
-        self.setIndex(self.clickedIndex);
-        self.updateIndexList();
+      if (!this.disabled) {
+        this.setIndex(this.clickedIndex);
+        this.updateIndexList();
       }
     },
     setClickedIndex(value: number) {
-      const self = this as any;
       // 更新点击之后的索引
-      self.clickedIndex = value;
+      this.clickedIndex = value;
     },
     setIndex(value = -1) {
-      const self = this as any;
-      self.now = value;
+      this.now = value;
     },
     getIndex() {
-      const self = this as any;
-      return String(self.now).split('.');
+      return String(this.now).split('.');
     },
     updateIndexList() {
-      const self = this as any;
-      const index = self.getIndex();
-      self.index = index.length > 0 ? index[0] : -1;
+      const index = this.getIndex();
+      this.index = index.length > 0 ? index[0] : -1;
     },
     emitHover(value: number) {
-      const self = this as any;
-      self.onHover(value);
-      self.$emit('on-hover', value);
+      this.onHover(value);
+      this.$emit('on-hover', value);
     },
     emitClick(value: number) {
-      const self = this as any;
-      self.onChange(value);
-      self.$emit('update:modelValue', value);
-      self.$emit('on-change', value);
+      this.onChange(value);
+      this.$emit('update:modelValue', value);
+      this.$emit('on-change', value);
     },
   },
   components: {
@@ -159,9 +144,10 @@ export default {
   watch: {
     modelValue(val: number, oldValue: number) {
       if (val !== oldValue) {
-        const self = this as any;
-        self.init(val);
+        this.init(val);
       }
     },
   },
 };
+
+export default rateOptions;

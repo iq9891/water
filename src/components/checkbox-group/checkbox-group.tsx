@@ -1,6 +1,6 @@
 /** @format */
 
-import { h, provide, defineComponent } from 'vue';
+import { provide, ComponentOptions } from 'vue';
 import { getProps, getSlots } from '../../common/vue-utils';
 import { isArray } from '../../common/typeof';
 import { hasOwn } from '../../common/utils';
@@ -14,7 +14,7 @@ interface ReturnParamsEntity {
   status?: boolean;
 }
 
-const CheckboxGroup = defineComponent({
+const CheckboxGroup: ComponentOptions = {
   components: {
     WCheckbox,
   },
@@ -61,12 +61,11 @@ const CheckboxGroup = defineComponent({
   },
   methods: {
     emitChange(item: any) {
-      const self = this as any;
-      const { disabled, value, label } = self.fieldNames;
+      const { disabled, value, label } = this.fieldNames;
 
-      if (!self.disabled && !item[disabled]) {
+      if (!this.disabled && !item[disabled]) {
         const checkValue: any = hasOwn(item, label) ? item[label] : item[value];
-        const modelValue = self.modelValue as string[];
+        const modelValue = this.modelValue as string[];
         const valueIndex: number = modelValue.indexOf(checkValue);
         const checkStatus: boolean = valueIndex > -1;
 
@@ -77,9 +76,9 @@ const CheckboxGroup = defineComponent({
         }
         item.status = !checkStatus;
 
-        self.$emit('update:modelValue', modelValue);
-        (self.onChange as Function)(item);
-        self.$emit('on-change', item);
+        this.$emit('update:modelValue', modelValue);
+        this.onChange(item);
+        this.$emit('on-change', item);
       }
     },
   },
@@ -110,14 +109,8 @@ const CheckboxGroup = defineComponent({
       ));
     }
 
-    return h(
-      'div',
-      {
-        class: className,
-      },
-      children,
-    );
+    return <div class={className}>{children}</div>;
   },
-});
+};
 
 export default CheckboxGroup;

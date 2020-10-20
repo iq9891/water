@@ -1,13 +1,13 @@
 /** @format */
 
-import { CSSProperties } from 'vue';
+import { CSSProperties, ComponentOptions } from 'vue';
 import validator, {
   sizeNoLargeValidator,
   directionValidator,
 } from '../../common/validator';
 import { getColorStyle } from '../../common/color';
 
-export default {
+const badgeOptions: ComponentOptions = {
   props: {
     modelValue: {
       type: Number,
@@ -67,111 +67,94 @@ export default {
   },
   computed: {
     isRtl() {
-      const self = this as any;
-      return self.direction === 'rtl';
+      return this.direction === 'rtl';
     },
     dotColor() {
-      const self = this as any;
-      return getColorStyle(self.color, 'background');
+      return getColorStyle(this.color, 'background');
     },
     showStatus(): boolean {
-      const self = this as any;
-      return self.status !== '' || !!self.color;
+      return this.status !== '' || !!this.color;
     },
     slotDefault(): boolean {
-      const self = this as any;
-      return !!self.$slots.default;
+      return !!this.$slots.default;
     },
     slotCount(): boolean {
-      const self = this as any;
-      return !!self.$slots.count;
+      return !!this.$slots.count;
     },
     isNoOverflow() {
-      const self = this as any;
-      return (self.overflowCount as number) >= self.modelValue;
+      return (this.overflowCount as number) >= this.modelValue;
     },
     count() {
-      const self = this as any;
-      return self.isNoOverflow ? self.modelValue : `${self.overflowCount}+`;
+      return this.isNoOverflow ? this.modelValue : `${this.overflowCount}+`;
     },
     zeroCount(): boolean {
-      const self = this as any;
-      return self.count < 1;
+      return this.count < 1;
     },
     showCount(): boolean {
-      const self = this as any;
-      return !self.zeroCount || !!self.showZero;
+      return !this.zeroCount || !!this.showZero;
     },
     titleValue(): string | number {
-      const self = this as any;
-      return self.title || self.count;
+      return this.title || this.count;
     },
     supClass() {
-      const self = this as any;
       return [
-        `w-badge-sup${self.size ? `-${self.size}` : ''}`,
+        `w-badge-sup${this.size ? `-${this.size}` : ''}`,
         {
-          'w-badge-sup-small-more': !self.isNoOverflow && self.size === 'small',
-          'w-badge-sup-rtl': self.isRtl,
+          'w-badge-sup-small-more': !this.isNoOverflow && this.size === 'small',
+          'w-badge-sup-rtl': this.isRtl,
         },
       ];
     },
     customClass() {
-      const self = this as any;
       return [
         'w-badge-custom',
         {
-          'w-badge-custom-rtl': self.isRtl,
+          'w-badge-custom-rtl': this.isRtl,
         },
       ];
     },
     countClass() {
-      const self = this as any;
-      return [self.supClass, 'w-badge-count', self.className];
+      return [this.supClass, 'w-badge-count', this.className];
     },
     dotClass() {
-      const self = this as any;
       return [
         'w-badge-dot',
         {
-          'w-badge-dot-rtl': self.isRtl,
+          'w-badge-dot-rtl': this.isRtl,
         },
       ];
     },
     dotStatusClass() {
-      const self = this as any;
       return [
         'w-badge-status-dot',
         {
-          [`w-badge-status-${self.status}`]: !self.color,
+          [`w-badge-status-${this.status}`]: !this.color,
         },
       ];
     },
     textClass() {
-      const self = this as any;
       return [
         'w-badge-status-text',
         {
-          'w-badge-status-text-rtl': self.isRtl,
+          'w-badge-status-text-rtl': this.isRtl,
         },
       ];
     },
     styleWithOffset() {
-      const self = this as any;
       const style: CSSProperties = {};
-      const hasOffset = self.offset.length > 0;
+      const hasOffset = this.offset.length > 0;
 
       if (!hasOffset) {
         return null;
       }
 
-      const offset0 = parseInt(self.offset[0] as string, 10);
-      const left = self.isRtl ? `${-offset0}px` : `${offset0}px`;
-      const right = self.isRtl ? `${offset0}px` : `${-offset0}px`;
+      const offset0 = parseInt(this.offset[0] as string, 10);
+      const left = this.isRtl ? `${-offset0}px` : `${offset0}px`;
+      const right = this.isRtl ? `${offset0}px` : `${-offset0}px`;
 
-      style.marginTop = `${self.offset[self.offset.length > 1 ? 1 : 0]}px`;
+      style.marginTop = `${this.offset[this.offset.length > 1 ? 1 : 0]}px`;
 
-      if (self.direction === 'rtl') {
+      if (this.direction === 'rtl') {
         return hasOffset
           ? {
               left,
@@ -180,7 +163,7 @@ export default {
           : {};
       }
 
-      return self.offset
+      return this.offset
         ? {
             right,
             ...style,
@@ -189,3 +172,5 @@ export default {
     },
   },
 };
+
+export default badgeOptions;

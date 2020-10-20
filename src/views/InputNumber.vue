@@ -9,6 +9,7 @@
     4. on-change 方法返回的参数修改，返回 新旧两值
     change 属性替换为 on-change
     change emit 方法 替换为 on-change
+    parser 替换 on-parser
   </pre> -->
   <w-space type="vertical">
     <w-space>
@@ -31,7 +32,7 @@
       <w-input-number
         v-model="formatterValue"
         :formatter="(val) => '$' + val"
-        :parser="(val) => String(val).replace(/\$s?/g, '')"
+        :on-parser="(val) => String(val).replace(/\$s?/g, '')"
         style="display: block; width: 200px;"
       />
       <w-input-number
@@ -39,7 +40,7 @@
         :min="0"
         :max="100"
         :formatter="(value) => `${value}%`"
-        :parser="(value) => String(value).replace('%', '')"
+        :on-parser="(value) => String(value).replace('%', '')"
       />
       <w-input-number v-model="readonlyValue" readonly />
       <w-input-number
@@ -97,7 +98,7 @@
         v-model="formatterValue"
         controls-position="left"
         :formatter="(val) => '$' + val"
-        :parser="(val) => String(val).replace(/\$s?/g, '')"
+        :on-parser="(val) => String(val).replace(/\$s?/g, '')"
         style="display: block; width: 200px;"
       />
       <w-input-number
@@ -106,7 +107,7 @@
         :min="0"
         :max="100"
         :formatter="(value) => `${value}%`"
-        :parser="(value) => String(value).replace('%', '')"
+        :on-parser="(value) => String(value).replace('%', '')"
       />
       <w-input-number
         v-model="readonlyValue"
@@ -169,7 +170,7 @@
         v-model="formatterValue"
         controls-position="around"
         :formatter="(val) => '$' + val"
-        :parser="(val) => String(val).replace(/\$s?/g, '')"
+        :on-parser="(val) => String(val).replace(/\$s?/g, '')"
         style="width: 200px;"
       />
       <w-input-number
@@ -178,7 +179,7 @@
         :min="0"
         :max="100"
         :formatter="(value) => `${value}%`"
-        :parser="(value) => String(value).replace('%', '')"
+        :on-parser="(value) => String(value).replace('%', '')"
       />
       <w-input-number
         v-model="readonlyValue"

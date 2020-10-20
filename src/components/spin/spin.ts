@@ -1,9 +1,13 @@
 /** @format */
 
+import { ComponentOptions } from 'vue';
 import { LoadingOutlined } from '@ant-design/icons-vue';
 import { sizeValidator } from '../../common/validator';
 
-export default {
+const spinOptions: ComponentOptions = {
+  components: {
+    LoadingOutlined,
+  },
   props: {
     modelValue: Boolean,
     tip: String,
@@ -15,41 +19,36 @@ export default {
   },
   computed: {
     spinClass() {
-      const self = this as any;
       return [
         'w-spin',
         {
-          'w-spin-active': self.modelValue,
+          'w-spin-active': this.modelValue,
         },
       ];
     },
     iconClass() {
-      const self = this as any;
       return [
-        `w-spin-icon${self.size ? `-${self.size}` : ''}`,
-        `w-spin-tip-icon${self.size ? `-${self.size}` : ''}`,
+        `w-spin-icon${this.size ? `-${this.size}` : ''}`,
+        `w-spin-tip-icon${this.size ? `-${this.size}` : ''}`,
         {
-          'w-spin-icon-only': !self.$slots.default,
+          'w-spin-icon-only': !this.$slots.default,
         },
       ];
     },
     bodyClass() {
-      const self = this as any;
       return [
         'w-spin-body',
         {
-          'w-spin-body-active': self.modelValue,
+          'w-spin-body-active': this.modelValue,
         },
       ];
     },
     tipClass() {
-      const self = this as any;
       return {
-        [`w-spin-tip-${self.size}`]: self.size,
+        [`w-spin-tip-${this.size}`]: this.size,
       };
     },
   },
-  components: {
-    LoadingOutlined,
-  },
 };
+
+export default spinOptions;

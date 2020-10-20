@@ -1,7 +1,9 @@
 /** @format */
 
+import { ComponentOptions } from 'vue';
 import { LoadingOutlined } from '@ant-design/icons-vue';
 import { TypeClass } from '../../common/types';
+import { getSlots } from '../../common/vue-utils';
 import validator, { sizeValidator } from '../../common/validator';
 
 export interface ButtonProps {
@@ -14,7 +16,7 @@ export interface ButtonProps {
   className?: TypeClass;
 }
 
-export default {
+const buttonOptions: ComponentOptions = {
   data() {
     return {
       preName: 'w-btn',
@@ -58,70 +60,64 @@ export default {
   },
   computed: {
     btnClass() {
-      const self = this as any;
       return [
-        `${self.preName}`,
+        `${this.preName}`,
         {
-          [`${self.preName}-${self.shape}`]: self.shape,
-          [`${self.preName}-${self.type}`]: self.type,
-          [`${self.preName}-${self.size}`]: self.size,
-          [`${self.preName}-ghost`]: self.ghost,
-          [`${self.preName}-loading`]: self.loading,
-          [`${self.preName}-disabled`]: self.disabled,
-          [`${self.preName}-click`]: self.clicked,
-          [`${self.preName}-only${self.size ? `-${self.size}` : ''}`]: !self
+          [`${this.preName}-${this.shape}`]: this.shape,
+          [`${this.preName}-${this.type}`]: this.type,
+          [`${this.preName}-${this.size}`]: this.size,
+          [`${this.preName}-ghost`]: this.ghost,
+          [`${this.preName}-loading`]: this.loading,
+          [`${this.preName}-disabled`]: this.disabled,
+          [`${this.preName}-click`]: this.clicked,
+          [`${this.preName}-only${this.size ? `-${this.size}` : ''}`]: !this
             .$slots.default,
         },
-        self.className,
+        this.className,
       ];
     },
     bodyClass() {
-      const self = this as any;
       return [
-        `${self.preName}-body`,
+        `${this.preName}-body`,
         {
-          [`${self.preName}-body-${self.size}`]: self.size,
+          [`${this.preName}-body-${this.size}`]: this.size,
         },
       ];
     },
     iconClass() {
-      const self = this as any;
       return [
         'w-btn-icon',
         {
-          'w-btn-icon-only': !self.$slots.default,
+          'w-btn-icon-only': !this.$slots.default,
         },
       ];
     },
     textClass() {
-      const self = this as any;
       return [
-        `${self.preName}-text`,
+        `${this.preName}-text`,
         {
-          [`${self.preName}-text-${self.size}`]: self.size,
-          [`${self.preName}-text-icon`]: self.loading || !!self.$slots.icon,
-          [`${self.preName}-primary-text`]: self.type === 'primary',
-          [`${self.preName}-text-icon-${self.size}`]: self.loading && self.size,
+          [`${this.preName}-text-${this.size}`]: this.size,
+          [`${this.preName}-text-icon`]: this.loading || !!this.$slots.icon,
+          [`${this.preName}-primary-text`]: this.type === 'primary',
+          [`${this.preName}-text-icon-${this.size}`]: this.loading && this.size,
         },
       ];
     },
   },
   methods: {
     clickFn(ev: AnimationEvent) {
-      const self = this as any;
-      self.clicked = !self.loading;
-      self.clickEvent = ev;
+      this.clicked = !this.loading;
+      this.clickEvent = ev;
     },
     removeClickName(ev: AnimationEvent) {
-      const self = this as any;
-      self.clicked = false;
+      this.clicked = false;
 
       const reParams = {
-        ev: self.clickEvent,
+        ev: this.clickEvent,
         animEvent: ev,
       };
 
-      self.clickEvent = null;
+      this.clickEvent = null;
 
       return reParams;
     },
@@ -133,13 +129,13 @@ export default {
       textClass,
       bodyClass,
       iconClass,
-      $slots,
       disabled,
       btnClass,
       clickFn,
       removeClickName,
       loading,
-    } = this as any;
+    } = this;
+
     const buttonProps: any = {
       ...$attrs,
       type: htmlType,
@@ -149,12 +145,13 @@ export default {
       onanimationend: removeClickName,
     };
     let loadingNode = loading ? <LoadingOutlined class={iconClass} /> : '';
+    const iconNode = getSlots(this, { name: 'icon' });
 
-    if (!loading && $slots.icon) {
-      loadingNode = <span class={iconClass}>{$slots.icon()}</span>;
+    if (!loading && iconNode) {
+      loadingNode = <span class={iconClass}>{iconNode}</span>;
     }
 
-    const slotDef = $slots.default ? $slots.default() : [];
+    const slotDef = getSlots(this);
 
     const children =
       slotDef.length > 1
@@ -181,3 +178,5 @@ export default {
     LoadingOutlined,
   },
 };
+
+export default buttonOptions;

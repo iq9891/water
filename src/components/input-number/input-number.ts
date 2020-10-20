@@ -1,5 +1,6 @@
 /** @format */
 
+import { ComponentOptions } from 'vue';
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons-vue';
 import validator, { sizeValidator } from '../../common/validator';
 import RepeatClick from '../../directives/repeat-click';
@@ -10,7 +11,7 @@ interface ReturnParamsEntity {
   oldValue: number | string;
 }
 
-export default {
+const inputNumberOptions: ComponentOptions = {
   data() {
     return {
       number: 0,
@@ -67,7 +68,7 @@ export default {
       type: Function,
       default: (num: number) => num,
     },
-    parser: {
+    onParser: {
       type: Function,
       default: (input: string) => input,
     },
@@ -78,166 +79,147 @@ export default {
   },
   computed: {
     inputNumberClass() {
-      const self = this as any;
       return [
         'w-input-number',
-        `w-input-number-${self.controlsPosition}`,
+        `w-input-number-${this.controlsPosition}`,
         {
-          'w-input-number-disabled': self.disabled,
-          [`w-input-number-${self.size}`]: self.size,
-          'w-input-number-focus': self.write,
+          'w-input-number-disabled': this.disabled,
+          [`w-input-number-${this.size}`]: this.size,
+          'w-input-number-focus': this.write,
         },
       ];
     },
     handleClass() {
-      const self = this as any;
       return [
         'w-input-number-handle',
-        `w-input-number-handle-${self.controlsPosition}`,
+        `w-input-number-handle-${this.controlsPosition}`,
       ];
     },
     numberUpClass() {
-      const self = this as any;
       return [
         'w-input-number-arrow',
         'w-input-number-arrow-up',
         {
-          'w-input-number-arrow-disabled': self.upDisabled,
+          'w-input-number-arrow-disabled': this.upDisabled,
         },
       ];
     },
     numberDownClass() {
-      const self = this as any;
       return [
         'w-input-number-arrow',
         'w-input-number-arrow-down',
         {
-          'w-input-number-arrow-disabled': self.downDisabled,
+          'w-input-number-arrow-disabled': this.downDisabled,
         },
       ];
     },
     aroundMinusClass() {
-      const self = this as any;
       return [
         'w-input-number-around-handle',
         'w-input-number-around-handle-minus',
         {
-          [`w-input-number-around-handle-${self.size}`]: self.size,
+          [`w-input-number-around-handle-${this.size}`]: this.size,
           'w-input-number-around-handle-disabled':
-            self.downDisabled || self.disabled,
+            this.downDisabled || this.disabled,
         },
       ];
     },
     aroundPlusClass() {
-      const self = this as any;
       return [
         'w-input-number-around-handle',
         'w-input-number-around-handle-plus',
         {
-          [`w-input-number-around-handle-${self.size}`]: self.size,
+          [`w-input-number-around-handle-${this.size}`]: this.size,
           'w-input-number-around-handle-disabled':
-            self.upDisabled || self.disabled,
+            this.upDisabled || this.disabled,
         },
       ];
     },
     inputClass() {
-      const self = this as any;
       return [
         'w-input-number-input',
-        `w-input-number-input-${self.controlsPosition}`,
+        `w-input-number-input-${this.controlsPosition}`,
         {
-          'w-input-number-input-disabled': self.disabled,
-          'w-input-number-input-readonly': self.readonly,
-          [`w-input-number-input-${self.size}`]: self.size,
+          'w-input-number-input-disabled': this.disabled,
+          'w-input-number-input-readonly': this.readonly,
+          [`w-input-number-input-${this.size}`]: this.size,
         },
       ];
     },
     upDisabled(): boolean {
-      const self = this as any;
-      return self.max <= self.originalNumber;
+      return this.max <= this.originalNumber;
     },
     downDisabled(): boolean {
-      const self = this as any;
-      return self.min >= self.originalNumber;
+      return this.min >= this.originalNumber;
     },
     isAround() {
-      const self = this as any;
-      return self.controlsPosition === 'around';
+      return this.controlsPosition === 'around';
     },
     count(): string {
-      const self = this as any;
-      return self.number.toString().replace('.', self.decimalSeparator);
+      return this.number.toString().replace('.', this.decimalSeparator);
     },
   },
   mounted() {
-    const self = this as any;
-    self.setNumber(self.modelValue);
+    this.setNumber(this.modelValue);
   },
   methods: {
     setNumber(val: number | string) {
-      const self = this as any;
-      self.number = formatWrapper(val, self.formatter, self.parser);
-      self.originalNumber = (self.parser as Function)(val);
+      this.number = formatWrapper(val, this.formatter, this.onParser);
+      this.originalNumber = this.onParser(val);
     },
     setValue(val: number | string): ReturnParamsEntity {
-      const self = this as any;
-      const oldValue = self.number;
-      self.setNumber(val);
+      const oldValue = this.number;
+      this.setNumber(val);
 
       const reParams: ReturnParamsEntity = {
-        value: self.number,
+        value: this.number,
         oldValue,
       };
 
-      (self.onChange as Function)(reParams);
-      self.$emit('on-change', reParams);
-      self.$emit('update:modelValue', self.number);
+      this.onChange(reParams);
+      this.$emit('on-change', reParams);
+      this.$emit('update:modelValue', this.number);
 
       return reParams;
     },
     changeValue(ev: MouseEvent) {
-      const self = this as any;
-      this.setValue((self.parser as Function)(getValueFromEvent(ev)));
+      this.setValue(this.onParser(getValueFromEvent(ev)));
     },
     focusFn() {
-      const self = this as any;
-      self.write = !self.readonly;
+      this.write = !this.readonly;
     },
     blurFn(ev: MouseEvent) {
-      const self = this as any;
-      let value = (self.parser as Function)(getValueFromEvent(ev));
-      if (value >= self.max) {
-        value = self.max;
-      } else if (value <= self.min) {
-        value = self.min;
+      let value = this.onParser(getValueFromEvent(ev));
+      if (value >= this.max) {
+        value = this.max;
+      } else if (value <= this.min) {
+        value = this.min;
       }
-      self.setValue(value);
-      self.write = false;
+      this.setValue(value);
+      this.write = false;
     },
     upNumber() {
-      const self = this as any;
-      if (!self.upDisabled && !self.disabled) {
-        self.setValue(
+      if (!this.upDisabled && !this.disabled) {
+        this.setValue(
           upStep(
-            self.originalNumber,
-            self.min,
-            self.max,
-            self.step,
-            self.precision,
+            this.originalNumber,
+            this.min,
+            this.max,
+            this.step,
+            this.precision,
           ),
         );
       }
     },
     downNumber() {
-      const self = this as any;
-      if (!self.downDisabled && !self.disabled) {
-        self.setValue(
+      if (!this.downDisabled && !this.disabled) {
+        this.setValue(
           downStep(
-            self.originalNumber,
-            self.min,
-            self.max,
-            self.step,
-            self.precision,
+            this.originalNumber,
+            this.min,
+            this.max,
+            this.step,
+            this.precision,
           ),
         );
       }
@@ -245,8 +227,7 @@ export default {
   },
   watch: {
     modelValue(value: number | string) {
-      const self = this as any;
-      self.setNumber(value);
+      this.setNumber(value);
     },
   },
   directives: {
@@ -257,3 +238,5 @@ export default {
     MinusOutlined,
   },
 };
+
+export default inputNumberOptions;

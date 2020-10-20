@@ -1,9 +1,10 @@
 /** @format */
 
-import { h, VNode, defineComponent, provide } from 'vue';
+import { h, VNode, ComponentOptions, provide } from 'vue';
 import { getSpacing } from './helper';
 import validator from '../../common/validator';
 import { TypeClass } from '../../common/types';
+import { getSlots } from '../../common/vue-utils';
 
 export interface RowProps {
   className?: TypeClass;
@@ -15,7 +16,7 @@ export interface RowProps {
   gutter?: String;
 }
 
-const Row = defineComponent({
+const rowOptions: ComponentOptions = {
   props: {
     className: {
       type: [Object, Array, String],
@@ -77,18 +78,16 @@ const Row = defineComponent({
   },
   computed: {
     classList(): object {
-      const self = this as any;
       return {
-        [`${this.preName}`]: !self.type || self.type === 'flex',
-        [`${this.preName}-${self.type}`]: self.type === 'float',
-        [`${this.preName}-${self.align}`]: !self.type && !!self.align,
-        [`${this.preName}-${self.justify}`]: !self.type && !!self.justify,
+        [`${this.preName}`]: !this.type || this.type === 'flex',
+        [`${this.preName}-${this.type}`]: this.type === 'float',
+        [`${this.preName}-${this.align}`]: !this.type && !!this.align,
+        [`${this.preName}-${this.justify}`]: !this.type && !!this.justify,
       };
     },
     rowStyle(): string {
-      const self = this as any;
-      const gapGutter = getSpacing(self.gutter);
-      const gapBasin = getSpacing(self.basin);
+      const gapGutter = getSpacing(this.gutter);
+      const gapBasin = getSpacing(this.basin);
       const gutter = gapGutter
         ? `margin-left: -${gapGutter};margin-right: -${gapGutter};`
         : '';
@@ -99,15 +98,13 @@ const Row = defineComponent({
     },
   },
   render(): VNode {
-    const self = this as any;
-    const { $slots } = self;
     const attrs = {
-      class: [this.classList, self.className],
+      class: [this.classList, this.className],
       style: this.rowStyle,
     };
 
-    return h(self.tag, attrs, $slots.default ? $slots.default() : '');
+    return h(this.tag, attrs, getSlots(this));
   },
-});
+};
 
-export default Row;
+export default rowOptions;

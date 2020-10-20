@@ -1,7 +1,8 @@
 /** @format */
 
-import { h, CSSProperties, VNode, Comment } from 'vue';
+import { h, CSSProperties, VNode, Comment, ComponentOptions } from 'vue';
 import { isNumber, isString } from '../../common/typeof';
+import { getSlots } from '../../common/vue-utils';
 import validator, {
   sizeValidator,
   typeValidator,
@@ -13,8 +14,7 @@ export interface SpaceProps {
   align?: String;
 }
 
-export default {
-  name: 'WSpace',
+const spaceOptions: ComponentOptions = {
   props: {
     size: {
       type: [String, Number],
@@ -40,7 +40,7 @@ export default {
     },
   },
   render(): VNode | null {
-    const { size, type, align, $slots } = this as any;
+    const { size, type, align, $slots } = this;
 
     if (!$slots.default) {
       return null;
@@ -87,3 +87,5 @@ export default {
     );
   },
 };
+
+export default spaceOptions;

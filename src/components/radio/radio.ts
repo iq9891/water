@@ -1,6 +1,6 @@
 /** @format */
 
-import { inject } from 'vue';
+import { inject, ComponentOptions } from 'vue';
 import { LoadingOutlined } from '@ant-design/icons-vue';
 import { TypeClass } from '../../common/types';
 import validator from '../../common/validator';
@@ -27,7 +27,10 @@ export interface RadioProps {
   onChange: Function;
 }
 
-export default {
+const radioOptions: ComponentOptions = {
+  components: {
+    LoadingOutlined,
+  },
   props: {
     modelValue: {
       type: [String, Number, Boolean],
@@ -51,97 +54,86 @@ export default {
   },
   computed: {
     isRadio() {
-      const self = this as any;
-      return self.type === 'radio';
+      return this.type === 'radio';
     },
     preClass() {
-      const self = this as any;
-      const type = self.border ? 'radio-button' : self.type;
-      return self.isRadio || self.border ? `w-${type}` : `w-radio-${type}`;
+      const type = this.border ? 'radio-button' : this.type;
+      return this.isRadio || this.border ? `w-${type}` : `w-radio-${type}`;
     },
     preName() {
-      const self = this as any;
-      return `${self.preClass}-`;
+      return `${this.preClass}-`;
     },
     disabledStatus() {
-      const self = this as any;
-      return self.disabled || (self.radioGroup && self.radioGroup.disabled);
+      return this.disabled || (this.radioGroup && this.radioGroup.disabled);
     },
     loadingStatus() {
-      const self = this as any;
-      return self.loading || (self.radioGroup && self.radioGroup.loading);
+      return this.loading || (this.radioGroup && this.radioGroup.loading);
     },
     radioClass(): any[] {
-      const self = this as any;
-      const buttonStyle = `${(self.radioGroup &&
-        self.radioGroup.$props.buttonStyle) ||
-        self.buttonStyle}`;
-      const btnType = self.isRadio && !self.border ? '' : buttonStyle;
+      const buttonStyle = `${(this.radioGroup &&
+        this.radioGroup.$props.buttonStyle) ||
+        this.buttonStyle}`;
+      const btnType = this.isRadio && !this.border ? '' : buttonStyle;
       const size =
-        self.radioGroup && self.radioGroup.$props.size
-          ? self.radioGroup.$props.size
-          : self.size;
-      const isNeedSize = !self.isRadio || (self.isRadio && self.border);
+        this.radioGroup && this.radioGroup.$props.size
+          ? this.radioGroup.$props.size
+          : this.size;
+      const isNeedSize = !this.isRadio || (this.isRadio && this.border);
 
       return [
         `${
           isNeedSize
-            ? `${size ? self.preName : self.preClass}${size}`
-            : self.preClass
+            ? `${size ? this.preName : this.preClass}${size}`
+            : this.preClass
         }`,
         {
-          'w-radio-border': self.border,
-          [`${self.preName}${btnType}-on`]: self.status,
-          [`${self.preName}disabled`]: self.disabledStatus,
+          'w-radio-border': this.border,
+          [`${this.preName}${btnType}-on`]: this.status,
+          [`${this.preName}disabled`]: this.disabledStatus,
         },
-        self.className,
+        this.className,
       ];
     },
     statusClass() {
-      const self = this as any;
-      const preName = self.border ? 'w-radio-border-' : self.preName;
+      const preName = this.border ? 'w-radio-border-' : this.preName;
 
       return [
         `${preName}status`,
         {
-          [`${preName}on`]: self.status,
-          [`${self.preName}status-disabled`]: self.disabledStatus,
-          [`${self.preName}status-loading`]: self.loadingStatus,
+          [`${preName}on`]: this.status,
+          [`${this.preName}status-disabled`]: this.disabledStatus,
+          [`${this.preName}status-loading`]: this.loadingStatus,
         },
       ];
     },
     innerClass() {
-      const self = this as any;
-      const preName = self.border ? 'w-radio-border-' : self.preName;
+      const preName = this.border ? 'w-radio-border-' : this.preName;
       return [
         `${preName}inner`,
         {
-          [`${self.preName}inner-loading`]: self.loadingStatus,
-          [`${preName}inner-on`]: self.status,
-          [`${self.preName}inner-disabled`]: self.disabledStatus,
+          [`${this.preName}inner-loading`]: this.loadingStatus,
+          [`${preName}inner-on`]: this.status,
+          [`${this.preName}inner-disabled`]: this.disabledStatus,
         },
       ];
     },
     inputClass() {
-      const self = this as any;
-      return `${self.preName}input`;
+      return `${this.preName}input`;
     },
     contentClass() {
-      const self = this as any;
       return [
-        `${self.preName}content`,
+        `${this.preName}content`,
         {
-          'w-radio-border-content': self.border,
-          [`${self.preName}content-disabled`]: self.disabledStatus,
+          'w-radio-border-content': this.border,
+          [`${this.preName}content-disabled`]: this.disabledStatus,
         },
       ];
     },
     status(): boolean {
-      const self = this as any;
-      const value = self.radioGroup
-        ? self.radioGroup.$props.modelValue
-        : self.modelValue;
-      return self.checked || (value !== false && self.label === value);
+      const value = this.radioGroup
+        ? this.radioGroup.$props.modelValue
+        : this.modelValue;
+      return this.checked || (value !== false && this.label === value);
     },
   },
   setup() {
@@ -152,39 +144,35 @@ export default {
   },
   methods: {
     clickFn(ev: MouseEvent) {
-      const self = this as any;
-      if (!self.disabledStatus && !self.loading && !self.status) {
+      if (!this.disabledStatus && !this.loading && !this.status) {
         const reParams: ChangeParamsEntity = {
           ev,
-          value: self.label,
-          label: self.label,
+          value: this.label,
+          label: this.label,
         };
-        (self.onBefore as Function)(reParams).then(() => {
-          self.emitChange(ev);
+        this.onBefore(reParams).then(() => {
+          this.emitChange(ev);
         });
       }
     },
     emitChange(ev: MouseEvent) {
-      const self = this as any;
-
       const reParams: ReturnParamsEntity = {
         ev,
-        value: self.label,
-        label: self.label,
-        status: self.status,
+        value: this.label,
+        label: this.label,
+        status: this.status,
       };
 
-      if (self.radioGroup) {
-        self.radioGroup.emitChange(reParams);
+      if (this.radioGroup) {
+        this.radioGroup.emitChange(reParams);
       } else {
-        self.$emit('update:checked', !self.checked);
-        self.$emit('update:modelValue', self.label);
-        (self.onChange as Function)(reParams);
-        self.$emit('on-change', reParams);
+        this.$emit('update:checked', !this.checked);
+        this.$emit('update:modelValue', this.label);
+        this.onChange(reParams);
+        this.$emit('on-change', reParams);
       }
     },
   },
-  components: {
-    LoadingOutlined,
-  },
 };
+
+export default radioOptions;

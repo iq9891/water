@@ -1,8 +1,9 @@
 /** @format */
 
-import { h, VNode, defineComponent } from 'vue';
+import { h, VNode, ComponentOptions } from 'vue';
 import { TypeStyle } from '../../common/types';
 import validator from '../../common/validator';
+import { getSlots } from '../../common/vue-utils';
 import DefaultEmptyImg from './img-def';
 import SimpleEmptyImg from './img-simple';
 
@@ -17,7 +18,7 @@ export interface EmptyProps {
 export const PRESENTED_IMAGE_DEFAULT = h(defaultEmptyImg());
 export const PRESENTED_IMAGE_SIMPLE = h(simpleEmptyImg());
 
-const Empty = defineComponent({
+const emptyOptions: ComponentOptions = {
   props: {
     type: {
       type: String,
@@ -33,7 +34,7 @@ const Empty = defineComponent({
     },
   },
   render() {
-    const { type, $slots, style } = this as any;
+    const { type, style } = this;
 
     const isSimple = type === 'simple';
 
@@ -44,17 +45,21 @@ const Empty = defineComponent({
       },
     ];
 
-    const children: VNode = $slots.default ? (
-      $slots.default()
-    ) : (
-      <div>暂无数据</div>
-    );
+    const children = getSlots(this);
+
+    if (children.length < 1) {
+      children.push(<div>暂无数据</div>);
+    }
 
     const defaultImgNode = isSimple
       ? PRESENTED_IMAGE_SIMPLE
       : PRESENTED_IMAGE_DEFAULT;
 
-    const imgNode: VNode = $slots.img ? $slots.img() : defaultImgNode;
+    const imgNode = getSlots(this, { name: 'img' });
+
+    if (imgNode.length < 1) {
+      imgNode.push(defaultImgNode);
+    }
 
     const imgClass = [
       'w-empty-img',
@@ -70,6 +75,6 @@ const Empty = defineComponent({
       </div>
     );
   },
-});
+};
 
-export default Empty;
+export default emptyOptions;

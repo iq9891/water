@@ -1,12 +1,12 @@
 /** @format */
 
+import { ComponentOptions } from 'vue';
 import WProgressText from './ProgressText.vue';
 import { statusList, getColor } from './helper';
-import { isString, isArray, isFunction } from '../../common/typeof';
+import { isString, isFunction } from '../../common/typeof';
 import progressProps from './progress-props';
-import number from '../statistic/number';
 
-export default {
+const progressLineOptions: ComponentOptions = {
   components: {
     WProgressText,
   },
@@ -20,56 +20,51 @@ export default {
   },
   computed: {
     isStep() {
-      const self = this as any;
-      return self.step > 0;
+      return this.step > 0;
     },
     isProgress() {
-      const self = this as any;
-      return self.modelValue < 100;
+      return this.modelValue < 100;
     },
     fontStyle() {
-      const self = this as any;
       return {
-        height: `${self.strokeWidth}px`,
-        'line-height': `${self.strokeWidth}px`,
+        height: `${this.strokeWidth}px`,
+        'line-height': `${this.strokeWidth}px`,
       };
     },
     lineStyle() {
-      const self = this as any;
       return {
-        background: getColor(self.color, self.modelValue),
+        background: getColor(this.color, this.modelValue),
       };
     },
     outerStyle() {
-      const self = this as any;
       let newColor = '';
 
-      if (isString(self.trailColor)) {
-        newColor = self.trailColor as string;
-      } else if (isFunction(self.trailColor)) {
-        newColor = (self.trailColor as Function)(self.modelValue);
+      if (isString(this.trailColor)) {
+        newColor = this.trailColor as string;
+      } else if (isFunction(this.trailColor)) {
+        newColor = (this.trailColor as Function)(this.modelValue);
       }
 
       return {
         'background-color': newColor,
-        ...self.radiusStyle,
+        ...this.radiusStyle,
       };
     },
     radiusStyle() {
-      const self = this as any;
       return {
         'border-radius':
-          self.strokeLinecap === 'round' && !self.isStep
-            ? `${self.strokeWidth / 2}px`
+          this.strokeLinecap === 'round' && !this.isStep
+            ? `${this.strokeWidth / 2}px`
             : 0,
       };
     },
     hasStatus(): boolean {
-      const self = this as any;
       return (
-        !!self.status &&
-        statusList.some((statusItem: string) => statusItem === self.status)
+        !!this.status &&
+        statusList.some((statusItem: string) => statusItem === this.status)
       );
     },
   },
 };
+
+export default progressLineOptions;

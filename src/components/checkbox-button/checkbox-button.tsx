@@ -1,11 +1,11 @@
 /** @format */
 
-import { inject } from 'vue';
+import { inject, ComponentOptions } from 'vue';
 import WCheckbox from '../checkbox/checkbox.vue';
 import { getProps, getSlots } from '../../common/vue-utils';
 import checkboxProps from '../checkbox-group/checkbox-props';
 
-export default {
+const checkboxButtonOptions: ComponentOptions = {
   props: {
     modelValue: {
       type: [String, Number, Boolean],
@@ -26,9 +26,9 @@ export default {
     };
   },
   render() {
-    const props = getProps(this as any);
-    const children = () => getSlots(this as any);
-    const { checkboxGroup } = this as any;
+    const props = getProps(this);
+    const children = () => getSlots(this);
+    const { checkboxGroup } = this;
     const rProps = {
       ...props,
     };
@@ -49,3 +49,5 @@ export default {
     WCheckbox,
   },
 };
+
+export default checkboxButtonOptions;

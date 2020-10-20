@@ -1,9 +1,10 @@
 /** @format */
 
+import { ComponentOptions } from 'vue';
 import { directionValidator } from '../../common/validator';
 import { getColorStyle } from '../../common/color';
 
-export default {
+const badgeRibbonOptions: ComponentOptions = {
   props: {
     text: String,
     direction: {
@@ -15,16 +16,15 @@ export default {
   },
   computed: {
     ribbonClass() {
-      const self = this as any;
-      return ['w-badge-ribbon', `w-badge-ribbon-${self.direction}`];
+      return ['w-badge-ribbon', `w-badge-ribbon-${this.direction}`];
     },
     ribbonColor() {
-      const self = this as any;
-      return getColorStyle(self.color, 'background');
+      return getColorStyle(this.color, 'background');
     },
     cornerColor() {
-      const self = this as any;
-      return getColorStyle(self.color, 'color');
+      return getColorStyle(this.color, 'color');
     },
   },
 };
+
+export default badgeRibbonOptions;

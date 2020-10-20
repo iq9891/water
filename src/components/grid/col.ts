@@ -1,6 +1,7 @@
 /** @format */
 
-import { h, VNode, defineComponent, inject } from 'vue';
+import { h, VNode, ComponentOptions, inject } from 'vue';
+import { getSlots } from '../../common/vue-utils';
 import SPACE from './constant';
 import { getSpacing } from './helper';
 
@@ -11,7 +12,7 @@ interface colStyleEntity {
   paddingBottom?: string;
 }
 
-const Col = defineComponent({
+const colOptions: ComponentOptions = {
   props: {
     className: {
       type: [Object, Array, String],
@@ -90,19 +91,16 @@ const Col = defineComponent({
       };
     },
     customize(): string[] {
-      const self = this as any;
       const customize: string[] = SPACE.filter(
-        (size: string): string => self[size],
+        (size: string): string => this[size],
       );
 
       return customize.map(
-        (prop: string): string => `${this.preName}-${self[prop]}-${prop}`,
+        (prop: string): string => `${this.preName}-${this[prop]}-${prop}`,
       );
     },
   },
   render(): VNode {
-    const { $slots } = this as any;
-
     return h(
       'div',
       {
@@ -116,9 +114,9 @@ const Col = defineComponent({
         ],
         style: this.colStyle,
       },
-      $slots.default ? $slots.default() : '',
+      getSlots(this),
     );
   },
-});
+};
 
-export default Col;
+export default colOptions;

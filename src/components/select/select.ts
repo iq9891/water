@@ -1,6 +1,6 @@
 /** @format */
 
-import { provide, computed, VNode } from 'vue';
+import { provide, computed, VNode, ComponentOptions } from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import {
   DownOutlined,
@@ -32,7 +32,7 @@ import {
   fieldNamesDefault,
 } from './entity';
 
-export default {
+const selectOptions: ComponentOptions = {
   components: {
     DownOutlined,
     CloseOutlined,
@@ -123,153 +123,134 @@ export default {
   computed: {
     ...poperComputed,
     isSingleMode() {
-      const self = this as any;
-      return self.mode === TYPE_ENUM.single;
+      return this.mode === TYPE_ENUM.single;
     },
     isTagMode() {
-      const self = this as any;
-      return self.mode === TYPE_ENUM.tags;
+      return this.mode === TYPE_ENUM.tags;
     },
     showArrow() {
-      const self = this as any;
-      return self.loading || self.clear || self.arrow;
+      return this.loading || this.clear || this.arrow;
     },
     result() {
-      const self = this as any;
-      const singleResultItem = self.getSingleResult();
+      const singleResultItem = this.getSingleResult();
       return singleResultItem
-        ? singleResultItem[self.fieldNames[self.optionValueProp]]
+        ? singleResultItem[this.fieldNames[this.optionValueProp]]
         : '';
     },
     moreTags() {
-      const self = this as any;
-      return self.maxTagCount > 0
-        ? self.nameTags.slice(0, self.maxTagCount)
-        : self.nameTags;
+      return this.maxTagCount > 0
+        ? this.nameTags.slice(0, this.maxTagCount)
+        : this.nameTags;
     },
     tagCount() {
-      const self = this as any;
-      return self.nameTags.length - (self.maxTagCount || 0);
+      return this.nameTags.length - (this.maxTagCount || 0);
     },
     filterDatas() {
-      const self = this as any;
-      self.tagSearchHandleNew();
+      this.tagSearchHandleNew();
 
-      const filteredOptionDatas = self.optionDatas.filter((optItem: any) => {
-        const filterValue = optItem[self.fieldNames[self.optionValueProp]];
-        return filterValue ? filterValue.indexOf(self.fieldValue) > -1 : '';
+      const filteredOptionDatas = this.optionDatas.filter((optItem: any) => {
+        const filterValue = optItem[this.fieldNames[this.optionValueProp]];
+        return filterValue ? filterValue.indexOf(this.fieldValue) > -1 : '';
       });
 
-      if (self.newOpt) {
-        return filteredOptionDatas.concat(self.newOpt);
+      if (this.newOpt) {
+        return filteredOptionDatas.concat(this.newOpt);
       }
       return filteredOptionDatas;
     },
     selectClass() {
-      const self = this as any;
       return [
-        `w-select-${self.mode}`,
+        `w-select-${this.mode}`,
         {
-          'w-select-disabled': self.disabled,
-          'w-select-focused': !self.$slots.area && self.focused,
-          'w-select-area': self.$slots.area,
+          'w-select-disabled': this.disabled,
+          'w-select-focused': !this.$slots.area && this.focused,
+          'w-select-area': this.$slots.area,
         },
       ];
     },
     moreClass() {
-      const self = this as any;
       return [
         'w-select-more',
         {
-          [`w-select-more-${self.size}`]: self.size,
-          [`w-select-more-${self.direction}`]: self.arrow,
+          [`w-select-more-${this.size}`]: this.size,
+          [`w-select-more-${this.direction}`]: this.arrow,
         },
       ];
     },
     arrowClass() {
-      const self = this as any;
       return [
         'w-select-arrow',
-        `w-select-arrow-${self.direction}`,
+        `w-select-arrow-${this.direction}`,
         {
-          [`w-select-arrow-${self.size}`]: self.size,
-          'w-select-arrow-disabled': self.disabled,
+          [`w-select-arrow-${this.size}`]: this.size,
+          'w-select-arrow-disabled': this.disabled,
         },
       ];
     },
     moreRemoveClass() {
-      const self = this as any;
-      return ['w-select-more-remove', `w-select-more-remove-${self.direction}`];
+      return ['w-select-more-remove', `w-select-more-remove-${this.direction}`];
     },
     searchBoxClass() {
-      const self = this as any;
       return [
         'w-select-single-search-box',
-        `w-select-single-search-box-${self.direction}`,
+        `w-select-single-search-box-${this.direction}`,
       ];
     },
     moreItemClass() {
-      const self = this as any;
       return [
         'w-select-more-item',
-        `w-select-more-item-${self.direction}`,
+        `w-select-more-item-${this.direction}`,
         {
-          'w-select-more-item-disabled': self.disabled,
-          [`w-select-more-item-${self.size}`]: self.size,
+          'w-select-more-item-disabled': this.disabled,
+          [`w-select-more-item-${this.size}`]: this.size,
         },
       ];
     },
     resultClass() {
-      const self = this as any;
       return [
         'w-select-result',
         {
-          [`w-select-result-${self.size}`]: self.size,
-          'w-select-result-disabled': self.disabled,
-          'w-select-result-empty': !self.result,
+          [`w-select-result-${this.size}`]: this.size,
+          'w-select-result-disabled': this.disabled,
+          'w-select-result-empty': !this.result,
         },
       ];
     },
     searchClass() {
-      const self = this as any;
       return [
         'w-select-single-search',
         {
-          [`w-select-single-search-${self.size}`]: self.size,
+          [`w-select-single-search-${this.size}`]: this.size,
         },
       ];
     },
     popStyle() {
-      const self = this as any;
       const style: any = {};
 
-      if (self.selectPoperHeight > 0) {
-        style.maxHeight = `${self.selectPoperHeight}px`;
-        style.height = `${self.selectPoperHeight}px`;
+      if (this.selectPoperHeight > 0) {
+        style.maxHeight = `${this.selectPoperHeight}px`;
+        style.height = `${this.selectPoperHeight}px`;
       }
 
       return style;
     },
   },
   mounted() {
-    const self = this as any;
-    self.renderOption();
+    this.renderOption();
   },
   methods: {
     renderOption() {
-      const self = this as any;
-      if (self.options.length > 0) {
-        self.optionDatas = self.options.slice();
-      } else if (isFunction(self.$slots.default)) {
-        self.optionDatas = self.getSlotDatas();
+      if (this.options.length > 0) {
+        this.optionDatas = this.options.slice();
+      } else if (isFunction(this.$slots.default)) {
+        this.optionDatas = this.getSlotDatas();
       }
       // 获取选中标签中的禁用状态
-      self.handleNameTags();
+      this.handleNameTags();
     },
     getSlotDatas() {
-      const self = this as any;
-      const { value, label } = self.fieldNames;
-      return getSlots(self).map((slotItem: VNode) => {
+      const { value, label } = this.fieldNames;
+      return getSlots(this).map((slotItem: VNode) => {
         // <w-option value="XXX" label="XXX"></w-option>
         if (slotItem.props) {
           const myProps = cloneDeep(slotItem.props);
@@ -334,285 +315,261 @@ export default {
       });
     },
     getSingleResult() {
-      const self = this as any;
       const resultItem =
-        self.optionDatas.length > 0
-          ? self.optionDatas.find(
+        this.optionDatas.length > 0
+          ? this.optionDatas.find(
               (optItem: any) =>
-                optItem[self.fieldNames[self.optionLabelProp]] ===
-                self.modelValue,
+                optItem[this.fieldNames[this.optionLabelProp]] ===
+                this.modelValue,
             )
           : null;
       return resultItem;
     },
     selectClick() {
-      const self = this as any;
-      if (!self.disabled) {
-        self.onBefore().then(() => {
-          self.changePoperStatus(true);
-          self.focused = true;
-          self.$nextTick(() => {
-            if (self.search && self.$refs.singleSearch) {
-              self.$refs.singleSearch.focus();
+      if (!this.disabled) {
+        this.onBefore().then(() => {
+          this.changePoperStatus(true);
+          this.focused = true;
+          this.$nextTick(() => {
+            if (this.search && this.$refs.singleSearch) {
+              this.$refs.singleSearch.focus();
             }
-            self.getFocus();
+            this.getFocus();
           });
         });
       }
     },
     resetHoverIndex() {
-      const self = this as any;
-      self.optHoverIndex = -1;
+      this.optHoverIndex = -1;
     },
     changePoperStatus(val: boolean) {
-      const self = this as any;
-      self.poperStatus = val;
+      this.poperStatus = val;
       if (!val) {
-        self.resetHoverIndex();
-        self.clearSearchValue();
+        this.resetHoverIndex();
+        this.clearSearchValue();
       }
     },
     setFieldValue(val = '') {
-      const self = this as any;
-      self.fieldValue = val;
+      this.fieldValue = val;
     },
     handleNameTags() {
-      const self = this as any;
       // 获取选中标签中的禁用状态
-      if (!self.isSingleMode) {
-        self.nameTags = [];
-        self.$nextTick(() => {
-          self.nameTags = addUsedStatus(
-            self.optionDatas,
-            self.modelValue,
-            self.fieldNames,
-            self.fieldNames[self.optionLabelProp],
+      if (!this.isSingleMode) {
+        this.nameTags = [];
+        this.$nextTick(() => {
+          this.nameTags = addUsedStatus(
+            this.optionDatas,
+            this.modelValue,
+            this.fieldNames,
+            this.fieldNames[this.optionLabelProp],
           );
         });
       }
     },
     clearSearchValue() {
-      const self = this as any;
-      if (self.autoClearSearchValue) {
-        self.setFieldValue();
+      if (this.autoClearSearchValue) {
+        this.setFieldValue();
       }
     },
     searchEnter(ev: MouseEvent) {
-      const self = this as any;
       // 刚开始直接按回车会默认添加删除第一个
-      self.optHoverIndex = self.optHoverIndex > -1 ? self.optHoverIndex : 0;
-      self.getHoverIndexEnabled();
+      this.optHoverIndex = this.optHoverIndex > -1 ? this.optHoverIndex : 0;
+      this.getHoverIndexEnabled();
 
-      self.$nextTick(() => {
-        const optNode = self.$refs[`option${self.optHoverIndex}`];
+      this.$nextTick(() => {
+        const optNode = this.$refs[`option${this.optHoverIndex}`];
         if (optNode && !optNode.disabled) {
           optNode.checkOption(ev);
-          self.$nextTick(() => {
-            self.clearSearchValue();
-            self.handleNameTags();
-            self.resetHoverIndex();
-            self.getFocus();
-            self.tagNewEffectiveHandle(optNode);
+          this.$nextTick(() => {
+            this.clearSearchValue();
+            this.handleNameTags();
+            this.resetHoverIndex();
+            this.getFocus();
+            this.tagNewEffectiveHandle(optNode);
           });
         }
       });
     },
     getHoverIndexEnabled(dir: number = 1) {
-      const self = this as any;
       // 略过不可用
-      self.optHoverIndex = findEnabled(
-        self.filterDatas,
-        self.optHoverIndex,
+      this.optHoverIndex = findEnabled(
+        this.filterDatas,
+        this.optHoverIndex,
         dir,
-        self.fieldNames,
+        this.fieldNames,
       );
     },
     searchKeyDown() {
-      const self = this as any;
       // 递增索引
-      self.optHoverIndex = ++self.optHoverIndex % self.filterDatas.length;
-      self.getHoverIndexEnabled();
+      this.optHoverIndex = ++this.optHoverIndex % this.filterDatas.length;
+      this.getHoverIndexEnabled();
     },
     searchKeyUp() {
-      const self = this as any;
       // 递减索引
-      self.optHoverIndex =
-        (self.filterDatas.length + --self.optHoverIndex) %
-        self.filterDatas.length;
+      this.optHoverIndex =
+        (this.filterDatas.length + --this.optHoverIndex) %
+        this.filterDatas.length;
       // 略过不可用
-      self.getHoverIndexEnabled(-1);
+      this.getHoverIndexEnabled(-1);
     },
     removeTag(removeValue: string, ev: MouseEvent) {
-      const self = this as any;
-      self.optHoverIndex = self.filterDatas.findIndex(
+      this.optHoverIndex = this.filterDatas.findIndex(
         (fItem: any) =>
-          fItem[self.fieldNames[self.optionValueProp]] === removeValue,
+          fItem[this.fieldNames[this.optionValueProp]] === removeValue,
       );
-      self.searchEnter(ev);
+      this.searchEnter(ev);
     },
     // 输入框为空的时候删除最后一个已选
     fieldDelete(ev: MouseEvent) {
-      const self = this as any;
       const { value } = (ev as any).target;
 
       if (
-        self.fieldCanDelate > 0 &&
-        self.modelValue.length > 0 &&
-        !self.fieldValue
+        this.fieldCanDelate > 0 &&
+        this.modelValue.length > 0 &&
+        !this.fieldValue
       ) {
-        const delTag = self.nameTags[self.modelValue.length - 1];
-        const { label } = self.fieldNames;
+        const delTag = this.nameTags[this.modelValue.length - 1];
+        const { label } = this.fieldNames;
         // 递增索引
-        self.optHoverIndex = self.optionDatas.findIndex(
+        this.optHoverIndex = this.optionDatas.findIndex(
           (optItem: any) => optItem[label] === delTag[label],
         );
-        self.searchEnter(ev);
+        this.searchEnter(ev);
       }
       // 清空第二次删除的时候才会删除上一个选中
-      self.fieldCanDelate = !value
-        ? ++self.fieldCanDelate
-        : self.fieldCanDelate;
+      this.fieldCanDelate = !value
+        ? ++this.fieldCanDelate
+        : this.fieldCanDelate;
     },
     tagSearchHandleNew() {
-      const self = this as any;
       // 如果tag模式
       // 输入中添加下拉内容的地方
       if (
-        self.fieldValue &&
-        self.isTagMode &&
-        !self.modelValue.find(
-          (nameValue: string) => self.fieldValue === nameValue,
+        this.fieldValue &&
+        this.isTagMode &&
+        !this.modelValue.find(
+          (nameValue: string) => this.fieldValue === nameValue,
         ) &&
-        !self.optionDatas.find(
+        !this.optionDatas.find(
           (optParams: string) =>
-            self.fieldValue === optParams[self.fieldNames.value],
+            this.fieldValue === optParams[this.fieldNames.value],
         )
       ) {
         // 创建搜索未结果
-        self.newOpt = {
-          [self.fieldNames.value]: self.fieldValue,
-          [self.fieldNames.label]: self.fieldValue,
+        this.newOpt = {
+          [this.fieldNames.value]: this.fieldValue,
+          [this.fieldNames.label]: this.fieldValue,
           new: true,
-          [self.fieldNames.disabled]: false,
-          [self.fieldNames.loading]: false,
+          [this.fieldNames.disabled]: false,
+          [this.fieldNames.loading]: false,
         };
       } else {
-        self.newOpt = null;
+        this.newOpt = null;
       }
     },
     tagNewEffectiveHandle(optNode: any) {
-      const self = this as any;
-      if (self.isTagMode && optNode.new) {
+      if (this.isTagMode && optNode.new) {
         if (optNode.active) {
-          const { label } = self.fieldNames;
-          self.optionDatas.findIndex(
+          const { label } = this.fieldNames;
+          this.optionDatas.findIndex(
             (optItem: any) => optItem[label] === optNode[label],
           );
-          self.optionDatas.splice(1);
+          this.optionDatas.splice(1);
         } else {
-          self.optionDatas.unshift(optNode);
+          this.optionDatas.unshift(optNode);
         }
       }
     },
     fieldMoreInput(ev: MouseEvent) {
-      const self = this as any;
-      self.fieldCanDelate = 0;
-      self.setFieldValue((ev.target as any).value || '');
-      self.setMoreInputWidth();
+      this.fieldCanDelate = 0;
+      this.setFieldValue((ev.target as any).value || '');
+      this.setMoreInputWidth();
     },
     setMoreInputWidth() {
-      const self = this as any;
-      self.$nextTick(() => {
-        self.fieldWidth = `${self.$refs.pre.offsetWidth + 20}px`;
-        self.resetHoverIndex();
+      this.$nextTick(() => {
+        this.fieldWidth = `${this.$refs.pre.offsetWidth + 20}px`;
+        this.resetHoverIndex();
       });
     },
     getFocus() {
-      const self = this as any;
-      if (self.search && !self.isSingleMode) {
+      if (this.search && !this.isSingleMode) {
         setTimeout(() => {
           // 解决多选模式点击光标定位问题
-          if (!self.fieldValue) {
-            self.fieldWidth = '0.75em';
+          if (!this.fieldValue) {
+            this.fieldWidth = '0.75em';
           }
-          if (self.search && self.$refs.moreSearch) {
-            self.$refs.moreSearch.focus();
+          if (this.search && this.$refs.moreSearch) {
+            this.$refs.moreSearch.focus();
           }
         }, 10);
       }
     },
     removeOptionDataWhenNew(newParams: any) {
-      const self = this as any;
-
-      if (self.isTagMode && newParams.active && newParams.new) {
-        self.optionDatas = self.optionDatas.filter(
+      if (this.isTagMode && newParams.active && newParams.new) {
+        this.optionDatas = this.optionDatas.filter(
           (optItem: any) =>
-            optItem[self.fieldNames.label] !== newParams[self.fieldNames.label],
+            optItem[this.fieldNames.label] !== newParams[this.fieldNames.label],
         );
       }
     },
     optionChange(params: ReturnParamsEntity) {
-      const self = this as any;
       const newParams = cloneDeep(params);
 
-      newParams.modelValue = self.isSingleMode
-        ? newParams[self.fieldNames[self.optionLabelProp]]
+      newParams.modelValue = this.isSingleMode
+        ? newParams[this.fieldNames[this.optionLabelProp]]
         : handleName(
-            params[self.fieldNames[self.optionLabelProp]],
-            self.modelValue,
-            self.optionDatas,
-            self.isSingleMode,
-            self.fieldNames,
-            self.fieldNames[self.optionLabelProp],
+            params[this.fieldNames[this.optionLabelProp]],
+            this.modelValue,
+            this.optionDatas,
+            this.isSingleMode,
+            this.fieldNames,
+            this.fieldNames[this.optionLabelProp],
           );
 
-      self.$emit('update:modelValue', newParams.modelValue);
-      self.onChange(newParams);
-      self.$emit('on-change', newParams);
+      this.$emit('update:modelValue', newParams.modelValue);
+      this.onChange(newParams);
+      this.$emit('on-change', newParams);
 
-      if (self.isSingleMode) {
-        self.changePoperStatus();
+      if (this.isSingleMode) {
+        this.changePoperStatus();
       } else {
-        self.getFocus();
-        self.handleNameTags();
-        self.removeOptionDataWhenNew(newParams);
+        this.getFocus();
+        this.handleNameTags();
+        this.removeOptionDataWhenNew(newParams);
       }
 
-      self.setPoperPosition();
+      this.setPoperPosition();
     },
     clearModelValue(ev: MouseEvent) {
-      const self = this as any;
-      const modelValue = self.isSingleMode ? '' : [];
-      self.$emit('update:modelValue', modelValue);
-      self.$emit('on-clear');
-      self.onClear();
-      self.handleNameTags();
-      self.setPoperPosition();
+      const modelValue = this.isSingleMode ? '' : [];
+      this.$emit('update:modelValue', modelValue);
+      this.$emit('on-clear');
+      this.onClear();
+      this.handleNameTags();
+      this.setPoperPosition();
       ev.stopPropagation();
     },
     setPoperPosition() {
       setTimeout(() => {
-        const self = this as any;
-        const { poper } = self.$refs;
+        const { poper } = this.$refs;
         if (poper) {
           poper.poperInit();
         }
       }, 10);
     },
     bodyClick() {
-      const self = this as any;
-      self.changePoperStatus();
-      self.focused = false;
+      this.changePoperStatus();
+      this.focused = false;
     },
     inputBlur(ev: MouseEvent) {
-      const self = this as any;
-      self.onBlur(ev);
-      self.$emit('on-blur', ev);
+      this.onBlur(ev);
+      this.$emit('on-blur', ev);
     },
     inputFocus(ev: MouseEvent) {
-      const self = this as any;
-      self.onFocus(ev);
-      self.$emit('on-focus', ev);
+      this.onFocus(ev);
+      this.$emit('on-focus', ev);
     },
   },
 };
+
+export default selectOptions;

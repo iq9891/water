@@ -1,5 +1,5 @@
 /** @format */
-import { inject } from 'vue';
+import { inject, ComponentOptions } from 'vue';
 import validator from '../../common/validator';
 import checkboxProps from '../checkbox-group/checkbox-props';
 
@@ -13,7 +13,7 @@ export interface ReturnParamsEntity extends ChangeParamsEntity {
   status: boolean;
 }
 
-export default {
+const checkboxOptions: ComponentOptions = {
   props: {
     modelValue: {
       type: [String, Number, Boolean],
@@ -37,86 +37,77 @@ export default {
   },
   computed: {
     isCheckbox() {
-      const self = this as any;
-      return self.type === 'checkbox';
+      return this.type === 'checkbox';
     },
     preClass() {
-      const self = this as any;
-      const type = self.border ? 'checkbox-button' : self.type;
-      return self.isCheckbox || self.border
+      const type = this.border ? 'checkbox-button' : this.type;
+      return this.isCheckbox || this.border
         ? `w-${type}`
         : `w-checkbox-${type}`;
     },
     preName() {
-      const self = this as any;
-      return `${self.preClass}-`;
+      return `${this.preClass}-`;
     },
     disabledStatus() {
-      const self = this as any;
       return (
-        self.disabled || (self.checkboxGroup && self.checkboxGroup.disabled)
+        this.disabled || (this.checkboxGroup && this.checkboxGroup.disabled)
       );
     },
     checkboxClasss(): any[] {
-      const self = this as any;
-      const buttonStyle = `${(self.checkboxGroup &&
-        self.checkboxGroup.$props.buttonStyle) ||
-        self.buttonStyle}-`;
-      const btnType = self.isCheckbox && !self.border ? '' : buttonStyle;
+      const buttonStyle = `${(this.checkboxGroup &&
+        this.checkboxGroup.$props.buttonStyle) ||
+        this.buttonStyle}-`;
+      const btnType = this.isCheckbox && !this.border ? '' : buttonStyle;
       const size =
-        self.checkboxGroup && self.checkboxGroup.$props.size
-          ? self.checkboxGroup.$props.size
-          : self.size;
-      const isNeedSize = !self.isCheckbox || (self.isCheckbox && self.border);
+        this.checkboxGroup && this.checkboxGroup.$props.size
+          ? this.checkboxGroup.$props.size
+          : this.size;
+      const isNeedSize = !this.isCheckbox || (this.isCheckbox && this.border);
 
       return [
         `${
           isNeedSize
-            ? `${size ? self.preName : self.preClass}${size}`
-            : self.preClass
+            ? `${size ? this.preName : this.preClass}${size}`
+            : this.preClass
         }`,
         {
-          'w-checkbox-border': self.border,
-          [`${self.preName}${btnType}only`]: !self.checkboxGroup,
-          [`${self.preName}${btnType}on`]: btnType && self.status,
-          [`${self.preName}disabled`]: self.disabledStatus,
+          'w-checkbox-border': this.border,
+          [`${this.preName}${btnType}only`]: !this.checkboxGroup,
+          [`${this.preName}${btnType}on`]: btnType && this.status,
+          [`${this.preName}disabled`]: this.disabledStatus,
         },
-        self.className,
+        this.className,
       ];
     },
     statusClass() {
-      const self = this as any;
-      const preName = self.border ? 'w-checkbox-border-' : self.preName;
+      const preName = this.border ? 'w-checkbox-border-' : this.preName;
       return [
         `${preName}status`,
         {
-          [`${preName}on`]: self.status,
-          [`${self.preName}indeterminate`]: self.indeterminate,
-          [`${self.preName}status-disabled`]: self.disabledStatus,
+          [`${preName}on`]: this.status,
+          [`${this.preName}indeterminate`]: this.indeterminate,
+          [`${this.preName}status-disabled`]: this.disabledStatus,
         },
       ];
     },
     contentClass() {
-      const self = this as any;
       return [
-        `${self.preName}content`,
+        `${this.preName}content`,
         {
-          'w-checkbox-border-content': self.border,
-          [`${self.preName}content-disabled`]: self.disabledStatus,
+          'w-checkbox-border-content': this.border,
+          [`${this.preName}content-disabled`]: this.disabledStatus,
         },
       ];
     },
     inputClass() {
-      const self = this as any;
-      return `${self.preName}input`;
+      return `${this.preName}input`;
     },
     status(): boolean {
-      const self = this as any;
-      const status = self.checkboxGroup
-        ? self.checkboxGroup.$props.modelValue.indexOf(self.label) > -1
-        : self.label === self.modelValue;
+      const status = this.checkboxGroup
+        ? this.checkboxGroup.$props.modelValue.indexOf(this.label) > -1
+        : this.label === this.modelValue;
 
-      return self.checked || status;
+      return this.checked || status;
     },
   },
   setup() {
@@ -127,29 +118,28 @@ export default {
   },
   methods: {
     clickFn(ev: MouseEvent) {
-      const self = this as any;
-      if (!self.disabledStatus) {
-        self.emitChange(ev);
+      if (!this.disabledStatus) {
+        this.emitChange(ev);
       }
     },
     emitChange(ev: MouseEvent) {
-      const self = this as any;
-
       const reParams: ReturnParamsEntity = {
         ev,
-        value: self.label,
-        label: self.label,
-        status: self.status,
+        value: this.label,
+        label: this.label,
+        status: this.status,
       };
 
-      if (self.checkboxGroup) {
-        self.checkboxGroup.emitChange(reParams);
+      if (this.checkboxGroup) {
+        this.checkboxGroup.emitChange(reParams);
       } else {
-        self.$emit('update:checked', !self.checked);
-        self.$emit('update:modelValue', self.label);
-        (self.onChange as Function)(reParams);
-        self.$emit('on-change', reParams);
+        this.$emit('update:checked', !this.checked);
+        this.$emit('update:modelValue', this.label);
+        (this.onChange as Function)(reParams);
+        this.$emit('on-change', reParams);
       }
     },
   },
 };
+
+export default checkboxOptions;

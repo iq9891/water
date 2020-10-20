@@ -1,6 +1,6 @@
 /** @format */
 
-import { ref, nextTick, VNode } from 'vue';
+import { ComponentOptions, nextTick } from 'vue';
 import WSpin from '../spin/Spin.vue';
 import { isFunction } from '../../common/typeof';
 import { isClient } from '../../common/utils';
@@ -16,7 +16,7 @@ import {
   ScrollToEntity,
 } from './ast';
 
-export default {
+const scrollOptions: ComponentOptions = {
   components: {
     WBar,
     WSpin,
@@ -101,66 +101,56 @@ export default {
   },
   computed: {
     isVertical(): boolean {
-      const self = this as any;
-      return self.type === 'vertical';
+      return this.type === 'vertical';
     },
     bar() {
-      const self = this as any;
-      return self.isVertical ? VERTICAL_ENUM : HORIZONTAL_ENUM;
+      return this.isVertical ? VERTICAL_ENUM : HORIZONTAL_ENUM;
     },
     scrollClass() {
-      const self = this as any;
       return [
         'w-scroll',
         {
-          'w-scroll-active': self.isCursorDown,
-          'w-scroll-disabled': self.disabled,
+          'w-scroll-active': this.isCursorDown,
+          'w-scroll-disabled': this.disabled,
         },
       ];
     },
     wrapClass() {
-      const self = this as any;
-      return ['w-scroll-wrap', self.wrapClassName];
+      return ['w-scroll-wrap', this.wrapClassName];
     },
     bodyClass() {
-      const self = this as any;
       return [
         'w-scroll-body',
-        { 'w-scroll-body-vertical': self.isVertical },
-        self.bodyClassName,
+        { 'w-scroll-body-vertical': this.isVertical },
+        this.bodyClassName,
       ];
     },
   },
   mounted() {
-    const self = this as any;
+    this.resizeNode = this.$refs.resize ? this.$refs.resize : null;
+    this.wrapNode = this.$refs.wrap ? this.$refs.wrap : null;
 
-    self.resizeNode = self.$refs.resize ? self.$refs.resize : null;
-    self.wrapNode = self.$refs.wrap ? self.$refs.wrap : null;
+    nextTick(this.updateScroll);
 
-    nextTick(self.updateScroll);
-
-    if (!self.noResize && isClient()) {
-      on(window, 'resize', self.updateResize);
+    if (!this.noResize && isClient()) {
+      on(window, 'resize', this.updateResize);
     }
   },
   updated() {
-    const self = this as any;
-    self.updateScroll();
+    this.updateScroll();
   },
   beforeUnmount() {
-    const self = this as any;
-    if (!self.noResize && isClient()) {
-      off(window, 'resize', self.updateResize);
+    if (!this.noResize && isClient()) {
+      off(window, 'resize', this.updateResize);
     }
   },
   methods: {
     updateScroll() {
-      const self = this as any;
-      const { clientSize, scrollSize } = self.bar;
+      const { clientSize, scrollSize } = this.bar;
       const percentage =
-        (self.wrapNode[clientSize] * 100) / self.wrapNode[scrollSize];
+        (this.wrapNode[clientSize] * 100) / this.wrapNode[scrollSize];
 
-      self.getSize(percentage);
+      this.getSize(percentage);
     },
     updateResize() {
       this.updateScroll();
@@ -172,25 +162,23 @@ export default {
       });
     },
     getSize(percentage: number) {
-      const self = this as any;
-      self.size = percentage < 100 ? `${percentage}%` : '';
+      this.size = percentage < 100 ? `${percentage}%` : '';
     },
     handleScroll(ev: any): void {
-      const self = this as any;
-      const { scroll, clientSize } = self.bar;
+      const { scroll, clientSize } = this.bar;
       let scrollChange = 0;
       let scrollScale = 0;
 
-      const scrollSpace = self.wrapNode[scroll] + self.wrapNode[clientSize];
-      const scrollMax = self.resizeNode[clientSize];
+      const scrollSpace = this.wrapNode[scroll] + this.wrapNode[clientSize];
+      const scrollMax = this.resizeNode[clientSize];
 
-      if (scrollSpace < scrollMax || self.wrapNode[scroll] > 0) {
+      if (scrollSpace < scrollMax || this.wrapNode[scroll] > 0) {
         scrollScale = ev.wheelDelta
           ? -ev.wheelDelta / 120
           : (ev.detail || 0) / 3;
 
-        scrollChange = self.wrapNode[scroll] + scrollScale * self.scrollStep;
-        self.scrollMove({
+        scrollChange = this.wrapNode[scroll] + scrollScale * this.scrollStep;
+        this.scrollMove({
           ev,
           scrollChange,
           scrollScale,
@@ -199,46 +187,45 @@ export default {
       }
     },
     scrollMove(params: HandleScrollEntity) {
-      const self = this as any;
-      if (!self.disabled) {
+      if (!this.disabled) {
         const { scrollChange, ev } = params;
-        const { scroll, clientSize } = self.bar;
-        const scrollSpace = self.wrapNode[scroll] + self.wrapNode[clientSize];
-        const scrollMax = self.resizeNode[clientSize];
+        const { scroll, clientSize } = this.bar;
+        const scrollSpace = this.wrapNode[scroll] + this.wrapNode[clientSize];
+        const scrollMax = this.resizeNode[clientSize];
         const evt = ev as any;
 
-        self.wrapNode[scroll] = scrollChange;
-        self.move = (self.wrapNode[scroll] * 100) / self.wrapNode[clientSize];
+        this.wrapNode[scroll] = scrollChange;
+        this.move = (this.wrapNode[scroll] * 100) / this.wrapNode[clientSize];
 
         // 方向判断
-        if (self.lastScroll !== self.wrapNode[scroll]) {
-          self.scrollDir =
-            self.lastScroll < self.wrapNode[scroll]
+        if (this.lastScroll !== this.wrapNode[scroll]) {
+          this.scrollDir =
+            this.lastScroll < this.wrapNode[scroll]
               ? DIR_ENUM.NEXT
               : DIR_ENUM.PREV;
-          self.lastScroll = self.wrapNode[scroll];
+          this.lastScroll = this.wrapNode[scroll];
 
           // 多个滚动嵌套的时候，可以设置 stopPropagation 进行独立滚动
-          if (self.stopPropagation && evt && isFunction(evt.stopPropagation)) {
+          if (this.stopPropagation && evt && isFunction(evt.stopPropagation)) {
             evt.stopPropagation();
           }
 
           if (
-            self.preventDefault &&
+            this.preventDefault &&
             evt &&
             isFunction(evt.preventDefault) &&
-            !preventDefaultExceptionFn(evt.target, self.preventDefaultException)
+            !preventDefaultExceptionFn(evt.target, this.preventDefaultException)
           ) {
             evt.preventDefault();
           }
         } else {
-          self.scrollDir = self.openPull ? self.scrollDir : '';
+          this.scrollDir = this.openPull ? this.scrollDir : '';
           if (
-            self.preventDefault &&
-            !self.edgeIsPreventDefault &&
+            this.preventDefault &&
+            !this.edgeIsPreventDefault &&
             evt &&
             isFunction(evt.preventDefault) &&
-            !preventDefaultExceptionFn(evt.target, self.preventDefaultException)
+            !preventDefaultExceptionFn(evt.target, this.preventDefaultException)
           ) {
             evt.preventDefault();
             evt.stopPropagation();
@@ -248,71 +235,67 @@ export default {
         const pullParams = {
           ...params,
           [scroll]: scrollChange,
-          dir: self.scrollDir,
+          dir: this.scrollDir,
         };
 
         // 下拉加载更多
         if (
-          self.openPull === DIR_ENUM.NEXT &&
-          !self.isPulling &&
-          self.scrollDir === DIR_ENUM.NEXT &&
-          scrollMax - scrollSpace <= self.threshold
+          this.openPull === DIR_ENUM.NEXT &&
+          !this.isPulling &&
+          this.scrollDir === DIR_ENUM.NEXT &&
+          scrollMax - scrollSpace <= this.threshold
         ) {
-          self.isPulling = true;
+          this.isPulling = true;
           pullParams.eventType = 'pulling';
-          self.onPulling(pullParams);
-          self.$emit('on-pulling', pullParams);
+          this.onPulling(pullParams);
+          this.$emit('on-pulling', pullParams);
         }
 
         // 上拉加载更多
         if (
-          self.openPull === DIR_ENUM.PREV &&
-          !self.isPulling &&
-          self.scrollDir === DIR_ENUM.PREV &&
-          scrollChange <= self.threshold
+          this.openPull === DIR_ENUM.PREV &&
+          !this.isPulling &&
+          this.scrollDir === DIR_ENUM.PREV &&
+          scrollChange <= this.threshold
         ) {
-          self.isPulling = true;
+          this.isPulling = true;
           pullParams.eventType = 'pulling';
-          self.onPulling(pullParams);
-          self.$emit('on-pulling', pullParams);
+          this.onPulling(pullParams);
+          this.$emit('on-pulling', pullParams);
         }
 
-        if (self.scrollDir) {
-          self.onScroll(pullParams);
-          self.$emit('on-scroll', pullParams);
+        if (this.scrollDir) {
+          this.onScroll(pullParams);
+          this.$emit('on-scroll', pullParams);
         }
       }
     },
     barMove(params: ThumbPositionPercentageEntity) {
-      const self = this as any;
       const { scrollScale, ev, eventType, thumbPositionPercentage } = params;
-      self.scrollMove({
+      this.scrollMove({
         ev,
         scrollChange:
-          (thumbPositionPercentage * self.wrapNode[self.bar.scrollSize]) / 100,
+          (thumbPositionPercentage * this.wrapNode[this.bar.scrollSize]) / 100,
         scrollScale,
         eventType,
       });
     },
     barClickTrack(params: ThumbPositionPercentageEntity) {
-      const self = this as any;
       const { scrollScale, ev, eventType, thumbPositionPercentage } = params;
-      self.scrollMove({
+      this.scrollMove({
         ev,
         scrollChange:
-          (thumbPositionPercentage * self.wrapNode[self.bar.scrollSize]) / 100,
+          (thumbPositionPercentage * this.wrapNode[this.bar.scrollSize]) / 100,
         scrollScale,
         eventType,
       });
     },
     dragChange(isCursorDown: boolean) {
-      const self = this as any;
-      self.isCursorDown = isCursorDown;
+      this.isCursorDown = isCursorDown;
     },
     // 滚动到某处
     scrollTo({ scrollChange }: ScrollToEntity): void {
-      const self = this as any;
-      self.scrollMove({
+      this.scrollMove({
         ev: null,
         scrollScale: 0,
         scrollChange,
@@ -321,25 +304,22 @@ export default {
     },
     // 刷新，重新计算
     refresh(): void {
-      const self = this as any;
       nextTick(() => {
         this.updateScroll();
       });
     },
     // 加载完毕
     finishPull(): void {
-      const self = this as any;
-      self.isPulling = false;
-      self.lastScroll = -1;
-      self.scrollDir = '';
+      this.isPulling = false;
+      this.lastScroll = -1;
+      this.scrollDir = '';
     },
     spinScroll(evt: any) {
-      const self = this as any;
       if (
-        self.preventDefault &&
+        this.preventDefault &&
         evt &&
         isFunction(evt.preventDefault) &&
-        !preventDefaultExceptionFn(evt.target, self.preventDefaultException)
+        !preventDefaultExceptionFn(evt.target, this.preventDefaultException)
       ) {
         evt.preventDefault();
       }
@@ -347,12 +327,13 @@ export default {
   },
   watch: {
     pulled(val: boolean, oldVal: boolean) {
-      const self = this as any;
       if (val) {
-        self.refresh();
-        self.finishPull();
-        self.$forceUpdate();
+        this.refresh();
+        this.finishPull();
+        this.$forceUpdate();
       }
     },
   },
 };
+
+export default scrollOptions;

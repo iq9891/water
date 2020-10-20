@@ -1,11 +1,14 @@
 /** @format */
 
-import { inject } from 'vue';
+import { inject, ComponentOptions } from 'vue';
 import WRadio from '../radio/Radio.vue';
 import { getProps, getSlots } from '../../common/vue-utils';
 import radioProps from '../radio-group/radio-props';
 
-export default {
+const radioButtonOptions: ComponentOptions = {
+  components: {
+    WRadio,
+  },
   props: {
     modelValue: {
       type: [String, Number, Boolean],
@@ -26,9 +29,9 @@ export default {
     };
   },
   render() {
-    const props = getProps(this as any);
-    const children = () => getSlots(this as any);
-    const { radioGroup } = this as any;
+    const props = getProps(this);
+    const children = () => getSlots(this);
+    const { radioGroup } = this;
     const rProps = {
       ...props,
     };
@@ -50,7 +53,6 @@ export default {
       </WRadio>
     );
   },
-  components: {
-    WRadio,
-  },
 };
+
+export default radioButtonOptions;

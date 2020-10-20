@@ -1,5 +1,6 @@
 /** @format */
 
+import { ComponentOptions } from 'vue';
 import { isNumber, isFunction } from '../../common/typeof';
 import { directionValidator } from '../../common/validator';
 import WStatisticNumber from './number';
@@ -9,7 +10,7 @@ enum NUMBER_TYPE {
   DECIMAL_ENUM = 1,
 }
 
-export default {
+const statisticOptions: ComponentOptions = {
   components: {
     WStatisticNumber,
   },
@@ -43,46 +44,42 @@ export default {
   },
   computed: {
     formatValue(): string {
-      const self = this as any;
-      const newValue = Number(self.modelValue);
-      return self.precision
-        ? newValue.toFixed(self.precision)
-        : String(self.modelValue);
+      const newValue = Number(this.modelValue);
+      return this.precision
+        ? newValue.toFixed(this.precision)
+        : String(this.modelValue);
     },
     contentList(): string[] {
-      const self = this as any;
-      return self.formatValue.split('.');
+      return this.formatValue.split('.');
     },
     int(): string {
-      const self = this as any;
-      const content = self.contentList[NUMBER_TYPE.INT_ENUM];
+      const content = this.contentList[NUMBER_TYPE.INT_ENUM];
 
       const intNumber = Number(content);
       return isNumber(intNumber) && !Number.isNaN(intNumber)
-        ? intNumber.toLocaleString().replace(',', self.groupSeparator)
+        ? intNumber.toLocaleString().replace(',', this.groupSeparator)
         : content;
     },
     decimal(): string {
-      const self = this as any;
-      return self.contentList.length > 1
-        ? `.${self.contentList[NUMBER_TYPE.DECIMAL_ENUM]}`
+      return this.contentList.length > 1
+        ? `.${this.contentList[NUMBER_TYPE.DECIMAL_ENUM]}`
         : '';
     },
     contentClass() {
-      const self = this as any;
       return [
         'w-statistic-content',
-        `w-statistic-content-${self.direction}`,
+        `w-statistic-content-${this.direction}`,
         {
-          'w-statistic-content-render': isFunction(self.valueRender),
-          'w-statistic-int': self.int && !self.decimal,
-          [`w-statistic-int-${self.direction}`]: self.int && !self.decimal,
+          'w-statistic-content-render': isFunction(this.valueRender),
+          'w-statistic-int': this.int && !this.decimal,
+          [`w-statistic-int-${this.direction}`]: this.int && !this.decimal,
         },
       ];
     },
     intClass() {
-      const self = this as any;
-      return ['w-statistic-int', `w-statistic-int-${self.direction}`];
+      return ['w-statistic-int', `w-statistic-int-${this.direction}`];
     },
   },
 };
+
+export default statisticOptions;

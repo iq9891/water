@@ -1,10 +1,11 @@
 /** @format */
 
+import { ComponentOptions } from 'vue';
 import progressProps from './progress-props';
 import progressIcon from './progress-icon';
 import { statusList } from './helper';
 
-export default {
+const progressTextOptions: ComponentOptions = {
   components: {
     progressIcon,
   },
@@ -14,28 +15,26 @@ export default {
   },
   computed: {
     fontStyle() {
-      const self = this as any;
-      return (!self.hasStatus || self.inside) && self.step > 0
+      return (!this.hasStatus || this.inside) && this.step > 0
         ? {
-            height: `${self.strokeWidth}px`,
-            'line-height': `${self.strokeWidth}px`,
+            height: `${this.strokeWidth}px`,
+            'line-height': `${this.strokeWidth}px`,
           }
         : {};
     },
     hasStatus(): boolean {
-      const self = this as any;
       return (
-        !!self.status &&
-        statusList.some((statusItem: string) => statusItem === self.status)
+        !!this.status &&
+        statusList.some((statusItem: string) => statusItem === this.status)
       );
     },
     percentText() {
-      const self = this as any;
-      return self.format(self.modelValue);
+      return this.format(this.modelValue);
     },
     noLine(): boolean {
-      const self = this as any;
-      return self.type !== 'line';
+      return this.type !== 'line';
     },
   },
 };
+
+export default progressTextOptions;
