@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-  <pre style="color: red">
+  <!-- <pre style="color: red">
     重构组件
     1. 新增 pulled 属性
     2. 加载更多不在获取 ref 调用组件内置发方法，而是用 pulled 控制是否拉取完成，当拉取完成 设置 pulled 为 true 组件自动处理
@@ -10,7 +10,7 @@
     pulling emit 方法 替换为 on-pulling
     scroll 属性替换为 onScroll
     scroll emit 方法 替换为 on-scroll
-  </pre>
+  </pre> -->
   <w-space type="vertical">
     <WScroll
       :ref="(el) => (pullScroll2 = el)"
@@ -149,7 +149,7 @@
   }
 
   .demo-scroll-h {
-    width: 100%;
+    width: 400px;
     height: 200px;
 
     &-i {

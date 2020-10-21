@@ -2,10 +2,11 @@
 
 import { h, CSSProperties, VNode, Comment, ComponentOptions } from 'vue';
 import { isNumber, isString } from '../../common/typeof';
-import { getSlots } from '../../common/vue-utils';
+import { getProps } from '../../common/vue-utils';
 import validator, {
   sizeValidator,
   typeValidator,
+  directionValidator,
 } from '../../common/validator';
 
 export interface SpaceProps {
@@ -38,9 +39,15 @@ const spaceOptions: ComponentOptions = {
         return validator(typeList, value);
       },
     },
+    direction: {
+      type: String,
+      default: 'ltr',
+      validator: directionValidator,
+    },
   },
   render(): VNode | null {
-    const { size, type, align, $slots } = this;
+    const { size, type, align, direction } = getProps(this);
+    const { $slots } = this;
 
     if (!$slots.default) {
       return null;
@@ -66,8 +73,10 @@ const spaceOptions: ComponentOptions = {
         .map((childItem: VNode, childIdx: Number) => {
           const style: CSSProperties = {};
 
-          if (isNumber(size) && childIdx < childrenLen) {
-            style.paddingRight = `${size}px`;
+          if (isHorizontal && isNumber(size) && childIdx < childrenLen) {
+            style[
+              direction === 'ltr' ? 'paddingRight' : 'paddingLeft'
+            ] = `${size}px`;
           }
 
           return h(
@@ -76,6 +85,7 @@ const spaceOptions: ComponentOptions = {
               class: [
                 `w-space-item-${type}`,
                 {
+                  [`w-space-item-${type}-${direction}`]: isHorizontal,
                   [`w-space-item-${type}-${size}`]: isString(size) && !!size,
                 },
               ],

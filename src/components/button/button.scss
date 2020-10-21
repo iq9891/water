@@ -64,6 +64,7 @@ $button-only-padding: (
   @each $size, $value in $button-padding {
     &#{$size} {
       padding: 0 $value;
+      line-height: map-get($button-list, $size) - 2;
     }
   }
 

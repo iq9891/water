@@ -9,12 +9,14 @@ $space-list: (
 );
 
 $space-type: (
-  'horizontal': 'right',
+  'horizontal-ltr': 'right',
+  'horizontal-rtl': 'left',
   'vertical': 'bottom',
 );
 
 .w-space {
   display: flex; // inline-flex 在内嵌滚动组件的时候会有莫名的高度问题
+  flex-wrap: wrap;
 
   &-vertical {
     flex-direction: column;
@@ -43,6 +45,7 @@ $space-type: (
       @each $size, $value in $space-list {
         &#{$size} {
           padding-#{$typeValue}: $value;
+          line-height: 1;
 
           &:last-child {
             padding: 0;

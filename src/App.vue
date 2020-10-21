@@ -4,7 +4,7 @@
   <img alt="Vue logo" src="./assets/logo.png" />
   <br />
   <p>
-    <w-space>
+    <w-space :direction="direction">
       <w-button size="small" @click="directionFn">{{ direction }}</w-button>
       <span>共计 {{ demoRouters.length }} 个</span>
     </w-space>

@@ -5,13 +5,13 @@
     <pre style="color: red">
       新增组件
     </pre>
-    <w-space>
+    <w-space :direction="direction">
       center
       <button>Primary</button>
       <span>Block</span>
     </w-space>
     <hr />
-    <w-space :size="48">
+    <w-space :direction="direction" :size="48">
       center
       <button>Primary</button>
       <span>Block</span>
@@ -25,14 +25,14 @@
     <hr />
     <div class="space-align-container">
       <div class="space-align-block">
-        <w-space align="center">
+        <w-space :direction="direction" align="center">
           center
           <WText>Primary</WText>
           <span class="mock-block">Block</span>
         </w-space>
       </div>
       <div class="space-align-block">
-        <w-space align="start">
+        <w-space :direction="direction" align="start">
           start
           <button type="primary">
             Primary
@@ -41,7 +41,7 @@
         </w-space>
       </div>
       <div class="space-align-block">
-        <w-space align="end">
+        <w-space :direction="direction" align="end">
           <WText type="danger">
             end
           </WText>
@@ -52,7 +52,7 @@
         </w-space>
       </div>
       <div class="space-align-block">
-        <w-space align="baseline">
+        <w-space :direction="direction" align="baseline">
           baseline
           <button type="primary">
             Primary
@@ -66,6 +66,7 @@
 
 <script>
   import { defineAsyncComponent } from 'vue';
+  import { mapState } from 'vuex';
 
   const WSpace = defineAsyncComponent(() =>
     import('../components/space/Space.vue'),
@@ -79,6 +80,9 @@
     components: {
       WSpace,
       WText,
+    },
+    computed: {
+      ...mapState(['direction']),
     },
   };
 </script>

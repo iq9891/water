@@ -31,21 +31,21 @@
   </pre> -->
   <w-space type="vertical">
     <w-space type="vertical">
-      <w-space>
+      <w-space :direction="direction">
         <span>huiValue--{{ huiValue }}</span>
         <span>hui2Value--{{ hui2Value }}</span>
         <span>selectValue--{{ selectValue }}</span>
         <span>moreValue--{{ moreValue }}</span>
         <span>tagValue--{{ tagValue }}</span>
       </w-space>
-      <w-space>
+      <w-space :direction="direction">
         <w-radio-group v-model="size" :size="size">
           <w-radio-button label="small">small</w-radio-button>
           <w-radio-button label="">default</w-radio-button>
           <w-radio-button label="large">large</w-radio-button>
         </w-radio-group>
       </w-space>
-      <w-space>
+      <w-space :direction="direction">
         <w-select
           v-model="selectValue"
           style="width: 160px"
@@ -74,6 +74,8 @@
           :size="size"
         >
         </w-select>
+      </w-space>
+      <w-space :direction="direction">
         <w-select
           v-model="moreValue"
           :transfer="false"
@@ -140,6 +142,8 @@
             :content-render="() => contentRender('Japan (日本)')"
           ></w-option>
         </w-select>
+      </w-space>
+      <w-space :direction="direction">
         <w-select
           v-model="hui2Value"
           mode="multiple"
@@ -189,7 +193,7 @@
           ></w-option>
         </w-select>
       </w-space>
-      <w-space>
+      <w-space :direction="direction">
         <w-select
           v-model="areaMoreValue"
           :transfer="false"

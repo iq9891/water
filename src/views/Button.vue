@@ -14,11 +14,27 @@
     9. 去掉 组合 按钮
     10. 新增 shape 属性，可圆角
   </pre>
+  <!-- <w-space
+    :direction="direction"
+  >
+    <w-radio-group
+      v-model="size"
+      :loading="loading"
+      :disabled="disabled"
+      :options="options"
+      type="button"
+      button-style="solid"
+    ></w-radio-group><w-button type="dashed" @click="loading = !loading"
+      >加载{{ loading ? '中' : '' }}</w-button
+    ><w-button type="danger" @click="disabled = !disabled"
+      >禁用{{ disabled ? '中' : '' }}</w-button
+    >
+  </w-space> -->
   <w-space type="vertical">
-    <w-space>
-      <!-- <w-button @click="size = 'large'">大</w-button>
+    <w-space :direction="direction">
+      <w-button @click="size = 'large'">大</w-button>
       <w-button type="info" @click="size = ''">中</w-button>
-      <w-button type="border" @click="size = 'small'">小</w-button> -->
+      <w-button type="border" @click="size = 'small'">小</w-button>
       <w-radio-group
         v-model="size"
         :loading="loading"
@@ -35,7 +51,7 @@
       >
     </w-space>
     <w-divider />
-    <w-space>
+    <w-space :direction="direction">
       <w-button :size="size" :disabled="disabled" :loading="loading"
         ><fire-filled /> Default</w-button
       >
@@ -66,7 +82,7 @@
         >Danger <fire-filled
       /></w-button>
     </w-space>
-    <w-space>
+    <w-space :direction="direction">
       <w-button :size="size" :disabled="disabled" :loading="loading"
         >Default</w-button
       >
@@ -96,7 +112,7 @@
       >
     </w-space>
     <div class="button-ghost">
-      <w-space>
+      <w-space :direction="direction">
         <w-button :size="size" :disabled="disabled" :loading="loading" ghost
           >Default</w-button
         >
@@ -134,7 +150,7 @@
         >
       </w-space>
     </div>
-    <w-space>
+    <w-space :direction="direction">
       <w-button :size="size" :disabled="disabled" :loading="loading">
         <template #icon>
           <img src="https://static2.evente.cn/static/img/icon.jpg" alt="水滴" />
@@ -231,7 +247,7 @@
         Danger
       </w-button>
     </w-space>
-    <w-space>
+    <w-space :direction="direction">
       <w-button
         shape="circle"
         :size="size"
@@ -406,6 +422,7 @@
 <script>
   import { defineAsyncComponent } from 'vue';
   import { FireFilled } from '@ant-design/icons-vue';
+  import { mapState } from 'vuex';
 
   const WButton = defineAsyncComponent(() =>
     import('../components/button/Button.tsx'),
@@ -444,6 +461,9 @@
         size: '',
         options,
       };
+    },
+    computed: {
+      ...mapState(['direction']),
     },
   };
 </script>

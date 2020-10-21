@@ -1,6 +1,6 @@
 /** @format */
 
-import validator, {
+import {
   sizeValidator,
   directionValidator,
   textAreaResizeValidator,
