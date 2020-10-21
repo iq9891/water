@@ -97,9 +97,9 @@
   }
 
   &-small {
-    line-height: $switch-sm-height;
-    height: $switch-sm-height;
-    min-width: $switch-sm-min-width;
+    line-height: $switch-height-sm;
+    height: $switch-height-sm;
+    min-width: $switch-min-width-sm;
 
     &-inner {
       margin: 0 4px 0 19px;

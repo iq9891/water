@@ -62,7 +62,7 @@
   }
 
   &:hover {
-    color: $radio-hover-color;
+    color: $radio-color-hover;
   }
 
   &-outline-on {
@@ -75,16 +75,16 @@
     }
 
     &:active {
-      color: $radio-active-color;
-      border-color: $radio-active-color;
+      color: $radio-color-active;
+      border-color: $radio-color-active;
     }
 
     &:hover {
-      color: $radio-hover-color;
-      border-color: $radio-hover-color;
+      color: $radio-color-hover;
+      border-color: $radio-color-hover;
 
       &::before {
-        background-color: $radio-hover-color;
+        background-color: $radio-color-hover;
       }
     }
   }
@@ -92,17 +92,17 @@
   &-solid-on {
     @extend .w-radio-button-outline-on;
 
-    color: $radio-solid-color;
+    color: $radio-color-solid;
     background: $radio-color;
 
     &:active {
-      color: $radio-solid-color;
-      background: $radio-active-color;
+      color: $radio-color-solid;
+      background: $radio-color-active;
     }
 
     &:hover {
-      color: $radio-solid-color;
-      background: $radio-hover-color;
+      color: $radio-color-solid;
+      background: $radio-color-hover;
     }
   }
 

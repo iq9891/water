@@ -36,12 +36,12 @@ $link-font: (
       }
 
       &:hover {
-        color: $link-hover-color;
+        color: $link-color-hover;
         text-decoration: none !important;
       }
 
       &:active {
-        color: $link-active-color;
+        color: $link-color-active;
       }
 
       & .w-link-text {

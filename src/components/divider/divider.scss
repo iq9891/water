@@ -3,9 +3,9 @@
 @import '../style/config.scss';
 
 $divider-list: (
-  '': $dividing-middle,
-  '-large': $dividing-large,
-  '-small': $dividing-small,
+  '': $dividing-base,
+  '-large': $dividing-lg,
+  '-small': $dividing-sm,
 );
 
 $divider-type: (

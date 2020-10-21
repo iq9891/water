@@ -63,7 +63,7 @@
   }
 
   &:hover {
-    color: $checkbox-hover-color;
+    color: $checkbox-color-hover;
   }
 
   &-outline-on {
@@ -76,16 +76,16 @@
     }
 
     &:active {
-      color: $checkbox-active-color;
-      border-color: $checkbox-active-color;
+      color: $checkbox-color-active;
+      border-color: $checkbox-color-active;
     }
 
     &:hover {
-      color: $checkbox-hover-color;
-      border-color: $checkbox-hover-color;
+      color: $checkbox-color-hover;
+      border-color: $checkbox-color-hover;
 
       &::before {
-        background-color: $checkbox-hover-color;
+        background-color: $checkbox-color-hover;
       }
     }
   }
@@ -93,17 +93,17 @@
   &-solid-on {
     @extend .w-checkbox-button-outline-on;
 
-    color: $checkbox-solid-color;
+    color: $checkbox-color-solid;
     background: $checkbox-color;
 
     &:active {
-      color: $checkbox-solid-color;
-      background: $checkbox-active-color;
+      color: $checkbox-color-solid;
+      background: $checkbox-color-active;
     }
 
     &:hover {
-      color: $checkbox-solid-color;
-      background: $checkbox-hover-color;
+      color: $checkbox-color-solid;
+      background: $checkbox-color-hover;
     }
   }
 

@@ -119,9 +119,9 @@ $normal-border: #dbdee9 !default;
 $normal-bg: $white !default;
 $normal-color: $white !default;
 // 行高
-$line-height-large: 22px !default;
+$line-height-lg: 22px !default;
 $line-height: 18px !default;
-$line-height-small: 16px !default;
+$line-height-sm: 16px !default;
 //不可用 颜色
 $disabled-bg: #f5f5f5 !default;
 $disabled-bg-on: #e6e6e6 !default;
@@ -135,20 +135,20 @@ $shadow: rgba(0, 0, 0, 0.15) !default;
 $mask: rgba(0, 0, 0, 0.65) !default;
 // 分割线
 $dividing-color: #eaeef5 !default;
-$dividing-small: 8px !default;
-$dividing-middle: 16px !default;
-$dividing-large: 24px !default;
+$dividing-sm: 8px !default;
+$dividing-base: 16px !default;
+$dividing-lg: 24px !default;
 // 间距
-$space-small: 8px !default;
-$space-middle: 16px !default;
-$space-large: 32px !default;
+$space-sm: 8px !default;
+$space-base: 16px !default;
+$space-lg: 32px !default;
 // 超链的时间
 $link-duration: $animation-duration-slow !default;
 $link-color: $primary-color !default;
-$link-hover-color: color-palette($link-color, 5) !default;
-$link-active-color: color-palette($link-color, 7) !default;
+$link-color-hover: color-palette($link-color, 5) !default;
+$link-color-active: color-palette($link-color, 7) !default;
 $link-decoration: none !default;
-$link-hover-decoration: none !default;
+$link-decoration-hover: none !default;
 $link-disabled-color: $disabled-color !default;
 $link-opacity: 0.5 !default;
 $link-font-size-sm: $font-size-sm !default;
@@ -175,9 +175,9 @@ $spin-opacity: 0.4 !default;
 // 开关
 $switch-color: $primary-color !default;
 $switch-height: 20px !default;
-$switch-sm-height: 16px !default;
+$switch-height-sm: 16px !default;
 $switch-min-width: 44px !default;
-$switch-sm-min-width: 28px !default;
+$switch-min-width-sm: 28px !default;
 $switch-duration: $animation-duration-slow !default;
 $switch-loading-color: color.scale($black, $alpha: -55%) !default;
 $switch-disabled-bg: $disabled-bg !default;
@@ -227,9 +227,9 @@ $button-only-padding-sm: 4px !default;
 
 // 单选
 $radio-color: $primary-color !default;
-$radio-solid-color: $text-color-inverse !default;
-$radio-hover-color: color-palette($radio-color, 5) !default;
-$radio-active-color: color-palette($radio-color, 7) !default;
+$radio-color-hover: color-palette($radio-color, 5) !default;
+$radio-color-solid: $text-color-inverse !default;
+$radio-color-active: color-palette($radio-color, 7) !default;
 $radio-button-color: $text-color !default;
 $radio-button-bg: $component-background !default;
 $radio-button-border: $normal-border !default;
@@ -246,9 +246,9 @@ $radio-disabled-inner-on: #8c8c8c !default;
 
 // 多选
 $checkbox-color: $primary-color !default;
-$checkbox-solid-color: $text-color-inverse !default;
-$checkbox-hover-color: color-palette($checkbox-color, 5) !default;
-$checkbox-active-color: color-palette($checkbox-color, 7) !default;
+$checkbox-color-hover: color-palette($checkbox-color, 5) !default;
+$checkbox-color-active: color-palette($checkbox-color, 7) !default;
+$checkbox-color-solid: $text-color-inverse !default;
 $checkbox-button-color: $text-color !default;
 $checkbox-button-bg: $component-background !default;
 $checkbox-button-border: $normal-border !default;

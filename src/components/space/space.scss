@@ -3,9 +3,9 @@
 @import '../style/config.scss';
 
 $space-list: (
-  '': $space-middle,
-  '-large': $space-large,
-  '-small': $space-small,
+  '': $space-base,
+  '-large': $space-lg,
+  '-small': $space-sm,
 );
 
 $space-type: (
