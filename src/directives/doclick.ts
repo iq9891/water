@@ -2,9 +2,9 @@
 
 export default {
   beforeMount(el: any, binding: any) {
-    const documentHandler = (e: any) => {
+    const documentHandler = (e: MouseEvent) => {
       if (!el.contains(e.target)) {
-        binding.value.apply(e);
+        binding.value.apply(e, [e]);
       }
     };
     el.emfeDocumentClick = documentHandler;

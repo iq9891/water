@@ -5,18 +5,18 @@
 @mixin placeholder($color: $placeholder-color) {
   &::-webkit-input-placeholder {
     color: $color;
-    font-size: $input-font-size;
+    font-size: $input-font-size-sm;
   }
 
   &::-moz-placeholder {
     color: $color;
-    font-size: $input-font-size;
+    font-size: $input-font-size-sm;
     opacity: 1;
   }
 
   &::placeholder {
     color: $color;
-    font-size: $input-font-size;
+    font-size: $input-font-size-sm;
   }
 
   &:placeholder-shown {

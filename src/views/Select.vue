@@ -13,7 +13,7 @@
     新增 clear 属性，单选时候，清除选中内容，新增 @clear 回调
     新增 arrow 属性，控制右边 下拉小箭头显示
     新增 onContentRender 属性，自定义 option 每项内容
-    新增 selectPoperWidth, selectPoperHeight 属性 控制 poper 弹框的宽度高度
+    新增 poperWidth, poperHeight 属性 控制 poper 弹框的宽度高度
     新增 maxTagCount 属性 最多显示几个
     去掉 emptyText 属性，新增 empty slot 自定义空状态
     新增 tag slot，自定义多选tags模式的标签
@@ -26,8 +26,9 @@
     blur emit 替换为 on-blur
     focus 属性替换为 on-focus
     focus emit 替换为 on-focus
-    新增 on-clear 属性
-    新增 on-clear emit
+    新增 on-clear 属性及 emit
+    新增 on-search 属性及 emit 只有 autoComplete 为 true 的时候
+    新增 filterOption 属性，在单选模式控制筛选
   </pre> -->
   <w-space type="vertical">
     <w-space type="vertical">
@@ -37,6 +38,7 @@
         <span>selectValue--{{ selectValue }}</span>
         <span>moreValue--{{ moreValue }}</span>
         <span>tagValue--{{ tagValue }}</span>
+        <span>simpleValue--{{ simpleValue }}</span>
       </w-space>
       <w-space :direction="direction">
         <w-radio-group v-model="size" :size="size">
@@ -249,6 +251,18 @@
           </template>
         </w-select>
       </w-space>
+      <w-space :direction="direction">
+        <w-select
+          v-model="simpleValue"
+          style="width: 160px"
+          :options="defaultSimpleDatas"
+          search
+          clear
+          :direction="direction"
+          :size="size"
+        >
+        </w-select>
+      </w-space>
     </w-space>
   </w-space>
 </template>
@@ -287,6 +301,8 @@
     data() {
       return {
         selectValue: '苹果',
+        simpleValue: 'Apple',
+        defaultSimpleDatas: ['Apple', 'Pear', 'More'],
         defaultDatas: [
           { value: 'Apple', label: '苹果', loading: false, disabled: true },
           {

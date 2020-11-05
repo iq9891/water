@@ -88,6 +88,11 @@
     @extend .w-select-multiple;
   }
 
+  &-complete {
+    border: none;
+    padding: 0;
+  }
+
   &-area {
     background: none;
     border-radius: 0;
@@ -299,5 +304,14 @@
   &-empty {
     color: $select-empty-color;
     padding: $padding-md 0;
+  }
+
+  & .w-search {
+    cursor: default;
+  }
+
+  & .w-search,
+  .w-input {
+    cursor: text;
   }
 }

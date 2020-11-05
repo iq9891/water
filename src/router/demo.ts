@@ -239,4 +239,15 @@ export default [
     component: () =>
       import(/* webpackChunkName: "search" */ '../views/Search.vue'),
   },
+  {
+    path: '/auto-complete',
+    name: 'AutoComplete',
+    meta: {
+      name: '自动完成',
+    },
+    component: () =>
+      import(
+        /* webpackChunkName: "auto-complete" */ '../views/AutoComplete.vue'
+      ),
+  },
 ];

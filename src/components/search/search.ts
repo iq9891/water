@@ -62,6 +62,7 @@ const searchOptions: ComponentOptions = {
     clear: Boolean,
     loading: Boolean, // search
     enterButton: Boolean, // search
+    enterIcon: Boolean, // serach
     className: {
       type: [Object, Array, String],
       default: '',

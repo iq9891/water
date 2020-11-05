@@ -22,8 +22,50 @@
       ></slot>
     </template>
     <template v-else>
+      <w-search
+        v-if="autoComplete"
+        v-model="fieldValue"
+        :placeholder="placeholder"
+        :enter-button="enterButton"
+        :enter-icon="enterIcon"
+        :loading="loading"
+        :disabled="disabled"
+        :size="size"
+        :clear="clear"
+        @compositionstart="handleCompositionStart($event)"
+        @compositionupdate="handleCompositionUpdate($event)"
+        @compositionend="handleCompositionEnd($event)"
+        @input="autoCompleteInput($event)"
+        @keydown.enter="searchEnter($event)"
+        @keyup.down="searchKeyDown"
+        @keyup.up="searchKeyUp"
+        @blur="inputBlur($event)"
+        @focus="inputFocus($event)"
+        @on-change="searchChange"
+      />
+      <!-- <div
+        v-if="autoComplete"
+      >
+        <input
+          ref="autoCompleteSearch"
+          v-model="fieldValue"
+          type="text"
+          :class="searchClass"
+          :placeholder="result || placeholder"
+          aria-label="search"
+          @compositionstart="handleCompositionStart($event)"
+          @compositionupdate="handleCompositionUpdate($event)"
+          @compositionend="handleCompositionEnd($event)"
+          @input="autoCompleteInput($event)"
+          @keydown.enter="searchEnter($event)"
+          @keyup.down="searchKeyDown"
+          @keyup.up="searchKeyUp"
+          @blur="inputBlur($event)"
+          @focus="inputFocus($event)"
+        />
+      </div> -->
       <div
-        v-if="isSingleMode || moreTags.length < 1"
+        v-else-if="isSingleMode || moreTags.length < 1"
         :class="resultClass"
         :title="result || placeholder"
       >
@@ -107,16 +149,21 @@
           @focus="inputFocus($event)"
         />
       </div>
-      <span v-if="showArrow && !loading" :class="arrowClass">
+      <span v-if="arrow && !loading" :class="arrowClass">
         <down-outlined />
       </span>
-      <span v-if="showArrow && search && poperStatus" :class="arrowClass">
+      <span v-if="arrow && search && poperStatus" :class="arrowClass">
         <search-outlined class="w-select-search" />
       </span>
-      <span v-if="showArrow && loading" :class="arrowClass">
+      <span v-if="!enterIcon && !enterButton && loading" :class="arrowClass">
         <loading-outlined />
       </span>
-      <span v-if="clear && (result || nameTags.length)" :class="arrowClass">
+      <span
+        v-if="
+          !enterIcon && !enterButton && clear && (result || nameTags.length)
+        "
+        :class="arrowClass"
+      >
         <close-circle-filled
           class="w-select-close"
           @click="clearModelValue($event)"
@@ -127,7 +174,7 @@
       ref="poper"
       v-model="poperStatus"
       target="select"
-      :width="selectPoperWidth"
+      :width="poperWidth"
       :placement="placement"
       :disabled="!transfer"
       :z-index="zIndex"
