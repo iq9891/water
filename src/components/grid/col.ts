@@ -13,6 +13,21 @@ interface colStyleEntity {
 }
 
 const colOptions: ComponentOptions = {
+  setup() {
+    const basin = inject('basin', 0);
+    const gutter = inject('gutter', 0);
+    const type = inject('type', 0);
+    return {
+      basin,
+      gutter,
+      type,
+    };
+  },
+  data() {
+    return {
+      preName: 'w-col',
+    };
+  },
   props: {
     className: {
       type: [Object, Array, String],
@@ -62,21 +77,6 @@ const colOptions: ComponentOptions = {
       type: Number,
       default: 0,
     },
-  },
-  setup() {
-    const basin = inject('basin', 0);
-    const gutter = inject('gutter', 0);
-    const type = inject('type', 0);
-    return {
-      basin,
-      gutter,
-      type,
-    };
-  },
-  data() {
-    return {
-      preName: 'w-col',
-    };
   },
   computed: {
     colStyle(): colStyleEntity {

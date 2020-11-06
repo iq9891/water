@@ -16,10 +16,13 @@ $space-type: (
 
 .w-space {
   display: flex; // inline-flex 在内嵌滚动组件的时候会有莫名的高度问题
-  flex-wrap: wrap;
 
   &-vertical {
     flex-direction: column;
+  }
+
+  &-horizontal {
+    flex-wrap: wrap;
   }
 
   &-align {

@@ -19,6 +19,13 @@ export interface HandleScrollEntity extends MouseMoveBaseEntity {
 }
 
 const barOptions: ComponentOptions = {
+  setup() {
+    const thumb = ref([]);
+
+    return {
+      thumb,
+    };
+  },
   data() {
     return {
       isCursorDown: false,
@@ -52,13 +59,6 @@ const barOptions: ComponentOptions = {
     thumbClass() {
       return ['w-scroll-thumb', `w-scroll-thumb-${this.bar.key}`];
     },
-  },
-  setup() {
-    const thumb = ref([]);
-
-    return {
-      thumb,
-    };
   },
   methods: {
     clickThumbHandler(ev: any) {

@@ -9,6 +9,13 @@ const radioButtonOptions: ComponentOptions = {
   components: {
     WRadio,
   },
+  setup() {
+    const radioGroup = inject('radioGroup', null);
+
+    return {
+      radioGroup,
+    };
+  },
   props: {
     modelValue: {
       type: [String, Number, Boolean],
@@ -20,13 +27,6 @@ const radioButtonOptions: ComponentOptions = {
     },
     checked: Boolean,
     ...radioProps,
-  },
-  setup() {
-    const radioGroup = inject('radioGroup', null);
-
-    return {
-      radioGroup,
-    };
   },
   render() {
     const props = getProps(this);

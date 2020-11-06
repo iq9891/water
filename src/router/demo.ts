@@ -250,4 +250,13 @@ export default [
         /* webpackChunkName: "auto-complete" */ '../views/AutoComplete.vue'
       ),
   },
+  {
+    path: '/timeline',
+    name: 'Timeline',
+    meta: {
+      name: '时间轴',
+    },
+    component: () =>
+      import(/* webpackChunkName: "timeline" */ '../views/Timeline.vue'),
+  },
 ];

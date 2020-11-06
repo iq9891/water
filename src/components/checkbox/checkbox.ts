@@ -14,6 +14,12 @@ export interface ReturnParamsEntity extends ChangeParamsEntity {
 }
 
 const checkboxOptions: ComponentOptions = {
+  setup() {
+    const checkboxGroup = inject('checkboxGroup', null);
+    return {
+      checkboxGroup,
+    };
+  },
   props: {
     modelValue: {
       type: [String, Number, Boolean],
@@ -109,12 +115,6 @@ const checkboxOptions: ComponentOptions = {
 
       return this.checked || status;
     },
-  },
-  setup() {
-    const checkboxGroup = inject('checkboxGroup', null);
-    return {
-      checkboxGroup,
-    };
   },
   methods: {
     clickFn(ev: MouseEvent) {
