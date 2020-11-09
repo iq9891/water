@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-  <div :class="classList">
+  <div :class="classList" @click="checked">
     <slot></slot>
   </div>
 </template>

@@ -1,8 +1,9 @@
 /** @format */
 
-import { h, defineComponent, VNode } from 'vue';
+import { h, defineComponent, VNode, Comment } from 'vue';
 import { CloseCircleFilled } from '@ant-design/icons-vue';
 import validator from '../../common/validator';
+import { isString } from '../../common/typeof';
 import { hasOwn, hyphenate } from '../../common/utils';
 
 const bothSidesRender = defineComponent({
@@ -87,7 +88,15 @@ const bothSidesRender = defineComponent({
       {
         class: [
           `w-input-${hyphenate(this.type)}`,
-          `w-input-${hyphenate(this.type)}-${this.direction}`,
+          {
+            // 如果没有内容就没有间距
+            [`w-input-${hyphenate(this.type)}-${this.direction}`]:
+              !!clearNode ||
+              !!limitNode ||
+              (isString(content) && content.length > 0) ||
+              (content as any).filter((cItem: any) => cItem.type !== Comment)
+                .length > 0,
+          },
         ],
       },
       [clearNode, limitNode, content],

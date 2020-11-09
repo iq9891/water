@@ -3,21 +3,23 @@
 <template>
   <div
     class="w-tag"
-    :class="classList"
+    :class="tagClass"
     :style="tagStyle"
     @animationend="removeClickName"
     @click="clickFn($event)"
   >
-    <slot></slot>
-    <i
-      v-if="closableValue"
-      class="w-tag-close"
-      :class="{
-        'w-tag-close-section': !isAllValue,
-        'w-tag-close-disabled': disabled,
-      }"
+    <span v-if="$slots.icon" class="w-tag-icon">
+      <slot name="icon"></slot>
+    </span>
+    <span class="w-tag-text">
+      <slot></slot>
+    </span>
+    <close-outlined
+      v-if="isClose"
+      :class="closeClass"
       @click="closeTag($event)"
-    ></i>
+    />
+    <loading-outlined v-if="loading" class="w-tag-loading" />
   </div>
 </template>
 
