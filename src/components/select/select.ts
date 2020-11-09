@@ -10,7 +10,13 @@ import {
   CloseCircleFilled,
 } from '@ant-design/icons-vue';
 import { poperComputed, poperProps } from '../../common/poper';
-import { isFunction, isArray, isString } from '../../common/typeof';
+import {
+  isFunction,
+  isArray,
+  isString,
+  isKorean,
+  isNumber,
+} from '../../common/typeof';
 import { getSlots } from '../../common/vue-utils';
 import { hasOwn } from '../../common/utils';
 import { directionValidator } from '../../common/validator';
@@ -19,6 +25,7 @@ import WScroll from '../scroll/Scroll.vue';
 import WEmpty from '../empty/empty';
 import WOption from './Option.vue';
 import WPoper from '../poper/Poper.vue';
+import WSearch from '../search/Search.vue';
 import {
   selectMode,
   handleName,
@@ -43,6 +50,7 @@ const selectOptions: ComponentOptions = {
     WScroll,
     WOption,
     WEmpty,
+    WSearch,
   },
   directives: {
     docClick,
@@ -51,6 +59,10 @@ const selectOptions: ComponentOptions = {
     provide(
       'modelValue',
       computed(() => props.modelValue),
+    );
+    provide(
+      'autoComplete',
+      computed(() => props.autoComplete),
     );
     provide('selectMode', props.mode);
   },
@@ -65,6 +77,13 @@ const selectOptions: ComponentOptions = {
       nameTags: [],
       newOpt: null,
       focused: false,
+      isPinYinWriting: false,
+      throttleTimer: null,
+    };
+  },
+  provide() {
+    return {
+      fieldValue: computed(() => this.fieldValue),
     };
   },
   props: {
@@ -85,7 +104,13 @@ const selectOptions: ComponentOptions = {
     clear: Boolean,
     loading: Boolean,
     disabled: Boolean,
-    arrow: Boolean,
+    arrow: {
+      type: Boolean,
+      default: true,
+    },
+    autoComplete: Boolean,
+    enterButton: Boolean, // search
+    enterIcon: Boolean, // serach
     transfer: {
       type: Boolean,
       default: true,
@@ -112,10 +137,23 @@ const selectOptions: ComponentOptions = {
       validator: directionValidator,
     },
     mode: selectMode,
-    selectPoperWidth: Number,
-    selectPoperHeight: Number,
+    poperWidth: Number,
+    poperHeight: Number,
     maxTagCount: Number,
+    valueWait: {
+      type: Number,
+      default: 0,
+    },
+    filterOption: Function,
+    onBody: {
+      type: Function,
+      default: () => {},
+    },
     onClear: {
+      type: Function,
+      default: () => {},
+    },
+    onSearch: {
       type: Function,
       default: () => {},
     },
@@ -127,9 +165,6 @@ const selectOptions: ComponentOptions = {
     },
     isTagMode() {
       return this.mode === TYPE_ENUM.tags;
-    },
-    showArrow() {
-      return this.loading || this.clear || this.arrow;
     },
     result() {
       const singleResultItem = this.getSingleResult();
@@ -148,10 +183,17 @@ const selectOptions: ComponentOptions = {
     filterDatas() {
       this.tagSearchHandleNew();
 
-      const filteredOptionDatas = this.optionDatas.filter((optItem: any) => {
-        const filterValue = optItem[this.fieldNames[this.optionValueProp]];
-        return filterValue ? filterValue.indexOf(this.fieldValue) > -1 : '';
-      });
+      const filterFunction = isFunction(this.filterOption)
+        ? (optItem: any) => this.filterOption(this.fieldValue, optItem)
+        : (optItem: any) => {
+            const filterValue = optItem[this.fieldNames[this.optionValueProp]];
+            return filterValue ? filterValue.indexOf(this.fieldValue) > -1 : '';
+          };
+
+      const filteredOptionDatas =
+        this.autoComplete && !this.filterOption
+          ? this.optionDatas
+          : this.optionDatas.filter(filterFunction);
 
       if (this.newOpt) {
         return filteredOptionDatas.concat(this.newOpt);
@@ -162,8 +204,10 @@ const selectOptions: ComponentOptions = {
       return [
         `w-select-${this.mode}`,
         {
+          'w-select-complete': this.autoComplete,
           'w-select-disabled': this.disabled,
-          'w-select-focused': !this.$slots.area && this.focused,
+          'w-select-focused':
+            !this.autoComplete && !this.$slots.area && this.focused,
           'w-select-area': this.$slots.area,
         },
       ];
@@ -212,9 +256,14 @@ const selectOptions: ComponentOptions = {
         {
           [`w-select-result-${this.size}`]: this.size,
           'w-select-result-disabled': this.disabled,
-          'w-select-result-empty': !this.result,
+          'w-select-result-empty': !this.result || this.autoComplete,
         },
       ];
+    },
+    singleSearchBox() {
+      return {
+        'w-select-single-search-box': !this.autoComplete,
+      };
     },
     searchClass() {
       return [
@@ -227,12 +276,22 @@ const selectOptions: ComponentOptions = {
     popStyle() {
       const style: any = {};
 
-      if (this.selectPoperHeight > 0) {
-        style.maxHeight = `${this.selectPoperHeight}px`;
-        style.height = `${this.selectPoperHeight}px`;
+      if (this.poperHeight > 0) {
+        style.maxHeight = `${this.poperHeight}px`;
+        style.height = `${this.poperHeight}px`;
       }
 
       return style;
+    },
+  },
+  watch: {
+    options: {
+      deep: true,
+      handler() {
+        if (this.autoComplete) {
+          this.renderOption();
+        }
+      },
     },
   },
   mounted() {
@@ -240,13 +299,41 @@ const selectOptions: ComponentOptions = {
   },
   methods: {
     renderOption() {
-      if (this.options.length > 0) {
-        this.optionDatas = this.options.slice();
-      } else if (isFunction(this.$slots.default)) {
+      if (isFunction(this.$slots.default)) {
         this.optionDatas = this.getSlotDatas();
+      } else {
+        this.optionDatas = this.options.length > 0 ? this.options.slice() : [];
       }
+      // 适配 options 为 [1,2,3] or ['1', '2', '3']
+      this.completeOptions();
       // 获取选中标签中的禁用状态
       this.handleNameTags();
+    },
+    completeOptions() {
+      this.optionDatas = this.optionDatas.map(
+        (oItem: string | number | FieldNamesEntity[]) => {
+          if (isString(oItem) || isNumber(oItem)) {
+            return {
+              [this.fieldNames.value]: oItem,
+              [this.fieldNames.label]: oItem,
+              [this.fieldNames.disabled]: false,
+              [this.fieldNames.loading]: false,
+            };
+          }
+          const newItem = cloneDeep(oItem) as FieldNamesEntity;
+          const { label, value } = this.fieldNames;
+
+          if (!hasOwn(newItem, label) && hasOwn(newItem, value)) {
+            newItem[label] = newItem[value];
+          }
+
+          if (!hasOwn(newItem, value) && hasOwn(newItem, label)) {
+            newItem[value] = newItem[label];
+          }
+
+          return newItem;
+        },
+      );
     },
     getSlotDatas() {
       const { value, label } = this.fieldNames;
@@ -328,12 +415,19 @@ const selectOptions: ComponentOptions = {
     selectClick() {
       if (!this.disabled) {
         this.onBefore().then(() => {
-          this.changePoperStatus(true);
+          if (!this.autoComplete || this.filterDatas.length > 0) {
+            this.changePoperStatus(true);
+          }
           this.focused = true;
           this.$nextTick(() => {
             if (this.search && this.$refs.singleSearch) {
               this.$refs.singleSearch.focus();
             }
+
+            if (!this.autoClearSearchValue || this.autoComplete) {
+              this.setFieldValue(this.modelValue);
+            }
+
             this.getFocus();
           });
         });
@@ -367,17 +461,40 @@ const selectOptions: ComponentOptions = {
       }
     },
     clearSearchValue() {
-      if (this.autoClearSearchValue) {
+      if (this.autoClearSearchValue && !this.autoComplete) {
         this.setFieldValue();
       }
     },
     searchEnter(ev: MouseEvent) {
-      // 刚开始直接按回车会默认添加删除第一个
-      this.optHoverIndex = this.optHoverIndex > -1 ? this.optHoverIndex : 0;
-      this.getHoverIndexEnabled();
+      if (this.autoComplete) {
+        if (this.poperStatus) {
+          this.searchEnterCore(ev);
+          this.changePoperStatus();
+        } else {
+          this.changePoperStatus(this.filterDatas.length > 0);
+        }
+      } else {
+        this.searchEnterCore(ev);
+      }
+    },
+    searchEnterCore(ev: MouseEvent) {
+      // 自动补全，有值连续回车
+      if (this.optHoverIndex < 0 && this.autoComplete && this.fieldValue) {
+        this.optHoverIndex = this.filterDatas.findIndex(
+          (fItem: any) =>
+            fItem[this.fieldNames[this.optionValueProp]] === this.fieldValue,
+        );
+      }
+      // 查询可用索引
+      if (this.optHoverIndex < 0 && !this.autoComplete) {
+        // 刚开始直接按回车会默认添加删除第一个
+        this.optHoverIndex = 0;
+        this.getHoverIndexEnabled();
+      }
 
       this.$nextTick(() => {
         const optNode = this.$refs[`option${this.optHoverIndex}`];
+
         if (optNode && !optNode.disabled) {
           optNode.checkOption(ev);
           this.$nextTick(() => {
@@ -386,6 +503,18 @@ const selectOptions: ComponentOptions = {
             this.resetHoverIndex();
             this.getFocus();
             this.tagNewEffectiveHandle(optNode);
+          });
+        } else if (this.autoComplete) {
+          // 没有的情况就是什么都没选，当
+          this.optionChange({
+            ev,
+            active: false,
+            disabled: false,
+            label: this.fieldValue,
+            loading: false,
+            modelValue: this.fieldValue,
+            new: false,
+            value: this.fieldValue,
           });
         }
       });
@@ -469,16 +598,50 @@ const selectOptions: ComponentOptions = {
     },
     tagNewEffectiveHandle(optNode: any) {
       if (this.isTagMode && optNode.new) {
-        if (optNode.active) {
-          const { label } = this.fieldNames;
-          this.optionDatas.findIndex(
-            (optItem: any) => optItem[label] === optNode[label],
-          );
-          this.optionDatas.splice(1);
+        if (this.newOpt) {
+          this.optionDatas.unshift(this.newOpt);
         } else {
-          this.optionDatas.unshift(optNode);
+          const { label } = this.fieldNames;
+          this.optionDatas.splice(
+            this.optionDatas.findIndex(
+              (optItem: any) => optItem[label] === optNode[label],
+            ),
+            1,
+          );
         }
       }
+    },
+    handleCompositionStart() {
+      this.isPinYinWriting = true;
+    },
+    handleCompositionUpdate(ev: Event) {
+      const text = (ev.target as any).value;
+      const lastCharacter = text[text.length - 1] || '';
+      this.isPinYinWriting = !isKorean(lastCharacter);
+    },
+    handleCompositionEnd(ev: Event) {
+      if (this.isPinYinWriting) {
+        this.isPinYinWriting = false;
+        (this as any).autoCompleteInput(ev);
+      }
+    },
+    autoCompleteInput(ev: MouseEvent) {
+      clearTimeout(this.throttleTimer);
+      if (!this.isPinYinWriting) {
+        this.throttleTimer = setTimeout(() => {
+          const fileInputValue = (ev.target as any).value || '';
+          this.$emit('on-search', fileInputValue);
+          this.onSearch(fileInputValue);
+          this.checkPoperStatus();
+        }, this.valueWait);
+      }
+    },
+    checkPoperStatus() {
+      this.$nextTick(() => {
+        if (this.autoComplete) {
+          this.changePoperStatus(this.filterDatas.length > 0);
+        }
+      });
     },
     fieldMoreInput(ev: MouseEvent) {
       this.fieldCanDelate = 0;
@@ -538,7 +701,17 @@ const selectOptions: ComponentOptions = {
         this.removeOptionDataWhenNew(newParams);
       }
 
+      if (this.autoComplete) {
+        this.setFieldValue(newParams.modelValue);
+      }
+
       this.setPoperPosition();
+    },
+    searchChange(params: ReturnParamsEntity) {
+      const { eventType, ev } = params;
+      if (eventType === 'clear') {
+        this.clearModelValue(ev);
+      }
     },
     clearModelValue(ev: MouseEvent) {
       const modelValue = this.isSingleMode ? '' : [];
@@ -548,6 +721,9 @@ const selectOptions: ComponentOptions = {
       this.handleNameTags();
       this.setPoperPosition();
       ev.stopPropagation();
+      if (this.autoComplete) {
+        this.setFieldValue();
+      }
     },
     setPoperPosition() {
       setTimeout(() => {
@@ -557,8 +733,13 @@ const selectOptions: ComponentOptions = {
         }
       }, 10);
     },
-    bodyClick() {
+    bodyClick(ev: MouseEvent) {
       this.changePoperStatus();
+      if (this.autoComplete && this.focused) {
+        this.searchEnterCore(ev);
+        this.onBody(this.fieldValue);
+        this.$emit('on-body', this.fieldValue);
+      }
       this.focused = false;
     },
     inputBlur(ev: MouseEvent) {

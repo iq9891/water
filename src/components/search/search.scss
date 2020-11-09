@@ -19,7 +19,7 @@
 
   &-icon {
     color: $search-icon-color;
-    cursor: pointer;
+    cursor: default;
     transition: all $search-duration;
 
     &-disabled {
@@ -60,6 +60,7 @@
       @extend .w-search-icon;
 
       color: $search-icon-color-inverse;
+      cursor: pointer;
 
       &-disabled {
         color: $search-disabled-color;

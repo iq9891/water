@@ -6,6 +6,13 @@ import { getProps, getSlots } from '../../common/vue-utils';
 import checkboxProps from '../checkbox-group/checkbox-props';
 
 const checkboxButtonOptions: ComponentOptions = {
+  setup() {
+    const checkboxGroup = inject('checkboxGroup', null);
+
+    return {
+      checkboxGroup,
+    };
+  },
   props: {
     modelValue: {
       type: [String, Number, Boolean],
@@ -17,13 +24,6 @@ const checkboxButtonOptions: ComponentOptions = {
     },
     checked: Boolean,
     ...checkboxProps,
-  },
-  setup() {
-    const checkboxGroup = inject('checkboxGroup', null);
-
-    return {
-      checkboxGroup,
-    };
   },
   render() {
     const props = getProps(this);

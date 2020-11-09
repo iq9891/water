@@ -31,7 +31,7 @@
         </template>
       </w-button>
     </template>
-    <template v-else #suffix>
+    <template v-if="enterIcon" #suffix>
       <template v-if="$slots.suffix">
         <slot name="suffix"></slot>
       </template>

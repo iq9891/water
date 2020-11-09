@@ -31,6 +31,12 @@ const radioOptions: ComponentOptions = {
   components: {
     LoadingOutlined,
   },
+  setup() {
+    const radioGroup = inject('radioGroup', null);
+    return {
+      radioGroup,
+    };
+  },
   props: {
     modelValue: {
       type: [String, Number, Boolean],
@@ -135,12 +141,6 @@ const radioOptions: ComponentOptions = {
         : this.modelValue;
       return this.checked || (value !== false && this.label === value);
     },
-  },
-  setup() {
-    const radioGroup = inject('radioGroup', null);
-    return {
-      radioGroup,
-    };
   },
   methods: {
     clickFn(ev: MouseEvent) {

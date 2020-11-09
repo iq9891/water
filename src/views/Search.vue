@@ -37,7 +37,6 @@
       autocomplete="on"
       :max-length="7"
       @on-change="change"
-      @on-search="onSearch"
     />
     <w-search
       v-model="val1"
@@ -50,6 +49,21 @@
       placeholder="请输入密码"
       autocomplete="on"
       :max-length="7"
+      enter-icon
+      @on-change="change"
+    />
+    <w-search
+      v-model="val1"
+      :clear="clear"
+      :disabled="disabled"
+      :size="size"
+      :border="border"
+      :loading="loading"
+      :direction="direction"
+      placeholder="请输入密码"
+      autocomplete="on"
+      :max-length="7"
+      enter-icon
       @on-change="change"
     >
       <template #suffix>

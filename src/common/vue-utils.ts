@@ -1,7 +1,7 @@
 /** @format */
 
 import merge from 'lodash-es/merge';
-import { isVNode, ComponentOptions, Comment, Fragment, Text } from 'vue';
+import { isVNode, ComponentOptions, Comment, Fragment, Text, VNode } from 'vue';
 import { isArray, isFunction } from './typeof';
 import { hasOwn, hyphenate, camelize } from './utils';
 
@@ -101,4 +101,13 @@ export const getSlots = (instance: any, options?: GetSlotsOptions) => {
     return filterEmptyElement(defultSlots[0].children);
   }
   return defultSlots ? filterEmptyElement(defultSlots) : [];
+};
+
+// 过滤 真实的 div 标签，Text，注释，只获得组件
+export const getTrueSlots = (instance: any, options?: GetSlotsOptions) => {
+  const children = getSlots(instance, options);
+  return children.filter(
+    (childItem: VNode) =>
+      !!childItem && isVNode(childItem) && typeof childItem.type === 'object',
+  );
 };

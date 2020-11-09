@@ -326,6 +326,7 @@ $input-color: $text-color !default;
 $input-placeholder-color: $placeholder-color !default;
 $input-border: $normal-border !default;
 $input-font-size: $font-size-base !default;
+$input-font-size-sm: $font-size-sm !default;
 $input-size-lg: 32px !default;
 $input-size-base: 28px !default;
 $input-size-sm: 24px !default;
@@ -366,3 +367,6 @@ $tag-height-lg: 32px !default;
 $tag-close-color: rgba(0, 0, 0, 0.85) !default;
 $tag-checked-bg: $primary-color !default;
 $tag-checked-color: $normal-color !default;
+
+// 时间轴
+$timeline-item-space: 16px !default;

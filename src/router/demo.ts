@@ -239,4 +239,24 @@ export default [
     component: () =>
       import(/* webpackChunkName: "search" */ '../views/Search.vue'),
   },
+  {
+    path: '/auto-complete',
+    name: 'AutoComplete',
+    meta: {
+      name: '自动完成',
+    },
+    component: () =>
+      import(
+        /* webpackChunkName: "auto-complete" */ '../views/AutoComplete.vue'
+      ),
+  },
+  {
+    path: '/timeline',
+    name: 'Timeline',
+    meta: {
+      name: '时间轴',
+    },
+    component: () =>
+      import(/* webpackChunkName: "timeline" */ '../views/Timeline.vue'),
+  },
 ];

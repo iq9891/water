@@ -18,9 +18,13 @@ const optionOptions: ComponentOptions = {
   },
   setup() {
     const selectModelValue = inject('modelValue', '');
+    const selectFieldValue = inject('fieldValue', '');
+    const selectAutoComplete = inject('autoComplete', false);
     const selectModeInject = inject('selectMode', '');
     return {
       selectModelValue,
+      selectAutoComplete,
+      selectFieldValue,
       selectMode: selectModeInject,
     };
   },
@@ -70,11 +74,16 @@ const optionOptions: ComponentOptions = {
     },
     isActive() {
       const slotValue = getSlots(this);
+      // 在自动完成模式的单选，选中之后再点击删除内容不高亮显示
+      const mValue = this.selectAutoComplete
+        ? this.selectFieldValue
+        : this.selectModelValue;
+
       return (
         this.active ||
-        this.checkActive(this.selectModelValue, this.label) ||
+        this.checkActive(mValue, this.label) ||
         (slotValue.length > 0 &&
-          this.checkActive(this.selectModelValue, slotValue[0].children))
+          this.checkActive(mValue, slotValue[0].children))
       );
     },
     optionClass() {
