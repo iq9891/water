@@ -19,11 +19,11 @@
       </w-timeline-item>
     </w-timeline>
     <w-timeline mode="alternate">
-      <w-timeline-item1 timestamp="2019-10-10" color="#f5222d">
+      <w-timeline-item timestamp="2019-10-10" color="#f5222d">
         <div>Solve initial network problems 1</div>
         <div>Solve initial network problems 2</div>
         <div>Solve initial network problems 3</div>
-      </w-timeline-item1>
+      </w-timeline-item>
       123
       <!-- <div></div> -->
       <!-- sss -->
@@ -143,7 +143,6 @@
   import { defineAsyncComponent } from 'vue';
   import { FireFilled } from '@ant-design/icons-vue';
   import { mapState } from 'vuex';
-  import WTimelineItem1 from '../components/timeline-item/TimelineItem.vue';
 
   const WTimeline = defineAsyncComponent(() =>
     import('../components/timeline/timeline'),
@@ -160,7 +159,6 @@
   export default {
     components: {
       WTimeline,
-      WTimelineItem1,
       WTimelineItem,
       WSpace,
       FireFilled,
