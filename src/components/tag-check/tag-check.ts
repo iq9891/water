@@ -1,8 +1,9 @@
 /** @format */
 
+import { ComponentOptions } from 'vue';
 import { sizeValidator } from '../../common/validator';
 
-export default {
+const tagCheckOptions: ComponentOptions = {
   data() {
     return {
       clicked: false,
@@ -29,24 +30,19 @@ export default {
         'w-tag-check',
         {
           'w-tag-check-loading': self.loading,
-          'w-tag-check-active': self.statusValue,
+          'w-tag-check-active': self.modelValue,
           'w-tag-check-inline': self.inline,
           [`w-tag-check-${self.size}`]: self.size,
           'w-tag-check-disabled': self.disabled,
         },
       ];
     },
-    statusValue() {
-      const self = this as any;
-      return self.modelValue;
-    },
-    sizeValue() {
-      const self = this as any;
-      return self.size;
-    },
-    disabledValue() {
-      const self = this as any;
-      return self.disabled;
+  },
+  methods: {
+    checked() {
+      this.$emit('update:modelValue', !this.modelValue);
     },
   },
 };
+
+export default tagCheckOptions;

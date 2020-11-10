@@ -116,6 +116,8 @@ const InputOptions: ComponentOptions = {
     },
     enterChange(reParams: ReturnParamsEntity) {
       this.changeValue(reParams);
+      this.$emit('on-enter', reParams);
+      this.onEnter(reParams);
     },
   },
 };

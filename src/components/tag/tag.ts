@@ -1,5 +1,7 @@
 /** @format */
 
+import { ComponentOptions } from 'vue';
+import { CloseOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import validator, { sizeValidator } from '../../common/validator';
 import { hexToRgb, RgbEntity } from '../../common/color';
 
@@ -13,7 +15,11 @@ interface ColorsEntity {
   borderColor?: string;
 }
 
-export default {
+const tagOptions: ComponentOptions = {
+  components: {
+    CloseOutlined,
+    LoadingOutlined,
+  },
   data() {
     return {
       clicked: false,
@@ -22,7 +28,7 @@ export default {
   props: {
     disabled: Boolean,
     loading: Boolean,
-    closable: Boolean,
+    close: Boolean,
     inline: {
       type: Boolean,
       default: true,
@@ -41,88 +47,85 @@ export default {
         return validator(typeList, value);
       },
     },
-    close: {
+    onClose: {
       type: Function,
       default: () => {},
     },
   },
   computed: {
-    classList() {
-      const self = this as any;
+    tagClass() {
       return [
         {
-          'w-tag-loading': self.loading,
-          [`w-tag-${self.size}`]: !!self.size,
-          [`w-tag-loading-${self.size}`]: self.loading && !!self.size,
-          'w-tag-click': !self.loading && self.clicked,
-          'w-tag-inline': self.inline,
-          'w-tag-disabled': self.disabled,
-          'w-tag-section': !self.isAllValue,
-          'w-tag-section-loading': self.sectionLoad,
+          'w-tag-loading-box': this.loading,
+          [`w-tag-${this.size}`]: !!this.size,
+          'w-tag-click': !this.loading && this.clicked,
+          'w-tag-inline': this.inline,
+          'w-tag-disabled': this.disabled,
+          'w-tag-section': !this.isAllValue,
+        },
+      ];
+    },
+    closeClass() {
+      return [
+        'w-tag-close',
+        {
+          'w-tag-close-section': !this.isAllValue,
+          'w-tag-close-disabled': this.disabled,
         },
       ];
     },
     sectionLoad() {
-      const self = this as any;
-      return !self.isAllValue && self.loading;
+      return !this.isAllValue && this.loading;
     },
-    closableValue() {
-      const self = this as any;
-      return self.closable && !self.loading;
+    isClose() {
+      return this.close && !this.loading && !this.disabled;
     },
     isAllValue() {
-      const self = this as any;
-      return self.colorType === 'all';
+      return this.colorType === 'all';
     },
     borderColorValue() {
-      const self = this as any;
-      const { r, g, b } = self.colorValue;
-      const alpha = self.isAllValue ? 0.4 : 1;
+      const { r, g, b } = this.colorValue;
+      const alpha = this.isAllValue ? 0.4 : 1;
       return `rgba(${r}, ${g}, ${b}, ${alpha})`;
     },
     backgroundColorValue() {
-      const self = this as any;
-      const { r, g, b }: RgbEntity = self.colorValue;
-      const alpha = self.isAllValue ? 0.1 : 1;
+      const { r, g, b }: RgbEntity = this.colorValue;
+      const alpha = this.isAllValue ? 0.1 : 1;
       return `rgba(${r}, ${g}, ${b}, ${alpha})`;
     },
     fontColorValue() {
-      const self = this as any;
-      const { r, g, b }: RgbEntity = self.colorValue;
-      return self.isAllValue ? `rgb(${r}, ${g}, ${b})` : '#fff';
+      const { r, g, b }: RgbEntity = this.colorValue;
+      return this.isAllValue ? `rgb(${r}, ${g}, ${b})` : '#fff';
     },
     colorValue(): RgbEntity {
-      const self = this as any;
-      return hexToRgb(self.color);
+      return hexToRgb(this.color);
     },
     tagStyle(): ColorsEntity {
-      const self = this as any;
       const colors: ColorsEntity = {};
 
-      if (self.color) {
-        colors.borderColor = self.borderColorValue;
-        colors.color = self.fontColorValue;
-        colors.backgroundColor = self.backgroundColorValue;
+      if (this.color) {
+        colors.borderColor = this.borderColorValue;
+        colors.color = this.fontColorValue;
+        colors.backgroundColor = this.backgroundColorValue;
       }
       return colors;
     },
   },
   methods: {
     clickFn() {
-      const self = this as any;
-      self.clicked = !self.disabled;
+      this.clicked = !this.disabled;
     },
     removeClickName() {
-      const self = this as any;
-      self.clicked = false;
+      this.clicked = false;
     },
     closeTag(ev: MouseEvent) {
-      const self = this as any;
       const params: ReturnEntity = {
         ev,
       };
-      self.close(params);
-      self.$emit('on-close', params);
+      this.onClose(params);
+      this.$emit('on-close', params);
     },
   },
 };
+
+export default tagOptions;

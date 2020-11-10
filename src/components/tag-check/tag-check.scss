@@ -2,41 +2,23 @@
 
 @import '../style/config.scss';
 @import '../style/mixins/spread.scss';
-// @import '../../../helper/loading.scss';
 
-$move-time: 0.2s;
 $tag-list: (
-  '': 18,
-  '-large': 22,
-  '-small': 14,
+  '': $tag-height-base,
+  '-large': $tag-height-lg,
+  '-small': $tag-height-sm,
 );
-$margin-right: (
-  '': 8,
-  '-large': 8,
-  '-small': 8,
-);
-// $loading-padding-right: (
-//   '': 29,
-//   '-large': 29,
-//   '-small': 21,
-// );
-// $loading-right: (
-//   '': 10,
-//   '-large': 16,
-//   '-small': 8,
-// );
 
 .w-tag-check {
-  border: 1px solid $normal-bg;
   color: $text-color-secondary;
   padding: 0 8px;
   white-space: nowrap;
-  background: $normal-bg;
-  transition: background $move-time, border-color $move-time, color $move-time;
+  background: $tag-bg;
+  transition: background $tag-duration, color $tag-duration;
   cursor: pointer;
   font-family: $font-family;
-  border-radius: 4px;
-  font-size: 12px;
+  border-radius: $border-radius-base;
+  font-size: $font-size-sm;
 
   &-inline {
     display: inline-block;
@@ -48,12 +30,11 @@ $margin-right: (
   }
 
   &-active {
-    border: 1px solid $primary-6;
-    background: $primary-6;
-    color: $normal-color;
+    background: $tag-checked-bg;
+    color: $tag-checked-color;
 
     & .w-tag-check-disabled {
-      color: $normal-color;
+      color: $tag-checked-color;
       cursor: not-allowed;
     }
   }
@@ -61,12 +42,15 @@ $margin-right: (
   // 循环尺寸
   @each $size, $value in $tag-list {
     &#{$size} {
-      height: $value + px;
-      line-height: $value + px;
-      margin-right: map-get($margin-right, $size) + px;
+      height: $value;
+      line-height: $value;
 
       @if $size == '-small' {
-        padding: 0 8px;
+        padding: 0 $padding-xs;
+      }
+
+      @if $size == '-large' {
+        padding: 0 $padding-sm;
       }
     }
   }
@@ -74,30 +58,4 @@ $margin-right: (
   &:last-child {
     margin-right: 0;
   }
-
-  // &-loading {
-  //   @extend .w-loading;
-
-  //   opacity: 0.5;
-  //   pointer-events: none;
-  //   position: relative;
-
-  //   &::before {
-  //     width: 10px;
-  //     height: 10px;
-  //     top: 50%;
-  //     margin: -5px 0 0;
-  //   }
-
-  //   // 循环尺寸
-  //   @each $size, $value in $loading-padding-right {
-  //     &#{$size} {
-  //       padding-right: $value + px;
-
-  //       &::before {
-  //         right: map-get($loading-right, $size) + px;
-  //       }
-  //     }
-  //   }
-  // }
 }

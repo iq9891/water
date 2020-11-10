@@ -6,23 +6,27 @@
     ref="newtag"
     :class="classList"
     @click="clickFn($event)"
-    @animationend="removeClickName"
   >
-    <!-- <i class="w-newtag-icon"></i> -->
+    <span v-if="$slots.icon" class="w-newtag-icon">
+      <slot name="icon"></slot>
+    </span>
     <slot></slot>
   </div>
   <w-input
     v-else
     ref="input"
-    v-model="inputValue"
     v-doc-click="bodyClick"
+    :value="inputValue"
     :class="inputClass"
-    :placeholder="placeholder"
-    :error="error"
+    :size="size"
+    placeholder=""
     :style="`width: ${inputWidth}px`"
-    @keyup.enter="inputEnter"
+    @on-enter="inputEnter"
+    @on-change="inputChange"
   >
-    <!-- <w-icon v-show="loading" slot="suffix" spin /> -->
+    <template #suffix>
+      <loading-outlined v-if="loading" />
+    </template>
   </w-input>
 </template>
 

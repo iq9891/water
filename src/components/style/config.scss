@@ -357,5 +357,16 @@ $search-button-only-padding-base: $button-only-padding-base !default;
 $search-button-only-padding-sm: ($button-only-padding-sm + 1px) !default;
 $search-button-only-padding-lg: ($button-only-padding-lg + 1px) !default;
 
+// tag
+$tag-border-border: $normal-border !default;
+$tag-duration: $animation-duration-slow !default;
+$tag-bg: #fafafa !default;
+$tag-height-base: 28px !default;
+$tag-height-sm: 24px !default;
+$tag-height-lg: 32px !default;
+$tag-close-color: rgba(0, 0, 0, 0.85) !default;
+$tag-checked-bg: $primary-color !default;
+$tag-checked-color: $normal-color !default;
+
 // 时间轴
 $timeline-item-space: 16px !default;

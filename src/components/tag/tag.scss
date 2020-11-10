@@ -3,28 +3,21 @@
 @import '../style/config.scss';
 @import '../style/mixins/spread.scss';
 
-$move-time: 0.2s;
 $tag-list: (
-  '': 18,
-  '-large': 22,
-  '-small': 14,
-);
-$margin-right: (
-  '': 8,
-  '-large': 8,
-  '-small': 8,
+  '': $tag-height-base,
+  '-large': $tag-height-lg,
+  '-small': $tag-height-sm,
 );
 
 .w-tag {
-  border: 1px solid $normal-border;
-  color: $text-color-secondary;
+  border: 1px solid $tag-border-border;
+  color: $text-color;
   padding: 0 8px;
   white-space: nowrap;
-  background: $disabled-bg;
+  background: $tag-bg;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: $border-radius-base;
   font-family: $font-family;
-  font-size: 12px;
 
   &-inline {
     display: inline-block;
@@ -34,36 +27,30 @@ $margin-right: (
   // 循环尺寸
   @each $size, $value in $tag-list {
     &#{$size} {
-      height: $value + px;
-      line-height: $value + px;
-      margin-right: map-get($margin-right, $size) + px;
+      height: $value;
+      line-height: $value - 2;
+      font-size: 0;
 
       @if $size == '-sm' {
-        padding: 0 8px;
+        padding: 0 $padding-xs;
       }
     }
   }
 
-  &:last-child {
-    margin-right: 0;
+  &-text {
+    font-size: $font-size-sm;
   }
 
-  &-click {
-    position: relative;
+  &-icon {
+    font-size: $font-size-sm;
+    padding-right: $padding-xxs;
+  }
 
-    &::before {
-      content: ' ';
-      position: absolute;
-      top: -1px;
-      bottom: -1px;
-      right: -1px;
-      left: -1px;
-      border-radius: inherit;
-      border: 1px solid;
-      border-color: inherit;
-      opacity: 0.4;
+  & a {
+    color: $text-color;
 
-      @include speadMixin;
+    &:hover {
+      color: $text-color;
     }
   }
 
@@ -72,46 +59,25 @@ $margin-right: (
     height: 10px;
     display: inline-block;
     position: relative;
-    margin-left: 8px;
+    margin-left: 3px;
     transform: translateY(1px);
+    color: $text-color-secondary;
+    font-size: $font-size-sm;
 
     &:hover {
-      &::before,
-      &::after {
-        background: rgba(0, 0, 0, 0.85);
-      }
-
-      & .w-tag-close-section {
-        &::before,
-        &::after {
-          background: #fff;
-        }
-      }
-    }
-
-    &::before,
-    &::after {
-      content: '';
-      width: 2px;
-      height: 10px;
-      border-radius: 2px;
-      background: $text-color-secondary;
-      transition: background $move-time;
-      position: absolute;
-      left: 4px;
-      top: 0;
+      color: $text-color;
     }
 
     &-section {
       &::before,
       &::after {
-        background: #fff;
+        background: $component-background;
       }
 
       &:hover {
         &::before,
         &::after {
-          background: #fff;
+          background: $component-background;
         }
       }
     }
@@ -133,34 +99,16 @@ $margin-right: (
     }
   } // w-tag-close end
 
-  // &-loading {
-  //   @extend .w-loading;
+  &-loading {
+    @extend .w-tag-close;
 
-  //   opacity: 0.5;
-  //   pointer-events: none;
-  //   position: relative;
-  //   padding-right: 29px;
+    color: inherit;
 
-  //   &::before {
-  //     width: 10px;
-  //     height: 10px;
-  //     top: 50%;
-  //     right: 9px;
-  //     margin: -6px 0 0;
-  //   }
-  // }
-
-  &-section {
-    transition: opacity $move-time;
-
-    &:hover {
-      opacity: 0.85;
-    }
-
-    &-loading {
-      &::before {
-        border-top: 1px solid $normal-color;
-      }
+    &-box {
+      opacity: 0.5;
+      pointer-events: none;
+      position: relative;
+      transition: opacity $tag-duration;
     }
   }
 
