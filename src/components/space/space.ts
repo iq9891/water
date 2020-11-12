@@ -7,6 +7,7 @@ import validator, {
   sizeValidator,
   typeValidator,
   directionValidator,
+  TYPE_ENUM,
 } from '../../common/validator';
 
 export interface SpaceProps {
@@ -28,7 +29,7 @@ const spaceOptions: ComponentOptions = {
     },
     type: {
       type: String,
-      default: 'horizontal', // vertical
+      default: TYPE_ENUM.HORIZONTAL, // vertical
       validator: typeValidator,
     },
     align: {
@@ -55,7 +56,7 @@ const spaceOptions: ComponentOptions = {
 
     const children = $slots.default();
     const childrenLen = children.length;
-    const isHorizontal = type === 'horizontal';
+    const isHorizontal = type === TYPE_ENUM.HORIZONTAL;
     const mergedAlign = align === undefined && isHorizontal ? 'center' : align;
 
     return h(

@@ -1,6 +1,7 @@
 /** @format */
 import { CSSProperties } from 'vue';
-import { hasOwn, getStyle } from '../../common/utils';
+import { hasOwn } from '../../common/utils';
+import { getStyle } from '../../common/dom';
 import { isObject, isNumber } from '../../common/typeof';
 
 let hiddenTextarea: any;

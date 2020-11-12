@@ -2,6 +2,7 @@
 
 import { createRouter, createWebHistory } from 'vue-router';
 import demoRouters from './demo';
+import transitionRouters from './transition';
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -25,6 +26,7 @@ const router = createRouter({
         import(/* webpackChunkName: "color" */ '../views/color/Color.vue'),
     },
     ...demoRouters,
+    ...transitionRouters,
   ],
 });
 

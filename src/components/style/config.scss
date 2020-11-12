@@ -368,5 +368,8 @@ $tag-close-color: rgba(0, 0, 0, 0.85) !default;
 $tag-checked-bg: $primary-color !default;
 $tag-checked-color: $normal-color !default;
 
+// 折叠过度
+$fold-duration: $animation-duration-slow !default;
+$fold-transition-type: ease-in-out !default;
 // 时间轴
 $timeline-item-space: 16px !default;

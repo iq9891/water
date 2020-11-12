@@ -1,0 +1,8 @@
+/** @format */
+
+@import '../style/config.scss';
+
+.w-fold {
+  transition: height $fold-duration $fold-transition-type,
+    opacity $fold-duration $fold-transition-type;
+}
