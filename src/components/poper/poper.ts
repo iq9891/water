@@ -20,11 +20,18 @@ const poperOptions: ComponentOptions = {
     width: Number,
     height: Number,
     zIndex: Number,
+    className: {
+      type: [Object, Array, String],
+      default: '',
+    },
   },
   computed: {
     ...poperComputed,
     targetNode() {
-      return getRefByTarget(this, '$parent', this.target);
+      return this.$refs.poper;
+    },
+    poperClass() {
+      return ['w-poper', this.className];
     },
   },
   mounted() {

@@ -5,23 +5,36 @@
     新组件
   </pre> -->
   <w-space type="vertical">
-    <div ref="demo" style="display: inline-block;">
+    <w-poper
+      v-model="poperStatus1"
+      :width="130"
+      :z-index="212"
+      placement="bottomLeft"
+      :interval="12"
+      :disabled="false"
+    >
       <w-checkbox v-model:checked="poperStatus1" border
-        >点{{ poperStatus1 }}我</w-checkbox
+        >点{{ poperStatus1 }}我1</w-checkbox
       >
-      <w-poper
-        ref="poper"
-        v-model="poperStatus1"
-        target="demo"
-        :width="130"
-        :z-index="212"
-        placement="bottomLeft"
-        :interval="12"
-        :disabled="false"
+      <template #poper>
+        test1
+      </template>
+    </w-poper>
+    <w-poper
+      v-model="poperStatus2"
+      :width="130"
+      :z-index="212"
+      placement="bottomLeft"
+      :interval="12"
+      :disabled="true"
+    >
+      <w-checkbox v-model:checked="poperStatus2" border
+        >点{{ poperStatus2 }}我2</w-checkbox
       >
+      <template #poper>
         test12
-      </w-poper>
-    </div>
+      </template>
+    </w-poper>
   </w-space>
 </template>
 
@@ -49,6 +62,7 @@
     data() {
       return {
         poperStatus1: false,
+        poperStatus2: false,
       };
     },
   };
