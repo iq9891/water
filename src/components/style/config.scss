@@ -114,6 +114,9 @@ $animation-duration-slow: 0.3s !default; // Modal
 $animation-duration-base: 0.2s !default;
 $animation-duration-fast: 0.1s !default; // Tooltip
 
+// fade 动画时间
+$fade-duration: $animation-duration-slow !default;
+
 // 正常
 $normal-border: #dbdee9 !default;
 $normal-bg: $white !default;
@@ -371,5 +374,12 @@ $tag-checked-color: $normal-color !default;
 // 折叠过度
 $fold-duration: $animation-duration-slow !default;
 $fold-transition-type: ease-in-out !default;
+
 // 时间轴
 $timeline-item-space: 16px !default;
+
+// tooltip
+$tooltip-font-size: $font-size-base !default;
+$tooltip-line-height: 1.5 !default;
+$tooltip-min-width: 30px !default;
+$tooltip-min-height: 32px !default;

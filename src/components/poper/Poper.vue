@@ -5,9 +5,11 @@
   <div ref="poper" class="w-poper-box">
     <slot></slot>
     <teleport :to="to" :disabled="disabled">
-      <div v-show="modelValue" ref="popElem" :class="poperClass">
-        <slot name="poper"></slot>
-      </div>
+      <transition name="fade">
+        <div v-show="modelValue" ref="popElem" :class="poperClass">
+          <slot name="poper"></slot>
+        </div>
+      </transition>
     </teleport>
   </div>
 </template>

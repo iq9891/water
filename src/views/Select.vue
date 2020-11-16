@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-  <!-- <pre style="color: red">
+  <!-- <pre style="color: red">getContainer
     重构组件
     1. 去掉 click 属性
     3. 新增 ltr 支持
@@ -29,6 +29,7 @@
     新增 on-clear 属性及 emit
     新增 on-search 属性及 emit 只有 autoComplete 为 true 的时候
     新增 filterOption 属性，在单选模式控制筛选
+    change -> onChange 属性修改
   </pre> -->
   <w-space type="vertical">
     <w-space type="vertical">

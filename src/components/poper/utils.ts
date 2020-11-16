@@ -131,3 +131,10 @@ export const getRefByTarget = (instance: any, $key: any, refName: any): any => {
 
   return null;
 };
+
+export const getEventType = (type: string) => {
+  if (type === 'mouseenter' || type === 'mouseleave') {
+    return 'hover';
+  }
+  return type;
+};

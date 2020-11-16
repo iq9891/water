@@ -259,4 +259,13 @@ export default [
     component: () =>
       import(/* webpackChunkName: "timeline" */ '../views/Timeline.vue'),
   },
+  {
+    path: '/tooltip',
+    name: 'Tooltip',
+    meta: {
+      name: '文字提示',
+    },
+    component: () =>
+      import(/* webpackChunkName: "tooltip" */ '../views/Tooltip.vue'),
+  },
 ];
