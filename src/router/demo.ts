@@ -268,4 +268,13 @@ export default [
     component: () =>
       import(/* webpackChunkName: "tooltip" */ '../views/Tooltip.vue'),
   },
+  {
+    path: '/popover',
+    name: 'Popover',
+    meta: {
+      name: '气泡卡片',
+    },
+    component: () =>
+      import(/* webpackChunkName: "popover" */ '../views/Popover.vue'),
+  },
 ];

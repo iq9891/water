@@ -13,11 +13,11 @@
   z-index: 1050;
   box-sizing: border-box;
   padding: 0;
-  overflow: hidden;
   font-variant: normal;
   outline: none;
 
   &-box {
     position: relative;
+    display: inline-block;
   }
 }

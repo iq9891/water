@@ -1,7 +1,12 @@
 /** @format */
 @use 'sass:color';
+@use 'sass:math';
 
 @import './colors.scss';
+
+@function delUnits($number) {
+  @return $number / ($number * 0 + 1);
+}
 
 $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
   'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
@@ -383,3 +388,19 @@ $tooltip-font-size: $font-size-base !default;
 $tooltip-line-height: 1.5 !default;
 $tooltip-min-width: 30px !default;
 $tooltip-min-height: 32px !default;
+$tooltip-bg: rgba(0, 0, 0, 0.75) !default;
+
+// popover
+$popover-bg: $component-background;
+$popover-font-size: $font-size-base !default;
+$popover-line-height: 1.5 !default;
+$popover-min-width: 30px !default;
+$popover-min-height: 32px !default;
+$popover-border-color: #f0f0f0 !default;
+$popover-arrow-color: color.scale($black, $alpha: -94%) !default;
+$popover-arrow-width: 6 !default;
+$popover-arrow-size: (
+  math.sqrt($popover-arrow-width * $popover-arrow-width * 2) / 2
+) !default;
+$popover-arrow-size-unit: px;
+$popover-distance: $popover-arrow-width + 4px;
