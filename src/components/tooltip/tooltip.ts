@@ -89,9 +89,6 @@ const tooltipOptions: ComponentOptions = {
         },
       ];
     },
-    contentValue() {
-      return this.content;
-    },
     arrowStyle(): ColorEntity {
       const color: ColorEntity = {};
       if (this.isHorTop && this.arrowColor) {

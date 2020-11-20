@@ -26,10 +26,10 @@
 
   &-content {
     padding: $padding-xxs + 2 $padding-xs;
-    color: $normal-color;
+    color: $text-color-inverse;
     text-align: left;
     text-decoration: none;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: $tooltip-bg;
     border-radius: $border-radius-base;
     box-shadow: 0 2px 8px $shadow-color;
     box-sizing: border-box;
@@ -58,13 +58,13 @@
     &-horbottom {
       top: 0;
       border-width: 0 5px 5px;
-      border-bottom-color: rgba(0, 0, 0, 0.75);
+      border-bottom-color: $tooltip-bg;
     }
 
     &-hortop {
       bottom: 0;
       border-width: 5px 5px 0;
-      border-top-color: rgba(0, 0, 0, 0.75);
+      border-top-color: $tooltip-bg;
     }
 
     &-vercenter {
@@ -83,13 +83,13 @@
     &-horleft {
       right: 0;
       border-width: 5px 0 5px 5px;
-      border-left-color: rgba(0, 0, 0, 0.75);
+      border-left-color: $tooltip-bg;
     }
 
     &-horright {
       left: 0;
       border-width: 5px 5px 5px 0;
-      border-right-color: rgba(0, 0, 0, 0.75);
+      border-right-color: $tooltip-bg;
     }
 
     &-horcenter {
