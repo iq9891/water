@@ -2,7 +2,9 @@
 
 import { ComponentOptions } from 'vue';
 import { poperComputed, poperBaseProps } from '../../common/poper';
-import { setPostion, getRefByTarget } from './utils';
+import { isNumber, isString } from '../../common/typeof';
+import { setPostion } from './utils';
+import { getStyle, getTrueValue } from '../../common/utils';
 
 const poperOptions: ComponentOptions = {
   props: {
@@ -17,9 +19,14 @@ const poperOptions: ComponentOptions = {
       type: String,
       default: 'body',
     },
-    width: Number,
+    width: [Number, String],
     height: Number,
     zIndex: Number,
+    paddingBottom: {
+      // 操作区域在页面右下角的时候，连续点击两次位置变化的修复
+      type: Number,
+      default: 0,
+    },
     className: {
       type: [Object, Array, String],
       default: '',
@@ -41,17 +48,32 @@ const poperOptions: ComponentOptions = {
     poperInit() {
       this.$nextTick(() => {
         this.setWidth();
-        setPostion(this, this.targetNode, this.disabled);
+        setPostion(
+          this,
+          this.targetNode,
+          !this.modelValue || this.disabled,
+          (params: any) => {
+            this.$emit('horizontal-inited', params);
+          },
+          (params: any) => {
+            this.$emit('vertical-inited', params);
+          },
+          {
+            paddingBottom: this.paddingBottom,
+          },
+        );
       });
     },
     setWidth() {
       const { popElem } = this.$refs;
       if (popElem) {
-        popElem.style.width = `${this.width || this.targetNode.offsetWidth}px`;
+        // 在右边的时候宽度设置为 auto 的时候会被挤压
+        const defWidth = isNumber(parseInt(this.width, 10)) ? this.width : '';
+        const width = getTrueValue(defWidth || this.targetNode.offsetWidth);
+        const height = this.height ? getTrueValue(this.height) : '';
 
-        if (this.height) {
-          popElem.style.height = `${this.height}px`;
-        }
+        popElem.style.width = width;
+        popElem.style.height = height;
 
         if (this.zIndex && this.zIndex > 0) {
           popElem.style.zIndex = this.zIndex;

@@ -8,7 +8,7 @@
     去掉 title-style ， getContainer 属性
   </pre> -->
   <w-space type="vertical">
-    <div class="box">
+    <!-- <div class="box">
       <w-popover v-model="popoverStatus1">
         <span>鼠标移入时将显示 Popover 。{{ popoverStatus1 }}</span>
         <template #title>
@@ -32,21 +32,29 @@
           </div>
         </template>
       </w-popover>
-    </div>
-    <div>
-      <w-popover v-model="popoverStatus3" trigger="click" placement="right">
+    </div> -->
+    <div style="text-align: center;">
+      <!--  padding-top: calc(100vh - 28px) -->
+      <w-popover
+        v-model="popoverStatus3"
+        trigger="click"
+        placement="bottom"
+        :poper-width="400"
+      >
         <WButton>点我 。</WButton>
         <template #title>
           <w-link href="https://github.com/fe6/water">水滴</w-link>
         </template>
         <template #content>
-          <div>这是内容。</div>
+          <div>
+            这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。
+          </div>
           <div>这是内容。</div>
           <w-link @click="linkClick">关闭 Popover ！</w-link>
         </template>
       </w-popover>
     </div>
-    <div class="box">
+    <!-- <div class="box">
       必须 有 v-model 才能操作显示隐藏状态
       <w-popover
         v-model="popoverStatus4"
@@ -70,7 +78,7 @@
           <w-link @click="link4Click">关闭 Popover ！</w-link>
         </template>
       </w-popover>
-    </div>
+    </div> -->
   </w-space>
 </template>
 

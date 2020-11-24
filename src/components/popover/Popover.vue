@@ -9,8 +9,12 @@
     :interval="interval"
     :disabled="!transfer"
     :class-name="popoverClass"
+    :padding-bottom="poperPaddingBottom"
+    @horizontal-inited="horizontalPoperInited"
+    @vertical-inited="verticalPoperInited"
   >
     <div
+      :ref="(el) => (handlerNode = el)"
       v-doc-click="bodyClick"
       :class="popoverCoreClass"
       @mouseenter="triggerHandle($event)"

@@ -3,6 +3,7 @@
 <template>
   <!-- <pre style="color: red">
     新组件
+    当出界了自动换方向
   </pre> -->
   <w-space type="vertical">
     <w-poper

@@ -1,8 +1,9 @@
 /** @format */
 
-import { ComponentOptions } from 'vue';
+import { ComponentOptions, ref } from 'vue';
 import docClick from '../../directives/doclick';
 import { poperComputed, poperProps } from '../../common/poper';
+import { getRect } from '../../common/getrect';
 import WPoper from '../poper/Poper.vue';
 import { getEventType } from '../poper/utils';
 
@@ -21,6 +22,10 @@ const popoverOptions: ComponentOptions = {
     return {
       status: false,
       timer: null,
+      arrowClass: [],
+      popoverClass: [],
+      isHorOutSide: false,
+      isVerOutSide: false,
     };
   },
   props: {
@@ -34,10 +39,7 @@ const popoverOptions: ComponentOptions = {
       type: Number,
       default: 0,
     },
-    poperWidth: {
-      type: [Number, String],
-      default: 'auto',
-    },
+    poperWidth: [Number, String],
     leaveDelay: {
       type: Number,
       default: 0,
@@ -58,38 +60,21 @@ const popoverOptions: ComponentOptions = {
       default: '',
     },
   },
+  setup() {
+    const handlerNode = ref([]);
+
+    return {
+      handlerNode,
+    };
+  },
   computed: {
     ...poperComputed,
     popoverCoreClass() {
       return ['w-popover-core', this.className];
     },
-    popoverClass(): any[] {
-      return [
-        'w-popover',
-        {
-          'w-popover-horbottom': this.isHorBottom,
-          'w-popover-hortop': this.isHorTop,
-          'w-popover-horleft': this.isVerLeft,
-          'w-popover-horright': this.isVerRight,
-        },
-      ];
-    },
-    arrowClass(): any[] {
-      return [
-        {
-          'w-popover-arrow-hortop': this.isHorTop,
-          'w-popover-arrow-horbottom': this.isHorBottom,
-          'w-popover-arrow-verendright': this.isVerEndRight,
-          'w-popover-arrow-verendleft': this.isVerEndLeft,
-          'w-popover-arrow-vercenter': this.isVerCenter,
-
-          'w-popover-arrow-horleft': this.isVerLeft,
-          'w-popover-arrow-horright': this.isVerRight,
-          'w-popover-arrow-horendbottom': this.isHorEndBottom,
-          'w-popover-arrow-horendtop': this.isVerEndTop,
-          'w-popover-arrow-horcenter': this.isHorCenter,
-        },
-      ];
+    poperPaddingBottom() {
+      // 10 是 .w-popover-hortop 的 padding 距离
+      return !this.isVerOutSide ? 10 : 0;
     },
     arrowStyle(): ColorEntity {
       const color: ColorEntity = {};
@@ -120,6 +105,52 @@ const popoverOptions: ComponentOptions = {
     modelValue: 'watchValue',
   },
   methods: {
+    setArrowClass() {
+      const horDis: any = {};
+      const verDis: any = {};
+
+      // top bottom 的左中右设置
+      if (this.isVer) {
+        verDis[`w-popover-arrow-hor${this.isVerOutSide}`] = true;
+        verDis[`w-popover-arrow-verend${this.isHorOutSide}`] = true;
+      }
+      // left right 的上中下设置
+      if (this.isHor) {
+        verDis[`w-popover-arrow-hor${this.isHorOutSide}`] = true;
+        verDis[`w-popover-arrow-horend${this.isVerOutSide}`] = true;
+      }
+
+      this.arrowClass = [
+        {
+          ...verDis,
+          ...horDis,
+        },
+      ];
+    },
+    setPopoverClass() {
+      const verDis: any = {};
+      const horDis: any = {};
+
+      if (this.isHor) {
+        verDis[`w-popover-hor${this.isHorOutSide}`] = true;
+      }
+
+      if (this.isVer) {
+        horDis[`w-popover-hor${this.isVerOutSide}`] = true;
+      }
+
+      this.popoverClass = [
+        'w-popover',
+        {
+          ...horDis,
+          ...verDis,
+        },
+      ];
+    },
+    setClasses() {
+      this.setArrowClass();
+      this.setPopoverClass();
+    },
     triggerHandle(ev: MouseEvent) {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
@@ -149,6 +180,14 @@ const popoverOptions: ComponentOptions = {
         this.$emit('on-change', this.status);
         this.$emit('update:modelValue', this.status);
       }
+    },
+    horizontalPoperInited({ isOutside }: any) {
+      this.isHorOutSide = isOutside;
+      this.setClasses();
+    },
+    verticalPoperInited({ isOutside }: any) {
+      this.isVerOutSide = isOutside;
+      this.setClasses();
     },
     innerClick(ev: MouseEvent) {
       ev.stopPropagation();
