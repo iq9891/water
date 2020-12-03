@@ -59,14 +59,12 @@ export const setLeftFn = (
           isOutside = 'left';
         } else if (isHorLeftOutside) {
           isOutside = 'right';
-          console.log(verRightX, right, tooltipWidth, 'verRightX');
           posX = verRightX;
         } else {
           isOutside = 'center';
           posX = centerX;
         }
       } else if (self.isVerLeft) {
-        console.log(leftX, 'leftX');
         // leftTop left leftBottom
         const isLeftOutside = leftX < 0;
         isOutside = isLeftOutside ? 'right' : 'left';
@@ -130,7 +128,7 @@ export const setTopFn = (
       if (self.isHorCenter) {
         // left right
         const centerY = posY + height / 2 - tooltipHeight / 2;
-        console.log(centerY, isVerTopOutside, 'centerY');
+
         if (centerY < 0) {
           // 上边出界了
           isOutside = 'top';
@@ -148,12 +146,12 @@ export const setTopFn = (
         posY = isBottomOutside ? posY : horBottomY;
       } else if (self.isHorTop) {
         // top topLeft topRight
-        const isTopOutside = topY < 0;
+        const isTopOutside = topY - getScroll(window, true) < 0;
         isOutside = isTopOutside ? 'bottom' : 'top';
         posY = isTopOutside ? bottomY : topY;
       } else if (self.isHorBottom) {
         // bottom bottomLeft bottomRight
-        const isBottom3Outside = bottomY > window.innerHeight;
+        const isBottom3Outside = bottomY + tooltipHeight > window.innerHeight;
         isOutside = isBottom3Outside ? 'top' : 'bottom';
         posY = isBottom3Outside ? topY : bottomY;
       } else {

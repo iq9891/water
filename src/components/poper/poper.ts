@@ -2,9 +2,9 @@
 
 import { ComponentOptions } from 'vue';
 import { poperComputed, poperBaseProps } from '../../common/poper';
-import { isNumber, isString } from '../../common/typeof';
+import { isNumber } from '../../common/typeof';
 import { setPostion } from './utils';
-import { getStyle, getTrueValue } from '../../common/utils';
+import { getTrueValue } from '../../common/utils';
 
 const poperOptions: ComponentOptions = {
   props: {

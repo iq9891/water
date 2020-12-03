@@ -6,9 +6,10 @@
     新增 title slot 样式完全自定义
     change 的 prop 和 emit 都变成 on-change
     去掉 title-style ， getContainer 属性
+    新增当弹框超越边界时，自动调整一次位置
   </pre> -->
   <w-space type="vertical">
-    <!-- <div class="box">
+    <div class="box">
       <w-popover v-model="popoverStatus1">
         <span>鼠标移入时将显示 Popover 。{{ popoverStatus1 }}</span>
         <template #title>
@@ -32,13 +33,13 @@
           </div>
         </template>
       </w-popover>
-    </div> -->
+    </div>
     <div style="text-align: center;">
       <!--  padding-top: calc(100vh - 28px) -->
       <w-popover
         v-model="popoverStatus3"
         trigger="click"
-        placement="bottom"
+        placement="top"
         :poper-width="400"
       >
         <WButton>点我 。</WButton>
@@ -54,8 +55,7 @@
         </template>
       </w-popover>
     </div>
-    <!-- <div class="box">
-      必须 有 v-model 才能操作显示隐藏状态
+    <div class="box">
       <w-popover
         v-model="popoverStatus4"
         placement="right"
@@ -68,7 +68,7 @@
           'box-shadow': '0 2px 8px rgba(0, 255, 255, 0.14)',
         }"
       >
-        <span>点击显示 Popover 。</span>
+        <span>必须 有 v-model 才能操作显示隐藏状态。点击显示 Popover 。</span>
         <template #title>
           <w-link href="https://github.com/fe6/water">水滴</w-link>
         </template>
@@ -78,7 +78,7 @@
           <w-link @click="link4Click">关闭 Popover ！</w-link>
         </template>
       </w-popover>
-    </div> -->
+    </div>
   </w-space>
 </template>
 
