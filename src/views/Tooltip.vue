@@ -8,6 +8,7 @@
   change -> onChange ， props 和 emit
   新增 poperWidth 字段 控制 poper 宽度
   新增 content slot 自定义内容， slot 优先 prop
+  新增当弹框超越边界时，自动调整一次位置
  -->
   <w-space type="vertical">
     <div class="box">

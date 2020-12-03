@@ -23,6 +23,10 @@ const tooltipOptions: ComponentOptions = {
     return {
       status: false,
       timer: null,
+      arrowClass: [],
+      tooltipClass: [],
+      isHorOutSide: false,
+      isVerOutSide: false,
     };
   },
   props: {
@@ -58,36 +62,12 @@ const tooltipOptions: ComponentOptions = {
   },
   computed: {
     ...poperComputed,
+    poperPaddingBottom() {
+      // 10 是 .w-tooltip-hortop 的 padding 距离，解决右下角第一次超出边界时候的位置问题
+      return !this.isVerOutSide ? 10 : 0;
+    },
     tooltipCoreClass() {
       return ['w-tooltip-core', this.className];
-    },
-    tooltipClass(): any[] {
-      return [
-        'w-tooltip',
-        {
-          'w-tooltip-horbottom': this.isHorBottom,
-          'w-tooltip-hortop': this.isHorTop,
-          'w-tooltip-horleft': this.isVerLeft,
-          'w-tooltip-horright': this.isVerRight,
-        },
-      ];
-    },
-    arrowClass(): any[] {
-      return [
-        {
-          'w-tooltip-arrow-hortop': this.isHorTop,
-          'w-tooltip-arrow-horbottom': this.isHorBottom,
-          'w-tooltip-arrow-verendright': this.isVerEndRight,
-          'w-tooltip-arrow-verendleft': this.isVerEndLeft,
-          'w-tooltip-arrow-vercenter': this.isVerCenter,
-
-          'w-tooltip-arrow-horleft': this.isVerLeft,
-          'w-tooltip-arrow-horright': this.isVerRight,
-          'w-tooltip-arrow-horendbottom': this.isHorEndBottom,
-          'w-tooltip-arrow-horendtop': this.isVerEndTop,
-          'w-tooltip-arrow-horcenter': this.isHorCenter,
-        },
-      ];
     },
     arrowStyle(): ColorEntity {
       const color: ColorEntity = {};
@@ -142,6 +122,60 @@ const tooltipOptions: ComponentOptions = {
     },
     watchValue(val: boolean) {
       this.setStatus(val, true);
+    },
+    setArrowClass() {
+      const horDis: any = {};
+      const verDis: any = {};
+
+      // top bottom 的左中右设置
+      if (this.isVer) {
+        verDis[`w-tooltip-arrow-hor${this.isVerOutSide}`] = true;
+        verDis[`w-tooltip-arrow-verend${this.isHorOutSide}`] = true;
+      }
+      // left right 的上中下设置
+      if (this.isHor) {
+        verDis[`w-tooltip-arrow-hor${this.isHorOutSide}`] = true;
+        verDis[`w-tooltip-arrow-horend${this.isVerOutSide}`] = true;
+      }
+
+      this.arrowClass = [
+        {
+          ...verDis,
+          ...horDis,
+        },
+      ];
+    },
+    setPopoverClass() {
+      const verDis: any = {};
+      const horDis: any = {};
+
+      if (this.isHor) {
+        verDis[`w-tooltip-hor${this.isHorOutSide}`] = true;
+      }
+
+      if (this.isVer) {
+        horDis[`w-tooltip-hor${this.isVerOutSide}`] = true;
+      }
+
+      this.tooltipClass = [
+        'w-tooltip',
+        {
+          ...horDis,
+          ...verDis,
+        },
+      ];
+    },
+    setClasses() {
+      this.setArrowClass();
+      this.setPopoverClass();
+    },
+    horizontalPoperInited({ isOutside }: any) {
+      this.isHorOutSide = isOutside;
+      this.setClasses();
+    },
+    verticalPoperInited({ isOutside }: any) {
+      this.isVerOutSide = isOutside;
+      this.setClasses();
     },
   },
 };

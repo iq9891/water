@@ -9,6 +9,9 @@
     :interval="interval"
     :disabled="!transfer"
     :class-name="tooltipClass"
+    :padding-bottom="poperPaddingBottom"
+    @horizontal-inited="horizontalPoperInited"
+    @vertical-inited="verticalPoperInited"
   >
     <div
       v-doc-click="bodyClick"
