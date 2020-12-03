@@ -429,6 +429,7 @@ const selectOptions: ComponentOptions = {
             }
 
             this.getFocus();
+            this.setPoperPosition();
           });
         });
       }

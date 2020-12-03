@@ -30,6 +30,7 @@
     新增 on-search 属性及 emit 只有 autoComplete 为 true 的时候
     新增 filterOption 属性，在单选模式控制筛选
     change -> onChange 属性修改
+    弹框超出边界自动调整位置
   </pre> -->
   <w-space type="vertical">
     <w-space type="vertical">
