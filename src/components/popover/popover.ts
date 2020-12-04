@@ -1,9 +1,8 @@
 /** @format */
 
-import { ComponentOptions, ref } from 'vue';
+import { ComponentOptions } from 'vue';
 import docClick from '../../directives/doclick';
 import { poperComputed, poperProps } from '../../common/poper';
-import { getRect } from '../../common/getrect';
 import WPoper from '../poper/Poper.vue';
 import { getEventType } from '../poper/utils';
 
