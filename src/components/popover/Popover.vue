@@ -14,7 +14,6 @@
     @vertical-inited="verticalPoperInited"
   >
     <div
-      :ref="(el) => (handlerNode = el)"
       v-doc-click="bodyClick"
       :class="popoverCoreClass"
       @mouseenter="triggerHandle($event)"

@@ -60,13 +60,6 @@ const popoverOptions: ComponentOptions = {
       default: '',
     },
   },
-  setup() {
-    const handlerNode = ref([]);
-
-    return {
-      handlerNode,
-    };
-  },
   computed: {
     ...poperComputed,
     popoverCoreClass() {
