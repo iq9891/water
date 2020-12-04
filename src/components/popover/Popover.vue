@@ -7,7 +7,7 @@
     :z-index="zIndex"
     :placement="placement"
     :interval="interval"
-    :disabled="!transfer"
+    :disabled="!transfer || disabled"
     :class-name="popoverClass"
     :padding-bottom="poperPaddingBottom"
     @horizontal-inited="horizontalPoperInited"
@@ -31,7 +31,7 @@
         <template v-if="$slots.title">
           <slot name="title"></slot>
         </template>
-        <div v-else class="w-popover-title">
+        <div v-else-if="title" class="w-popover-title">
           {{ title }}
         </div>
         <div class="w-popover-content">

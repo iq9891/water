@@ -2,7 +2,8 @@
 
 import { ComponentOptions } from 'vue';
 import docClick from '../../directives/doclick';
-import { poperComputed, poperProps } from '../../common/poper';
+import { poperComputed } from '../../common/poper';
+import popoverProps from './popover-props';
 import WPoper from '../poper/Poper.vue';
 import { getEventType } from '../poper/utils';
 
@@ -28,36 +29,7 @@ const popoverOptions: ComponentOptions = {
     };
   },
   props: {
-    ...poperProps,
-    modelValue: Boolean,
-    transfer: {
-      type: Boolean,
-      default: true,
-    },
-    enterDelay: {
-      type: Number,
-      default: 0,
-    },
-    poperWidth: [Number, String],
-    leaveDelay: {
-      type: Number,
-      default: 0,
-    },
-    trigger: {
-      type: String,
-      default: 'hover',
-    },
-    title: String,
-    content: String,
-    arrowColor: String,
-    contentStyle: {
-      type: [Object, Array, String],
-      default: '',
-    },
-    className: {
-      type: [Object, Array, String],
-      default: '',
-    },
+    ...popoverProps,
   },
   computed: {
     ...poperComputed,
@@ -146,7 +118,12 @@ const popoverOptions: ComponentOptions = {
     triggerHandle(ev: MouseEvent) {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
-        this.setStatus(!this.status, this.isTrigger(ev), true);
+        this.setStatus(
+          !this.disabled && !this.status,
+          this.isTrigger(ev),
+          true,
+          ev,
+        );
       }, this.enterDelay);
     },
     isTrigger(ev: MouseEvent): boolean {
@@ -160,16 +137,20 @@ const popoverOptions: ComponentOptions = {
     mouseleave(ev: MouseEvent) {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
-        this.setStatus(!this.status, this.isTrigger(ev), true);
+        this.setStatus(!this.status, this.isTrigger(ev), true, ev);
       }, this.leaveDelay);
     },
-    setStatus(val: boolean, change: boolean, emit?: boolean) {
+    setStatus(val: boolean, change: boolean, emit?: boolean, ev?: MouseEvent) {
       if (change) {
         this.status = val;
       }
-      if (change && emit) {
-        this.onChange(this.status);
-        this.$emit('on-change', this.status);
+      if (change && emit && !this.disabled) {
+        const emitParams = {
+          status: this.status,
+          ev,
+        };
+        this.onChange(emitParams);
+        this.$emit('on-change', emitParams);
         this.$emit('update:modelValue', this.status);
       }
     },
