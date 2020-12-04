@@ -7,6 +7,8 @@
     change 的 prop 和 emit 都变成 on-change
     去掉 title-style ， getContainer 属性
     新增当弹框超越边界时，自动调整一次位置
+    新增 disabled 属性
+    on-change 返回的参数修改
   </pre> -->
   <w-space type="vertical">
     <div class="box">
@@ -41,6 +43,8 @@
         trigger="click"
         placement="top"
         :poper-width="400"
+        :on-change="poChange"
+        @on-change="poChange"
       >
         <WButton>点我 。</WButton>
         <template #title>
@@ -122,6 +126,9 @@
       },
       link4Click() {
         this.popoverStatus4 = false;
+      },
+      poChange(params) {
+        console.log(params, 'popover change');
       },
     },
   };

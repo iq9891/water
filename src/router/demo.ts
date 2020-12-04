@@ -277,4 +277,13 @@ export default [
     component: () =>
       import(/* webpackChunkName: "popover" */ '../views/Popover.vue'),
   },
+  {
+    path: '/popconfirm',
+    name: 'Popconfirm',
+    meta: {
+      name: '气泡确认框',
+    },
+    component: () =>
+      import(/* webpackChunkName: "popconfirm" */ '../views/Popconfirm.vue'),
+  },
 ];
