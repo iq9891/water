@@ -75,9 +75,20 @@ export const getStyle = (el: any, options: GetStyleOptionsEntity = {}) => {
 };
 
 export const css = (el: any, params: CSSProperties, type = 'style') => {
-  keys(params).forEach((paramsKey: string) => {
+  const oldStyle = getStyle(el);
+  const oldCache: any = {}; // 返回旧样式
+  const elStyleKeys = keys(params);
+
+  // 获取旧样式
+  elStyleKeys.forEach((attr: string) => {
+    oldCache[attr] = oldStyle[attr];
+  });
+
+  elStyleKeys.forEach((paramsKey: string) => {
     el[type][paramsKey] = (params as any)[paramsKey];
   });
+
+  return oldCache;
 };
 
 /* istanbul ignore next */

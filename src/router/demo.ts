@@ -286,4 +286,12 @@ export default [
     component: () =>
       import(/* webpackChunkName: "popconfirm" */ '../views/Popconfirm.vue'),
   },
+  {
+    path: '/mask',
+    name: 'Mask',
+    meta: {
+      name: '遮罩',
+    },
+    component: () => import(/* webpackChunkName: "mask" */ '../views/Mask.vue'),
+  },
 ];

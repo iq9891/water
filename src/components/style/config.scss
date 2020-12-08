@@ -139,8 +139,6 @@ $disabled-border: #dbdee9 !default;
 $code-bg: #f0f0f0 !default;
 // 阴影
 $shadow: rgba(0, 0, 0, 0.15) !default;
-// 遮罩颜色
-$mask: rgba(0, 0, 0, 0.65) !default;
 // 分割线
 $dividing-color: #eaeef5 !default;
 $dividing-sm: 8px !default;
@@ -404,3 +402,6 @@ $popover-arrow-size: (
 ) !default;
 $popover-arrow-size-unit: px;
 $popover-distance: $popover-arrow-width + 4px;
+
+// mask
+$mask-color: rgba(0, 0, 0, 0.45) !default;
