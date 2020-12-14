@@ -259,4 +259,12 @@ export default [
     component: () =>
       import(/* webpackChunkName: "timeline" */ '../views/Timeline.vue'),
   },
+  {
+    path: '/page',
+    name: 'Page',
+    meta: {
+      name: '分页',
+    },
+    component: () => import(/* webpackChunkName: "page" */ '../views/Page.vue'),
+  },
 ];

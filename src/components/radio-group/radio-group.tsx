@@ -2,7 +2,7 @@
 
 import { provide, ComponentOptions } from 'vue';
 import { getProps, getSlots } from '../../common/vue-utils';
-import { isArray } from '../../common/typeof';
+import { isArray, isUndefined } from '../../common/typeof';
 import validator from '../../common/validator';
 import WRadio from '../radio/Radio.vue';
 import radioProps from './radio-props';
@@ -72,18 +72,28 @@ const radioGroupOptions: ComponentOptions = {
 
     if (isArray(options) && options.length > 0) {
       const { value, label, loading, key, disabled } = fieldNames;
-      children = options.map((optItem: any, optIndex: number) => (
-        <WRadio
-          label={optItem[label] || ''}
-          loading={optItem[loading] || false}
-          key={optItem[key] || optIndex}
-          disabled={optItem[disabled] || false}
-          type={type}
-          className={radioClassName}
-          border={border}>
-          {() => optItem[value] || ''}
-        </WRadio>
-      ));
+      children = options.map((optItem: any, optIndex: number) => {
+        console.log(
+          !isUndefined(optItem[label]) && optItem[label],
+          (!isUndefined(optItem[label]) && optItem[label]) || optItem || '',
+          123,
+        );
+
+        return (
+          <WRadio
+            label={
+              (isUndefined(optItem[label]) ? optItem : optItem[label]) || ''
+            }
+            loading={optItem[loading] || false}
+            key={optItem[key] || optIndex}
+            disabled={optItem[disabled] || false}
+            type={type}
+            className={radioClassName}
+            border={border}>
+            {() => optItem[value] || optItem || ''}
+          </WRadio>
+        );
+      });
     }
 
     return <div class={className}>{children}</div>;

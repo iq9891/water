@@ -32,6 +32,10 @@ const InputOptions: ComponentOptions = {
       type: String,
       default: 'input',
     },
+    inputClassName: {
+      type: [Object, Array, String],
+      default: '',
+    },
   },
   computed: {
     niceClass() {

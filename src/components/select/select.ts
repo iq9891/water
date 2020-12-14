@@ -186,7 +186,9 @@ const selectOptions: ComponentOptions = {
       const filterFunction = isFunction(this.filterOption)
         ? (optItem: any) => this.filterOption(this.fieldValue, optItem)
         : (optItem: any) => {
-            const filterValue = optItem[this.fieldNames[this.optionValueProp]];
+            const filterValue = String(
+              optItem[this.fieldNames[this.optionValueProp]],
+            );
             return filterValue ? filterValue.indexOf(this.fieldValue) > -1 : '';
           };
 

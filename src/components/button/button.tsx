@@ -147,7 +147,7 @@ const buttonOptions: ComponentOptions = {
     let loadingNode = loading ? <LoadingOutlined class={iconClass} /> : '';
     const iconNode = getSlots(this, { name: 'icon' });
 
-    if (!loading && iconNode) {
+    if (!loading && iconNode.length) {
       loadingNode = <span class={iconClass}>{iconNode}</span>;
     }
 

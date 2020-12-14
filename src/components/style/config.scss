@@ -370,3 +370,12 @@ $tag-checked-color: $normal-color !default;
 
 // 时间轴
 $timeline-item-space: 16px !default;
+
+// 分页
+$page-height-base: $button-height-base !default;
+$page-height-sm: $button-height-sm !default;
+$page-color: $primary-color !default;
+$page-color-hover: color-palette($page-color, 5) !default;
+$page-color-active: color-palette($page-color, 7) !default;
+$page-duration: $animation-duration-slow !default;
+$page-ellipsis-color: rgba(0, 0, 0, 0.25) !default;

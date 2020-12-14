@@ -30,6 +30,7 @@
         :auto-size="autoSize"
         :rows="rows"
         :resize="resize"
+        :class-name="inputClassName"
         @on-change="changeValue"
         @on-focus="niceInputFocus"
         @on-blur="niceInputBlur"
@@ -69,6 +70,7 @@
         :auto-size="autoSize"
         :rows="rows"
         :resize="resize"
+        :class-name="inputClassName"
         @on-change="changeValue"
         @on-focus="niceInputFocus"
         @on-blur="niceInputBlur"
@@ -116,6 +118,7 @@
           :auto-size="autoSize"
           :rows="rows"
           :resize="resize"
+          :class-name="inputClassName"
           @on-change="changeValue"
           @on-focus="niceInputFocus"
           @on-blur="niceInputBlur"
@@ -155,6 +158,7 @@
           :auto-size="autoSize"
           :rows="rows"
           :resize="resize"
+          :class-name="inputClassName"
           @on-change="changeValue"
           @on-focus="niceInputFocus"
           @on-blur="niceInputBlur"
@@ -213,6 +217,7 @@
       :auto-size="autoSize"
       :rows="rows"
       :resize="resize"
+      :class-name="inputClassName"
       @on-change="changeValue"
       @on-focus="niceInputFocus"
       @on-blur="niceInputBlur"
@@ -252,9 +257,12 @@
     :auto-size="autoSize"
     :rows="rows"
     :resize="resize"
-    :class-name="{
-      'w-input-borderless': !border,
-    }"
+    :class-name="[
+      {
+        'w-input-borderless': !border,
+      },
+      inputClassName,
+    ]"
     @on-change="changeValue"
     @on-focus="niceInputFocus"
     @on-blur="niceInputBlur"
