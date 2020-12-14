@@ -293,5 +293,5 @@ export default [
       name: '分页',
     },
     component: () => import(/* webpackChunkName: "page" */ '../views/Page.vue'),
-  }
+  },
 ];
