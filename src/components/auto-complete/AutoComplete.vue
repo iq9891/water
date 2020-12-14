@@ -29,4 +29,3 @@
 </template>
 
 <script lang="ts" src="./auto-complete.ts"></script>
-<!--<style lang="scss" src="./auto-complete.scss"></style>-->

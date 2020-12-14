@@ -48,9 +48,14 @@ const linkOptions: ComponentOptions = {
 
     const iconNode = (): VNode | null => {
       const iconChild = getSlots(this, { name: 'icon' });
-      const newIconChild = loading ? h(LoadingOutlined) : iconChild;
 
-      return newIconChild
+      const newIconChild = loading
+        ? h(LoadingOutlined, {
+            'w-link-loading': loading,
+          })
+        : iconChild;
+
+      return loading || (newIconChild as any).length
         ? h(
             'span',
             {

@@ -5,6 +5,7 @@ import { TypeStyle } from '../../common/types';
 import validator, {
   sizeValidator,
   typeValidator,
+  TYPE_ENUM,
 } from '../../common/validator';
 
 export interface DividerProps {
@@ -25,7 +26,7 @@ const dividerOptions: ComponentOptions = {
     },
     type: {
       type: String,
-      default: 'horizontal',
+      default: TYPE_ENUM.HORIZONTAL,
       validator: typeValidator,
     },
     placement: {

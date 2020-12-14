@@ -1,7 +1,12 @@
 /** @format */
 @use 'sass:color';
+@use 'sass:math';
 
 @import './colors.scss';
+
+@function delUnits($number) {
+  @return $number / ($number * 0 + 1);
+}
 
 $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
   'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
@@ -113,6 +118,9 @@ $box-shadow-base: $shadow-2 !default;
 $animation-duration-slow: 0.3s !default; // Modal
 $animation-duration-base: 0.2s !default;
 $animation-duration-fast: 0.1s !default; // Tooltip
+
+// fade 动画时间
+$fade-duration: $animation-duration-slow !default;
 
 // 正常
 $normal-border: #dbdee9 !default;
@@ -368,6 +376,10 @@ $tag-close-color: rgba(0, 0, 0, 0.85) !default;
 $tag-checked-bg: $primary-color !default;
 $tag-checked-color: $normal-color !default;
 
+// 折叠过度
+$fold-duration: $animation-duration-slow !default;
+$fold-transition-type: ease-in-out !default;
+
 // 时间轴
 $timeline-item-space: 16px !default;
 
@@ -379,3 +391,24 @@ $page-color-hover: color-palette($page-color, 5) !default;
 $page-color-active: color-palette($page-color, 7) !default;
 $page-duration: $animation-duration-slow !default;
 $page-ellipsis-color: rgba(0, 0, 0, 0.25) !default;
+// tooltip
+$tooltip-font-size: $font-size-base !default;
+$tooltip-line-height: 1.5 !default;
+$tooltip-min-width: 30px !default;
+$tooltip-min-height: 32px !default;
+$tooltip-bg: rgba(0, 0, 0, 0.75) !default;
+
+// popover
+$popover-bg: $component-background;
+$popover-font-size: $font-size-base !default;
+$popover-line-height: 1.5 !default;
+$popover-min-width: 30px !default;
+$popover-min-height: 32px !default;
+$popover-border-color: #f0f0f0 !default;
+$popover-arrow-color: color.scale($black, $alpha: -94%) !default;
+$popover-arrow-width: 6 !default;
+$popover-arrow-size: (
+  math.sqrt($popover-arrow-width * $popover-arrow-width * 2) / 2
+) !default;
+$popover-arrow-size-unit: px;
+$popover-distance: $popover-arrow-width + 4px;

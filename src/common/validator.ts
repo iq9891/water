@@ -14,6 +14,11 @@ const validator = (list: string[], value: string) => {
 
 export default validator;
 
+export enum TYPE_ENUM {
+  HORIZONTAL = 'horizontal',
+  VERTICAL = 'vertical',
+}
+
 export const directionValidator = (value: string) => {
   const typeList = ['rtl', 'ltr'];
 
@@ -33,7 +38,7 @@ export const sizeNoLargeValidator = (value: string) => {
 };
 
 export const typeValidator = (value: string) => {
-  const typeList = ['horizontal', 'vertical'];
+  const typeList = [TYPE_ENUM.HORIZONTAL, TYPE_ENUM.VERTICAL];
 
   return validator(typeList, value);
 };

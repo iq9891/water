@@ -59,6 +59,10 @@ export const poperProps = {
 };
 
 export const poperComputed = {
+  // 纵向( Ver )，上下各个方向
+  isVer(): boolean {
+    return /^(top|bottom)/g.test((this as any).placement);
+  },
   // 纵向( Ver )，设置左边的判断 start
   isVerCenter(): boolean {
     return /\b(top|bottom)\b/g.test((this as any).placement);
@@ -82,6 +86,10 @@ export const poperComputed = {
   // 纵向( Ver )，设置左边的判断 end
 
   // 横向( Hor )，设置左边的判断 start
+  // 横向( Hor )，上下各个方向
+  isHor(): boolean {
+    return /^(left|right)/g.test((this as any).placement);
+  },
   // left right
   isHorCenter(): boolean {
     return /\b(left|right)\b/g.test((this as any).placement);

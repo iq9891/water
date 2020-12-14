@@ -69,10 +69,10 @@ $link-font: (
   &-icon {
     vertical-align: 0;
     font-size: 0;
+    margin-right: $padding-xxs;
   }
 
   &-text {
-    padding-left: 4px;
     display: inline-block;
     vertical-align: middle;
   }
@@ -81,6 +81,7 @@ $link-font: (
     opacity: $link-opacity;
     pointer-events: none;
     position: relative;
+    margin-right: $padding-xxs;
 
     &::before {
       width: 10px;

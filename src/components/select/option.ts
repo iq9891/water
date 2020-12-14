@@ -8,7 +8,7 @@ import {
   FieldNamesEntity,
   fieldNamesDefault,
 } from './entity';
-import { selectMode, TYPE_ENUM } from './option-utils';
+import { selectMode, OPTION_TYPE_ENUM } from './option-utils';
 import optionContentRender from './option-content-render';
 
 const optionOptions: ComponentOptions = {
@@ -70,7 +70,7 @@ const optionOptions: ComponentOptions = {
   computed: {
     isSingleMode() {
       const mode = this.selectMode || this.mode;
-      return mode === TYPE_ENUM.single;
+      return mode === OPTION_TYPE_ENUM.single;
     },
     isActive() {
       const slotValue = getSlots(this);

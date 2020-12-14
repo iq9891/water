@@ -1,0 +1,33 @@
+/** @format */
+@import '../style/config.scss';
+@import '../button/button.scss';
+
+.popconfirm {
+  &-core {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: $padding-xxs 0 $padding-sm;
+  }
+
+  &-info {
+    padding-right: $padding-xs;
+    font-size: 14px;
+    color: $warning-color;
+  }
+
+  &-content {
+    font-size: 14px;
+    color: $text-color;
+    line-height: 18px;
+    font-weight: normal;
+  }
+
+  &-handler {
+    text-align: right;
+  }
+
+  &-button {
+    margin-left: 8px;
+  }
+}

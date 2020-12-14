@@ -4,28 +4,43 @@
   <img alt="Vue logo" src="./assets/logo.png" />
   <br />
   <p>
-    <w-space :direction="direction">
-      <w-button size="small" @click="directionFn">{{ direction }}</w-button>
-      <span>共计 {{ demoRouters.length }} 个</span>
-    </w-space>
+    <w-button size="small" @click="directionFn">{{ direction }}</w-button>
   </p>
-  <w-space type="vertical">
-    <span v-for="demoRouteItem in demoRouters" :key="demoRouteItem.name">
-      <router-link :to="{ name: demoRouteItem.name }">
-        {{ demoRouteItem.meta.name }}
-      </router-link>
-      <w-divider type="vertical" />
-    </span>
+  <div>
+    <div>
+      <div>
+        <p>组件共计 {{ demoRouters.length }} 个</p>
+        <div>
+          <span v-for="demoRouteItem in demoRouters" :key="demoRouteItem.name">
+            <router-link :to="{ name: demoRouteItem.name }">
+              {{ demoRouteItem.meta.name }}
+            </router-link>
+            <w-divider type="vertical" />
+          </span>
+        </div>
+      </div>
+      <w-divider />
+      <div>
+        <p>动画共计 {{ transitionRouters.length }} 个</p>
+        <span v-for="tItem in transitionRouters" :key="tItem.name">
+          <router-link :to="{ name: tItem.name }">
+            {{ tItem.meta.name }}
+          </router-link>
+          <w-divider type="vertical" />
+        </span>
+      </div>
+    </div>
+    <w-divider />
     <router-view />
-  </w-space>
+  </div>
 </template>
 
 <script>
   import { defineAsyncComponent } from 'vue';
   import { mapState } from 'vuex';
   import demoRouters from './router/demo';
+  import transitionRouters from './router/transition';
   import WDivider from './components/divider/Divider.vue';
-  import WSpace from './components/space/Space.vue';
 
   const WButton = defineAsyncComponent(() =>
     import('./components/button/Button.tsx'),
@@ -36,11 +51,11 @@
     components: {
       WButton,
       WDivider,
-      WSpace,
     },
     data() {
       return {
         demoRouters,
+        transitionRouters,
       };
     },
     computed: {

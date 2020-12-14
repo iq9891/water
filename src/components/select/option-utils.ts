@@ -4,7 +4,7 @@ import validator from '../../common/validator';
 import { hasOwn } from '../../common/utils';
 import { FieldNamesEntity } from './entity';
 
-export enum TYPE_ENUM {
+export enum OPTION_TYPE_ENUM {
   single = 'single',
   multiple = 'multiple',
   tags = 'tags',
@@ -12,9 +12,13 @@ export enum TYPE_ENUM {
 
 export const selectMode = {
   type: String,
-  default: TYPE_ENUM.single,
+  default: OPTION_TYPE_ENUM.single,
   validator(value: string) {
-    const typeList = [TYPE_ENUM.single, TYPE_ENUM.multiple, TYPE_ENUM.tags];
+    const typeList = [
+      OPTION_TYPE_ENUM.single,
+      OPTION_TYPE_ENUM.multiple,
+      OPTION_TYPE_ENUM.tags,
+    ];
     return validator(typeList, value);
   },
 };

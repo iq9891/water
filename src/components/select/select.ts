@@ -31,7 +31,7 @@ import {
   handleName,
   findEnabled,
   addUsedStatus,
-  TYPE_ENUM,
+  OPTION_TYPE_ENUM,
 } from './option-utils';
 import {
   FieldNamesEntity,
@@ -161,10 +161,10 @@ const selectOptions: ComponentOptions = {
   computed: {
     ...poperComputed,
     isSingleMode() {
-      return this.mode === TYPE_ENUM.single;
+      return this.mode === OPTION_TYPE_ENUM.single;
     },
     isTagMode() {
-      return this.mode === TYPE_ENUM.tags;
+      return this.mode === OPTION_TYPE_ENUM.tags;
     },
     result() {
       const singleResultItem = this.getSingleResult();
@@ -431,6 +431,7 @@ const selectOptions: ComponentOptions = {
             }
 
             this.getFocus();
+            this.setPoperPosition();
           });
         });
       }

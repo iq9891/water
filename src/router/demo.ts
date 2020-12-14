@@ -260,11 +260,38 @@ export default [
       import(/* webpackChunkName: "timeline" */ '../views/Timeline.vue'),
   },
   {
+    path: '/tooltip',
+    name: 'Tooltip',
+    meta: {
+      name: '文字提示',
+    },
+    component: () =>
+      import(/* webpackChunkName: "tooltip" */ '../views/Tooltip.vue'),
+  },
+  {
+    path: '/popover',
+    name: 'Popover',
+    meta: {
+      name: '气泡卡片',
+    },
+    component: () =>
+      import(/* webpackChunkName: "popover" */ '../views/Popover.vue'),
+  },
+  {
+    path: '/popconfirm',
+    name: 'Popconfirm',
+    meta: {
+      name: '气泡确认框',
+    },
+    component: () =>
+      import(/* webpackChunkName: "popconfirm" */ '../views/Popconfirm.vue'),
+  },
+  {
     path: '/page',
     name: 'Page',
     meta: {
       name: '分页',
     },
     component: () => import(/* webpackChunkName: "page" */ '../views/Page.vue'),
-  },
+  }
 ];
