@@ -54,21 +54,27 @@ export const textAreaResizeValidator = (value: string) => {
   return validator(typeList, value);
 };
 
-export const placementValidator = (value: string) => {
-  const typeList = [
-    'top',
-    'left',
-    'right',
-    'bottom',
-    'topLeft',
-    'topRight',
-    'bottomLeft',
-    'bottomRight',
-    'leftTop',
-    'leftBottom',
-    'rightTop',
-    'rightBottom',
-  ];
+const placementTypeList = [
+  'top',
+  'left',
+  'right',
+  'bottom',
+  'topLeft',
+  'topRight',
+  'bottomLeft',
+  'bottomRight',
+  'leftTop',
+  'leftBottom',
+  'rightTop',
+  'rightBottom',
+];
 
-  return validator(typeList, value);
+export const placementValidator = (value: string) => {
+  return validator(placementTypeList, value);
+};
+
+export const placementMaskValidator = (value: string) => {
+  const maskTypeList = placementTypeList.slice();
+  maskTypeList.push('center');
+  return validator(maskTypeList, value);
 };

@@ -3,7 +3,7 @@
 <template>
   <!-- <pre style="color: red">
     重新组件
-    mask 和 drawer 的基础组件
+    modal 和 drawer 的基础组件
   </pre> -->
   <w-space type="vertical">
     <w-mask

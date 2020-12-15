@@ -3,13 +3,18 @@
 <template>
   <!-- 多套一层是防止 to 设置父级为目标元素 -->
   <div class="w-mask-handle">
-    <slot></slot>
+    <slot v-if="defultChildren"></slot>
     <teleport :to="to" :disabled="disabled">
-      <div v-show="status" class="w-mask-root" :style="rootStyle">
+      <div
+        v-show="status"
+        class="w-mask-root"
+        :class="rootClass"
+        :style="rootStyle"
+      >
         <transition name="fade">
           <div v-if="mask" v-show="mask && status" class="w-mask"></div>
         </transition>
-        <div :class="coreClass" @click="maskClose">
+        <div :class="coreClass" @click="maskCloseFn">
           <slot name="maskCore" :status="status"></slot>
         </div>
       </div>

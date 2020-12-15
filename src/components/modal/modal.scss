@@ -1,0 +1,99 @@
+/** @format */
+
+@import '../button/button.scss';
+
+.w-modal {
+  box-sizing: border-box;
+  color: $text-color;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: $line-height;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  pointer-events: none;
+  position: relative;
+  top: 100px;
+  width: 520px;
+  max-width: calc(100vw - 32px);
+  margin: 0 auto;
+  padding: 0 0 24px;
+  transform-origin: 137.5px 128px;
+
+  &-core-center {
+    display: flex;
+    align-items: center;
+  }
+
+  &-center {
+    top: 0;
+  }
+
+  &-content {
+    position: relative;
+    background-clip: padding-box;
+    border: 0;
+    border-radius: $border-radius-base;
+    box-shadow: $shadow-2;
+    pointer-events: auto;
+  }
+
+  &-header {
+    padding: $padding-md $padding-lg;
+    color: $text-color;
+    background: $modal-header-bg;
+    border-bottom: 1px solid $modal-header-border-color;
+    border-radius: $border-radius-base $border-radius-base 0 0;
+  }
+
+  &-title {
+    margin: 0;
+    color: $text-color;
+    font-weight: 500;
+    font-size: $modal-header-title-font-size;
+    line-height: $modal-header-title-line-height;
+    word-wrap: break-word;
+  }
+
+  &-body {
+    padding: $padding-lg;
+    font-size: $font-size-base;
+    line-height: $line-height;
+    word-wrap: break-word;
+    background: $modal-body-bg;
+  }
+
+  &-footer {
+    padding: 10px 16px;
+    text-align: right;
+    background: $modal-body-bg;
+    border-top: 1px solid $modal-footer-border-color;
+    @debug $modal-footer-border-color;
+
+    border-radius: 0 0 $border-radius-base $border-radius-base;
+  }
+
+  &-button {
+    margin-left: 8px;
+  }
+
+  &-close {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 55px;
+    width: 55px;
+    cursor: pointer;
+    font-size: 16px;
+    color: $modal-close-color;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      color: $modal-close-color-hover;
+    }
+  }
+}

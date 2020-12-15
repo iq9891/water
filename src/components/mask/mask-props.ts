@@ -1,4 +1,5 @@
 /** @format */
+import { placementMaskValidator } from '../../common/validator';
 
 export default {
   modelValue: Boolean,
@@ -7,13 +8,22 @@ export default {
     type: Boolean,
     default: true,
   },
-  maskClosable: {
+  esc: {
+    type: Boolean,
+    default: true,
+  },
+  maskClose: {
     type: Boolean,
     default: true,
   },
   to: {
     type: String,
     default: 'body',
+  },
+  placement: {
+    type: String,
+    default: 'top',
+    validator: placementMaskValidator,
   },
   zIndex: Number,
   className: {
@@ -23,5 +33,13 @@ export default {
   coreClassName: {
     type: [Object, Array, String],
     default: '',
+  },
+  rootClassName: {
+    type: [Object, Array, String],
+    default: '',
+  },
+  onChange: {
+    type: Function,
+    default: () => {},
   },
 };

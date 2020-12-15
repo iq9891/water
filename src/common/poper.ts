@@ -38,7 +38,7 @@ export const poperProps = {
     default() {
       return new Promise((resolve) => {
         (this as any).$nextTick(() => {
-          resolve();
+          resolve(true);
         });
       });
     },

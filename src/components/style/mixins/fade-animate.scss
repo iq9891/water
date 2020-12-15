@@ -1,0 +1,20 @@
+/** @format */
+
+@import '../config.scss';
+
+.fade-enter-active {
+  animation: fade-in $fade-duration ease-out both;
+}
+
+.fade-leave-active {
+  animation: fade-in $fade-duration reverse ease-in both;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

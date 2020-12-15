@@ -1,10 +1,12 @@
 /** @format */
 
 import { ComponentOptions } from 'vue';
-import maskProps from './mask-props';
-import { switchScrollingEffect } from './utils';
-import { css } from '../../common/dom';
+import { on, off, css } from '../../common/dom';
+
 import { keys } from '../../common/utils';
+import { getSlots } from '../../common/vue-utils';
+import { switchScrollingEffect } from './utils';
+import maskProps from './mask-props';
 
 let cacheOverflow = {};
 let openCount = 0;
@@ -15,6 +17,7 @@ const maskOptions: ComponentOptions = {
       status: false,
       foldClass: 'w-mask-zoom',
       rootStyle: {},
+      defultChildren: [],
     };
   },
   props: {
@@ -30,13 +33,23 @@ const maskOptions: ComponentOptions = {
     contentClass() {
       return ['w-mask-content', this.contentClassName];
     },
+    rootClass() {
+      return [
+        'w-mask-root',
+        `w-mask-root-${this.placement}`,
+        this.rootClassName,
+      ];
+    },
   },
   mounted() {
+    this.defultChildren = getSlots(this);
     if (this.modelValue) {
       this.maskInit();
     }
+    this.bindKeyUp();
   },
   beforeUnmount() {
+    this.unBindKeyUp();
     this.maskUnInit();
   },
   methods: {
@@ -46,6 +59,10 @@ const maskOptions: ComponentOptions = {
       this.switchScrollingEffect();
       this.setZIndex();
     },
+    changeModelValue() {
+      this.maskInit();
+      this.statusChange();
+    },
     maskUnInit() {
       // 离开时不会 render， 导到离开时数值不变，改用 func 。。
       openCount = this.modelValue && openCount ? openCount - 1 : openCount;
@@ -54,16 +71,17 @@ const maskOptions: ComponentOptions = {
       this.status = false;
       this.$emit('update:modelValue', this.status);
     },
+    statusChange() {
+      this.$emit('on-change', this.status);
+      this.onChange(this.status);
+    },
     setZIndex() {
       this.rootStyle = {
         zIndex: this.zIndex,
       };
     },
-    escClose() {
-      this.closeAlert();
-    },
-    maskClose() {
-      if (this.mask && this.maskClosable) {
+    maskCloseFn() {
+      if (this.mask && this.maskClose) {
         this.closeAlert();
       }
     },
@@ -84,9 +102,25 @@ const maskOptions: ComponentOptions = {
         }
       }
     },
+    bindKeyUp() {
+      if (this.esc) {
+        // ESC close
+        on(document, 'keydown', this.closeAlert);
+      }
+    },
+    unBindKeyUp() {
+      off(document, 'keydown', this.closeAlert);
+    },
   },
   watch: {
-    modelValue: 'maskInit',
+    modelValue: 'changeModelValue',
+    esc(val) {
+      if (val) {
+        this.bindKeyUp();
+      } else {
+        this.unBindKeyUp();
+      }
+    },
   },
 };
 

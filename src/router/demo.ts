@@ -294,4 +294,13 @@ export default [
     },
     component: () => import(/* webpackChunkName: "mask" */ '../views/Mask.vue'),
   },
+  {
+    path: '/modal',
+    name: 'Modal',
+    meta: {
+      name: '对话框',
+    },
+    component: () =>
+      import(/* webpackChunkName: "modal" */ '../views/Modal.vue'),
+  },
 ];

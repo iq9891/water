@@ -17,15 +17,15 @@
       <slot></slot>
     </template>
     <template #content>
-      <div class="popconfirm">
-        <div class="popconfirm-core">
-          <div class="popconfirm-info">
+      <div class="w-popconfirm">
+        <div class="w-popconfirm-core">
+          <div class="w-popconfirm-info">
             <template v-if="$slots.icon">
               <slot name="icon"></slot>
             </template>
-            <exclamation-circle-filled v-else class="popconfirm-icon" />
+            <exclamation-circle-filled v-else class="w-popconfirm-icon" />
           </div>
-          <div class="popconfirm-content">
+          <div class="w-popconfirm-content">
             <template v-if="$slots.content">
               <slot name="content"></slot>
             </template>
@@ -34,15 +34,15 @@
             </template>
           </div>
         </div>
-        <div class="popconfirm-handler">
+        <div class="w-popconfirm-handler">
           <w-button-render
-            class="popconfirm-button"
+            class="w-popconfirm-button"
             :button-props="cancelButtonProps"
             @click="cancelClick($event)"
             >{{ cancelText }}</w-button-render
           >
           <w-button-render
-            class="popconfirm-button"
+            class="w-popconfirm-button"
             :button-props="okButtonProps"
             @click="okClick($event)"
             >{{ okText }}</w-button-render

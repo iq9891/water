@@ -1,6 +1,6 @@
 /** @format */
 
-import { poperComputed, poperProps } from '../../common/poper';
+import { poperProps } from '../../common/poper';
 
 export default {
   ...poperProps,

@@ -71,7 +71,7 @@ $padding-xxs: 4px !default;
 
 // Border color
 $border-color-base: hsv(0, 0, 85%) !default; // base border outline a component
-$border-color-split: hsv(0, 0, 94%) !default; // split border inside a component
+$border-color-split: #f0f0f0 !default; // split border inside a component
 $border-color-inverse: $white !default;
 $border-width-base: 1px !default; // width of the border for a component
 $border-style-base: solid !default; // style of a components border
@@ -119,8 +119,9 @@ $animation-duration-slow: 0.3s !default; // Modal
 $animation-duration-base: 0.2s !default;
 $animation-duration-fast: 0.1s !default; // Tooltip
 
-// fade 动画时间
+// 动画时间
 $fade-duration: $animation-duration-slow !default;
+$bounce-duration: $animation-duration-slow !default;
 
 // 正常
 $normal-border: #dbdee9 !default;
@@ -405,3 +406,15 @@ $popover-distance: $popover-arrow-width + 4px;
 
 // mask
 $mask-color: rgba(0, 0, 0, 0.45) !default;
+
+// modal
+$modal-header-bg: $component-background !default;
+$modal-body-bg: $component-background !default;
+$modal-footer-bg: $component-background !default;
+$modal-header-border-color: $border-color-split !default;
+$modal-header-title-font-size: $font-size-lg !default;
+$modal-header-title-line-height: 22px !default;
+$modal-footer-padding-vertical: 10px !default;
+$modal-footer-border-color: $border-color-split !default;
+$modal-close-color: rgba(0, 0, 0, 0.45) !default;
+$modal-close-color-hover: rgba(0, 0, 0, 0.85) !default;
