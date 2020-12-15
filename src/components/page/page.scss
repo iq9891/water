@@ -1,0 +1,236 @@
+/** @format */
+
+@import '../style/config.scss';
+@import '../button/button.scss';
+
+.w-page {
+  font-size: 0;
+
+  .w-btn-text {
+    line-height: 1;
+  }
+
+  &-button {
+    padding: 0 $padding-xs !important;
+    min-width: $page-height-base !important;
+    line-height: $page-height-base - 2px !important;
+    font-size: 0;
+    margin-right: 8px;
+    vertical-align: middle;
+    position: relative;
+
+    &-sm {
+      padding: 0 $padding-xxs !important;
+      min-width: $page-height-sm !important;
+      line-height: $page-height-sm - 2px !important;
+
+      .w-btn-text-small {
+        font-size: $font-size-sm;
+      }
+    }
+
+    &-group {
+      display: inline-block;
+    }
+  }
+
+  &-next,
+  &-prev {
+    &-sm {
+      padding: 0 $padding-xxs !important;
+      min-width: $page-height-sm !important;
+      height: $page-height-sm !important;
+
+      .w-btn-text-small {
+        display: block;
+        font-size: $font-size-sm;
+        width: 12px;
+        height: 12px;
+        margin: 0 auto;
+      }
+    }
+
+    &:hover .w-page-simple-arrow {
+      color: $page-color-hover;
+    }
+
+    &-disable {
+      background: none !important;
+
+      &:hover {
+        background: none !important;
+
+        & .w-page-simple-arrow {
+          color: $disabled-border;
+        }
+      }
+
+      & .w-page-simple-arrow {
+        color: $disabled-border;
+      }
+    }
+  }
+
+  &-over {
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    min-width: $page-height-base;
+    height: $page-height-base;
+    line-height: $page-height-base;
+    margin-right: 8px;
+    font-family: $font-family;
+    text-align: center;
+    border-radius: $border-radius-base;
+    cursor: pointer;
+    transition: all $page-duration;
+    font-size: $font-size-base;
+
+    &:hover {
+      .w-page-over-icon {
+        opacity: 1;
+      }
+
+      .w-page-ellipsis {
+        opacity: 0;
+      }
+    }
+
+    &-icon {
+      color: $blue-6;
+      font-size: $font-size-sm;
+      letter-spacing: -1px;
+      opacity: 0;
+      transition: all $page-duration;
+    }
+
+    &-sm {
+      min-width: $page-height-sm;
+      height: $page-height-sm;
+      line-height: $page-height-sm;
+    }
+  }
+
+  &-ellipsis {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    margin: auto;
+    color: $page-ellipsis-color;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    letter-spacing: 2px;
+    text-align: center;
+    text-indent: 0.13em;
+    opacity: 1;
+    transition: all $page-duration;
+
+    &-sm {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &-now {
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px !important;
+    margin-right: 12px !important;
+    padding: 0 $padding-xxs !important;
+    text-align: center;
+  }
+
+  &-italic {
+    font-size: $font-size-base;
+    line-height: $page-height-sm;
+    height: $page-height-sm;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  &-total {
+    @extend .w-page-italic;
+
+    margin-right: 6px;
+  }
+
+  &-simple {
+    &-button {
+      display: inline-block;
+      vertical-align: middle;
+      height: $page-height-sm;
+      line-height: $page-height-sm;
+      width: $page-height-sm;
+      position: relative;
+      text-align: center;
+
+      &:hover {
+        & .w-page-simple-arrow {
+          color: $page-color-hover;
+        }
+      }
+
+      &:active {
+        & .w-page-simple-arrow {
+          color: $page-color-active;
+        }
+      }
+
+      &-disabled {
+        cursor: not-allowed;
+
+        & .w-page-simple-arrow {
+          color: $disabled-border;
+        }
+
+        &:hover {
+          & .w-page-simple-arrow {
+            color: $disabled-border;
+          }
+        }
+      }
+    }
+
+    &-prev {
+      margin-right: 6px;
+    }
+
+    &-arrow {
+      font-size: $font-size-sm;
+      color: $text-color;
+      transition: border-color $page-duration;
+      vertical-align: middle;
+    }
+  }
+
+  &-text {
+    font-size: $font-size-base;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    color: $text-color;
+  }
+
+  &-size {
+    min-width: 98px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  &-jump {
+    width: 94px;
+    display: inline-block;
+    vertical-align: middle;
+    height: $page-height-base;
+    line-height: $page-height-base - 2px;
+
+    &-sm {
+      height: $page-height-sm;
+      line-height: $page-height-sm - 2px;
+    }
+  }
+}

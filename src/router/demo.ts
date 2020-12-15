@@ -303,4 +303,12 @@ export default [
     component: () =>
       import(/* webpackChunkName: "modal" */ '../views/Modal.vue'),
   },
+  {
+    path: '/page',
+    name: 'Page',
+    meta: {
+      name: '分页',
+    },
+    component: () => import(/* webpackChunkName: "page" */ '../views/Page.vue'),
+  },
 ];
