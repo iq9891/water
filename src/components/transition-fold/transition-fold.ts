@@ -1,16 +1,15 @@
 /** @format */
 
-import { ComponentOptions } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { css, addClass, removeClass } from '../../common/dom';
 import { typeValidator, TYPE_ENUM } from '../../common/validator';
 import { getTrueValue, oneCapital } from '../../common/utils';
 
-const transitionFoldOptions: ComponentOptions = {
-  data() {
-    return {
-      foldClass: 'w-fold',
-    };
-  },
+interface transitionFoldEntity {
+  type: string;
+}
+
+const transitionFoldOptions = defineComponent({
   props: {
     type: {
       type: String,
@@ -22,13 +21,18 @@ const transitionFoldOptions: ComponentOptions = {
       default: true,
     },
   },
-  computed: {
-    isHorizontal() {
-      return this.type === TYPE_ENUM.HORIZONTAL;
-    },
-    moveAttr() {
-      return this.isHorizontal ? 'height' : 'hidth';
-    },
+  setup(props: transitionFoldEntity) {
+    const isHorizontal = computed(() => props.type === TYPE_ENUM.HORIZONTAL);
+    const moveAttr = computed(() => (isHorizontal.value ? 'height' : 'width'));
+    return {
+      isHorizontal,
+      moveAttr,
+    };
+  },
+  data() {
+    return {
+      foldClass: 'w-fold',
+    };
   },
   methods: {
     getMoveValue(el: any) {
@@ -82,6 +86,6 @@ const transitionFoldOptions: ComponentOptions = {
       removeClass(el, this.foldClass);
     },
   },
-};
+});
 
 export default transitionFoldOptions;
